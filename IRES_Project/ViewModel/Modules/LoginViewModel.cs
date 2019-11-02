@@ -7,15 +7,33 @@ using Model.Models;
 using System.Windows;
 using System.Collections.ObjectModel;
 using Model.DB;
+using ViewModel.GlobalViewModels;
 
 namespace ViewModel.Modules
 {
-    public class LoginViewModel
+    public class LoginViewModel: BaseViewModel
     {
         private User user;
-        public LoginViewModel(User user)
+        Connection DataContext = null;
+        public LoginViewModel()
         {
-            this.user = new User(user.Username, user.Password);
+            //this.user = new User(user.Username, user.Password);
+            DataContext = Connection.Instance;
+        }
+        private string _UserName;
+
+        public string UserName
+        {
+            get => _UserName; 
+            set { _UserName = value; OnPropertyChanged(); }
+        }
+
+        private string _PassWord;
+
+        public string PassWord
+        {
+            get => _PassWord; 
+            set { _PassWord = value; OnPropertyChanged(); }
         }
 
         public ObservableCollection<User> User
@@ -24,15 +42,11 @@ namespace ViewModel.Modules
             set;
         }
 
-        public Boolean checkUser(User user)
+        public Boolean checkUser()
         {
-            Connection cn = new Connection();
-            cn.connectDB();
-            cn.openfConnection();
+            string query = $"SELECT 1 FROM employee WHERE user_name='{this.UserName}' and password='{this.PassWord}'";
 
-            string query = $"SELECT 1 FROM employee WHERE user_name='{user.Username}' and password='{user.Password}'";
-
-            return cn.runCommand(query);
+            return DataContext.runCommand(query);
         }
     }
 }

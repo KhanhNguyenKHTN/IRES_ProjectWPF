@@ -22,19 +22,22 @@ namespace IRES_Project
     /// Interaction logic for loginPage.xaml
     /// </summary>
     public partial class loginPage : Window
-    {   
+    {
+        LoginViewModel loginViewModel = null;
         public loginPage()
         {
             InitializeComponent();
+            loginViewModel = new LoginViewModel();
+            DataContext = loginViewModel;
         }
 
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
         {   try
             {
-                User user = new User( txtUsername.Text, txtPassword.Password);
-                LoginViewModel loginViewModel = new LoginViewModel(user);
+                // User user = new User( txtUsername.Text, txtPassword.Password);
 
-                Boolean login = loginViewModel.checkUser(user);
+                loginViewModel.PassWord = txtPassword.Password;
+                Boolean login = loginViewModel.checkUser();
 
                 if (login == true )
                 {

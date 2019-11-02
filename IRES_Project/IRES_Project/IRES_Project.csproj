@@ -93,7 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>test.dbml</DependentUpon>
     </Compile>
-    <Page Include="LoginView.xaml">
+    <Page Include="Views\Login\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,7 +105,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="LoginView.xaml.cs">
+    <Compile Include="Views\Login\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
@@ -165,7 +165,7 @@
   <ItemGroup>
     <Folder Include="Languages\" />
     <Folder Include="Resources\Audios\" />
-    <Folder Include="Views\" />
+    <Folder Include="Views\MainPage\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\background.jpg" />

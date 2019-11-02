@@ -11,7 +11,7 @@
             <Label Content="Login" Foreground="White" FontSize="25" HorizontalAlignment="Center"></Label>
             <Separator></Separator>
             <Label Content="Username" Foreground="White"></Label>
-            <TextBox Name="txtUsername" Height="25" Background="#545d6a"/>
+            <TextBox Name="txtUsername" Text="{Binding UserName}" Height="25" Background="#545d6a"/>
             <Label Content="Password" Foreground="White"></Label>
             <PasswordBox Name="txtPassword" Height="25" Background="#545d6a"/>
             <Button Name="btnSubmit" Click="BtnSubmit_Click" Content="Login" Margin="0 10" Height="25" Foreground="White" Background="#04c582"/>

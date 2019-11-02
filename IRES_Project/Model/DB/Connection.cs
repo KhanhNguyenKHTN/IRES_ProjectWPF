@@ -18,6 +18,26 @@ namespace Model.DB
 
         private NpgsqlConnection connection = null;
 
+        private static Connection _Instance;
+
+        public static Connection Instance
+        {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new Connection();
+                    _Instance.connectDB();
+                    _Instance.openfConnection();
+                }
+                return _Instance;
+            }
+            set
+            {
+                _Instance = value;
+            }
+        }
+
         public Connection()
         {
         }
