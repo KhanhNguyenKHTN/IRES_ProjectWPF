@@ -16,7 +16,11 @@ namespace ViewModel.GlobalViewModels
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChangedEventHandler eventHandler = this.PropertyChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 
@@ -24,7 +28,7 @@ namespace ViewModel.GlobalViewModels
     public class RelayCommand<T> : ICommand
     {
         private readonly Predicate<T> _canExecute;
-        private readonly Action<T> _execute;
+        private readonly Action<T> _execute;    
 
         public RelayCommand(Predicate<T> canExecute, Action<T> execute)
         {

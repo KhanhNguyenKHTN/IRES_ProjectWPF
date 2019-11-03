@@ -24,7 +24,8 @@ namespace ViewModel.Modules
 
         public string UserName
         {
-            get => _UserName; 
+            get { return _UserName; }
+ 
             set { _UserName = value; OnPropertyChanged(); }
         }
 
@@ -32,7 +33,7 @@ namespace ViewModel.Modules
 
         public string PassWord
         {
-            get => _PassWord; 
+            get { return _PassWord; }
             set { _PassWord = value; OnPropertyChanged(); }
         }
 
@@ -44,7 +45,7 @@ namespace ViewModel.Modules
 
         public Boolean checkUser()
         {
-            string query = $"SELECT 1 FROM employee WHERE user_name='{this.UserName}' and password='{this.PassWord}'";
+            string query = "SELECT 1 FROM employee WHERE user_name='{this.UserName}' and password='{this.PassWord}'";
 
             return DataContext.runCommand(query);
         }
