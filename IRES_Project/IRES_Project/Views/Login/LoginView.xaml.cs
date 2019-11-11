@@ -31,15 +31,17 @@ namespace IRES_Project
             DataContext = loginViewModel;
         }
 
+
         private void BtnSubmit_Click(object sender, RoutedEventArgs e)
-        {   try
+        {
+            try
             {
-                // User user = new User( txtUsername.Text, txtPassword.Password);
+                User user = new User(txtUsername.Text, txtPassword.Password);
 
                 loginViewModel.PassWord = txtPassword.Password;
                 Boolean login = loginViewModel.checkUser();
 
-                if (login == true )
+                if (login == true)
                 {
                     MessageBox.Show("Login thanh cong");
                 }
@@ -53,6 +55,11 @@ namespace IRES_Project
                 MessageBox.Show(msg.ToString());
                 throw;
             }
-        }     
+        }
+
+        private void FloatingPasswordBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
     }
 }

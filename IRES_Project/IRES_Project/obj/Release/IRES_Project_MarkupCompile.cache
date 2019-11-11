@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\DATN-NhaHang\IRES_Project\IRES_Project\obj\Release\
+D:\BT CODE\IRES_ProjectWPF\IRES_Project\IRES_Project\obj\Release\
 IRES_Project
 none
 false
 TRACE
-D:\DATN-NhaHang\IRES_Project\IRES_Project\App.xaml
-11151548125
+D:\BT CODE\IRES_ProjectWPF\IRES_Project\IRES_Project\App.xaml
+3-368566395
 
-5-2017746502
-16-653111379
-MainWindow.xaml;
+9-1102402742
+83356590865
+Views\Login\LoginView.xaml;MainWindow.xaml;Views\MainPage\MainPageView.xaml;
 
 True
 
