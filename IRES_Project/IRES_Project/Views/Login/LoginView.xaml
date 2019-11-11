@@ -32,9 +32,9 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-         <materialDesign:Card Grid.Row="1" Width="600" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10 10 10 10">
-             <Grid>
+         <materialDesign:Card Background="Transparent" Grid.Row="1" Width="600" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border Background="Azure" BorderBrush="Black" BorderThickness="2" CornerRadius="10 10 10 10">
+             <Grid >
                 <Grid.Resources>
                     <Style TargetType="Grid" >
                         <Setter Property="Margin" Value="15 0 15 0"></Setter>
