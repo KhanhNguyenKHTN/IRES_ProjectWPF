@@ -42,7 +42,7 @@ namespace ViewModel.Modules
             get;
             set;
         }
-
+       
         public Boolean checkUser()
         {
             string query = "SELECT 1 FROM employee WHERE user_name='{this.UserName}' and password='{this.PassWord}'";

@@ -12,28 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IRES_Project.Views.MainPage;
+using ViewModel.GlobalViewModels;
 
-namespace IRES_Project
+namespace CustomControls.GlobalControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ControlBarUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ControlBarUC : UserControl
     {
-        public MainWindow()
+        public ControlBarViewModel ViewModel { get; set; }
+        public ControlBarUC()
         {
-            InitializeComponent();
-
-            loginPage loginPage = new loginPage();
-            loginPage.ShowDialog();
-
-            //Switcher.pageSwitcher = 
-        }
-
-        public void Navigate(UserControl nextPage)
-        {
-            this.Content = nextPage;
+            InitializeComponent(); 
+            this.DataContext = ViewModel = new ControlBarViewModel();
         }
     }
 }

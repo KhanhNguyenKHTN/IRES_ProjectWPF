@@ -10,29 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel.Modules;
-using IRES_Project.Views;
-using IRES_Project;
 
-namespace IRES_Project.Views.MainPage
+namespace IRES_Project.UC
 {
     /// <summary>
-    /// Interaction logic for MainPageView.xaml
+    /// Interaction logic for UserControlMenu.xaml
     /// </summary>
-    public partial class MainPageView : Window
+    public partial class UserControlMenu : UserControl
     {
-        MainPageViewModel mainPage = null;
-        public MainPageView()
+        public UserControlMenu()
         {
             InitializeComponent();
-
-            loginPage login = new loginPage();
-            login.ShowDialog();
-
-            mainPage = new MainPageViewModel();
-
-            DataContext = mainPage;
         }
     }
 }

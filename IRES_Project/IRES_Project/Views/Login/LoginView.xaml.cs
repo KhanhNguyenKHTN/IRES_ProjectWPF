@@ -28,6 +28,7 @@ namespace IRES_Project
         {
             InitializeComponent();
             loginViewModel = new LoginViewModel();
+            
             DataContext = loginViewModel;
         }
 
