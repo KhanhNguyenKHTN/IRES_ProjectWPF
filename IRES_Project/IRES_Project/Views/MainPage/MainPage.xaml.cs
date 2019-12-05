@@ -10,26 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViewModel.Modules;
-using IRES_Project.Views;
-using IRES_Project;
 
 namespace IRES_Project.Views.MainPage
 {
     /// <summary>
-    /// Interaction logic for MainPageView.xaml
+    /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainPageView : Window
+    public partial class MainPage : UserControl
     {
-        MainPageViewModel mainPage = null;
-        public MainPageView()
+        public MainPage()
         {
             InitializeComponent();
+            this.DataContext = new MainPageViewModel();
 
-            mainPage = new MainPageViewModel();
-
-            DataContext = mainPage;
         }
     }
 }

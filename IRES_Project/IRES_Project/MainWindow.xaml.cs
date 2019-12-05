@@ -28,7 +28,11 @@ namespace IRES_Project
             loginPage loginPage = new loginPage();
             loginPage.ShowDialog();
 
-            //Switcher.pageSwitcher = 
+            //MainPageView mainPageView = new MainPageView();
+            //mainPageView.ShowDialog();
+
+            Switcher.pageSwitcher = this;
+            Switcher.Switch(new MainPage());
         }
 
         public void Navigate(UserControl nextPage)

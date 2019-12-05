@@ -13,7 +13,7 @@
         <materialDesign:Card  Background="{DynamicResource MaterialDesignBackground}">
             <StackPanel>
                 <!--Master data-->
-                <Expander HorizontalAlignment="Stretch">
+                <Expander HorizontalAlignment="Stretch" IsExpanded="True" >
                     <Expander.Header>
                         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Database" />
@@ -92,8 +92,8 @@
                 <Border Background="{DynamicResource MaterialDesignDivider}" Height="2" HorizontalAlignment="Stretch"
                      SnapsToDevicePixels="True" />
                 <!--End Master data-->
-                
-                <Expander HorizontalAlignment="Stretch">
+
+                <Expander HorizontalAlignment="Stretch" IsExpanded="True">
                     <Expander.Header>
                         <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ChartLine" />
@@ -122,7 +122,7 @@
                         <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
 
                             <StackPanel>
-                                <materialDesign:PackIcon Kind="Food" Foreground="Black" />
+                                <materialDesign:PackIcon Kind="Receipt" Foreground="Black" />
                             </StackPanel>
 
                             <StackPanel>
@@ -134,11 +134,11 @@
                         <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
 
                             <StackPanel>
-                                <materialDesign:PackIcon Kind="Bowl" Foreground="Gray" />
+                                <materialDesign:PackIcon Kind="PotMix" Foreground="Gray" />
                             </StackPanel>
 
                             <StackPanel>
-                                <TextBlock Margin="10 0 0 0"> Nguyên liệu</TextBlock>
+                                <TextBlock Margin="10 0 0 0"> Sản phẩm </TextBlock>
                             </StackPanel>
 
                         </StackPanel>
@@ -158,11 +158,11 @@
                         <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
 
                             <StackPanel>
-                                <materialDesign:PackIcon Kind="BorderAll" />
+                                <materialDesign:PackIcon Kind="ViewList" />
                             </StackPanel>
 
                             <StackPanel>
-                                <TextBlock Margin="10 0 0 0">Phân loại</TextBlock>
+                                <TextBlock Margin="10 0 0 0">Bàn ăn</TextBlock>
                             </StackPanel>
 
                         </StackPanel>
