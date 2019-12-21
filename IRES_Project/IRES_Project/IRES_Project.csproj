@@ -121,6 +121,9 @@
     <Compile Include="UC\UserControlMenu.xaml.cs">
       <DependentUpon>UserControlMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UC\UserControlSearchBox.xaml.cs">
+      <DependentUpon>UserControlSearchBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <DependentUpon>MainPageView.xaml</DependentUpon>
     </Compile>
     <Page Include="UC\UserControlMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserControlSearchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
