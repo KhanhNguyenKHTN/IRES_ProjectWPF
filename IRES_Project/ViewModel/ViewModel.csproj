@@ -30,7 +30,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,9 +44,13 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalViewModels\BaseViewModel.cs" />
+    <Compile Include="GlobalViewModels\ControlBarViewModel.cs" />
+    <Compile Include="Modules\LoginViewModel.cs" />
+    <Compile Include="Modules\MainPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,9 +62,13 @@
       <Project>{c8d7f380-eb45-4172-a57d-1da54708933b}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceConnection\ServiceConnection.csproj">
+      <Project>{397208e7-ba4a-4ccc-a09a-d9db4c65d254}</Project>
+      <Name>ServiceConnection</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modules\" />
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

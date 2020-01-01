@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRES_Globals", "IRES_Global
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControls", "CustomControls\CustomControls.csproj", "{5F999539-BE16-48EF-B649-01ABC8CB8EF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceConnection", "ServiceConnection\ServiceConnection.csproj", "{397208E7-BA4A-4CCC-A09A-D9DB4C65D254}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{5F999539-BE16-48EF-B649-01ABC8CB8EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F999539-BE16-48EF-B649-01ABC8CB8EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F999539-BE16-48EF-B649-01ABC8CB8EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{397208E7-BA4A-4CCC-A09A-D9DB4C65D254}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{397208E7-BA4A-4CCC-A09A-D9DB4C65D254}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{397208E7-BA4A-4CCC-A09A-D9DB4C65D254}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{397208E7-BA4A-4CCC-A09A-D9DB4C65D254}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
