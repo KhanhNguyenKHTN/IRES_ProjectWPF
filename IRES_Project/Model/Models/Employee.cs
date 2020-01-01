@@ -23,8 +23,17 @@ namespace Model.Models
         private DateTime _UpdatedDatetime;
         private bool _Active;
         private int _Version;
+        private string _PhoneNb;
         public Employee( int i)
         {
+            if (i % 2 == 0)
+            {
+                Active = true;
+            }
+            else
+            {
+                Active = false;
+            }
             _EmployeeId = i;
             _EmployeeCode = "Số" + i as string;
             _RestaurantId = i;
@@ -56,5 +65,6 @@ namespace Model.Models
         public DateTime UpdatedDatetime { get => _UpdatedDatetime; set => _UpdatedDatetime = value; }
         public bool Active { get => _Active; set => _Active = value; }
         public int Version { get => _Version; set => _Version = value; }
+        public string PhoneNb { get => _PhoneNb; set => _PhoneNb = value; }
     }
 }

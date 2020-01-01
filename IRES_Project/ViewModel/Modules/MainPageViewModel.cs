@@ -8,31 +8,37 @@ using System.Windows.Input;
 using ViewModel.GlobalViewModels;
 using Model.Models;
 using System.Collections.ObjectModel;
+using ServiceConnection;
 
 namespace ViewModel.Modules
 {
 
     public class MainPageViewModel : BaseViewModel
-    { 
-        public ObservableCollection<Employee>  ListEmployee { get; set; }
+    {
+        private ObservableCollection<Employee> _ListEmployee;
+        public ObservableCollection<Employee> ListEmployee { get { return _ListEmployee; } set { _ListEmployee = value;  OnPropertyChanged(); } }
 
         //public bool Isloaded = false;
         //public ICommand LoadedWindowCommand { get; set; }
-
-        public MainPageViewModel()
+        public ObservableCollection<Employee> GetData()
         {
             ListEmployee = new ObservableCollection<Employee>();
             for (int i = 0; i <= 15; i++)
-                
+
             {
                 ListEmployee.Add(new Employee(i));
-           
+
             }
+            return ListEmployee;         
+        }
+        public MainPageViewModel()
+        {
+            SQLConnection SqlInstant = new SQLConnection();
 
-            //int pageIndex = 1;
-            //private int numberOfRecPerPage;
-            //private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
+            ObservableCollection<Employee> employees = GetData();
 
+            //dataGrid 
+            
 
         //LoadedWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
         //{
@@ -44,5 +50,7 @@ namespace ViewModel.Modules
 
 
     }
+
+
     }
 }
