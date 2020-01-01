@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Npgsql;
 using ViewModel.Modules;
 using Model.Models;
 
@@ -21,34 +20,32 @@ namespace IRES_Project
     /// <summary>
     /// Interaction logic for loginPage.xaml
     /// </summary>
-    public partial class loginPage : Window
+    public partial class Login : Window
     {
         LoginViewModel loginViewModel = null;
-        public loginPage()
+        public Login()
         {
             InitializeComponent();
             loginViewModel = new LoginViewModel();
-            
             DataContext = loginViewModel;
         }
 
-
-        private void BtnSubmit_Click(object sender, RoutedEventArgs e)
+        private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                User user = new User(txtUsername.Text, txtPassword.Password);
-
                 loginViewModel.PassWord = txtPassword.Password;
-                Boolean login = loginViewModel.checkUser();
+                Boolean checkLogin = loginViewModel.checkUser();
 
-                if (login == true)
+                if (checkLogin == true)
                 {
-                    MessageBox.Show("Login thanh cong");
+                    MainWindow mainWindow = new MainWindow();
+                    this.Close();
+                    mainWindow.ShowDialog();
                 }
                 else
                 {
-                    MessageBox.Show("Login that bai");
+                    MessageBox.Show("Đăng nhập thất bại, vui lòng kiểm tra lại!");
                 }
             }
             catch (Exception msg)
@@ -58,9 +55,15 @@ namespace IRES_Project
             }
         }
 
-        private void FloatingPasswordBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void BtnCancelLogin_Click(object sender, RoutedEventArgs e)
         {
+            System.Windows.Application.Current.Shutdown();
+        }
 
+        private void PackIcon_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("123");
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }

@@ -6,19 +6,15 @@ using System.Threading.Tasks;
 using Model.Models;
 using System.Windows;
 using System.Collections.ObjectModel;
-using Model.DB;
 using ViewModel.GlobalViewModels;
+using Implements.Common;
 
 namespace ViewModel.Modules
 {
     public class LoginViewModel: BaseViewModel
     {
-        private User user;
-        Connection DataContext = null;
         public LoginViewModel()
         {
-            //this.user = new User(user.Username, user.Password);
-            DataContext = Connection.Instance;
         }
         private string _UserName;
 
@@ -37,17 +33,17 @@ namespace ViewModel.Modules
             set { _PassWord = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<User> User
-        {
-            get;
-            set;
-        }
-       
         public Boolean checkUser()
         {
-            string query = "SELECT 1 FROM employee WHERE user_name='{this.UserName}' and password='{this.PassWord}'";
+            LoginImplement loginImp = new LoginImplement();
+            UserModel user = loginImp.getUser(new UserModel(UserName, PassWord));
 
-            return DataContext.runCommand(query);
+            if (user.Role != null && user.Role == "7")
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

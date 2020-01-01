@@ -12,6 +12,6 @@ namespace IRES_Globals.GlobalClass
         public static string PORT = "5432";
         public static string USER = "postgres";
         public static string PASSWORD = "123456";
-        public static string DATABASE = "IresDb";
+        public static string DATABASE = "ires";
     }
 }

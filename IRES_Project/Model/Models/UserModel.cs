@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model.Models
 {
-    public class User
+    public class UserModel
     {
-        public User(string username, string password)
+        public UserModel(string username, string password)
         {
             this.username = username;
             this.password = password;
@@ -16,6 +16,7 @@ namespace Model.Models
 
         private string username;
         private string password;
+        private string role;
 
         public string Username  { 
             get { 
@@ -30,5 +31,7 @@ namespace Model.Models
             get { return password; }
             set { password = value; }
         }
+
+        public string Role { get => role; set => role = value; }
     }
 }
