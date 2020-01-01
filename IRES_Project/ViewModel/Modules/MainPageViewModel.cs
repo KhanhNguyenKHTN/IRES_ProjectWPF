@@ -8,7 +8,6 @@ using System.Windows.Input;
 using ViewModel.GlobalViewModels;
 using Model.Models;
 using System.Collections.ObjectModel;
-using ServiceConnection;
 
 namespace ViewModel.Modules
 {
@@ -33,9 +32,9 @@ namespace ViewModel.Modules
         }
         public MainPageViewModel()
         {
-            SQLConnection SqlInstant = new SQLConnection();
+          //  SQLConnection SqlInstant = new SQLConnection();
 
-            ObservableCollection<Employee> employees = GetData();
+           // ObservableCollection<Employee> employees = GetData();
 
             //dataGrid 
             

@@ -38,7 +38,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             
-            <uc:ControlBarUC Tag="{Binding Title, ElementName=mainWindow}"></uc:ControlBarUC>
+            <!--<uc:ControlBarUC Tag="{Binding Title, ElementName=mainWindow}"></uc:ControlBarUC>-->
         </Grid>
         <Grid Grid.Row="1">
             <Border BorderBrush="Black" BorderThickness="1">

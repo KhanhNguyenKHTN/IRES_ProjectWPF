@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\LoginImplement.cs" />
+    <Compile Include="MasterData\Workers\WorkerToDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,10 +50,12 @@
       <Project>{c8d7f380-eb45-4172-a57d-1da54708933b}</Project>
       <Name>Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ServiceConnection\Service.csproj">
+      <Project>{397208e7-ba4a-4ccc-a09a-d9db4c65d254}</Project>
+      <Name>Service</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CommonImplements\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>

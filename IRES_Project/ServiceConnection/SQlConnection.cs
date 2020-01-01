@@ -7,7 +7,7 @@ using Npgsql;
 using IRES_Globals.GlobalClass;
 using System.Windows.Forms;
 
-namespace ServiceConnection
+namespace Service
 {
     public class SQLConnection
     {

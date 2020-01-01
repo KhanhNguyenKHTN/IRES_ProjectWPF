@@ -16,7 +16,7 @@ using ViewModel.Modules;
 using Model.Models;
 using System.Collections.ObjectModel;
 
-namespace IRES_Project.Views.MainPage
+namespace IRES_Project.MasterData.MainPage
 {
     /// <summary>
     /// Interaction logic for MainPage.xaml

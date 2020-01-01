@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IRES_Project.Views.MainPage;
+using IRES_Project.MasterData.MainPage;
 
 namespace IRES_Project
 {
@@ -24,12 +24,6 @@ namespace IRES_Project
         public MainWindow()
         {
             InitializeComponent();
-
-            loginPage loginPage = new loginPage();
-            loginPage.ShowDialog();
-
-            //MainPageView mainPageView = new MainPageView();
-            //mainPageView.ShowDialog();
 
             Switcher.pageSwitcher = this;
             Switcher.Switch(new MainPage());
