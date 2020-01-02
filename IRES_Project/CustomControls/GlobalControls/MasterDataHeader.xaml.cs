@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IRES_Project.UC
+namespace CustomControls.GlobalControls
 {
     /// <summary>
-    /// Interaction logic for UserControlSearchBox.xaml
+    /// Interaction logic for MasterDataHeader.xaml
     /// </summary>
-    public partial class UserControlSearchBox : UserControl
+    public partial class MasterDataHeader : UserControl
     {
-        public UserControlSearchBox()
+        public MasterDataHeader()
         {
             InitializeComponent();
         }
