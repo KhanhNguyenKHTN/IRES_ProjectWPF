@@ -46,6 +46,8 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -62,6 +64,9 @@
     <Compile Include="GlobalControls\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalControls\MasterDataHeader.xaml.cs">
+      <DependentUpon>MasterDataHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="GlobalControls\ControlBarUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GlobalControls\MasterDataHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
