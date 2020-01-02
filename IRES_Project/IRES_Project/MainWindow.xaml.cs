@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IRES_Project.MasterData.MainPage;
+using IRES_Project.MasterData.FoodView;
 
 namespace IRES_Project
 {
@@ -26,7 +27,7 @@ namespace IRES_Project
             InitializeComponent();
 
             Switcher.pageSwitcher = this;
-            Switcher.Switch(new MainPage());
+            Switcher.Switch(new FoodView());
         }
 
         public void Navigate(UserControl nextPage)

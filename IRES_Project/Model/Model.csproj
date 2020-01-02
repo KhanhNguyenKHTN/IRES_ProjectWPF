@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="GlobalConstants\GlobalInformations.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Food.cs" />
+    <Compile Include="Models\DishModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

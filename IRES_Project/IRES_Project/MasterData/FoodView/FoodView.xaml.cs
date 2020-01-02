@@ -10,26 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel.Modules;
-using IRES_Project.Views;
-using IRES_Project;
+using ViewModel.MasterData;
 
-namespace IRES_Project.Views.MainPage
+namespace IRES_Project.MasterData.FoodView
 {
     /// <summary>
-    /// Interaction logic for MainPageView.xaml
+    /// Interaction logic for FoodView.xaml
     /// </summary>
-    public partial class MainPageView : Window
+    public partial class FoodView : UserControl
     {
-        MainPageViewModel mainPage = null;
-        public MainPageView()
+        DishViewModel dishVM = null;
+        public FoodView()
         {
             InitializeComponent();
-
-            mainPage = new MainPageViewModel();
-
-            DataContext = mainPage;
+            dishVM = new DishViewModel();
+            this.DataContext = dishVM;
         }
     }
 }
