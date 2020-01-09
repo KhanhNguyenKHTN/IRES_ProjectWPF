@@ -27,7 +27,7 @@ namespace IRES_Project
             InitializeComponent();
 
             Switcher.pageSwitcher = this;
-            Switcher.Switch(new FoodView());
+            Switcher.Switch(new MainPage());
         }
 
         public void Navigate(UserControl nextPage)
