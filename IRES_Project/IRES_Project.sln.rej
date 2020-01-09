@@ -1,0 +1,8 @@
+diff a/IRES_Project/IRES_Project.sln b/IRES_Project/IRES_Project.sln	(rejected hunks)
+@@ -1,5 +1,6 @@
+ ﻿
+ Microsoft Visual Studio Solution File, Format Version 12.00
++# Visual Studio 15
+ VisualStudioVersion = 15.0.28307.902
+ MinimumVisualStudioVersion = 10.0.40219.1
+ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRES_Project", "IRES_Project\IRES_Project.csproj", "{872E8DD3-A738-4785-ACFC-ED65BFBD599F}"

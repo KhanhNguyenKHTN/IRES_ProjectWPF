@@ -40,13 +40,6 @@ namespace IRES_Project.MasterData.MainPage
        
             int count = listEm.Take(numberOfRecPerPage).Count();
             lblpageInformation.Content = count + " of " + listEm.Count;
-           // dataGrid.Columns[2].Visibility = Visibility.Collapsed;
-            //dataGrid.Columns[3].Visibility = Visibility.Collapsed;
-            //dataGrid.Columns[4].Visibility = Visibility.Collapsed;
-            //dataGrid.Columns[5].Visibility = Visibility.Collapsed;
-            //dataGrid.Columns[6].Visibility = Visibility.Collapsed;
-            //dataGrid.Columns[7].Visibility = Visibility.Collapsed;
-            //dataGrid.Columns[8].Visibility = Visibility.Collapsed;
         }
 
         private void DataGrid_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)

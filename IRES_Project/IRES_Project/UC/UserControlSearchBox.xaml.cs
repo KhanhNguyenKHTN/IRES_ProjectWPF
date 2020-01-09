@@ -12,27 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IRES_Project.MasterData.MainPage;
-using IRES_Project.MasterData.FoodView;
 
-namespace IRES_Project
+namespace IRES_Project.UC
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UserControlSearchBox.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserControlSearchBox : UserControl
     {
-        public MainWindow()
+        public UserControlSearchBox()
         {
             InitializeComponent();
-
-            Switcher.pageSwitcher = this;
-            Switcher.Switch(new FoodView());
-        }
-
-        public void Navigate(UserControl nextPage)
-        {
-            this.Content = nextPage;
         }
     }
 }
