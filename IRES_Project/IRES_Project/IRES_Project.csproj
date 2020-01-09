@@ -170,6 +170,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MasterData\FoodView\FoodView.xaml.cs">
+      <DependentUpon>FoodView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Switcher.cs" />
     <Compile Include="UC\UserControlMenu.xaml.cs">
       <DependentUpon>UserControlMenu.xaml</DependentUpon>
@@ -177,6 +180,10 @@
     <Compile Include="MasterData\MainPage\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="MasterData\FoodView\FoodView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UC\UserControlMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

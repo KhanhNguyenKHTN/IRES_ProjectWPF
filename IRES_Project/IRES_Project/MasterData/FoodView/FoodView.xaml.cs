@@ -12,27 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IRES_Project.MasterData.MainPage;
-using IRES_Project.MasterData.FoodView;
+using ViewModel.MasterData;
 
-namespace IRES_Project
+namespace IRES_Project.MasterData.FoodView
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FoodView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FoodView : UserControl
     {
-        public MainWindow()
+        DishViewModel dishVM = null;
+        public FoodView()
         {
             InitializeComponent();
-
-            Switcher.pageSwitcher = this;
-            Switcher.Switch(new FoodView());
-        }
-
-        public void Navigate(UserControl nextPage)
-        {
-            this.Content = nextPage;
+            dishVM = new DishViewModel();
+            this.DataContext = dishVM;
         }
     }
 }

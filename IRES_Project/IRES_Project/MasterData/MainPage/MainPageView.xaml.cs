@@ -10,29 +10,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IRES_Project.MasterData.MainPage;
-using IRES_Project.MasterData.FoodView;
+using ViewModel.Modules;
+using IRES_Project.Views;
+using IRES_Project;
 
-namespace IRES_Project
+namespace IRES_Project.Views.MainPage
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainPageView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainPageView : Window
     {
-        public MainWindow()
+        MainPageViewModel mainPage = null;
+        public MainPageView()
         {
             InitializeComponent();
 
-            Switcher.pageSwitcher = this;
-            Switcher.Switch(new FoodView());
-        }
+            mainPage = new MainPageViewModel();
 
-        public void Navigate(UserControl nextPage)
-        {
-            this.Content = nextPage;
+            DataContext = mainPage;
         }
     }
 }
