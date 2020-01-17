@@ -16,6 +16,8 @@ namespace ViewModel.GlobalViewModels
         public ICommand MaximizeWindowCommand { get; set; }
         public ICommand MinimizeWindowCommand { get; set; }
         public ICommand MouseMoveWindowCommand { get; set; }
+
+       
         #endregion
 
         public ControlBarViewModel()

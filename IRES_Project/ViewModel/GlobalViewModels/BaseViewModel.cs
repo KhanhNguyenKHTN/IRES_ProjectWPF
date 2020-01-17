@@ -28,7 +28,9 @@ namespace ViewModel.GlobalViewModels
     public class RelayCommand<T> : ICommand
     {
         private readonly Predicate<T> _canExecute;
-        private readonly Action<T> _execute;    
+        private readonly Action<T> _execute;
+
+       
 
         public RelayCommand(Predicate<T> canExecute, Action<T> execute)
         {

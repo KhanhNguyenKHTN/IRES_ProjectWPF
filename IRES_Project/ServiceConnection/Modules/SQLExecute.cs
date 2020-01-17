@@ -19,10 +19,41 @@ namespace Service.Modules
                 return _Instance;
             }
         }
+        public DataTable MyGetExcuteQuery(string query)
+        {
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+                     // Execute a query
+            NpgsqlDataReader dr = cmd.ExecuteReader();
+
+            DataTable dt = new DataTable();
+
+            dt.Load(dr);
+            dr.Close();
+            return dt;
+        }
         public DataTable GetExcuteQuery(string query)
         {
             // Read command
             NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+            // Execute a query
+            NpgsqlDataReader dr = cmd.ExecuteReader();
+
+            DataTable dt = new DataTable();
+
+            dt.Load(dr);
+            dr.Close();
+            return dt;
+        }
+        public DataTable MyGetExcuteQuery(string query, string searchValue)
+        {
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+            
+
+            cmd.Parameters.Add("@search_text", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@search_text"].Value = searchValue;
+            cmd.Parameters.AddWithValue(searchValue);
             // Execute a query
             NpgsqlDataReader dr = cmd.ExecuteReader();
 
