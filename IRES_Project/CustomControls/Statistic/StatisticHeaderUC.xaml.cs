@@ -12,27 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IRES_Project.MasterData.MainPage;
-using IRES_Project.MasterData.FoodView;
 
-namespace IRES_Project
+namespace CustomControls.Statistic
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StatisticHeaderUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StatisticHeaderUC : UserControl
     {
-        public MainWindow()
+        public StatisticHeaderUC()
         {
             InitializeComponent();
-
-            Switcher.pageSwitcher = this;
-            Switcher.Switch(new MainPage());
-        }
-
-        public void Navigate(UserControl nextPage)
-        {
-            this.Content = nextPage;
         }
     }
 }
