@@ -23,7 +23,7 @@ namespace IRES_Project.MasterData.MainPage
     /// </summary>
     public partial class MainPage : UserControl
     {
-        int pageIndex = 1;
+        //int pageIndex = 1;
         private int numberOfRecPerPage = 5;
         private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
         private void cbNumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
