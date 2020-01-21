@@ -101,13 +101,15 @@
                         </LinearGradientBrush>
                     </Grid.Background>
 
-
-                    <Grid Grid.Row="0" Margin="0 10 0 0 " HorizontalAlignment="Stretch">
-                         <uc:MasterDataHeader  CustomClick ="Seach_Emp"  ></uc:MasterDataHeader>
+                        <!--TestClick="Test_Cmd"-->
+                    <!--#region MasterDataHeader --> 
+                    <Grid Grid.Row="0" Margin="0 10 0 0 " HorizontalAlignment="Stretch" Width="auto">
+                            <uc:MasterDataHeader CustomClick ="Seach_Emp"   RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
                     </Grid>
-
+                    <!--#endregion-->
+                        <!--ItemsSource="{Binding ListEmployee, Mode=TwoWay}"-->
                     <Grid Grid.Row="1">
-                        <DataGrid BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
+                            <DataGrid BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
                                   HorizontalAlignment="Left" Margin="20"   VerticalAlignment="Top"  CanUserSortColumns="True"  IsReadOnly="True" ColumnWidth="*" 
                                   materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
                         <DataGrid.Resources>
@@ -167,33 +169,38 @@
                             <Grid Grid.Column="0"></Grid>
                        
                             <Grid Grid.Column="1">
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    
                                     <Button Height="25" Margin="0 0 5 0" HorizontalAlignment="Left" Name="btnFirst" Click="btnFirst_Click" 
-                                     VerticalAlignment="Bottom" Width="50" Content="&lt;&lt;" Opacity="0.75"/>
+                                     VerticalAlignment="Bottom" Width="50" Content="&lt;&lt;" Opacity="0.75">
+                                        <!--<Button.InputBindings>
+                                            <KeyBinding Key="Enter"/>
+                                        </Button.InputBindings>-->
+                                    </Button>
                                     <Button Height="25" Margin="0" HorizontalAlignment="Center" Name="btnPrev"  Click="btnPrev_Click"
-                                     VerticalAlignment="Bottom" Width="40" Content="&lt;"     Opacity="0.75"/>
+                                     VerticalAlignment="Bottom" Width="50" Content="&lt;"     Opacity="0.75"/>
                                 </StackPanel>
                             </Grid>
                         
                             <Grid Grid.Column="2">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
-                             Name="btn1" Click="Btn1_Click" VerticalAlignment="Bottom" Width="40" Content="1"  Opacity="1" BorderBrush="Black" BorderThickness="1"></Button>
+                             Name="btn1" Click="Btn1_Click" VerticalAlignment="Bottom" Width="50" Content="1"  Opacity="1" BorderBrush="Black" BorderThickness="1"></Button>
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
-                             Name="btn2" Click="Btn2_Click" VerticalAlignment="Bottom" Width="40" Content="2"  Opacity="0.75"></Button>
+                             Name="btn2" Click="Btn2_Click" VerticalAlignment="Bottom" Width="50" Content="2"  Opacity="0.75"></Button>
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
-                             Name="btn3" Click="Btn3_Click" VerticalAlignment="Bottom" Width="40" Content="3"  Opacity="0.75"></Button>
+                             Name="btn3" Click="Btn3_Click" VerticalAlignment="Bottom" Width="50" Content="3"  Opacity="0.75"></Button>
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
-                             Name="btn4" Click="Btn4_Click" VerticalAlignment="Bottom" Width="40" Content="4"  Opacity="0.75"></Button>
+                             Name="btn4" Click="Btn4_Click" VerticalAlignment="Bottom" Width="50" Content="4"  Opacity="0.75"></Button>
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
-                             Name="btn5" Click="Btn5_Click" VerticalAlignment="Bottom" Width="40" Content="5"  Opacity="0.75"></Button>
+                             Name="btn5" Click="Btn5_Click" VerticalAlignment="Bottom" Width="50" Content="5"  Opacity="0.75"></Button>
                                 </StackPanel>
                             </Grid>
                         
                             <Grid Grid.Column="3">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Height="25" Margin="0 0 5 0" HorizontalAlignment="Center"  VerticalAlignment="Bottom"
-                                    Name="btnNext" Click="btnNext_Click"  Width="40" Content="&gt;"      Opacity="0.75"/>
+                                    Name="btnNext" Click="btnNext_Click"  Width="50" Content="&gt;"      Opacity="0.75"/>
                                     <Button Height="25" Margin="0"       HorizontalAlignment="Right"   VerticalAlignment="Bottom" 
                                     Name="btnLast" Click="btnLast_Click"  Width="50" Content="&gt;&gt;"  Opacity="0.75"/>
                                 </StackPanel>
@@ -205,7 +212,7 @@
                         
                     <Grid Grid.Row="3" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"   VerticalAlignment="Top">
-                            
+                            <CheckBox x:Name="myCheck"  IsEnabledChanged="MyCheck_IsEnabledChanged" IsEnabled="{Binding Refresh}" Visibility="Collapsed"></CheckBox>
                             <Label  x:Name="lblpageInformation" Margin=" 0 " HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                              HorizontalAlignment=" Center" VerticalAlignment="Bottom" Height="30"  Width="150" Background="MediumPurple" BorderThickness="1"/>
                             <!--<ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 0 5 0"

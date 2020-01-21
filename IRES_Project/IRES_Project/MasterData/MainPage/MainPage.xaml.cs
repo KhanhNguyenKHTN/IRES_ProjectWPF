@@ -26,15 +26,13 @@ namespace IRES_Project.MasterData.MainPage
         MainPageViewModel mainPageVM = new MainPageViewModel();
         int ActiveBtn = 1;
         int CurPageIndex = 1;
-        int PrePageIndex = 1;
-        int no_View, ViewIndex;     
+        int no_View, ViewIndex = 1;
         int count;
         int from;
-        int no_ListEm;
         int no_Page;
+        int first_Run = 0;
         ObservableCollection<Employee> listEm;
-
-        private int numberOfRecPerPage = 3;
+        private int numberOfRecPerPage = 2;
         private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
 
         public MainPage()
@@ -43,28 +41,34 @@ namespace IRES_Project.MasterData.MainPage
             this.DataContext = mainPageVM;
             listEm = mainPageVM.ListEmployee;
             dataGrid.ItemsSource = listEm.Take(numberOfRecPerPage);
-            no_ListEm = listEm.Count();
-            no_Page = no_ListEm / numberOfRecPerPage;
-            #region Paging
+            //dataGrid.ItemsSource=mainPageVM.ListEmployee.Take(numberOfRecPerPage);
+            No_View_Updt();
+            #region Config paging btn 2 trường hợp, 1 là khi khởi tạo, 1 là khi itemsource thay đổi
+            if (no_Page > 1)
+            {
+                btnNext.IsEnabled = true;
+                btnNext.Opacity = 1;
+            }
+            else
+            {
+                btnNext.IsEnabled = false;
+                btnNext.Opacity = 0.75;
+            }
 
-            btnNext.IsEnabled = true;
-            btnNext.Opacity = 1;
             if (listEm.Count <= numberOfRecPerPage)
             {
                 btnLast.IsEnabled = false;
+                btnLast.Opacity = 0.75;
             }
             else
             {
                 btnLast.IsEnabled = true;
                 btnLast.Opacity = 1;
-
             }
             btnPrev.IsEnabled = false;
             btnFirst.IsEnabled = false;
-            count = listEm.Take(numberOfRecPerPage).Count();
-            from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-            lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
-            //btnFirst.IsEnabled = false;
+            updtLabel();
+       
             //cbNumberOfRecords.Items.Add("10");
             //cbNumberOfRecords.Items.Add("20");
             //cbNumberOfRecords.Items.Add("30");
@@ -72,9 +76,10 @@ namespace IRES_Project.MasterData.MainPage
             //cbNumberOfRecords.Items.Add("100");
             //cbNumberOfRecords.SelectedItem = 10;
             #endregion
+
             #region Config button
-           
-          
+            btnUpdate();
+
             #endregion
         }
 
@@ -87,14 +92,68 @@ namespace IRES_Project.MasterData.MainPage
 
         private void Seach_Emp(object sender, RoutedEventArgs e)
         {
-           
-            
-            listEm = mainPageVM.searchEmployee();
-            dataGrid.ItemsSource = listEm;
-            Navigate((int)PagingMode.First);
-            count = listEm.Take(numberOfRecPerPage).Count();
-            from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-            lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+
+            ObservableCollection<Employee> searchEm = new ObservableCollection<Employee>();
+            searchEm = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
+            if (searchEm.Count != 0)
+            {
+                listEm = searchEm;
+                dataGrid.ItemsSource = listEm;
+                No_View_Updt();
+                if (no_Page > 1)
+                {
+                    Navigate((int)PagingMode.First);
+                }
+                else
+                {
+                    if (no_Page == 1)
+                    {
+                        Navigate((int)PagingMode.First);
+                        btnNext.IsEnabled = false;
+                        btnNext.Opacity = 0.75;
+                        btnLast.IsEnabled = false;
+                        btnLast.Opacity = 0.75;
+                        btnPrev.IsEnabled = false;
+                        btnPrev.Opacity = 0.75;
+                        btnFirst.IsEnabled = false;
+                        btnFirst.Opacity = 0.75;
+                    }
+                }
+                updtLabel();
+            }
+
+
+            #region test luong tìm kiếm Khong co ket qua => quay về mặc định
+            //else //Khong co ket qua => ko lam gi het
+            //{
+            //    listEm = mainPageVM.ListEmployee; // Load lai list default, command dòng này để giữ lại list hiện tại
+            //    Navigate((int)PagingMode.First);
+            //    count = listEm.Take(numberOfRecPerPage).Count();
+            //    from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
+            //    lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+            //}
+            #endregion  
+
+            #region test dùng trực tiếp VM
+            //mainPageVM.ListEmployee = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
+            //if (mainPageVM.ListEmployee.Count != 0)
+            //{
+            //    listEm = mainPageVM.ListEmployee;
+            //    dataGrid.ItemsSource = listEm;
+            //    Navigate((int)PagingMode.First);
+            //    count = listEm.Take(numberOfRecPerPage).Count();
+            //    from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
+            //    lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+            //}
+            //else //Khong co ket qua => ko lam gi het
+            //{
+            //    //listEm = mainPageVM.ListEmployee; // Load lai list default, command dòng này để giữ lại list hiện tại
+            //    //Navigate((int)PagingMode.First);
+            //    //count = listEm.Take(numberOfRecPerPage).Count();
+            //    //from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
+            //    //lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+            //}
+            #endregion
 
 
         }
@@ -105,7 +164,7 @@ namespace IRES_Project.MasterData.MainPage
             switch (mode)
             {
                 case (int)PagingMode.Next:
-                   
+
                     btnPrev.IsEnabled = true;
                     btnPrev.Opacity = 1;
                     btnFirst.IsEnabled = true;
@@ -115,15 +174,20 @@ namespace IRES_Project.MasterData.MainPage
 
                         if (listEm.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() != 0) // còn item để lấy
                         {
-                            dataGrid.ItemsSource = null;
+
+                            //dataGrid.ItemsSource = null;
                             dataGrid.ItemsSource = listEm.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage);
-                            PrePageIndex = CurPageIndex;
+                            if (ActiveBtn == 5 && ViewIndex != no_View)     //nút 5th
+                            {
+
+                                ViewIndex++;
+                            }
+                            btnUpdate();
                             btnDeFocus();
                             CurPageIndex++;
                             count = Math.Min((CurPageIndex) * (numberOfRecPerPage), listEm.Count());
                             updtActBtn();
                             btnFocus();
-                           
 
                             if (listEm.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() == 0) // hết item để lấy
                             {
@@ -138,15 +202,22 @@ namespace IRES_Project.MasterData.MainPage
                     }
                     break;
                 case (int)PagingMode.Previous:
-                    
-                    btnNext.IsEnabled = true;
-                    btnNext.Opacity = 1;
-                    btnLast.IsEnabled = true;
-                    btnLast.Opacity = 1;
+                    if (no_Page > 1)
+                    {
+                        btnNext.IsEnabled = true;
+                        btnNext.Opacity = 1;
+                        btnLast.IsEnabled = true;
+                        btnLast.Opacity = 1;
+                    }
                     btnDeFocus();
                     if (CurPageIndex > 1)
                     {
-                        PrePageIndex = CurPageIndex;
+                        if (ViewIndex > 1 && ActiveBtn == 1)
+                        {
+                            ViewIndex--;
+                        }
+                        btnUpdate();     // phụ thuộc vào ViewIndex
+
                         CurPageIndex -= 1;
                         dataGrid.ItemsSource = null;
                         if (CurPageIndex == 1)
@@ -156,9 +227,7 @@ namespace IRES_Project.MasterData.MainPage
                             btnFirst.IsEnabled = false;
                             btnFirst.Opacity = 0.75;
                             dataGrid.ItemsSource = listEm.Take(numberOfRecPerPage);
-                            count = listEm.Take(numberOfRecPerPage).Count();
-                            from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-                            lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+                            updtLabel();
                         }
                         else
                         {
@@ -180,78 +249,20 @@ namespace IRES_Project.MasterData.MainPage
                     break;
 
                 case (int)PagingMode.First:
-                    PrePageIndex = CurPageIndex;
+                    ViewIndex = 1;
                     CurPageIndex = 2;
-                    switch (PrePageIndex % 5)
-                    {
-                        case 1:
-                            {
-                                break;
-                            }
-                        case 2:
-                            {
-                                btn2.Opacity = 0.75;
-                                btn2.BorderThickness = new Thickness(0.0);
-                                break;
-                            }
-                        case 3:
-                            {
-                                btn3.Opacity = 0.75;
-                                btn3.BorderThickness = new Thickness(0.0);
-                                break;
-                            }
-                        case 4:
-                            {
-                                btn4.Opacity = 0.75;
-                                btn4.BorderThickness = new Thickness(0.0);
-                                break;
-                            }
-                        case 0:
-                            {
-                                btn5.Opacity = 0.75;
-                                btn5.BorderThickness = new Thickness(0.0);
-                                break;
-                            }
-                    }
                     Navigate((int)PagingMode.Previous);
                     break;
                 case (int)PagingMode.Last:
-                    PrePageIndex = CurPageIndex;
-                    switch (PrePageIndex % 5)
+                    ViewIndex = no_View;
+                    CurPageIndex = (listEm.Count / numberOfRecPerPage);
+                    if (listEm.Count % numberOfRecPerPage == 0)
                     {
-                        case 1:
-                            {
-                                btn1.Opacity = 0.75;
-                                btn1.BorderThickness = new Thickness(0.0);
-                                break;
-                            }
-                        case 2:
-                            {
-                                btn2.Opacity = 0.75;
-                                btn2.BorderThickness = new Thickness(0.0);
-                                break;
-                            }
-                        case 3:
-                            {
-                                btn3.Opacity = 0.75;
-                                btn3.BorderThickness = new Thickness(0.0);
-                                break;
-                            }
-                        case 4:
-                            {
-                                btn4.Opacity = 0.75;
-                                btn4.BorderThickness = new Thickness(0.0);
-                                break;
-                            }
-                        case 0:
-                            {
-                                break;
-                            }
+                        CurPageIndex--;
                     }
-                    CurPageIndex = (listEm.Count / numberOfRecPerPage) - 1;
                     Navigate((int)PagingMode.Next);
                     break;
-                    #region pagecount
+                    #region test pagecount
                     //case (int)PagingMode.PageCountChange:
                     //    CurPageIndex = 1;
                     //    numberOfRecPerPage = Convert.ToInt32(cbNumberOfRecords.SelectedItem);
@@ -296,13 +307,12 @@ namespace IRES_Project.MasterData.MainPage
         //}
         #endregion
 
-
         #region Navigate number 1 2 3 4 5
         private void Btn1_Click(object sender, RoutedEventArgs e)
         {
             if (ActiveBtn != 1)
             {
-                PrePageIndex = CurPageIndex;
+
                 switch (ActiveBtn)
                 {
                     case 2:
@@ -322,7 +332,7 @@ namespace IRES_Project.MasterData.MainPage
                             Navigate((int)PagingMode.Previous);
                             break;
                         }
-                    case 0:
+                    case 5:
                         {
                             CurPageIndex -= 3;
                             Navigate((int)PagingMode.Previous);
@@ -339,7 +349,7 @@ namespace IRES_Project.MasterData.MainPage
 
             if (ActiveBtn != 2)
             {
-                PrePageIndex = CurPageIndex;
+
                 switch (ActiveBtn)
                 {
                     case 1:
@@ -351,7 +361,7 @@ namespace IRES_Project.MasterData.MainPage
                     case 3:
                         {
 
-                            
+
                             Navigate((int)PagingMode.Previous);
                             break;
                         }
@@ -361,7 +371,7 @@ namespace IRES_Project.MasterData.MainPage
                             Navigate((int)PagingMode.Previous);
                             break;
                         }
-                    case 0:
+                    case 5:
                         {
                             CurPageIndex -= 2;
                             Navigate((int)PagingMode.Previous);
@@ -376,9 +386,9 @@ namespace IRES_Project.MasterData.MainPage
         private void Btn3_Click(object sender, RoutedEventArgs e)
         {
 
-            if (ActiveBtn!= 3)
+            if (ActiveBtn != 3)
             {
-                PrePageIndex = CurPageIndex;
+
                 switch (ActiveBtn)
                 {
                     case 1:
@@ -397,7 +407,7 @@ namespace IRES_Project.MasterData.MainPage
                             Navigate((int)PagingMode.Previous);
                             break;
                         }
-                    case 0:
+                    case 5:
                         {
                             CurPageIndex -= 1;
                             Navigate((int)PagingMode.Previous);
@@ -413,7 +423,6 @@ namespace IRES_Project.MasterData.MainPage
         {
             if (ActiveBtn != 4)
             {
-                PrePageIndex = CurPageIndex;
                 switch (ActiveBtn)
                 {
                     case 1:
@@ -433,7 +442,7 @@ namespace IRES_Project.MasterData.MainPage
                             Navigate((int)PagingMode.Next);
                             break;
                         }
-                    case 0:
+                    case 5:
                         {
                             Navigate((int)PagingMode.Previous);
                             break;
@@ -445,9 +454,9 @@ namespace IRES_Project.MasterData.MainPage
         private void Btn5_Click(object sender, RoutedEventArgs e)
         {
 
-            if (ActiveBtn != 0)
+            if (ActiveBtn != 5)
             {
-                PrePageIndex = CurPageIndex;
+
                 switch (ActiveBtn)
                 {
                     case 1:
@@ -479,6 +488,8 @@ namespace IRES_Project.MasterData.MainPage
             }
         }
         #endregion
+
+        #region Btn config
         public void btnDeFocus()
         {
             switch (ActiveBtn)
@@ -569,88 +580,125 @@ namespace IRES_Project.MasterData.MainPage
                     }
             }
         }
-        public void viewNext()
-        {
-            dataGrid.ItemsSource = null;
-            dataGrid.ItemsSource = listEm.Skip(ViewIndex * numberOfRecPerPage * 5).Take(numberOfRecPerPage);
-
-            
-
-            ViewIndex++;
-
-            if ( no_ListEm < ViewIndex*5*numberOfRecPerPage)
-            {
-
-            }
-
-             PrePageIndex = CurPageIndex;
-            CurPageIndex++;
-
-
-
-
-
-        }
-
-
         public void btnUpdate()
         {
-            if(GetNo_Page()==0)
+            if (GetNo_Page() == 0)
             {
-                btn1.Visibility = Visibility.Collapsed;
-                btn2.Visibility = Visibility.Collapsed;
-                btn3.Visibility = Visibility.Collapsed;
-                btn4.Visibility = Visibility.Collapsed;
-                btn5.Visibility = Visibility.Collapsed;
+                btn1.Visibility = Visibility.Hidden;
+                btn2.Visibility = Visibility.Hidden;
+                btn3.Visibility = Visibility.Hidden;
+                btn4.Visibility = Visibility.Hidden;
+                btn5.Visibility = Visibility.Hidden;
             }
             else
             {
-                switch (GetNo_Page() % 5)
-                {
-                    case 1:
-                        {
-                            btn2.Visibility = Visibility.Collapsed;
-                            btn3.Visibility = Visibility.Collapsed;
-                            btn4.Visibility = Visibility.Collapsed;
-                            btn5.Visibility = Visibility.Collapsed;
-                            break;
-                        }
-                    case 2:
-                        {
-                            btn3.Visibility = Visibility.Collapsed;
-                            btn4.Visibility = Visibility.Collapsed;
-                            btn5.Visibility = Visibility.Collapsed;
-                            break;
-                        }
-                    case 3:
-                        {
-                            btn4.Visibility = Visibility.Collapsed;
-                            btn5.Visibility = Visibility.Collapsed;
-                            btn5.Visibility = Visibility.Collapsed;
-                            break;
-                        }
-                    case 4:
-                        {
-                            btn5.Visibility = Visibility.Collapsed;
-                            break;
-                        }
-                    case 0:
-                        {
-                            break;
-                        }
-                    default:
-                        {
-                            break;
-                        }
-                }
+                if ((ViewIndex == 1 && no_View == 1) || ViewIndex == no_View)
 
+                {
+                    switch (GetNo_Page() % 5)
+                    {
+                        case 1:
+                            {
+                                btn1.Content = (ViewIndex - 1) * 5 + 1;
+                                btn1.Visibility = Visibility.Visible;
+                                btn2.Visibility = Visibility.Hidden;
+                                btn3.Visibility = Visibility.Hidden;
+                                btn4.Visibility = Visibility.Hidden;
+                                btn5.Visibility = Visibility.Hidden;
+                                break;
+                            }
+                        case 2:
+                            {
+                                btn1.Content = (ViewIndex - 1) * 5 + 1;
+                                btn2.Content = (ViewIndex - 1) * 5 + 2;
+
+                                btn1.Visibility = Visibility.Visible;
+                                btn2.Visibility = Visibility.Visible;
+                                btn3.Visibility = Visibility.Hidden;
+                                btn4.Visibility = Visibility.Hidden;
+                                btn5.Visibility = Visibility.Hidden;
+                                break;
+                            }
+                        case 3:
+                            {
+                                btn1.Content = (ViewIndex - 1) * 5 + 1;
+                                btn2.Content = (ViewIndex - 1) * 5 + 2;
+                                btn3.Content = (ViewIndex - 1) * 5 + 3;
+                                btn1.Visibility = Visibility.Visible;
+                                btn2.Visibility = Visibility.Visible;
+                                btn3.Visibility = Visibility.Visible;
+                                btn4.Visibility = Visibility.Hidden;
+                                btn5.Visibility = Visibility.Hidden;
+                                break;
+                            }
+                        case 4:
+                            {
+                                btn1.Content = (ViewIndex - 1) * 5 + 1;
+                                btn2.Content = (ViewIndex - 1) * 5 + 2;
+                                btn3.Content = (ViewIndex - 1) * 5 + 3;
+                                btn4.Content = (ViewIndex - 1) * 5 + 4;
+                                btn1.Visibility = Visibility.Visible;
+                                btn2.Visibility = Visibility.Visible;
+                                btn3.Visibility = Visibility.Visible;
+                                btn4.Visibility = Visibility.Visible;
+                                btn5.Visibility = Visibility.Hidden;
+                                break;
+                            }
+                        case 0:
+                            {
+                                btn1.Content = (ViewIndex - 1) * 5 + 1;
+                                btn2.Content = (ViewIndex - 1) * 5 + 2;
+                                btn3.Content = (ViewIndex - 1) * 5 + 3;
+                                btn4.Content = (ViewIndex - 1) * 5 + 4;
+                                btn5.Content = (ViewIndex - 1) * 5 + 5;
+                                btn1.Visibility = Visibility.Visible;
+                                btn2.Visibility = Visibility.Visible;
+                                btn3.Visibility = Visibility.Visible;
+                                btn4.Visibility = Visibility.Visible;
+                                btn5.Visibility = Visibility.Visible;
+                                break;
+                            }
+                        default:
+                            {
+                                MessageBox.Show("btnUpdate Exception");
+                                break;
+                            }
+                    }
+                }
+                else
+                {
+                    btn1.Content = (ViewIndex - 1) * 5 + 1;
+                    btn2.Content = (ViewIndex - 1) * 5 + 2;
+                    btn3.Content = (ViewIndex - 1) * 5 + 3;
+                    btn4.Content = (ViewIndex - 1) * 5 + 4;
+                    btn5.Content = (ViewIndex - 1) * 5 + 5;
+
+                    btn1.Visibility = Visibility.Visible;
+                    btn2.Visibility = Visibility.Visible;
+                    btn3.Visibility = Visibility.Visible;
+                    btn4.Visibility = Visibility.Visible;
+                    btn5.Visibility = Visibility.Visible;
+                }
+            }
+        }
+        public void No_View_Updt()
+        {
+            no_Page = listEm.Count / numberOfRecPerPage;
+            if (listEm.Count % numberOfRecPerPage != 0)
+            {
+                no_Page++;
+            }
+            no_View = no_Page / 5;
+            if (no_Page % 5 != 0)
+            {
+                no_View++;
             }
         }
 
         public int GetNo_Page()
         {
             int res;
-            int TotalRec = listEm.Skip((ViewIndex-1)*5*numberOfRecPerPage).Count();
+            int TotalRec = listEm.Skip((ViewIndex - 1) * 5 * numberOfRecPerPage).Count();
             if (TotalRec == 0)
             {
                 return 0;
@@ -662,33 +710,64 @@ namespace IRES_Project.MasterData.MainPage
             }
             return res;
         }
+        #endregion
 
+        private void MyCheck_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (first_Run > 0)
+            {
+                if (mainPageVM.ListEmployee.Count != 0)
+                {
+                    listEm = mainPageVM.ListEmployee;
+                    dataGrid.ItemsSource = listEm;
+                    No_View_Updt();
+                    if (no_Page > 1)
+                    {
+                        Navigate((int)PagingMode.First);
+                    }
+                    else
+                    {
+                        if (no_Page == 1)
+                        {
+                            Navigate((int)PagingMode.First);
+                            btnNext.IsEnabled = false;
+                            btnNext.Opacity = 0.75;
+                            btnLast.IsEnabled = false;
+                            btnLast.Opacity = 0.75;
+                            btnPrev.IsEnabled = false;
+                            btnPrev.Opacity = 0.75;
+                            btnFirst.IsEnabled = false;
+                            btnFirst.Opacity = 0.75;
+                        }
+                    }
+                    updtLabel();
+                }
+                else
+                    first_Run = 1; ;
+            }
+       }
 
+        //private void Test_Cmd(object sender, RoutedEventArgs e)
+        //{
+        //    dataGrid.ItemsSource = null;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //    listEm = mainPageVM.ListEmployee;
+        //    dataGrid.ItemsSource = listEm;
+        //}
+        private void Refresh_Data(object sender, RoutedEventArgs e)
+        {
+            //dataGrid.ItemsSource = null;
+            listEm = mainPageVM.ListEmployee;
+            dataGrid.ItemsSource = listEm;
+            No_View_Updt();
+            Navigate((int)PagingMode.First);
+            updtLabel();
+        }
+        private void updtLabel()
+        {
+            count = listEm.Take(numberOfRecPerPage).Count();
+            from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
+            lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+        }
     }
 }

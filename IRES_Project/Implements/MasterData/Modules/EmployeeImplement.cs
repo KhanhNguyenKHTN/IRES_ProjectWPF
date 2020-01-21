@@ -13,14 +13,28 @@ namespace Implements.MasterData.Modules
 {
    public class EmployeeImplement
     {
-        public ObservableCollection<Employee> getListEmployee()
+        public static ObservableCollection<Employee> getListEmployee()
         {
             string query = $"select employee_code,user_display_name,role_name,employee.role_id,employee_description,employee_phone from ires.employee,ires.user_info, ires.role where ires.employee.user_id = ires.user_info.user_id and ires.employee.role_id = ires.role.role_id and ires.employee.active = 'true' ";
 
             ObservableCollection<Employee> result = new ObservableCollection<Employee>();
+
             WorkerToDB worker = new WorkerToDB();
             DataTable dt = worker.getRecordsCommand(query);
-
+            if(dt.Rows.Count==0)
+            {
+                Employee def_item = new Employee();
+                def_item = new Employee
+                {
+                    EmployeeCode = "Rỗng",
+                    EmployeeName = "Rỗng",
+                    RoleId = -1,
+                    Role = "Rỗng",
+                    PhoneNb = "Rỗng"
+                };
+                result.Add(def_item);
+                return result;
+            }
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Employee item = new Employee();
@@ -38,10 +52,11 @@ namespace Implements.MasterData.Modules
 
             return result;
         }
-        public ObservableCollection<Employee> searchListEmployee(string search_text)
+        public static ObservableCollection<Employee> searchListEmployee(string search_text)
         {
             string query = $"select employee_code,user_display_name,role_name,employee.role_id,employee_description,employee_phone from ires.employee,ires.user_info, ires.role " +
-                $" where (ires.employee.user_id = ires.user_info.user_id and ires.employee.role_id = ires.role.role_id and ires.employee.active = 'true') and (lower(user_display_name) like LOWER('%' || @search_text || '%') or lower(role_name) like lower('%' || @search_text || '%') )";
+                $" where (ires.employee.user_id = ires.user_info.user_id and ires.employee.role_id = ires.role.role_id and ires.employee.active = 'true') and" +
+                $" (lower(user_display_name) like LOWER('%' || @search_text || '%') or lower(role_name) like lower('%' || @search_text || '%') )";
             
             ObservableCollection<Employee> result = new ObservableCollection<Employee>();
             WorkerToDB worker = new WorkerToDB();
@@ -49,9 +64,23 @@ namespace Implements.MasterData.Modules
 
             SQLExecute sqlExecute = new SQLExecute();
 
-            DataTable dt = sqlExecute.MyGetExcuteQuery(query, search_text); 
+            DataTable dt = sqlExecute.MyGetExcuteQuery(query, search_text);
 
-          
+            if (dt.Rows.Count == 0)
+            {
+                Employee def_item = new Employee();
+                def_item = new Employee
+                {
+                    EmployeeCode = "Rỗng",
+                    EmployeeName = "Rỗng",
+                    RoleId = -1,
+                    Role = "Rỗng",
+                    PhoneNb = "Rỗng"
+                };
+                result.Add(def_item);
+                return result;
+            }
+
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
