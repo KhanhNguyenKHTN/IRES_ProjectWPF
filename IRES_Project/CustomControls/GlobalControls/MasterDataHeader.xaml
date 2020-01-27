@@ -14,7 +14,7 @@
             <ColumnDefinition  Width="8*"/>
             <ColumnDefinition  Width="10*"/>
             <ColumnDefinition  Width="15*"/>
-            <ColumnDefinition  Width="10*"/>
+            <ColumnDefinition  Width="12*"/>
             <ColumnDefinition  Width="10*"/>
             <ColumnDefinition  Width="8*"/>
         </Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
         </Grid>
         <Grid Grid.Column ="4">
             <StackPanel Orientation="Horizontal">
-                <Button Visibility="Collapsed" Click ="Test_Click" Margin ="10 0 0 0" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=MySearch}">
+                <Button Visibility="Collapsed" Click ="Test_Click" Margin ="0 0 0 0" Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=MySearch}">
                     Test Cmd</Button>
                 <Button  Margin="10 0 10 0">
                     <DockPanel>

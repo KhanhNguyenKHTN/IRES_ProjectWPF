@@ -109,8 +109,8 @@
                     <!--#endregion-->
                         <!--ItemsSource="{Binding ListEmployee, Mode=TwoWay}"-->
                     <Grid Grid.Row="1">
-                            <DataGrid BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
-                                  HorizontalAlignment="Left" Margin="20"   VerticalAlignment="Top"  CanUserSortColumns="True"  IsReadOnly="True" ColumnWidth="*" 
+                            <DataGrid IsReadOnly="False" BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
+                                  HorizontalAlignment="Left" Margin="20"   VerticalAlignment="Top"  CanUserSortColumns="True"  ColumnWidth="*" 
                                   materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -144,12 +144,19 @@
                             <DataGridTextColumn Width="2*" Header="Tên nhân viên" Binding="{Binding EmployeeName}"  />
                             <DataGridTextColumn Width="2*" Header="Chức vụ"       Binding="{Binding Role}" />
                             <DataGridTextColumn Width="2*" Header="Số ĐT"         Binding="{Binding PhoneNb}" />
-                            <DataGridTemplateColumn Width="1*" Header="Tùy chỉnh" >
+                            <DataGridTemplateColumn x:Name="Edit_Col" Width="1*" Header="Tùy chỉnh" >
                                 <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <materialDesign:PackIcon Kind="AccountEdit" Margin= " 0 0 20 0" />
-                                                    <materialDesign:PackIcon Kind="Delete" />
+                                                    <TextBlock Width="15"></TextBlock>
+                                                    <Button Width="auto" Name="btn_Edit" Click="Edit_Click">
+                                                        <materialDesign:PackIcon Width="auto" Kind="AccountEdit" Margin= " 0 0 0 0" />
+                                                    </Button>
+                                                    <TextBlock Width="10"></TextBlock>
+                                                    <Button Width="auto">
+                                                        <materialDesign:PackIcon Width="auto" Kind="Delete" Margin= " 0 0 0 0" />
+                                                    </Button>
+                                                    <TextBlock Width="10"></TextBlock>
                                                 </StackPanel>
                                             </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -170,7 +177,6 @@
                        
                             <Grid Grid.Column="1">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    
                                     <Button Height="25" Margin="0 0 5 0" HorizontalAlignment="Left" Name="btnFirst" Click="btnFirst_Click" 
                                      VerticalAlignment="Bottom" Width="50" Content="&lt;&lt;" Opacity="0.75">
                                         <!--<Button.InputBindings>

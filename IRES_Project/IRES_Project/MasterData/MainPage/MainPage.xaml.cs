@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using ViewModel.Modules;
 using Model.Models;
 using System.Collections.ObjectModel;
+using System.Collections;
+using System.Data;
 
 namespace IRES_Project.MasterData.MainPage
 {
@@ -31,7 +33,7 @@ namespace IRES_Project.MasterData.MainPage
         int from;
         int no_Page;
         int first_Run = 0;
-        ObservableCollection<Employee> listEm;
+        ObservableCollection<Employee> listEm { get; set; }
         private int numberOfRecPerPage = 2;
         private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
 
@@ -217,7 +219,6 @@ namespace IRES_Project.MasterData.MainPage
                             ViewIndex--;
                         }
                         btnUpdate();     // phụ thuộc vào ViewIndex
-
                         CurPageIndex -= 1;
                         dataGrid.ItemsSource = null;
                         if (CurPageIndex == 1)
@@ -763,6 +764,29 @@ namespace IRES_Project.MasterData.MainPage
             Navigate((int)PagingMode.First);
             updtLabel();
         }
+
+       
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            //var currentRowIndex = dataGrid.Items.IndexOf(dataGrid.CurrentItem);
+            //var x = dataGrid.SelectedCells;
+            //var y = dataGrid.CurrentItem;
+
+
+            IList rows = dataGrid.SelectedItems;
+            Employee a = rows[0] as Employee;
+
+            MessageBox.Show(a.EmployeeName);
+
+            //DataRowView dataRow = (DataRowView)dataGrid.SelectedItem;
+            //int index = dataGrid.CurrentCell.Column.DisplayIndex;
+            //string cellValue = dataRow.Row.ItemArray[index].ToString();
+
+            //var columnName = ((Binding)((DataGridBoundColumn)dataGrid.CurrentCell.Column).Binding).Path.Path;
+            //var cellValue2 = dataRow.Row[columnName];
+
+        }
+
         private void updtLabel()
         {
             count = listEm.Take(numberOfRecPerPage).Count();
