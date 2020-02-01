@@ -24,15 +24,19 @@ namespace ViewModel.Modules
 
         private ObservableCollection<Employee> _ListEmployee;
         public ObservableCollection<Employee> ListEmployee { get { return _ListEmployee; } set { _ListEmployee = value;  OnPropertyChanged(); } }
+        private ObservableCollection<Employee> _ListEmployeeRoot;
+        public ObservableCollection<Employee> ListEmployeeRoot { get { return _ListEmployeeRoot; } set { _ListEmployeeRoot = value; OnPropertyChanged(); } }
 
         //public bool Isloaded = false;
         //public ICommand LoadedWindowCommand { get; set; }
-       
+
         public MainPageViewModel()
         {
             //  SQLConnection SqlInstant = new SQLConnection();
             ListEmployee = getDataEmployee();
-            if(ListEmployee.Count()==0)
+            ListEmployeeRoot = new ObservableCollection<Employee>();
+            ListEmployeeRoot = ListEmployee;
+            if (ListEmployee.Count()==0)
             {
                 MessageBox.Show("Khong co data");
             }
@@ -100,7 +104,11 @@ namespace ViewModel.Modules
             }
             return listEmployee;
         }
+        public bool UpdatePhoneNb(string phoneNb, string role)
+        {
 
+            return EmployeeImplement.UpdatePhone(phoneNb, role);
+        }
 
     }
 }

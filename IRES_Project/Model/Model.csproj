@@ -40,6 +40,7 @@
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,7 +51,6 @@
   <ItemGroup>
     <Compile Include="GlobalConstants\GlobalInformations.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Food.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\DishModel.cs" />
     <Compile Include="Models\UserModel.cs" />

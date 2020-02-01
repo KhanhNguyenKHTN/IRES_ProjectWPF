@@ -59,12 +59,9 @@ namespace Implements.MasterData.Modules
                 $" (lower(user_display_name) like LOWER('%' || @search_text || '%') or lower(role_name) like lower('%' || @search_text || '%') )";
             
             ObservableCollection<Employee> result = new ObservableCollection<Employee>();
-            WorkerToDB worker = new WorkerToDB();
-
-
             SQLExecute sqlExecute = new SQLExecute();
 
-            DataTable dt = sqlExecute.MyGetExcuteQuery(query, search_text);
+            DataTable dt = sqlExecute.GetExcuteQueryOne(query, search_text);
 
             if (dt.Rows.Count == 0)
             {
@@ -99,6 +96,34 @@ namespace Implements.MasterData.Modules
 
             return result;
         }
+        public static bool UpdatePhone(string PhoneNb, string user_name)
+        {
+  
+            string query = $"UPDATE ires.Employee SET employee_phone = @Value1" +
+                           $" from ires.User_info" +
+                           $" WHERE User_info.user_display_name = '' || @Value2 ||'' and Employee.user_id = User_info.user_id";
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.GetExcuteQueryTwo(query, PhoneNb, user_name); ;
+        }
+
+    //    using (SqlConnection conn =
+    //        new SqlConnection(connectionString))
+    //    {
+    //        conn.Open();
+    //        using (SqlCommand cmd =
+    //            new SqlCommand("UPDATE Employees SET firstname=@firstname, lastname=@lastname" +
+    //                " WHERE Id=@Id", conn))
+    //        {
+    //            cmd.Parameters.AddWithValue("@Id",user.UserId );
+    //            cmd.Parameters.AddWithValue("@firstname",user.FirstName);
+    //            cmd.Parameters.AddWithValue("@lastname",user.LastName);
+    //            //add whatever parameters you required to update here
+    //            int rows = cmd.ExecuteNonQuery();
+
+    //        }
+    //}
+
+
 
     }
 }

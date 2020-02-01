@@ -32,7 +32,7 @@ namespace IRES_Project.MasterData.MainPage
         int count;
         int from;
         int no_Page;
-        int first_Run = 0;
+        //int first_Run = 0;
         ObservableCollection<Employee> listEm { get; set; }
         private int numberOfRecPerPage = 2;
         private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
@@ -41,8 +41,8 @@ namespace IRES_Project.MasterData.MainPage
         {
             InitializeComponent();
             this.DataContext = mainPageVM;
-            listEm = mainPageVM.ListEmployee;
-            dataGrid.ItemsSource = listEm.Take(numberOfRecPerPage);
+           
+            mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage));
             //dataGrid.ItemsSource=mainPageVM.ListEmployee.Take(numberOfRecPerPage);
             No_View_Updt();
             #region Config paging btn 2 trường hợp, 1 là khi khởi tạo, 1 là khi itemsource thay đổi
@@ -57,7 +57,7 @@ namespace IRES_Project.MasterData.MainPage
                 btnNext.Opacity = 0.75;
             }
 
-            if (listEm.Count <= numberOfRecPerPage)
+            if (mainPageVM.ListEmployeeRoot.Count <= numberOfRecPerPage)
             {
                 btnLast.IsEnabled = false;
                 btnLast.Opacity = 0.75;
@@ -70,7 +70,7 @@ namespace IRES_Project.MasterData.MainPage
             btnPrev.IsEnabled = false;
             btnFirst.IsEnabled = false;
             updtLabel();
-       
+
             //cbNumberOfRecords.Items.Add("10");
             //cbNumberOfRecords.Items.Add("20");
             //cbNumberOfRecords.Items.Add("30");
@@ -81,7 +81,7 @@ namespace IRES_Project.MasterData.MainPage
 
             #region Config button
             btnUpdate();
-
+            
             #endregion
         }
 
@@ -95,12 +95,12 @@ namespace IRES_Project.MasterData.MainPage
         private void Seach_Emp(object sender, RoutedEventArgs e)
         {
 
-            ObservableCollection<Employee> searchEm = new ObservableCollection<Employee>();
-            searchEm = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
-            if (searchEm.Count != 0)
+
+            listEm = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
+            if (listEm.Count != 0)
             {
-                listEm = searchEm;
-                dataGrid.ItemsSource = listEm;
+                mainPageVM.ListEmployee = listEm;
+                mainPageVM.ListEmployeeRoot = listEm;
                 No_View_Updt();
                 if (no_Page > 1)
                 {
@@ -171,14 +171,12 @@ namespace IRES_Project.MasterData.MainPage
                     btnPrev.Opacity = 1;
                     btnFirst.IsEnabled = true;
                     btnFirst.Opacity = 1;
-                    if (listEm.Count >= (CurPageIndex * numberOfRecPerPage)) //còn at least 0 item để next
+                    if (mainPageVM.ListEmployeeRoot.Count >= (CurPageIndex * numberOfRecPerPage)) //còn at least 0 item để next
                     {
 
-                        if (listEm.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() != 0) // còn item để lấy
+                        if (mainPageVM.ListEmployeeRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() != 0) // còn item để lấy
                         {
-
-                            //dataGrid.ItemsSource = null;
-                            dataGrid.ItemsSource = listEm.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage);
+                            mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage));
                             if (ActiveBtn == 5 && ViewIndex != no_View)     //nút 5th
                             {
 
@@ -187,11 +185,11 @@ namespace IRES_Project.MasterData.MainPage
                             btnUpdate();
                             btnDeFocus();
                             CurPageIndex++;
-                            count = Math.Min((CurPageIndex) * (numberOfRecPerPage), listEm.Count());
+                            count = Math.Min((CurPageIndex) * (numberOfRecPerPage), mainPageVM.ListEmployeeRoot.Count());
                             updtActBtn();
                             btnFocus();
 
-                            if (listEm.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() == 0) // hết item để lấy
+                            if (mainPageVM.ListEmployeeRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() == 0) // hết item để lấy
                             {
                                 btnNext.IsEnabled = false;
                                 btnNext.Opacity = 0.75;
@@ -200,7 +198,7 @@ namespace IRES_Project.MasterData.MainPage
                             }
                         }
                         from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-                        lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+                        lblpageInformation.Content = from + "-" + count + " of " + mainPageVM.ListEmployeeRoot.Count;
                     }
                     break;
                 case (int)PagingMode.Previous:
@@ -220,22 +218,21 @@ namespace IRES_Project.MasterData.MainPage
                         }
                         btnUpdate();     // phụ thuộc vào ViewIndex
                         CurPageIndex -= 1;
-                        dataGrid.ItemsSource = null;
                         if (CurPageIndex == 1)
                         {
                             btnPrev.IsEnabled = false;
                             btnPrev.Opacity = 0.75;
                             btnFirst.IsEnabled = false;
                             btnFirst.Opacity = 0.75;
-                            dataGrid.ItemsSource = listEm.Take(numberOfRecPerPage);
+                            mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage));
                             updtLabel();
                         }
                         else
                         {
-                            dataGrid.ItemsSource = listEm.Skip((CurPageIndex - 1) * numberOfRecPerPage).Take(numberOfRecPerPage);
+                            mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Skip((CurPageIndex - 1) * numberOfRecPerPage).Take(numberOfRecPerPage));
                             count = CurPageIndex * numberOfRecPerPage;
                             from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-                            lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+                            lblpageInformation.Content = from + "-" + count + " of " + mainPageVM.ListEmployeeRoot.Count;
                         }
                         updtActBtn();
                         btnFocus();
@@ -256,8 +253,8 @@ namespace IRES_Project.MasterData.MainPage
                     break;
                 case (int)PagingMode.Last:
                     ViewIndex = no_View;
-                    CurPageIndex = (listEm.Count / numberOfRecPerPage);
-                    if (listEm.Count % numberOfRecPerPage == 0)
+                    CurPageIndex = (mainPageVM.ListEmployeeRoot.Count / numberOfRecPerPage);
+                    if (mainPageVM.ListEmployeeRoot.Count % numberOfRecPerPage == 0)
                     {
                         CurPageIndex--;
                     }
@@ -268,11 +265,11 @@ namespace IRES_Project.MasterData.MainPage
                     //    CurPageIndex = 1;
                     //    numberOfRecPerPage = Convert.ToInt32(cbNumberOfRecords.SelectedItem);
                     //    dataGrid.ItemsSource = null;
-                    //    dataGrid.ItemsSource = listEm.Take(numberOfRecPerPage);
-                    //    count = (listEm.Take(numberOfRecPerPage)).Count();
+                    //    dataGrid.ItemsSource = mainPageVM.ListEmployee.Take(numberOfRecPerPage);
+                    //    count = (mainPageVM.ListEmployee.Take(numberOfRecPerPage)).Count();
                     //    from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
 
-                    //    lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+                    //    lblpageInformation.Content = from + "-" + count + " of " + mainPageVM.ListEmployee.Count;
 
                     //    btnNext.IsEnabled = true;
                     //    btnLast.IsEnabled = true;
@@ -684,8 +681,8 @@ namespace IRES_Project.MasterData.MainPage
         }
         public void No_View_Updt()
         {
-            no_Page = listEm.Count / numberOfRecPerPage;
-            if (listEm.Count % numberOfRecPerPage != 0)
+            no_Page = mainPageVM.ListEmployeeRoot.Count / numberOfRecPerPage;
+            if (mainPageVM.ListEmployeeRoot.Count % numberOfRecPerPage != 0)
             {
                 no_Page++;
             }
@@ -699,13 +696,13 @@ namespace IRES_Project.MasterData.MainPage
         public int GetNo_Page()
         {
             int res;
-            int TotalRec = listEm.Skip((ViewIndex - 1) * 5 * numberOfRecPerPage).Count();
+            int TotalRec = mainPageVM.ListEmployeeRoot.Skip((ViewIndex - 1) * 5 * numberOfRecPerPage).Count();
             if (TotalRec == 0)
             {
                 return 0;
             }
             res = TotalRec / numberOfRecPerPage;
-            if (listEm.Count() % numberOfRecPerPage != 0)
+            if (mainPageVM.ListEmployeeRoot.Count() % numberOfRecPerPage != 0)
             {
                 res++;
             }
@@ -713,40 +710,41 @@ namespace IRES_Project.MasterData.MainPage
         }
         #endregion
 
-        private void MyCheck_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (first_Run > 0)
-            {
-                if (mainPageVM.ListEmployee.Count != 0)
-                {
-                    listEm = mainPageVM.ListEmployee;
-                    dataGrid.ItemsSource = listEm;
-                    No_View_Updt();
-                    if (no_Page > 1)
-                    {
-                        Navigate((int)PagingMode.First);
-                    }
-                    else
-                    {
-                        if (no_Page == 1)
-                        {
-                            Navigate((int)PagingMode.First);
-                            btnNext.IsEnabled = false;
-                            btnNext.Opacity = 0.75;
-                            btnLast.IsEnabled = false;
-                            btnLast.Opacity = 0.75;
-                            btnPrev.IsEnabled = false;
-                            btnPrev.Opacity = 0.75;
-                            btnFirst.IsEnabled = false;
-                            btnFirst.Opacity = 0.75;
-                        }
-                    }
-                    updtLabel();
-                }
-                else
-                    first_Run = 1; ;
-            }
-       }
+        //private void MyCheck_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e) //Check xem dưới VM có gọi gì ko, nếu có reset itemsource
+        //{
+        //    if (first_Run > 0)
+        //    {
+        //        if (mainPageVM.ListEmployeeRoot.Count != 0)
+        //        {
+        //            //listEm = mainPageVM.ListEmployee
+        //            //dataGrid.ItemsSource = listEm;
+
+        //            No_View_Updt();
+        //            if (no_Page > 1)
+        //            {
+        //                Navigate((int)PagingMode.First);
+        //            }
+        //            else
+        //            {
+        //                if (no_Page == 1)
+        //                {
+        //                    Navigate((int)PagingMode.First);
+        //                    btnNext.IsEnabled = false;
+        //                    btnNext.Opacity = 0.75;
+        //                    btnLast.IsEnabled = false;
+        //                    btnLast.Opacity = 0.75;
+        //                    btnPrev.IsEnabled = false;
+        //                    btnPrev.Opacity = 0.75;
+        //                    btnFirst.IsEnabled = false;
+        //                    btnFirst.Opacity = 0.75;
+        //                }
+        //            }
+        //            updtLabel();
+        //        }
+        //        else
+        //            first_Run = 1; ;
+        //    }
+        //}
 
         //private void Test_Cmd(object sender, RoutedEventArgs e)
         //{
@@ -757,15 +755,18 @@ namespace IRES_Project.MasterData.MainPage
         //}
         private void Refresh_Data(object sender, RoutedEventArgs e)
         {
-            //dataGrid.ItemsSource = null;
-            listEm = mainPageVM.ListEmployee;
-            dataGrid.ItemsSource = listEm;
+            mainPageVM.ListEmployee = mainPageVM.ListEmployeeRoot;
+           //mainPageVM.ListEmployee= mainPageVM.getDataEmployee();
+           //mainPageVM.ListEmployeeRoot = mainPageVM.ListEmployee;
+           //listEm = mainPageVM.ListEmployee;
+           //dataGrid.ItemsSource = listEm;
+
             No_View_Updt();
             Navigate((int)PagingMode.First);
             updtLabel();
         }
 
-       
+
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             //var currentRowIndex = dataGrid.Items.IndexOf(dataGrid.CurrentItem);
@@ -787,11 +788,25 @@ namespace IRES_Project.MasterData.MainPage
 
         }
 
+        private void DataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            IList Row = dataGrid.SelectedItems;
+            Employee x = Row[0] as Employee;
+            
+          //  mainPageVM.UpdatePhoneNb(x.PhoneNb, x.EmployeeName);
+            
+        }
+
+        private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+           // dataGrid.CancelEdit();
+        }
+
         private void updtLabel()
         {
-            count = listEm.Take(numberOfRecPerPage).Count();
+            count = mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage).Count();
             from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-            lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
+            lblpageInformation.Content = from + "-" + count + " of " + mainPageVM.ListEmployeeRoot.Count;
         }
     }
 }

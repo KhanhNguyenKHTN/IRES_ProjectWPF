@@ -9,9 +9,7 @@
     xmlns:ux="clr-namespace:IRES_Project.UC"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
-
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    TextElement.FontWeight="Regular"
+             
     TextElement.FontSize="13"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
@@ -102,11 +100,12 @@
                             <uc:MasterDataHeader CustomClick ="Seach_Emp"   RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
                     </Grid>
                     <!--#endregion-->
-                        <!--ItemsSource="{Binding ListEmployee, Mode=TwoWay}"-->
+                        <!-- ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"-->
                     <Grid Grid.Row="1">
-                            <DataGrid IsReadOnly="False" BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
+                            <DataGrid CellEditEnding="DataGrid_CellEditEnding" RowEditEnding="DataGrid_RowEditEnding" CanUserAddRows="False" IsReadOnly="False" BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
                                   HorizontalAlignment="Left" Margin="20"   VerticalAlignment="Top"  CanUserSortColumns="True"  ColumnWidth="*" 
-                                  materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+                                  materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                                  ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"   >
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="BorderBrush" Value="Black" />
@@ -135,10 +134,10 @@
                          </DataGrid.Resources>
 
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="2*" Header="Mã nhân viên"  Binding="{Binding EmployeeCode}"/>
-                            <DataGridTextColumn Width="2*" Header="Tên nhân viên" Binding="{Binding EmployeeName}"  />
-                            <DataGridTextColumn Width="2*" Header="Chức vụ"       Binding="{Binding Role}" />
-                            <DataGridTextColumn Width="2*" Header="Số ĐT"         Binding="{Binding PhoneNb}" />
+                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Mã nhân viên"  Binding="{Binding EmployeeCode}"/>
+                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Tên nhân viên" Binding="{Binding EmployeeName}"  />
+                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Chức vụ"       Binding="{Binding Role}" />
+                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Số ĐT"         Binding="{Binding PhoneNb}" />
                             <DataGridTemplateColumn x:Name="Edit_Col" Width="1*" Header="Tùy chỉnh" >
                                 <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -213,7 +212,7 @@
                         
                     <Grid Grid.Row="3" >
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"   VerticalAlignment="Top">
-                            <CheckBox x:Name="myCheck"  IsEnabledChanged="MyCheck_IsEnabledChanged" IsEnabled="{Binding Refresh}" Visibility="Collapsed"></CheckBox>
+                            <!--<CheckBox x:Name="myCheck"  IsEnabledChanged="MyCheck_IsEnabledChanged" IsEnabled="{Binding Refresh}" Visibility="Collapsed"></CheckBox>-->
                             <Label  x:Name="lblpageInformation" Margin=" 0 " HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                              HorizontalAlignment=" Center" VerticalAlignment="Bottom" Height="30"  Width="150" Background="MediumPurple" BorderThickness="1"/>
                             <!--<ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 0 5 0"

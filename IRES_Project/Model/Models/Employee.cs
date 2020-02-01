@@ -5,10 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Model.Models
 {
-    public class Employee : INotifyPropertyChanged
+    public class Employee : INotifyPropertyChanged, IEditableObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -89,5 +90,60 @@ namespace Model.Models
         public string EmployeeName { get => _EmployeeName; set { SetField(ref _EmployeeName, value, "EmployeeName"); } }
         public string Role { get => _Role; set { SetField(ref _Role, value, "Role"); } }
         public int EmployeeId { get => _EmployeeId; set { SetField(ref _EmployeeId, value, "EmployeeId"); } }
+
+        private bool _isBegin = false,_isEnd = false;
+        private Employee backup; 
+        public void BeginEdit()
+        {
+            if (_isBegin == false)
+            {
+               backup = this.MemberwiseClone() as Employee;
+               _isBegin = true;
+        
+            }
+            else
+            {
+                _isBegin = false;
+            }
         }
+
+        public void CancelEdit()
+        {
+            this.EmployeeId = backup.EmployeeId;
+            this.EmployeeName = backup.EmployeeName;
+            this.RestaurantId = backup.RestaurantId;
+            this.UserId = backup.UserId;
+            this.RoleId = backup.RoleId;
+            this.Role = backup.Role;
+            this.EmployeeStatus = backup.EmployeeStatus;
+            this.UserName = backup.UserName;
+            this.PassWord = backup.PassWord;
+            this.EmployeeDescription = backup.EmployeeDescription;
+            this.CreatedBy = backup.CreatedBy;
+            this.CreatedDatetime = backup.CreatedDatetime;
+            this.UpdatedBy = backup.UpdatedBy;
+            this.UpdatedDatetime = backup.UpdatedDatetime;
+            this.Active = backup.Active;
+            this.Version = backup.Version;
+            this.PhoneNb = backup.PhoneNb;
+
+        }
+        public void EndEdit()
+        {
+            if(_isEnd==false)
+            {
+                //IList Row = dataGrid.SelectedItems;
+                //Employee x = Row[0] as Employee;
+                //mainPageVM.UpdatePhoneNb(x.PhoneNb, x.EmployeeName);
+                //_isEnd = true;
+            }
+            else
+            {
+                _isEnd = false;
+            }
+            
+            //other logic...
+        }
+    }
+                 
     }
