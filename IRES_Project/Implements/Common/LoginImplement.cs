@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model.Models;
-using Implements.MasterData.Workers;
+using Implements.Workers;
 using System.Data;
 
 namespace Implements.Common

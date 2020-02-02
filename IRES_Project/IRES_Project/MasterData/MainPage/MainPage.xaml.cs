@@ -32,6 +32,7 @@ namespace IRES_Project.MasterData.MainPage
         }
         public MainPage()
         {
+            
             InitializeComponent();
             this.DataContext = new MainPageViewModel();
             MainPageViewModel mainPageVM = new MainPageViewModel();

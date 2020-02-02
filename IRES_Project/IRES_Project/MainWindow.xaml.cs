@@ -14,6 +14,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IRES_Project.MasterData.MainPage;
 using IRES_Project.MasterData.FoodView;
+using IRES_Project.Statistic;
+using ViewModel.MasterData;
+using ViewModel.Modules;
+using ViewModel.Statistic;
 
 namespace IRES_Project
 {
@@ -26,13 +30,32 @@ namespace IRES_Project
         {
             InitializeComponent();
 
-            Switcher.pageSwitcher = this;
-            Switcher.Switch(new MainPage());
+            DataContext = new MainPageViewModel();
         }
 
         public void Navigate(UserControl nextPage)
         {
             this.Content = nextPage;
+        }
+
+        private void UserControlMenu_StaffClick(object sender, RoutedEventArgs e)
+        {
+            DataContext = new MainPageViewModel();
+        }
+
+        private void UserControlMenu_DishClick(object sender, RoutedEventArgs e)
+        {
+            DataContext = new DishViewModel();  
+        }
+
+        private void UserControlMenu_OverviewStatisticClick(object sender, RoutedEventArgs e)
+        {
+            DataContext = new PieChartViewModel();
+        }
+
+        private void UserControlMenu_BillStatisticClick(object sender, RoutedEventArgs e)
+        {
+            DataContext = new BillStatisticViewModel(DateTime.Now.ToShortDateString());
         }
     }
 }

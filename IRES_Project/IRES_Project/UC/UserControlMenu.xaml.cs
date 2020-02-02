@@ -24,5 +24,57 @@ namespace IRES_Project.UC
         {
             InitializeComponent();
         }
+
+        public event RoutedEventHandler StaffClick;
+        public event RoutedEventHandler DishClick;
+
+        public event RoutedEventHandler OverviewStatisticClick;
+        public event RoutedEventHandler BillStatisticClick;   
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int selectedIndex = lsMenu.SelectedIndex;
+            lviewStatistic.SelectedItem = null;
+            switch (selectedIndex)
+            {
+                case 0:
+                    StaffClick?.Invoke(sender, e);
+                    break;
+                case 1:
+                    DishClick?.Invoke(sender, e);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void lviewStatistic_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int selectedIndex = lviewStatistic.SelectedIndex;
+            lsMenu.SelectedItem = null;
+            switch (selectedIndex)
+            {
+                case 0:
+                    OverviewStatisticClick?.Invoke(sender, e);
+                    break;
+                case 1:
+                    BillStatisticClick?.Invoke(sender, e);
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

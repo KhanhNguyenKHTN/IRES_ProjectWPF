@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Service.Modules;
 
-namespace Implements.MasterData.Workers
+namespace Implements.Workers
 {
     class WorkerToDB
     {

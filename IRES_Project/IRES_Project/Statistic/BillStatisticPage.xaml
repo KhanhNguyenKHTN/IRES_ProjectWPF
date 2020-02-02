@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="IRES_Project.Statistic.BillStatisticPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IRES_Project.Statistic"
+             xmlns:headerStatistic="clr-namespace:CustomControls.Statistic;assembly=CustomControls"
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"       
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+  <UserControl.Resources>
+
+  </UserControl.Resources>
+  <Border BorderBrush="Black" BorderThickness="1">
+    <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="50" />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <Border Grid.Row="0">
+        <headerStatistic:StatisticHeaderUC Margin="10 0" BtnLoadStatistic="StatisticHeaderUC_BtnLoadStatistic"></headerStatistic:StatisticHeaderUC>
+      </Border>
+      <GroupBox Grid.Row="1"
+              Style="{DynamicResource MaterialDesignGroupBox}"
+              Margin="16"
+              >
+        <GroupBox.Header>
+          <DockPanel>
+            <Label Margin="0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">Tổng quan hoạt động ngày 18/01/2020</Label>
+            <Button Height="20" BorderThickness="1" Foreground="Black" Padding="2" HorizontalAlignment="Right" Content="{materialDesign:PackIcon Refresh}"/>
+          </DockPanel>
+        </GroupBox.Header>
+        <StackPanel>
+          <ListBox ItemsSource="{Binding BillStatistic}" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+              <DataTemplate>
+                <materialDesign:Card
+                  Background="{DynamicResource MaterialDesignBackground}">
+                  <StackPanel>
+                    <Expander HorizontalAlignment="Stretch">
+                      <Expander.Header>
+                        <Grid Grid.Row="0" Background="Gray" Height="40">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                          </Grid.ColumnDefinitions>
+                          <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="ChevronRight" Margin="0 10 0 10"/>
+                            <Label FontWeight="Bold" Content="{Binding StatisticByDate.Date}" VerticalAlignment="Center"></Label>
+                          </StackPanel>
+                          <Label Padding="0" Grid.Column="1" FontWeight="Bold" VerticalAlignment="Center" Content="{Binding StatisticByDate.Revenue}"></Label>
+                        </Grid>
+                      </Expander.Header>
+                      <DataGrid BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False" ItemsSource="{Binding ListBills}" x:Name="dataGrid" Grid.Row ="1" HorizontalAlignment="Left" Margin="10" 
+                         VerticalAlignment="Top"  CanUserSortColumns="True"  IsReadOnly="True" ColumnWidth="*" 
+                         materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+
+                        <DataGrid.Resources>
+                          <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="Background" Value="Green" />
+                            <Setter Property="BorderThickness" Value="0 0 1 1"></Setter>
+                            <Setter Property="Margin" Value="0 0 0 1"></Setter>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+
+                            <Setter Property="MinHeight" Value="40"/>
+                          </Style>
+                          <Style TargetType="DataGridCell">
+                            <Setter Property="MinHeight" Value="50"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Setter Property="Template">
+                              <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                  <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center"/>
+                                  </Grid>
+                                </ControlTemplate>
+                              </Setter.Value>
+                            </Setter>
+                          </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                          <DataGridTextColumn Width="2*" Header="Mã hóa đơn" Binding="{Binding BillId}"/>
+                          <DataGridTextColumn Width="2*" Header="Tên khách hàng" Binding="{Binding Username}"  />
+                          <DataGridTextColumn Width="2*" Header="Số người" Binding="{Binding PersonQuantity}" />
+                          <DataGridTextColumn Width="2*" Header="Số món ăn" Binding="{Binding CountDishes}" />
+                          <DataGridTextColumn Width="2*" Header="Giảm giá" Binding="{Binding Discount}" />
+                          <DataGridTextColumn Width="2*" Header="Tổng tiền" Binding="{Binding OrderTotalPrice}" />
+                        </DataGrid.Columns>
+                      </DataGrid>
+                    </Expander>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                  </StackPanel>
+                </materialDesign:Card>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+          
+        </StackPanel>
+      </GroupBox>
+    </Grid>
+  </Border>
+</UserControl>

@@ -49,8 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalConstants\GlobalInformations.cs" />
+    <Compile Include="Models\BillModel.cs" />
+    <Compile Include="Models\BillStatisticModel.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\DishModel.cs" />
+    <Compile Include="Models\PieChartModel.cs" />
+    <Compile Include="Models\StatisticByDateModel.cs" />
+    <Compile Include="Models\TimeWatching.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -4,29 +4,52 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CustomControls.Statistic"
+             xmlns:my="clr-namespace:CustomControls.Statistic"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition  Width="20*"/>
-        <ColumnDefinition  Width="70*"/>
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition  Width="300"/>
+      <ColumnDefinition  Width="400"/>
+      <ColumnDefinition  Width="100*"/>
     </Grid.ColumnDefinitions>
-    <Grid Grid.Column="0" Margin="10">
-      <TextBlock>
-        <Label>Xem theo</Label>
-        <ComboBox>
-          <ComboBoxItem IsSelected="True">Ngày</ComboBoxItem>
-          <ComboBoxItem>Tuần</ComboBoxItem>
-          <ComboBoxItem>Tháng</ComboBoxItem>
-          <ComboBoxItem>Năm</ComboBoxItem>
+    <TextBlock Grid.Column="0" Margin="10"  HorizontalAlignment="Left" >
+      <Label>Xem theo</Label>
+      <ComboBox x:Name="cmbChooseTime" Width="100" SelectedValuePath="Content" DropDownClosed="cmbChooseTime_DropDownClosed">
+        <ComboBoxItem Content="Ngày" />
+        <ComboBoxItem Content="Tháng"/>
+        <ComboBoxItem Content="Năm"/>
       </ComboBox>
-      </TextBlock>
-    </Grid>
+    </TextBlock>
 
-    <Grid Grid.Column="1" Margin="10">
-      <TextBlock>
-        <Label>Chọn ngày</Label>
-        <DatePicker SelectedDate="2000-12-31" SelectedDateFormat="Long"></DatePicker>
-      </TextBlock>
-    </Grid>
+    <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10">
+      <Label>Chọn ngày</Label>
+      <TextBox Width="150" Text="1/1/2019"></TextBox>
+    
+      <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}">
+        <materialDesign:DialogHost.DialogContent>
+          <Border BorderBrush="Black" BorderThickness="1">
+          <StackPanel>
+            <Calendar DisplayMode="{Binding modeTime}"
+                      x:Name="timeCal"/>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">          
+               <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" 
+                    Style="{DynamicResource MaterialDesignFlatButton}" 
+                    Margin="5 10" VerticalAlignment="Center" Background="Green" HorizontalAlignment="Right"
+                    Content="OK" Width="100"/>
+            </StackPanel>
+          </StackPanel>
+          </Border>
+        </materialDesign:DialogHost.DialogContent>
+        <Grid>
+             <Button Content="{materialDesign:PackIcon CalendarRange}" ToolTip="Icon" Width="30" Height="30" Padding="0" Background="#bec2be" BorderThickness="0"
+                     Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"/>
+        </Grid>
+      </materialDesign:DialogHost>
+    </TextBlock>
+
+    <Button HorizontalAlignment="Left" Grid.Column="2" Content="Xem" Background="Gray" Click="Button_Click_Load" Width="100"></Button>
   </Grid>
 </UserControl>
