@@ -31,13 +31,14 @@ namespace CustomControls.GlobalControls
           
 
         }
-        public event RoutedEventHandler CustomClick;
+        public event RoutedEventHandler SearchClick;
         public event RoutedEventHandler RefreshClick;
         public event RoutedEventHandler TestClick;
+        public event RoutedEventHandler ActiveClick;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Search_Click(object sender, RoutedEventArgs e)
         {
-            CustomClick?.Invoke(sender, e);
+            SearchClick?.Invoke(sender, e);
 
         }
         private void Test_Click(object sender, RoutedEventArgs e)
@@ -48,6 +49,12 @@ namespace CustomControls.GlobalControls
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             RefreshClick?.Invoke(sender, e);
+
+        }
+        private void Active_Click(object sender, RoutedEventArgs e)
+        {
+           
+                ActiveClick?.Invoke(sender, e);
 
         }
     }

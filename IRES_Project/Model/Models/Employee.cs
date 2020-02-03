@@ -12,7 +12,7 @@ namespace Model.Models
     public class Employee : INotifyPropertyChanged, IEditableObject
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged(string propertyName =null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
@@ -69,6 +69,7 @@ namespace Model.Models
             set
             {
                 SetField(ref _EmployeeCode, value, "EmployeeCode");
+
             }
         }
 

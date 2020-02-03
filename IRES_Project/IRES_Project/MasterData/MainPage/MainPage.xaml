@@ -9,7 +9,7 @@
     xmlns:ux="clr-namespace:IRES_Project.UC"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
-             
+    
     TextElement.FontSize="13"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
@@ -17,11 +17,11 @@
     FontFamily="{DynamicResource MaterialDesignFont}"
     Name="mainWindow">
 
-    <i:Interaction.Triggers>
+    <!--<i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
         </i:EventTrigger>
-    </i:Interaction.Triggers>
+    </i:Interaction.Triggers>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -30,7 +30,7 @@
         </Grid.RowDefinitions>
         <!--#region Control bar-->
         <Grid Grid.Row="0">
-            <uc:ControlBarUC FontSize="20" Tag="Màn hình chính"></uc:ControlBarUC>
+            <uc:ControlBarUC FontSize="20" Tag="Desktop - Màn hình chính"></uc:ControlBarUC>
         </Grid>
         <!--#endregion-->
 
@@ -66,7 +66,7 @@
 
             <!--#region Right Menu-->
             <Border  Grid.Column="1"    BorderBrush="Black" BorderThickness="2" >
-                <GroupBox Padding="0">
+                <GroupBox x:Name="MainBox" Padding="0">
                     <!--#region Header-->
                     <GroupBox.Header >
                         <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
@@ -97,15 +97,17 @@
                         <!--TestClick="Test_Cmd"-->
                     <!--#region MasterDataHeader --> 
                     <Grid Grid.Row="0" Margin="0 10 0 0 " HorizontalAlignment="Stretch" Width="auto">
-                            <uc:MasterDataHeader CustomClick ="Seach_Emp"   RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
+                            <uc:MasterDataHeader  x:Name="MasterHeader" ActiveClick="MasterHeader_ActiveClick" SearchClick ="Search_Emp"  RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
                     </Grid>
                     <!--#endregion-->
                         <!-- ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"-->
                     <Grid Grid.Row="1">
-                            <DataGrid CellEditEnding="DataGrid_CellEditEnding" RowEditEnding="DataGrid_RowEditEnding" CanUserAddRows="False" IsReadOnly="False" BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
-                                  HorizontalAlignment="Left" Margin="20"   VerticalAlignment="Top"  CanUserSortColumns="True"  ColumnWidth="*" 
+                            <DataGrid CellEditEnding="DataGrid_CellEditEnding" RowEditEnding="DataGrid_RowEditEnding" CanUserAddRows="False"
+                                      IsReadOnly="True" BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
+                                  HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="20"   VerticalAlignment="Top"  CanUserSortColumns="True"  ColumnWidth="*" 
                                   materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"
-                                  ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"   >
+                                  ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
+                                   MouseLeave="DataGrid_MouseLeave"   >
                         <DataGrid.Resources>
                             <Style TargetType="{x:Type DataGridColumnHeader}">
                                 <Setter Property="BorderBrush" Value="Black" />
@@ -137,9 +139,36 @@
                                     <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Mã nhân viên"  Binding="{Binding EmployeeCode}"/>
                                     <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Tên nhân viên" Binding="{Binding EmployeeName}"  />
                                     <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Chức vụ"       Binding="{Binding Role}" />
-                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Số ĐT"         Binding="{Binding PhoneNb}" />
-                            <DataGridTemplateColumn x:Name="Edit_Col" Width="1*" Header="Tùy chỉnh" >
-                                <DataGridTemplateColumn.CellTemplate>
+                                    <!--<DataGridComboBoxColumn IsReadOnly="False" Width="2*" Header="Chức vụ" SelectedValueBinding="{Binding Role,Mode=TwoWay}" >
+                                        <DataGridComboBoxColumn.ElementStyle>
+                                            <Style TargetType="{x:Type ComboBox}">
+                                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.RoleList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                
+                                            </Style>
+                                        </DataGridComboBoxColumn.ElementStyle>
+                                        <DataGridComboBoxColumn.EditingElementStyle>
+                                            <Style TargetType="{x:Type ComboBox}">
+                                                <Setter Property="ItemsSource" Value="{Binding Path=DataContext.RoleList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                
+                                            </Style>
+                                        </DataGridComboBoxColumn.EditingElementStyle>
+                                        
+                                    </DataGridComboBoxColumn>-->
+                                    <!--<DataGridTemplateColumn IsReadOnly="True" Width="2*" Header="Chức vụ" x:Name="cmbRole" >
+                                        <DataGridTemplateColumn.CellTemplate >
+                                            <DataTemplate>
+                                                <ComboBox HorizontalContentAlignment="Center" Margin="10 0 10 0" Padding="5 0 5 0" Background="Thistle" Foreground="Black" 
+                                                          ItemsSource ="{Binding Path=DataContext.RoleList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                                 DropDownClosed="ComboBox_DropDownClosed" SelectedItem="{Binding Role, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   Width="auto">
+                                                </ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>--> 
+                                    <DataGridTextColumn  IsReadOnly="False" Width="2*" Header="Số ĐT"         Binding="{Binding PhoneNb}" />
+                                    <DataGridTemplateColumn x:Name="Edit_Col" Width="1*" Header="Tùy chỉnh" >
+                                    <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                                                     <TextBlock Width="15"></TextBlock>
@@ -147,13 +176,13 @@
                                                         <materialDesign:PackIcon Width="auto" Kind="AccountEdit" Margin= " 0 0 0 0" />
                                                     </Button>
                                                     <TextBlock Width="10"></TextBlock>
-                                                    <Button Width="auto">
+                                                    <Button Width="auto" Click="Delete_Click">
                                                         <materialDesign:PackIcon Width="auto" Kind="Delete" Margin= " 0 0 0 0" />
                                                     </Button>
                                                     <TextBlock Width="10"></TextBlock>
                                                 </StackPanel>
                                             </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                          </DataGrid.Columns>
                             </DataGrid>
@@ -217,7 +246,7 @@
                              HorizontalAlignment=" Center" VerticalAlignment="Bottom" Height="30"  Width="150" Background="MediumPurple" BorderThickness="1"/>
                             <!--<ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 0 5 0"
                              Width="100"  SelectedIndex="0" SelectionChanged="cbNumberOfRecords_SelectionChanged" Opacity="0.75"/>-->
-
+                              
                             </StackPanel>
                     </Grid>
 

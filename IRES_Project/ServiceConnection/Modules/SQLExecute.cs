@@ -51,7 +51,7 @@ namespace Service.Modules
             dr.Close();
             return dt;
         }
-        public bool GetExcuteQueryTwo(string query, string Value1, string Value2)
+        public bool GetExcuteQueryTwoStrStr(string query, string Value1, string Value2)
         {
 
             // Read command
@@ -59,6 +59,32 @@ namespace Service.Modules
 
             // Add parameter
             cmd.Parameters.Add("@Value1", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@Value1"].Value = Value1;
+            cmd.Parameters.AddWithValue(Value1);
+
+            cmd.Parameters.Add("@Value2", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@Value2"].Value = Value2;
+            cmd.Parameters.AddWithValue(Value2);
+            //Execute a query
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+        public bool GetExcuteQueryTwoIntStr(string query, int Value1, string Value2)
+        {
+
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+
+            // Add parameter
+            cmd.Parameters.Add("@Value1", NpgsqlTypes.NpgsqlDbType.Integer);
             cmd.Parameters["@Value1"].Value = Value1;
             cmd.Parameters.AddWithValue(Value1);
 
@@ -108,8 +134,30 @@ namespace Service.Modules
                 return false;
             }
         }
+        public bool DeleteQuery(string query, string Value)
+        {
 
-       
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+
+            // Add parameter
+            cmd.Parameters.Add("@Value", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@Value"].Value = Value;
+            cmd.Parameters.AddWithValue(Value);
+            //Execute a query
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+
+
         public Boolean UpdateExcuteQuery(string query)
         {
             try
