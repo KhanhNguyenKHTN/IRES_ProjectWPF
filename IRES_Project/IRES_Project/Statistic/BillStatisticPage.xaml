@@ -82,7 +82,32 @@
                           </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                          <DataGridTextColumn Width="2*" Header="Mã hóa đơn" Binding="{Binding BillId}"/>
+                          <DataGridTemplateColumn Header="Mã hóa đơn">
+                            <DataGridTemplateColumn.CellTemplate>
+                              <DataTemplate>
+                                <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}">
+                                  <materialDesign:DialogHost.DialogContent>
+                                    <Border BorderBrush="Black" BorderThickness="1">
+                                      <StackPanel>
+                                        <local:DetailOrderView Width="1450"></local:DetailOrderView>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                          <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" 
+                                            Style="{DynamicResource MaterialDesignFlatButton}" 
+                                            Margin="5 10" VerticalAlignment="Center" Background="Green" HorizontalAlignment="Right"
+                                            Content="OK" Width="100"/>
+                                        </StackPanel>
+                                      </StackPanel>
+                                    </Border>
+                                  </materialDesign:DialogHost.DialogContent>
+                                  <Button Background="Transparent" BorderThickness="0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                                    <Button.Content>
+                                      <TextBlock Foreground="Blue" TextDecorations="Underline" Text="{Binding BillId}"></TextBlock>
+                                    </Button.Content>
+                                  </Button>
+                                </materialDesign:DialogHost>
+                              </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                          </DataGridTemplateColumn>
                           <DataGridTextColumn Width="2*" Header="Tên khách hàng" Binding="{Binding Username}"  />
                           <DataGridTextColumn Width="2*" Header="Số người" Binding="{Binding PersonQuantity}" />
                           <DataGridTextColumn Width="2*" Header="Số món ăn" Binding="{Binding CountDishes}" />
@@ -92,6 +117,8 @@
                       </DataGrid>
                     </Expander>
                     <Border Background="{DynamicResource MaterialDesignDivider}" Height="1" HorizontalAlignment="Stretch" SnapsToDevicePixels="True" />
+                    <!--<local:DetailOrderView></local:DetailOrderView>-->
+                    
                   </StackPanel>
                 </materialDesign:Card>
               </DataTemplate>

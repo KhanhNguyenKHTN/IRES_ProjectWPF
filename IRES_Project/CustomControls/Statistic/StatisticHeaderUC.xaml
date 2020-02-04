@@ -30,17 +30,17 @@
       <materialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}">
         <materialDesign:DialogHost.DialogContent>
           <Border BorderBrush="Black" BorderThickness="1">
-          <StackPanel>
-            <Calendar DisplayMode="{Binding modeTime}"
-                      x:Name="timeCal"/>
+            <StackPanel>
+              <Calendar DisplayMode="{Binding modeTime}"
+                        x:Name="timeCal"/>
             
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">          
-               <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" 
-                    Style="{DynamicResource MaterialDesignFlatButton}" 
-                    Margin="5 10" VerticalAlignment="Center" Background="Green" HorizontalAlignment="Right"
-                    Content="OK" Width="100"/>
+              <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">          
+                 <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" 
+                      Style="{DynamicResource MaterialDesignFlatButton}" 
+                      Margin="5 10" VerticalAlignment="Center" Background="Green" HorizontalAlignment="Right"
+                      Content="OK" Width="100"/>
+              </StackPanel>
             </StackPanel>
-          </StackPanel>
           </Border>
         </materialDesign:DialogHost.DialogContent>
         <Grid>

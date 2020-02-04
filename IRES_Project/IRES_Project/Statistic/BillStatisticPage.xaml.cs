@@ -22,12 +22,12 @@ namespace IRES_Project.Statistic
     /// </summary>
     public partial class BillStatisticPage : UserControl
     {
-        BillStatisticViewModel billVM = null;
+        BillStatisticViewModel billVM = new BillStatisticViewModel(DateTime.Now.ToShortDateString());
 
         public BillStatisticPage()
         {
             InitializeComponent();
-            this.billVM = new BillStatisticViewModel(DateTime.Now.ToShortDateString());
+            //this.billVM = new BillStatisticViewModel(DateTime.Now.ToShortDateString());
             DataContext = billVM;
         }
 
@@ -61,6 +61,11 @@ namespace IRES_Project.Statistic
                     break;
                 default: break;
             }
+        }
+
+        private void DataGridCell_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("abc");
         }
     }
 }

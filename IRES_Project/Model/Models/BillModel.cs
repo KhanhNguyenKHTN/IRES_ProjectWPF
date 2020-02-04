@@ -24,6 +24,7 @@ namespace Model.Models
         private int personQuantity;
         private int countDishes;
         private float discount;
+        private List<OrderDetailModel> ordersDetail;
 
         public int BillId { get => billId; set => billId = value; }
         public string BillCode { get => billCode; set => billCode = value; }
@@ -41,5 +42,6 @@ namespace Model.Models
         public int PersonQuantity { get => personQuantity; set => personQuantity = value; }
         public int CountDishes { get => countDishes; set => countDishes = value; }
         public float Discount { get => discount; set => discount = value; }
+        public List<OrderDetailModel> OrdersDetail { get => ordersDetail; set => ordersDetail = value; }
     }
 }

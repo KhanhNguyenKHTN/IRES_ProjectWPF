@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Model.Models
 {
-    public class PieChartModel: INotifyPropertyChanged
+    public class ChartStatisticModel : INotifyPropertyChanged
     {
-        private string name;
+        private string time;
         private float count;
 
-        public string Name { get => name; set => name = value; }
+        public string Time { get => time; set => time = value; }
         public float Count { get => count; set => count = value; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -25,6 +25,4 @@ namespace Model.Models
             }
         }
     }
-
-
 }

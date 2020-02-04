@@ -28,7 +28,7 @@
     <DataTemplate x:Name="blueViewTemplate" DataType="{x:Type mastervm:DishViewModel}">
       <masterdatafoodview:FoodView DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate x:Name="orangeViewTemplate" DataType="{x:Type statisticvm:PieChartViewModel}">
+    <DataTemplate x:Name="orangeViewTemplate" DataType="{x:Type statisticvm:ChartStatisticViewModel}">
       <statisticview:OverviewPage DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Name="billStatistic" DataType="{x:Type statisticvm:BillStatisticViewModel}">

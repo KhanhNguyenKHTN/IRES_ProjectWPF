@@ -26,39 +26,27 @@ namespace IRES_Project.Statistic
         public OverviewPage()
         {
             InitializeComponent();
-            //LoadLineChartData();
-            //this.DataContext
-             var model = new PieChartViewModel();
-            Chart chart = new Chart() {};
 
-            
-            LineSeries lines = new LineSeries() { ItemsSource = model.Pies, DependentValuePath ="Count", IndependentValuePath = "Name" };
+            var chartStatisticVM = new ChartStatisticViewModel("tháng");
+            Chart chart = new Chart() { };
 
-            var pie = new List<PieChartModel>();
-            pie.Add(new PieChartModel() { Name = "thang 1", Count = 1222 });
-            pie.Add(new PieChartModel() { Name = "thang 2", Count = 1111 });
-            pie.Add(new PieChartModel() { Name = "thang 3", Count = 222 });
-            pie.Add(new PieChartModel() { Name = "thang 4", Count = 231 });
-            pie.Add(new PieChartModel() { Name = "thang 5", Count = 122 });
-            pie.Add(new PieChartModel() { Name = "Pakistan", Count = 122 });
-            pie.Add(new PieChartModel() { Name = "Nigeria", Count = 321 });
-            LineSeries lines1 = new LineSeries() { ItemsSource = pie, DependentValuePath = "Count", IndependentValuePath = "Name" };
-            chart.Series.Add(lines);
-            chart.Series.Add(lines1);
-            GridChart.Children.Add(chart);
+            LineSeries lineRevenue = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsRevenue, DependentValuePath = "Count", IndependentValuePath = "Time" };
+            LineSeries lineProfit = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsProfit, DependentValuePath = "Count", IndependentValuePath = "Time" };
+            LineSeries lineInnitialCost = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsInnitialCost, DependentValuePath = "Count", IndependentValuePath = "Time" };
+            LineSeries linePromotion = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsPromotion, DependentValuePath = "Count", IndependentValuePath = "Time" };
+
+
+            lineRevenue.Title = "Doanh Thu";
+            lineProfit.Title = "Lợi nhuận";
+            lineInnitialCost.Title = "Chi phí";
+            linePromotion.Title = "Khuyến mãi";
+
+            chart.Series.Add(lineRevenue);
+            chart.Series.Add(lineProfit);
+            chart.Series.Add(lineInnitialCost);
+            chart.Series.Add(linePromotion);
+
+            GridChart.Children.Add(chart); // add to chart 
         }
-
-        //private void LoadLineChartData()
-        //{
-        //    ((System.Windows.Controls.DataVisualization.Charting.LineSeries)mcChart.Series[0]).ItemsSource =
-        //        new KeyValuePair<DateTime, int>[]{
-        //    new KeyValuePair<DateTime,int>(DateTime.Now, 100),
-        //    new KeyValuePair<DateTime,int>(DateTime.Now.AddDays(1), 130),
-        //    new KeyValuePair<DateTime,int>(DateTime.Now.AddDays(2), 150),
-        //    new KeyValuePair<DateTime,int>(DateTime.Now.AddDays(3), 125),
-        //    new KeyValuePair<DateTime,int>(DateTime.Now.AddDays(4),155) };
-
-
-        //}
     }
 }

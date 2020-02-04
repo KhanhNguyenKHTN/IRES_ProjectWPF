@@ -41,6 +41,29 @@ namespace Implements.Statistic
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
+                int orderId = Convert.ToInt32(dt.Rows[i]["order_id"]);
+
+                string queryOrderDetail = $"SELECT d.*, o_d.dish_quantity FROM ires.dish d " +
+                    $"JOIN ( SELECT dish_id, dish_quantity FROM ires.order_detail " +
+                    $"WHERE order_id = 1) AS o_d ON d.dish_id = o_d.dish_id" ;
+
+                DataTable dtOrderDetail = worker.getRecordsCommand(queryOrderDetail);
+                List<OrderDetailModel> listOrders = new List<OrderDetailModel>();
+                for (int j = 0; j< dtOrderDetail.Rows.Count; j++)
+                {
+                    var totalPrice = 0;//Convert.ToInt32(dtOrderDetail.Rows[j]["dish_quantity"]) * Convert.ToInt32(dtOrderDetail.Rows[j]["dish_cost"]);
+                    OrderDetailModel detail = new OrderDetailModel
+                    {
+                        Name = dtOrderDetail.Rows[j]["dish_name"].ToString(),
+                        Discount = 0,
+                        Price = Convert.ToInt32(dtOrderDetail.Rows[j]["dish_cost"]),
+                        DishQuantity = Convert.ToInt32(dtOrderDetail.Rows[j]["dish_quantity"]),
+                        TotalDishPrice = (float)totalPrice
+                    };
+
+                    listOrders.Add(detail);
+                }
+
                 BillModel item ;
 
                 item = new BillModel
@@ -57,7 +80,8 @@ namespace Implements.Statistic
                     CreatedDate = Convert.ToDateTime(dt.Rows[i]["created_datetime"]),
                     Username = dt.Rows[i]["user_name"].ToString(),
                     PersonQuantity = Convert.ToInt32(dt.Rows[i]["person_quantity"]),
-                    CountDishes = Convert.ToInt32(dt.Rows[i]["count_dish_in_order"])
+                    CountDishes = Convert.ToInt32(dt.Rows[i]["count_dish_in_order"]),
+                    OrdersDetail = listOrders
                 };
                 if (result.ListBills == null)
                 {

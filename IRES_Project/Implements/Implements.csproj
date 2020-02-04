@@ -47,7 +47,6 @@
     <Compile Include="Statistic\BillStatisticImplements.cs" />
     <Compile Include="Workers\WorkerToDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Statistic\PieChartImplement.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

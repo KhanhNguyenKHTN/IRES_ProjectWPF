@@ -182,6 +182,9 @@
     <Compile Include="Statistic\BillStatisticPage.xaml.cs">
       <DependentUpon>BillStatisticPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Statistic\DetailOrderView.xaml.cs">
+      <DependentUpon>DetailOrderView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\OverviewStatisticPage.xaml.cs">
       <DependentUpon>OverviewStatisticPage.xaml</DependentUpon>
     </Compile>
@@ -201,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Statistic\BillStatisticPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Statistic\DetailOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
