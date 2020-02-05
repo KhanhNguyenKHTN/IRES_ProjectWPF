@@ -42,6 +42,7 @@ namespace IRES_Project.MasterData.MainPage
 
         public MainPage()
         {
+            
             InitializeComponent();
             this.DataContext = mainPageVM;
 
@@ -238,10 +239,10 @@ namespace IRES_Project.MasterData.MainPage
             Navigate((int)PagingMode.Last);
         }
 
-        //private void cbNumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    Navigate((int)PagingMode.PageCountChange);
-        //}
+        private void cbNumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Navigate((int)PagingMode.PageCountChange);
+        }
         #endregion
 
         #region Navigate number 1 2 3 4 5

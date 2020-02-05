@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,11 @@ using ViewModel.Statistic;
 namespace IRES_Project.Statistic
 {
     /// <summary>
-    /// Interaction logic for OverviewStatisticPage.xaml
+    /// Interaction logic for OverviewPage.xaml
     /// </summary>
-    public partial class OverviewStatisticPage : UserControl
+    public partial class OverviewPage : UserControl
     {
-        public OverviewStatisticPage()
+        public OverviewPage()
         {
             InitializeComponent();
 

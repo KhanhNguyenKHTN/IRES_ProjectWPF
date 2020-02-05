@@ -4,12 +4,84 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IRES_Project"
+        
+        xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:ux="clr-namespace:IRES_Project.UC"
+        xmlns:statisticview="clr-namespace:IRES_Project.Statistic"
+        xmlns:masterdatafoodview="clr-namespace:IRES_Project.MasterData.FoodView"
+        xmlns:masterdatamainview="clr-namespace:IRES_Project.MasterData.MainPage"
+        
+        
+        xmlns:mastervm="clr-namespace:ViewModel.MasterData;assembly=ViewModel"
+        xmlns:statisticvm="clr-namespace:ViewModel.Statistic;assembly=ViewModel"
+        xmlns:mastermodule="clr-namespace:ViewModel.Modules;assembly=ViewModel"
+       
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" WindowState="Maximized">
-    <Grid>
-        
+  <Window.Resources>
+    <DataTemplate x:Name="redViewTemplate" DataType="{x:Type mastermodule:MainPageViewModel}">
+      <masterdatamainview:MainPage DataContext="{Binding}"/>
+    </DataTemplate>
+    <DataTemplate x:Name="blueViewTemplate" DataType="{x:Type mastervm:DishViewModel}">
+      <masterdatafoodview:FoodView DataContext="{Binding}"/>
+    </DataTemplate>
+    <DataTemplate x:Name="orangeViewTemplate" DataType="{x:Type statisticvm:ChartStatisticViewModel}">
+      <statisticview:OverviewStatisticPage DataContext="{Binding}"/>
+    </DataTemplate>
+    <DataTemplate x:Name="billStatistic" DataType="{x:Type statisticvm:BillStatisticViewModel}">
+      <statisticview:BillStatisticPage DataContext="{Binding}"/>
+    </DataTemplate>
+  </Window.Resources>
+
+  <Grid>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition></RowDefinition>
+      </Grid.RowDefinitions>
+
+    <Grid Grid.Row="0">
+      <uc:ControlBarUC FontSize="20" Tag="Màn hình chính"></uc:ControlBarUC>
     </Grid>
+
+    <Grid Grid.Row="1">
+      <Border BorderBrush="Black" BorderThickness="1">
+        <DockPanel>
+          <StackPanel HorizontalAlignment="Left">
+            <TextBlock FontSize="20" VerticalAlignment="Center" Margin="10 4 0 0"> Desktop</TextBlock>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0 0 10 0"/>
+            <TextBlock FontSize="20" VerticalAlignment="Center" Margin="0 0 0 0">Admin</TextBlock>
+            <materialDesign:PackIcon Kind="ChevronDown" Width="30" Height="30" />
+          </StackPanel>
+        </DockPanel>
+      </Border>
+    </Grid>
+
+    <Grid Grid.Row="2" Margin="0 10 0 0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto"></ColumnDefinition>
+        <ColumnDefinition Width="1*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+
+
+      <Grid Grid.Column="0">
+        <ux:UserControlMenu
+          DishClick="UserControlMenu_DishClick"
+          StaffClick="UserControlMenu_StaffClick"
+          OverviewStatisticClick="UserControlMenu_OverviewStatisticClick"
+          BillStatisticClick="UserControlMenu_BillStatisticClick"
+          ></ux:UserControlMenu>
+      </Grid>
+
+      <ContentControl Grid.Column="1" Content="{Binding}">
+      </ContentControl>
+    </Grid>
+
+  </Grid>
 </Window>

@@ -9,83 +9,199 @@
     xmlns:ux="clr-namespace:IRES_Project.UC"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
-    
+
     TextElement.FontSize="13"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="{DynamicResource MaterialDesignFont}"
     Name="mainWindow">
+  <i:Interaction.Triggers>
+    <i:EventTrigger EventName="Loaded">
+      <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+    </i:EventTrigger>
+  </i:Interaction.Triggers>
 
-    <!--<i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>-->
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <!--#region Control bar-->
-        <Grid Grid.Row="0">
-            <uc:ControlBarUC FontSize="20" Tag="Desktop - Màn hình chính"></uc:ControlBarUC>
+  <!--#region Right Menu--><!--
+  <Grid>
+    <Border BorderBrush="Black" BorderThickness="2" >
+      <GroupBox Padding="4">
+        --><!--#region Header--><!--
+        <GroupBox.Header >
+          <StackPanel MaxHeight="20" Margin="0 -5 0 5 " HorizontalAlignment="Center">
+            <Label FontWeight="Bold" FontSize="15" >Danh sách nhân viên</Label>
+          </StackPanel>
+        </GroupBox.Header>
+        --><!--#endregion--><!--
+
+        <Grid OpacityMask="#FF423535">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+          </Grid.RowDefinitions>
+
+          <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+              <GradientStop Color="#FF85BDD6" Offset="0"/>
+              <GradientStop Color="#FF2F7B91" Offset="0.478"/>
+              <GradientStop Color="#FF4492A8" Offset="0.973"/>
+              <GradientStop Color="#FF72A6BF" Offset="0.227"/>
+              <GradientStop Color="#FF2EA4C5" Offset="0.739"/>
+            </LinearGradientBrush>
+          </Grid.Background>
+
+
+          <Grid Grid.Row="0" HorizontalAlignment="Center">
+            <uc:MasterDataHeader></uc:MasterDataHeader>
+          </Grid>
+
+          <Grid Grid.Row="1"   >
+
+            <DataGrid BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False" ItemsSource="{Binding ListEmployee}" x:Name="dataGrid" Grid.Row ="1" HorizontalAlignment="Left" Margin="20"
+                                    VerticalAlignment="Top"  CanUserSortColumns="True"  IsReadOnly="True" ColumnWidth="*"
+                                    materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+
+              <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                  <Setter Property="BorderBrush" Value="Black" />
+                  <Setter Property="Background" Value="Green" />
+                  <Setter Property="BorderThickness" Value="0 0 1 1"></Setter>
+                  <Setter Property="Margin" Value="0 0 0 1"></Setter>
+                  <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                  <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                  <Setter Property="MinHeight" Value="40"/>
+                </Style>
+
+                <Style TargetType="DataGridCell">
+                  <Setter Property="MinHeight" Value="50"/>
+                  <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="{x:Type DataGridCell}">
+                        <Grid Background="{TemplateBinding Background}">
+                          <ContentPresenter VerticalAlignment="Center"/>
+                        </Grid>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+
+              </DataGrid.Resources>
+
+              <DataGrid.Columns>
+                <DataGridTextColumn Width="2*" Header="Mã nhân viên" Binding="{Binding EmployeeCode}"/>
+                <DataGridTextColumn Width="2*" Header="Tên nhân viên" Binding="{Binding EmployeeDescription}"  />
+                <DataGridTextColumn Width="2*" Header="Chức vụ"       Binding="{Binding RoleId}" />
+                <DataGridTextColumn Width="2*" Header="Số ĐT"         Binding="{Binding PhoneNb}" />
+
+                <DataGridTemplateColumn Width="1*" Header="Tùy chỉnh" >
+                  <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <materialDesign:PackIcon Kind="AccountEdit" Margin= " 0 0 20 0" />
+                        <materialDesign:PackIcon Kind="Delete" />
+                      </StackPanel>
+                    </DataTemplate>
+                  </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+              </DataGrid.Columns>
+            </DataGrid>
+
+          </Grid>
+
+          <Grid Grid.Row="2" >
+            <DockPanel  HorizontalAlignment="Center" Width="600" >
+              <Button Margin="0 0 5 0" Height="25" HorizontalAlignment="Left" Name="btnFirst" VerticalAlignment="Bottom" Width="50" Content="&lt;&lt;" Opacity="0.75"/>
+              <Button Height="25"  VerticalAlignment="Bottom" Name="btnPrev" Width="50" Opacity="0.75" Content="&lt;"/>
+              <Label x:Name="lblpageInformation" Margin=" 100 0 0 0"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment=" Center" VerticalAlignment="Bottom" Height="30"  Width="200" />
+              <ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                        Width="100"  SelectedIndex="0" SelectionChanged="cbNumberOfRecords_SelectionChanged" Opacity="0.75"/>
+
+              <Button Height="25" HorizontalAlignment="Right"  Name="btnNext" VerticalAlignment="Bottom" Width="40" Content="&gt;"  Opacity="0.75"/>
+              <Button Margin="5 0 0 0" Height="25" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="50" Name="btnLast"  Opacity="0.75" Content="&gt;&gt;"/>
+            </DockPanel>
+
+          </Grid>
+
+          <Grid Grid.Row="3" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0">
+              <Button Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" Name="btnCancel"
+                                      Width="100"  Opacity="0.75" Content="Cancel" />
+            </StackPanel>
+          </Grid>
         </Grid>
-        <!--#endregion-->
+      </GroupBox>
+    </Border>
+    --><!--#endregion-->
 
-        <!--#region App control bar-->
-        <Grid Grid.Row="1">
-            <Border BorderBrush="Black" BorderThickness="1">
-                <DockPanel>
-                    <StackPanel HorizontalAlignment="Left">
-                        <TextBlock FontSize="20" VerticalAlignment="Center" Margin="10 4 0 0"> Desktop</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0 0 10 0"/>
-                        <TextBlock FontSize="20" VerticalAlignment="Center" Margin="0 0 0 0">Admin</TextBlock>
-                        <materialDesign:PackIcon Kind="ChevronDown" Width="30" Height="30" />
-                    </StackPanel>
-                </DockPanel>
+    <!--#endregion-->
+  <!--</Grid>-->
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto"></RowDefinition>
+      <RowDefinition Height="auto"></RowDefinition>
+      <RowDefinition></RowDefinition>
+    </Grid.RowDefinitions>
+    <!--#region Control bar-->
+    <Grid Grid.Row="0">
+      <uc:ControlBarUC FontSize="20" Tag="Desktop - Màn hình chính"></uc:ControlBarUC>
+    </Grid>
+    <!--#endregion-->
+
+    <!--#region App control bar-->
+    <Grid Grid.Row="1">
+      <Border BorderBrush="Black" BorderThickness="1">
+        <DockPanel>
+          <StackPanel HorizontalAlignment="Left">
+            <TextBlock FontSize="20" VerticalAlignment="Center" Margin="10 4 0 0"> Desktop</TextBlock>
+          </StackPanel>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0 0 10 0"/>
+            <TextBlock FontSize="20" VerticalAlignment="Center" Margin="0 0 0 0">Admin</TextBlock>
+            <materialDesign:PackIcon Kind="ChevronDown" Width="30" Height="30" />
+          </StackPanel>
+        </DockPanel>
+      </Border>
+    </Grid>
+    <!--#endregion-->
+
+    <!--#region Main window-->
+    <Grid Grid.Row="2" Margin="0 10 0 0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto"></ColumnDefinition>
+        <ColumnDefinition Width="1*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+
+      <!--#region Left menu-->
+      <Grid Grid.Column="0">
+        <ux:UserControlMenu></ux:UserControlMenu>
+      </Grid>
+      <!--#endregion-->
+
+      <!--#region Right Menu-->
+      <Border  Grid.Column="1"    BorderBrush="Black" BorderThickness="2" >
+        <GroupBox x:Name="MainBox" Padding="0">
+          <!--#region Header-->
+          <GroupBox.Header >
+            <Border Background="#326690">
+              <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
+                <Label FontWeight="Bold" FontSize="15" Foreground="White">Danh sách nhân viên</Label>
+              </StackPanel>
             </Border>
-        </Grid>
-        <!--#endregion-->
-      
-        <!--#region Main window-->
-        <Grid Grid.Row="2" Margin="0 10 0 0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
 
-            <!--#region Left menu-->
-            <Grid Grid.Column="0">
-                <ux:UserControlMenu></ux:UserControlMenu>
-            </Grid>
-            <!--#endregion-->
+          </GroupBox.Header>
 
-            <!--#region Right Menu-->
-            <Border  Grid.Column="1"    BorderBrush="Black" BorderThickness="2" >
-                <GroupBox x:Name="MainBox" Padding="0">
-                    <!--#region Header-->
-                    <GroupBox.Header >
-                        <Border Background="#326690">
-                            <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
-                                <Label FontWeight="Bold" FontSize="15" Foreground="White">Danh sách nhân viên</Label>
-                            </StackPanel>
-                        </Border>
-                        
-                    </GroupBox.Header>
-                    
-                    <!--#endregion-->
-                    <Grid Background="#b5c8e8" OpacityMask="#FF423535">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="6*" />
-                            <RowDefinition Height="2*" />
-                    </Grid.RowDefinitions>
-                        
-                    <!--<Grid.Background>
+          <!--#endregion-->
+          <Grid Background="#b5c8e8" OpacityMask="#FF423535">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="auto" />
+              <RowDefinition Height="6*" />
+              <RowDefinition Height="2*" />
+            </Grid.RowDefinitions>
+
+            <!--<Grid.Background>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FF85BDD6" Offset="0"/>
                             <GradientStop Color="#FF2F7B91" Offset="0.478"/>
@@ -95,52 +211,52 @@
                         </LinearGradientBrush>
                     </Grid.Background>-->
 
-                        <!--TestClick="Test_Cmd"-->
-                    <!--#region MasterDataHeader --> 
-                    <Grid Grid.Row="0" Margin="0 10 0 0 " HorizontalAlignment="Stretch" Width="auto">
-                            <uc:MasterDataHeader  x:Name="MasterHeader" ActiveClick="MasterHeader_ActiveClick" SearchClick ="Search_Emp"  RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
-                    </Grid>
-                    <!--#endregion-->
-                        <!-- ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"-->
-                    <Grid Grid.Row="1">
-                            <DataGrid CellEditEnding="DataGrid_CellEditEnding" RowEditEnding="DataGrid_RowEditEnding" CanUserAddRows="False"
+            <!--TestClick="Test_Cmd"-->
+            <!--#region MasterDataHeader -->
+            <Grid Grid.Row="0" Margin="0 10 0 0 " HorizontalAlignment="Stretch" Width="auto">
+              <uc:MasterDataHeader  x:Name="MasterHeader" ActiveClick="MasterHeader_ActiveClick" SearchClick ="Search_Emp"  RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
+            </Grid>
+            <!--#endregion-->
+            <!-- ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"-->
+            <Grid Grid.Row="1">
+              <DataGrid CellEditEnding="DataGrid_CellEditEnding" RowEditEnding="DataGrid_RowEditEnding" CanUserAddRows="False"
                                       IsReadOnly="True" BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
                                   HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="20"   VerticalAlignment="Top"  CanUserSortColumns="True"  ColumnWidth="*" 
                                   materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"
                                   ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
                                    MouseLeave="DataGrid_MouseLeave"   >
-                        <DataGrid.Resources>
-                            <Style TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="BorderBrush" Value="Black" />
-                                <Setter Property="Background" Value="MediumPurple" />
-                                <Setter Property="BorderThickness" Value="0 0 1 1"></Setter>
-                                <Setter Property="Margin" Value="0 0 0 1"></Setter>
-                                <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                                <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-                                <Setter Property="Foreground" Value="White"></Setter>
-                                <Setter Property="MinHeight" Value="40"/>
-                            </Style>
+                <DataGrid.Resources>
+                  <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="BorderBrush" Value="Black" />
+                    <Setter Property="Background" Value="MediumPurple" />
+                    <Setter Property="BorderThickness" Value="0 0 1 1"></Setter>
+                    <Setter Property="Margin" Value="0 0 0 1"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                    <Setter Property="Foreground" Value="White"></Setter>
+                    <Setter Property="MinHeight" Value="40"/>
+                  </Style>
 
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="MinHeight" Value="50"/>
-                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                            <Grid Background="{TemplateBinding Background}">
-                                                <ContentPresenter VerticalAlignment="Center"/>
-                                            </Grid>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                         </DataGrid.Resources>
+                  <Style TargetType="DataGridCell">
+                    <Setter Property="MinHeight" Value="50"/>
+                    <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                    <Setter Property="Template">
+                      <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                          <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                          </Grid>
+                        </ControlTemplate>
+                      </Setter.Value>
+                    </Setter>
+                  </Style>
+                </DataGrid.Resources>
 
-                        <DataGrid.Columns>
-                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Mã nhân viên"  Binding="{Binding EmployeeCode}"/>
-                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Tên nhân viên" Binding="{Binding EmployeeName}"  />
-                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Chức vụ"       Binding="{Binding Role}" />
-                                    <!--<DataGridComboBoxColumn IsReadOnly="False" Width="2*" Header="Chức vụ" SelectedValueBinding="{Binding Role,Mode=TwoWay}" >
+                <DataGrid.Columns>
+                  <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Mã nhân viên"  Binding="{Binding EmployeeCode}"/>
+                  <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Tên nhân viên" Binding="{Binding EmployeeName}"  />
+                  <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Chức vụ"       Binding="{Binding Role}" />
+                  <!--<DataGridComboBoxColumn IsReadOnly="False" Width="2*" Header="Chức vụ" SelectedValueBinding="{Binding Role,Mode=TwoWay}" >
                                         <DataGridComboBoxColumn.ElementStyle>
                                             <Style TargetType="{x:Type ComboBox}">
                                                 <Setter Property="ItemsSource" Value="{Binding Path=DataContext.RoleList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
@@ -157,7 +273,7 @@
                                         </DataGridComboBoxColumn.EditingElementStyle>
                                         
                                     </DataGridComboBoxColumn>-->
-                                    <!--<DataGridTemplateColumn IsReadOnly="True" Width="2*" Header="Chức vụ" x:Name="cmbRole" >
+                  <!--<DataGridTemplateColumn IsReadOnly="True" Width="2*" Header="Chức vụ" x:Name="cmbRole" >
                                         <DataGridTemplateColumn.CellTemplate >
                                             <DataTemplate>
                                                 <ComboBox HorizontalContentAlignment="Center" Margin="10 0 10 0" Padding="5 0 5 0" Background="Thistle" Foreground="Black" 
@@ -166,98 +282,98 @@
                                                 </ComboBox>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>--> 
-                                    <DataGridTextColumn  IsReadOnly="False" Width="2*" Header="Số ĐT"         Binding="{Binding PhoneNb}" />
-                                    <DataGridTemplateColumn x:Name="Edit_Col" Width="1*" Header="Tùy chỉnh" >
-                                    <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                                    <TextBlock Width="15"></TextBlock>
-                                                    <Button Width="auto" Name="btn_Edit" Click="Edit_Click">
-                                                        <materialDesign:PackIcon Width="auto" Kind="AccountEdit" Margin= " 0 0 0 0" />
-                                                    </Button>
-                                                    <TextBlock Width="10"></TextBlock>
-                                                    <Button Width="auto" Click="Delete_Click">
-                                                        <materialDesign:PackIcon Width="auto" Kind="Delete" Margin= " 0 0 0 0" />
-                                                    </Button>
-                                                    <TextBlock Width="10"></TextBlock>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                         </DataGrid.Columns>
-                            </DataGrid>
-                        </Grid>
-                        
-                    <Grid Grid.Row="2" VerticalAlignment="Top" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="0*" />
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="2*" />
-                                <ColumnDefinition Width="3*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0"></Grid>
-                            <Grid Grid.Column="1" >
-                               
-                                    <StackPanel Orientation="Horizontal" Margin="0 0 0 0"  VerticalAlignment="Bottom">
-                                        <!--<CheckBox x:Name="myCheck"  IsEnabledChanged="MyCheck_IsEnabledChanged" IsEnabled="{Binding Refresh}" Visibility="Collapsed"></CheckBox>-->
-                                        <Label x:Name="lblpageInformation" Padding="0 5 0 5" Margin="0 0 0 -1 " HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                                    </DataGridTemplateColumn>-->
+                  <DataGridTextColumn  IsReadOnly="False" Width="2*" Header="Số ĐT"         Binding="{Binding PhoneNb}" />
+                  <DataGridTemplateColumn x:Name="Edit_Col" Width="1*" Header="Tùy chỉnh" >
+                    <DataGridTemplateColumn.CellTemplate>
+                      <DataTemplate>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                          <TextBlock Width="15"></TextBlock>
+                          <Button Width="auto" Name="btn_Edit" Click="Edit_Click">
+                            <materialDesign:PackIcon Width="auto" Kind="AccountEdit" Margin= " 0 0 0 0" />
+                          </Button>
+                          <TextBlock Width="10"></TextBlock>
+                          <Button Width="auto" Click="Delete_Click">
+                            <materialDesign:PackIcon Width="auto" Kind="Delete" Margin= " 0 0 0 0" />
+                          </Button>
+                          <TextBlock Width="10"></TextBlock>
+                        </StackPanel>
+                      </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                  </DataGridTemplateColumn>
+                </DataGrid.Columns>
+              </DataGrid>
+            </Grid>
+
+            <Grid Grid.Row="2" VerticalAlignment="Top" >
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="0*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+              </Grid.ColumnDefinitions>
+              <Grid Grid.Column="0"></Grid>
+              <Grid Grid.Column="1" >
+
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 0"  VerticalAlignment="Bottom">
+                  <!--<CheckBox x:Name="myCheck"  IsEnabledChanged="MyCheck_IsEnabledChanged" IsEnabled="{Binding Refresh}" Visibility="Collapsed"></CheckBox>-->
+                  <Label x:Name="lblpageInformation" Padding="0 5 0 5" Margin="0 0 0 -1 " HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                              HorizontalAlignment=" Center" VerticalAlignment="Center" Height="28"  Width="150" Background="MediumPurple" BorderThickness="1"/>
-                                        <!--<ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 0 5 0"
+                  <!--<ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 0 5 0"
                              Width="100"  SelectedIndex="0" SelectionChanged="cbNumberOfRecords_SelectionChanged" Opacity="0.75"/>-->
 
-                                    </StackPanel>
-                               
-                            </Grid>
-                            <Grid Grid.Column="2"></Grid>
-                            <Grid Grid.Column="3">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Height="25" Margin="0 0 5 0" HorizontalAlignment="Right" Name="btnFirst" Click="btnFirst_Click" 
+                </StackPanel>
+
+              </Grid>
+              <Grid Grid.Column="2"></Grid>
+              <Grid Grid.Column="3">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                  <Button Height="25" Margin="0 0 5 0" HorizontalAlignment="Right" Name="btnFirst" Click="btnFirst_Click" 
                                      VerticalAlignment="Bottom" Width="50" Content="&lt;&lt;" Opacity="0.75">
-                                        <!--<Button.InputBindings>
+                    <!--<Button.InputBindings>
                                             <KeyBinding Key="Enter"/>
                                         </Button.InputBindings>-->
-                                    </Button>
-                                    <Button Height="25" Margin="0" HorizontalAlignment="Center" Name="btnPrev"  Click="btnPrev_Click"
+                  </Button>
+                  <Button Height="25" Margin="0" HorizontalAlignment="Center" Name="btnPrev"  Click="btnPrev_Click"
                                      VerticalAlignment="Bottom" Width="50" Content="&lt;"     Opacity="0.75"/>
-                                </StackPanel>
-                            </Grid>
-                        
-                            <Grid Grid.Column="4">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
+                </StackPanel>
+              </Grid>
+
+              <Grid Grid.Column="4">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                  <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
                              Name="btn1" Click="Btn1_Click" VerticalAlignment="Bottom" Width="50" Content="1"  Opacity="1" BorderBrush="Black" BorderThickness="1"></Button>
-                                    <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
+                  <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
                              Name="btn2" Click="Btn2_Click" VerticalAlignment="Bottom" Width="50" Content="2"  Opacity="0.75"></Button>
-                                    <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
+                  <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
                              Name="btn3" Click="Btn3_Click" VerticalAlignment="Bottom" Width="50" Content="3"  Opacity="0.75"></Button>
-                                    <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
+                  <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
                              Name="btn4" Click="Btn4_Click" VerticalAlignment="Bottom" Width="50" Content="4"  Opacity="0.75"></Button>
-                                    <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
+                  <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0"
                              Name="btn5" Click="Btn5_Click" VerticalAlignment="Bottom" Width="50" Content="5"  Opacity="0.75"></Button>
-                                </StackPanel>
-                            </Grid>
-                        
-                            <Grid Grid.Column="5">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                    <Button Height="25" Margin="0 0 5 0" HorizontalAlignment="Center"  VerticalAlignment="Bottom"
+                </StackPanel>
+              </Grid>
+
+              <Grid Grid.Column="5">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                  <Button Height="25" Margin="0 0 5 0" HorizontalAlignment="Center"  VerticalAlignment="Bottom"
                                     Name="btnNext" Click="btnNext_Click"  Width="50" Content="&gt;"      Opacity="0.75"/>
-                                    <Button Height="25" Margin="0"       HorizontalAlignment="Right"   VerticalAlignment="Bottom" 
+                  <Button Height="25" Margin="0"       HorizontalAlignment="Right"   VerticalAlignment="Bottom" 
                                     Name="btnLast" Click="btnLast_Click"  Width="50" Content="&gt;&gt;"  Opacity="0.75"/>
-                                </StackPanel>
-                            </Grid>
-                        
-                            <Grid Grid.Column="6"></Grid>
-                            
-                    </Grid>
-                    </Grid>
-                </GroupBox>
-            </Border>
-            <!--#endregion-->
-        </Grid>
-        <!--#endregion-->
+                </StackPanel>
+              </Grid>
+
+              <Grid Grid.Column="6"></Grid>
+
+            </Grid>
+          </Grid>
+        </GroupBox>
+      </Border>
+      <!--#endregion-->
     </Grid>
+    <!--#endregion-->
+  </Grid>
 </UserControl>
