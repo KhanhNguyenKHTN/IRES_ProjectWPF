@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel.MasterData;
 
 namespace IRES_Project.MasterData.MainPage
 {
@@ -20,9 +21,21 @@ namespace IRES_Project.MasterData.MainPage
     /// </summary>
     public partial class AddEmp : UserControl
     {
+        
         public AddEmp()
         {
             InitializeComponent();
+            AddEmpViewModel AddEmpVM = new AddEmpViewModel();
+            this.DataContext = AddEmpVM;
+            ResComb.ItemsSource = AddEmpVM.ListRes;
+
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.Text = string.Empty;
+            tb.GotFocus -= TextBox_GotFocus;
         }
     }
-}
+}       
