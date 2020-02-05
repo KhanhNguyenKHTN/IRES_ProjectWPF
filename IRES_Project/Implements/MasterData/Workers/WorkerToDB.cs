@@ -21,6 +21,7 @@ namespace Implements.MasterData.Workers
 
             DataTable dt = sqlExecute.GetExcuteQuery(query);
 
+
             return dt;
         }
 

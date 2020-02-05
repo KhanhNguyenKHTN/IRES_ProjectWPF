@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\LoginImplement.cs" />
+    <Compile Include="MasterData\Modules\EmployeeImplement.cs" />
     <Compile Include="MasterData\Modules\DishImplement.cs" />
     <Compile Include="MasterData\Workers\WorkerToDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

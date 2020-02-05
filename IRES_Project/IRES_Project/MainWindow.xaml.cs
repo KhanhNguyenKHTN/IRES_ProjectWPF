@@ -27,6 +27,7 @@ namespace IRES_Project
             InitializeComponent();
 
             Switcher.pageSwitcher = this;
+            //Switcher.Switch(new AddEmp());
             Switcher.Switch(new MainPage());
         }
 

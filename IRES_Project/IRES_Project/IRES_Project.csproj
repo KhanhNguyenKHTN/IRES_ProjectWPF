@@ -179,6 +179,9 @@
     <Compile Include="Statistic\OverviewStatisticPage.xaml.cs">
       <DependentUpon>OverviewStatisticPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MasterData\MainPage\AddEmp.xaml.cs">
+      <DependentUpon>AddEmp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Switcher.cs" />
     <Compile Include="UC\UserControlMenu.xaml.cs">
       <DependentUpon>UserControlMenu.xaml</DependentUpon>
@@ -190,7 +193,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Statistic\OverviewStatisticPage.xaml">
+    <Page Include="Statistic\OverviewStatisticPage.xaml"/>
+    <Page Include="MasterData\MainPage\AddEmp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
