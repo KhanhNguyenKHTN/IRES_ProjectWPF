@@ -29,7 +29,8 @@ namespace IRES_Project.UC
         public event RoutedEventHandler DishClick;
 
         public event RoutedEventHandler OverviewStatisticClick;
-        public event RoutedEventHandler BillStatisticClick;   
+        public event RoutedEventHandler BillStatisticClick;
+        public event RoutedEventHandler ProductStatisticClick;
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -67,6 +68,7 @@ namespace IRES_Project.UC
                     BillStatisticClick?.Invoke(sender, e);
                     break;
                 case 2:
+                    ProductStatisticClick?.Invoke(sender, e);
                     break;
                 case 3:
                     break;

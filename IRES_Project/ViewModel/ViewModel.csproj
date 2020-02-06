@@ -58,6 +58,7 @@
     <Compile Include="Statistic\BillStatisticViewModel.cs" />
     <Compile Include="Statistic\ChartStatisticViewModel.cs" />
     <Compile Include="Statistic\DetailOrderViewModel.cs" />
+    <Compile Include="Statistic\ProductStatisticViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Implements\Implements.csproj">

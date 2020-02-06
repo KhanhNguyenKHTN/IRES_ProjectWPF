@@ -8,10 +8,10 @@
         xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:ux="clr-namespace:IRES_Project.UC"
+        
         xmlns:statisticview="clr-namespace:IRES_Project.Statistic"
         xmlns:masterdatafoodview="clr-namespace:IRES_Project.MasterData.FoodView"
         xmlns:masterdatamainview="clr-namespace:IRES_Project.MasterData.MainPage"
-        
         
         xmlns:mastervm="clr-namespace:ViewModel.MasterData;assembly=ViewModel"
         xmlns:statisticvm="clr-namespace:ViewModel.Statistic;assembly=ViewModel"
@@ -34,6 +34,9 @@
     </DataTemplate>
     <DataTemplate x:Name="billStatistic" DataType="{x:Type statisticvm:BillStatisticViewModel}">
       <statisticview:BillStatisticPage DataContext="{Binding}"/>
+    </DataTemplate>
+    <DataTemplate x:Name="productStatistic" DataType="{x:Type statisticvm:ProductStatisticViewModel}">
+      <statisticview:ProductStatisticPage DataContext="{Binding}" />
     </DataTemplate>
   </Window.Resources>
 
@@ -76,6 +79,7 @@
           StaffClick="UserControlMenu_StaffClick"
           OverviewStatisticClick="UserControlMenu_OverviewStatisticClick"
           BillStatisticClick="UserControlMenu_BillStatisticClick"
+          ProductStatisticClick="UserControlMenu_ProductStatisticClick"
           ></ux:UserControlMenu>
       </Grid>
 
