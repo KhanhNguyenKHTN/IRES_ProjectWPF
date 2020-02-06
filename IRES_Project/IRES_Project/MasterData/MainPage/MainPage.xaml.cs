@@ -25,6 +25,8 @@ namespace IRES_Project.MasterData.MainPage
     /// </summary>
     public partial class MainPage : UserControl
     {
+        //int pageIndex = 1;
+        private int numberOfRecPerPage = 5;
         MainPageViewModel mainPageVM = new MainPageViewModel();
         int ActiveBtn = 1;
         int CurPageIndex = 1;
@@ -35,15 +37,15 @@ namespace IRES_Project.MasterData.MainPage
         string SelectedCol;
         bool FirstRun = true;
         ObservableCollection<Employee> ListEm { get; set; }
-       
-        private int numberOfRecPerPage = 2;
+
         private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
 
         public MainPage()
         {
+            
             InitializeComponent();
             this.DataContext = mainPageVM;
-          
+
             mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage));
             //dataGrid.ItemsSource=mainPageVM.ListEmployee.Take(numberOfRecPerPage);
             No_View_Updt();
@@ -83,14 +85,9 @@ namespace IRES_Project.MasterData.MainPage
 
             #region Config button
             btnUpdate();
-            
+
             #endregion
         }
-
-
-
-       
-       
 
         private void Navigate(int mode)
         {
@@ -242,10 +239,10 @@ namespace IRES_Project.MasterData.MainPage
             Navigate((int)PagingMode.Last);
         }
 
-        //private void cbNumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    Navigate((int)PagingMode.PageCountChange);
-        //}
+        private void cbNumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Navigate((int)PagingMode.PageCountChange);
+        }
         #endregion
 
         #region Navigate number 1 2 3 4 5
@@ -710,13 +707,13 @@ namespace IRES_Project.MasterData.MainPage
             if (mainPageVM.IsChecked)
             {
                 mainPageVM.ListEmployeeRoot = mainPageVM.getDataEmployee();
-               
+
             }
             else
             {
                 mainPageVM.ListEmployeeRoot = mainPageVM.getDeletedEmployee();
             }
-          
+
             No_View_Updt();
             Navigate((int)PagingMode.First);
             updtLabel();
@@ -764,7 +761,7 @@ namespace IRES_Project.MasterData.MainPage
             //    from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
             //    lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
             //}
-            #endregion  
+            #endregion
 
             #region test dùng trực tiếp VM
             //mainPageVM.ListEmployee = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
@@ -856,7 +853,7 @@ namespace IRES_Project.MasterData.MainPage
                         updtLabel();
                     }
                 }
-            } 
+            }
         }
         private void MasterHeader_ActiveClick(object sender, RoutedEventArgs e)
         {
@@ -943,7 +940,7 @@ namespace IRES_Project.MasterData.MainPage
 
         }
 
-      
+
         private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
 
@@ -989,7 +986,6 @@ namespace IRES_Project.MasterData.MainPage
                     }
             }
         }
-
 
         private void CellValidate(object sender, DataGridCellEditEndingEventArgs e)
         {

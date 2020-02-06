@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Implements.MasterData.Workers;
+using Implements.Workers;
 using Model.Models;
 
 namespace Implements.MasterData.Modules

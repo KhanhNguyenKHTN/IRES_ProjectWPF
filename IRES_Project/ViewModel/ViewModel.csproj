@@ -55,6 +55,9 @@
     <Compile Include="Modules\LoginViewModel.cs" />
     <Compile Include="Modules\MainPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistic\BillStatisticViewModel.cs" />
+    <Compile Include="Statistic\ChartStatisticViewModel.cs" />
+    <Compile Include="Statistic\DetailOrderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Implements\Implements.csproj">
