@@ -315,7 +315,7 @@
                                 </Grid>
 
                                 <Grid Grid.Row="3" Grid.Column="1">
-                                    <TextBox GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">ten-dang-nhap</TextBox>
+                                    <TextBox GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
                                 </Grid>
                                 
                                 <Grid Grid.Row="5" Grid.Column="1">

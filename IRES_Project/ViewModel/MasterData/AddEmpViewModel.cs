@@ -15,10 +15,15 @@ namespace ViewModel.MasterData
         public List<string> ListRes = new List<string>() { "IRES cơ sở 1" };
         public AddEmpViewModel()
         {
-           
+            NewEmp.EmployeeName = "ten_dang_nhap";
+            NewEmp.EmployeeCode = NewEmp.Role + DateTime.Now.ToString("yyyyMMddHHmmssffff");
+            NewEmp.EmployeeDescription = "";
+            NewEmp.Active = true;
+            NewEmp.CreatedBy = "";
+            NewEmp.CreatedDatetime = DateTime.Now;
         }
 
-        private Employee _NewEmp;
+        private Employee _NewEmp = new Employee();
 
         public Employee NewEmp
         {
