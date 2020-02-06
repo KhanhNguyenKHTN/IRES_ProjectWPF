@@ -45,17 +45,22 @@ namespace IRES_Project
 
         private void UserControlMenu_DishClick(object sender, RoutedEventArgs e)
         {
-            DataContext = new DishViewModel();  
+            DataContext = new DishViewModel();
         }
 
         private void UserControlMenu_OverviewStatisticClick(object sender, RoutedEventArgs e)
         {
-            DataContext = new PieChartViewModel();
+            DataContext = new ChartStatisticViewModel("ngày");
         }
 
         private void UserControlMenu_BillStatisticClick(object sender, RoutedEventArgs e)
         {
             DataContext = new BillStatisticViewModel(DateTime.Now.ToShortDateString());
+        }
+
+        private void UserControlMenu_ProductStatisticClick(object sender, RoutedEventArgs e)
+        {
+            DataContext = new ProductStatisticViewModel("tháng");
         }
     }
 }

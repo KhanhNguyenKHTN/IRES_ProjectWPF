@@ -19,15 +19,54 @@ using ViewModel.Statistic;
 namespace IRES_Project.Statistic
 {
     /// <summary>
-    /// Interaction logic for OverviewPage.xaml
+    /// Interaction logic for OverviewStatisticPage.xaml
     /// </summary>
-    public partial class OverviewPage : UserControl
+    public partial class OverviewStatisticPage : UserControl
     {
-        public OverviewPage()
+        ChartStatisticViewModel chartStatisticVM = null;
+        public OverviewStatisticPage()
         {
             InitializeComponent();
 
-            var chartStatisticVM = new ChartStatisticViewModel("tháng");
+            GetDataOverview("ngày");
+        }
+
+        private void StatisticHeaderUC_BtnLoadStatistic(object sender, RoutedEventArgs e)
+        {
+            TimeWatching timeWatching = sender as TimeWatching;
+
+            switch(timeWatching.ModeTime)
+            {
+                //case "month": GetOverviewStatisticByDate(timeWatching.TimeSearch);
+                //    break;
+                //case "year": GetOverviewStatisticByMonth(timeWatching.TimeSearch);
+                //    break;
+                //default: break;
+
+                case "month":
+                    GetOverviewStatisticByDate(timeWatching.ModeTime);
+                    break;
+                case "year":
+                    GetOverviewStatisticByMonth(timeWatching.ModeTime);
+                    break;
+                default: break;
+            }
+        }
+
+        public void GetOverviewStatisticByDate(string time)
+        {
+            GetDataOverview("ngày");
+        }
+
+        public void GetOverviewStatisticByMonth(string month)
+        {
+            GetDataOverview("tháng");
+        }
+
+        public void GetDataOverview(string mode)
+        {
+            GridChart.Children.Clear();
+            var chartStatisticVM = new ChartStatisticViewModel(mode);
             Chart chart = new Chart() { };
 
             LineSeries lineRevenue = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsRevenue, DependentValuePath = "Count", IndependentValuePath = "Time" };
