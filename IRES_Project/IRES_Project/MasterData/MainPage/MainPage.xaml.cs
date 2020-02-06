@@ -33,7 +33,7 @@ namespace IRES_Project.MasterData.MainPage
         int from;
         int no_Page;
         string SelectedCol;
-        //int first_Run = 0;
+        bool FirstRun = true;
         ObservableCollection<Employee> ListEm { get; set; }
        
         private int numberOfRecPerPage = 2;
@@ -653,48 +653,57 @@ namespace IRES_Project.MasterData.MainPage
         }
         #endregion
 
-        //private void MyCheck_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e) //Check xem dưới VM có gọi gì ko, nếu có reset itemsource
-        //{
-        //    if (first_Run > 0)
-        //    {
-        //        if (mainPageVM.ListEmployeeRoot.Count != 0)
-        //        {
-        //            //listEm = mainPageVM.ListEmployee
-        //            //dataGrid.ItemsSource = listEm;
+        private void MyCheck_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e) //Check xem dưới VM có gọi gì ko, nếu có reset itemsource
+        {
+            if (!FirstRun)
+            {                                                                                        
+                if (mainPageVM.IsChecked)
+                {
+                    ListEm = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
+                }
+                else
+                {
+                    ListEm = mainPageVM.searchDeletedEmployee();
+                }
+                if (ListEm.Count != 0)
+                {
+                    mainPageVM.ListEmployee = ListEm;
+                    mainPageVM.ListEmployeeRoot = ListEm;
+                    No_View_Updt();
+                    if (no_Page >= 1)
+                    {
+                        Navigate((int)PagingMode.First);
+                    }
+                    else
+                    {
+                        mainPageVM.ListEmployee.Clear();
+                    }
+                    updtLabel();
+                }
+                else
+                {
+                    mainPageVM.ListEmployeeRoot.Clear();
+                    No_View_Updt();
+                    Navigate((int)PagingMode.First);
+                    updtLabel();
+                }
 
-        //            No_View_Updt();
-        //            if (no_Page > 1)
-        //            {
-        //                Navigate((int)PagingMode.First);
-        //            }
-        //            else
-        //            {
-        //                if (no_Page == 1)
-        //                {
-        //                    Navigate((int)PagingMode.First);
-        //                    btnNext.IsEnabled = false;
-        //                    btnNext.Opacity = 0.75;
-        //                    btnLast.IsEnabled = false;
-        //                    btnLast.Opacity = 0.75;
-        //                    btnPrev.IsEnabled = false;
-        //                    btnPrev.Opacity = 0.75;
-        //                    btnFirst.IsEnabled = false;
-        //                    btnFirst.Opacity = 0.75;
-        //                }
-        //            }
-        //            updtLabel();
-        //        }
-        //        else
-        //            first_Run = 1; ;
-        //    }
-        //}
+
+
+
+
+
+            }
+            else
+                FirstRun = false;
+        }
 
         //private void Test_Cmd(object sender, RoutedEventArgs e)
         //{
         //    dataGrid.ItemsSource = null;
 
-        //    listEm = mainPageVM.ListEmployee;
-        //    dataGrid.ItemsSource = listEm;
+        //    ListEm = mainPageVM.ListEmployee;
+        //    dataGrid.ItemsSource = ListEm;
         //}
         private void Refresh_Data(object sender, RoutedEventArgs e)
         {
@@ -736,6 +745,13 @@ namespace IRES_Project.MasterData.MainPage
                 {
                     mainPageVM.ListEmployee.Clear();
                 }
+                updtLabel();
+            }
+            else
+            {
+                mainPageVM.ListEmployeeRoot.Clear();
+                No_View_Updt();
+                Navigate((int)PagingMode.First);
                 updtLabel();
             }
 
@@ -869,6 +885,13 @@ namespace IRES_Project.MasterData.MainPage
                     if (ListEm.Count != 0)
                     {
                         mainPageVM.ListEmployeeRoot = ListEm;
+                    }
+                    else
+                    {
+                        mainPageVM.ListEmployeeRoot.Clear();
+                        No_View_Updt();
+                        Navigate((int)PagingMode.First);
+                        updtLabel();
                     }
                 }
                 else
@@ -1070,6 +1093,9 @@ namespace IRES_Project.MasterData.MainPage
             //mainPageVM.UpdateRole(a.RoleId, a.EmployeeCode);
 
         }
+
+        
+
         private void updtLabel()
         {
             count = mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage).Count();

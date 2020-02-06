@@ -203,7 +203,7 @@
                             <Grid Grid.Column="1" >
                                
                                     <StackPanel Orientation="Horizontal" Margin="0 0 0 0"  VerticalAlignment="Bottom">
-                                        <!--<CheckBox x:Name="myCheck"  IsEnabledChanged="MyCheck_IsEnabledChanged" IsEnabled="{Binding Refresh}" Visibility="Collapsed"></CheckBox>-->
+                                        <CheckBox x:Name="myCheck"  IsEnabledChanged="MyCheck_IsEnabledChanged" IsEnabled="{Binding Refresh}" Visibility="Collapsed"></CheckBox>
                                         <Label x:Name="lblpageInformation" Padding="0 5 0 5" Margin="0 0 0 -1 " HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                              HorizontalAlignment=" Center" VerticalAlignment="Center" Height="28"  Width="150" Background="MediumPurple" BorderThickness="1"/>
                                         <!--<ComboBox x:Name="cbNumberOfRecords" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5 0 5 0"

@@ -22,7 +22,9 @@ namespace ViewModel.Modules
 
         private bool _Refresh = false;
         public bool Refresh { get { return _Refresh; } set { _Refresh = value; OnPropertyChanged(); } }
-
+        
+        private bool _ToFireSearch = false;
+        public bool ToFireSearch { get { return _ToFireSearch; } set { _ToFireSearch = value; OnPropertyChanged(); } }
         private bool _IsChecked = true;
         public bool IsChecked { get { return _IsChecked; } set { _IsChecked = value; OnPropertyChanged(); } }
 
@@ -51,20 +53,18 @@ namespace ViewModel.Modules
                 MessageBox.Show("Khong co data");
             }
 
-            SearchCommand = new RelayCommand<TextBox>((p) => { return (p.Text == null || p.Text=="") ? false : true; }, (p) =>
-            {
-               
-                ListEmployee = null;
-                ListEmployee = searchEmployee();
-                if (Refresh == true)
-                {
-                    Refresh = false;
-                }
-                else
-                    Refresh = true;
+            SearchCommand = new RelayCommand<TextBox>((p) => { return (p.Text == null || p.Text=="") ? false : true; },
+                (p) =>  {
+                            Search_Text = p.Text;
+                            //ListEmployeeRoot = searchEmployee();
+                            if (Refresh == true)
+                            {
+                                Refresh = false;
+                            }
+                            else
+                                Refresh = true;
 
-            }
-            );
+                        });
 
             //LoadedWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             //{
@@ -125,7 +125,7 @@ namespace ViewModel.Modules
             Employee X= listEmployee.First();
             if(X.RoleId ==-1)
             {
-                MessageBox.Show("Không có kết quả");
+                //MessageBox.Show("Không có kết quả");
                 listEmployee.Clear();
                 return listEmployee;
             }
@@ -152,7 +152,7 @@ namespace ViewModel.Modules
             Employee X = listEmployee.First();
             if (X.RoleId == -1)
             {
-                MessageBox.Show("Không có kết quả");
+                //MessageBox.Show("Không có kết quả");
                 listEmployee.Clear();
                 return listEmployee;
             }

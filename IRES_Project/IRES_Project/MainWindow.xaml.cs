@@ -27,8 +27,8 @@ namespace IRES_Project
             InitializeComponent();
 
             Switcher.pageSwitcher = this;
-            //Switcher.Switch(new AddEmp());
-            Switcher.Switch(new MainPage());
+            Switcher.Switch(new AddEmp());
+            //Switcher.Switch(new MainPage());
         }
 
         public void Navigate(UserControl nextPage)
