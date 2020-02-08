@@ -219,6 +219,33 @@ namespace Implements.MasterData.Modules
             SQLExecute sqlExecute = new SQLExecute();
             return sqlExecute.DeleteQuery(query, EmpCode);
         }
+        public static bool CheckEmpUserName(string UserName)
+        {
+
+            //string query = $"SELECT * FROM ires.employee" +
+            //               $" WHERE user_name = '' ||@Value|| '' ";
+            string query = $"select * from ires.employee where employee.user_name ='' || @Value ||''";
+
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.CheckUserNameQuery(query, UserName);
+        }
+        public static bool InsertUserToDb(Employee Emp, ref int UserId)
+        {
+            string query = $"insert into ires.user_info(user_display_name,user_dob, user_email,user_phone,role_id, user_address,user_status, created_by,created_datetime,updated_by, updated_datetime,active,version)" +
+                                             $" values('' || @UserName ||'', current_date, '' || @Email ||'', '' || @Phone ||'',  @RoleId, '' || @Address ||'', 'ACTIVE', 'Admin', CURRENT_TIMESTAMP(0), 'Admin', CURRENT_TIMESTAMP(0), true, '0') returning user_id";
+
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.InsertUserQuery(query, Emp, ref UserId);
+        }
+        public static bool InsertEmpToDb(Employee Emp)
+        {
+            string query = $"insert into ires.employee(employee_code, restaurant_id,user_id,employee_status,user_name,password,employee_description,created_by,created_datetime, updated_by,updated_datetime,active,version,role_id)" +
+                $"                               values('' || @EmpCode ||'', @ResId,  @UserId, 'ACTIVE', '' || @UserName ||'','' || @PassWord ||'', '' || @EmpDes ||'', 'Admin', CURRENT_TIMESTAMP(0), 'Admin', CURRENT_TIMESTAMP(0), true, 0, @RoleId)";
+
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.InsertEmpQuery(query, Emp);
+        }
+
 
 
 

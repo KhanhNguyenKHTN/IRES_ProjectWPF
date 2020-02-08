@@ -17,361 +17,366 @@
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
              Name="AddEmpPage">
-    
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <!--#region Control bar-->
-        <Grid Grid.Row="0">
-            <uc:ControlBarUC FontSize="20" Tag="Desktop - Thêm nhân viên"></uc:ControlBarUC>
-        </Grid>
-        <!--#endregion-->
-        <!--#region App control bar-->
-        <Grid Grid.Row="1">
-            <Border BorderBrush="Black" BorderThickness="1">
-                <DockPanel>
-                    <StackPanel HorizontalAlignment="Left">
-                        <TextBlock FontSize="20" VerticalAlignment="Center" Margin="10 4 0 0"> Desktop</TextBlock>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0 0 10 0"/>
-                        <TextBlock FontSize="20" VerticalAlignment="Center" Margin="0 0 0 0">Admin</TextBlock>
-                        <materialDesign:PackIcon Kind="ChevronDown" Width="30" Height="30" />
-                    </StackPanel>
-                </DockPanel>
-            </Border>
-        </Grid>
-        <!--#endregion-->
-        <Grid Grid.Row="2" Margin="0 10 0 0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <!--#region Left menu-->
-            <Grid Grid.Column="0">
-                <ux:UserControlMenu></ux:UserControlMenu>
-            </Grid>
-            <!--#endregion-->
-            <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
-                <GroupBox x:Name="MainBox" Padding="0">
-                    <!--#region Header-->
-                    <GroupBox.Header >
-                        <Border Background="#326690">
-                            <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
-                                <Label FontWeight="Bold" FontSize="15" Foreground="White">Thêm mới nhân viên</Label>
-                            </StackPanel>
-                        </Border>
-                    </GroupBox.Header>
-                    <!--#endregion-->
-                    <Grid Background="WhiteSmoke" OpacityMask="#FF423535">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="7*"></RowDefinition>
-                            <RowDefinition Height="2*"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.Resources>
-                                <Style TargetType="ComboBoxItem">
-                                    <Setter Property="Padding" Value="18 0 20 0"/>
-                                </Style> 
-                                <Style TargetType="Label">
-                                    <Setter Property="FontSize" Value="15" />
-                                    <Setter Property="FontWeight" Value="Bold" />
-                                </Style>
-                                <Style TargetType="ComboBox">
-                                    <Setter Property="BorderBrush" Value="Black" />
-                                    <Setter Property="BorderThickness" Value="1" />
-                                    <Setter Property="Padding" Value="20 4 20 0" />
-                                    </Style>
-                            </Grid.Resources>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                             </Grid.ColumnDefinitions>
-                            <!--#region  1st Col-->
-                            <Grid Grid.Column="0">
-                                
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
-                               
-                                <Grid Grid.Row="0">
-                                </Grid>
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Tên nhà hàng:</Label>
-                                    </Grid>
-                                </Grid>
-                                
-                                <Grid Grid.Row="2">
-                                </Grid>
-                                <Grid Grid.Row="3">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Tên đăng nhập:</Label>
-                                    </Grid>
-                                </Grid>
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
+            <GroupBox x:Name="MainBox" Padding="0">
+                <!--#region Header-->
+                <GroupBox.Header >
+                    <Border Background="#326690">
+                        <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
+                            <Label FontWeight="Bold" FontSize="15" Foreground="White">Thêm mới nhân viên</Label>
+                        </StackPanel>
+                    </Border>
+                </GroupBox.Header>
+                <!--#endregion-->
+                <Grid Background="WhiteSmoke" OpacityMask="#FF423535">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="7*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.Resources>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Padding" Value="18 0 20 0"/>
+                            </Style>
+                            <Style TargetType="Label">
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Setter Property="Padding" Value="20 4 20 0" />
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--#region  1st Col-->
+                        <Grid Grid.Column="0">
 
-                                <Grid Grid.Row="4">
-                                </Grid>
-                                <Grid Grid.Row="5">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Mật khẩu:</Label>
-                                    </Grid>
-                                </Grid>
-                                
-                                <Grid Grid.Row="6">
-                                </Grid>
-                                <Grid Grid.Row="7">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Xác nhận mật khẩu:</Label>
-                                    </Grid>
-                                </Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
 
-                                <Grid Grid.Row="8">
-                                </Grid>
-                                <Grid Grid.Row="9">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Chức vụ:</Label>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid Grid.Row="10">
-                                </Grid>
-                                <Grid Grid.Row="11">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Email:</Label>
-                                    </Grid>
-                                </Grid>
-                                
-                                <Grid Grid.Row="12">
-                                </Grid>
-                                <Grid Grid.Row="13">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Số điện thoại:</Label>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid Grid.Row="14">
-                                </Grid>
-                                <Grid Grid.Row="15">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Địa chỉ:</Label>
-                                    </Grid>
-                                </Grid>
-
-                                <Grid Grid.Row="16">
-                                </Grid>
-
-                                <Grid Grid.Row="17">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="3*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="0"></Grid>
-                                    <Grid Grid.Column="1"></Grid>
-                                    <Grid Grid.Column="2">
-                                        <Label>Ghi chú:</Label>
-                                    </Grid>
-                                </Grid>
-                                <Grid Grid.Row="18">
-                                    
-                                </Grid>                               
+                            <Grid Grid.Row="0">
                             </Grid>
-                            <!--#endregion-->
-                            <!--#region  2nd Col-->
-                            <Grid Grid.Column="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                    <RowDefinition Height="1*"/>
-                                </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Tên nhà hàng:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                            </Grid>
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Tên đăng nhập:</Label>
+                                </Grid>
+                            </Grid>
+                            
+                            <Grid Grid.Row="4">
+                            </Grid>
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Tên hiển thị:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="6">
+                            </Grid>
+                            <Grid Grid.Row="7">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Mật khẩu:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="8">
+                            </Grid>
+                            <Grid Grid.Row="9">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Xác nhận mật khẩu:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="10">
+                            </Grid>
+                            <Grid Grid.Row="11">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Chức vụ:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="12">
+                            </Grid>
+                            <Grid Grid.Row="13">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Email:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="14">
+                            </Grid>
+                            <Grid Grid.Row="15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Số điện thoại:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="16">
+                            </Grid>
+                            <Grid Grid.Row="17">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Địa chỉ:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="18">
+                            </Grid>
+
+                            <Grid Grid.Row="19">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Ghi chú:</Label>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="20">
+
+                            </Grid>
+                        </Grid>
+                        <!--#endregion-->
+                        <!--#region  2nd Col-->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="8*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="8*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <!--#region New Content-->
+                            <!--#region Ảnh nhân viên-->
+                            <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="6" Margin="20 0 20 0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    <ColumnDefinition Width="6*"></ColumnDefinition>
-                                    <ColumnDefinition Width="6*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <!--#region New Content-->
-                                <!--#region Ảnh nhân viên-->
-                                <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="6" Margin="20 0 20 0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                        <ColumnDefinition Width="4*"></ColumnDefinition>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="1">
+                                <Grid Grid.Column="1">
                                     <Border BorderBrush="Black" BorderThickness="1" >
                                         <Image Margin="20" Source="https://upload.wikimedia.org/wikipedia/commons/3/30/Googlelogo.png" />
                                     </Border>
-                                    </Grid>
                                 </Grid>
-                                <Grid Grid.Row="8" Grid.Column="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                        <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="1">
-                                        <Button VerticalContentAlignment="Top" >Chọn ảnh</Button>
-                                    </Grid>
+                            </Grid>
+                            <Grid Grid.Row="8" Grid.RowSpan="2" MaxHeight="60"  Grid.Column="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1">
+                                    <Button VerticalAlignment="Top" VerticalContentAlignment="Center" >Chọn ảnh</Button>
                                 </Grid>
-                                <!--#endregion-->
-                                
-                                <Grid Grid.Row="1" Grid.Column="1" >
-                                    <ComboBox  SelectedItem="IRES cơ sở 1"   Name="ResComb" ></ComboBox>
-                                </Grid>
-
-                                <Grid Grid.Row="3" Grid.Column="1">
-                                    <TextBox GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
-                                </Grid>
-                                
-                                <Grid Grid.Row="5" Grid.Column="1">
-                                    <TextBox Name="NewEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1"></TextBox>
-                                </Grid>
-
-                                
-                                <Grid Grid.Row="7" Grid.Column="1">
-                                    <TextBox Name="NewEmpPassConf" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1"></TextBox>
-                                </Grid>
-                                
-                                <Grid Grid.Row="9" Grid.Column="1">
-                                    <ComboBox Name="RoleComb"></ComboBox>
-                                </Grid>
-
-                                <Grid Grid.Row="11" Grid.Column="1">
-                                    <TextBox Name="NewEmpEmail" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">nhanvien01@ires.com.vn</TextBox>
-                                </Grid>
-
-                                <Grid Grid.Row="13" Grid.Column="1">
-                                    <TextBox Name="NewEmpPhone" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">0909090909</TextBox>
-                                </Grid>
-
-                                <Grid Grid.Row="15" Grid.Column="1">
-                                    <TextBox Name="NewEmpAddress" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">Thành phố Hồ Chí Minh</TextBox>
-                                </Grid>
-
-                                <Grid Grid.Row="17" Grid.RowSpan="2" Grid.Column="1"  Grid.ColumnSpan="2" Margin="0 0 80 0">
-                                    <TextBox Name="NewEmpDes" BorderBrush="Black" BorderThickness="1"></TextBox>
-                                </Grid>
-                                <!--#endregion-->
                             </Grid>
                             <!--#endregion-->
-                            
-                        </Grid>
-                        
-                        <!-- Lưu, Hủy-->
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                                <ColumnDefinition Width="1*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="1">
-                                <Button> Lưu</Button>
-                            </Grid>
-                            <Grid Grid.Column="3">
-                                <Button>Hủy</Button>
+                            <!--#region Thông tin nhân viên mới-->
+                            <Grid Grid.Row="1" Grid.Column="1" >
+                                <ComboBox  SelectedItem="IRES cơ sở 1"   Name="ResComb" ></ComboBox>
                             </Grid>
 
+                            <Grid Grid.Row="3" Grid.Column="1">
+                                <TextBox Name="user_name" GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserName}"></TextBox>
+                            </Grid>
+                            <Grid Grid.Row="3" Grid.Column="2">
+                                <materialDesign:PackIcon x:Name="UserNameError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                            <Grid Grid.Row="5" Grid.Column="1">
+                                <TextBox Name="user_display_name" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
+                            </Grid>
+
+                            <Grid Grid.Row="7" Grid.Column="2">
+                                <materialDesign:PackIcon x:Name="PassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                            <Grid Grid.Row="7" Grid.Column="1">
+                                <PasswordBox x:Name="PassW"    Padding=" 10 0 10 0" GotFocus="PassW_GotFocus" VerticalContentAlignment="Top"   
+                                             Password="123456" PasswordChanged="MyEmpPass_PasswordChanged"
+                                             BorderBrush="Black" BorderThickness="1" MaxLength="20"></PasswordBox>
+                                <!--<TextBox Visibility="Collapsed" Name="NewEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">******</TextBox>-->
+                            </Grid>
+             
+                            <Grid Grid.Row="9" Grid.Column="2">
+                                <materialDesign:PackIcon x:Name="ConfPassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                            <Grid Grid.Row="9" Grid.Column="1">
+                                <PasswordBox x:Name="ConfPassW" Padding=" 10 0 10 0" GotFocus="ConfPassW_GotFocus" VerticalContentAlignment="Top" 
+                                             Password="123456" PasswordChanged="MyEmpConfPass_PasswordChanged"
+                                             BorderBrush="Black" BorderThickness="1"></PasswordBox>
+                            </Grid>
+
+                            <Grid Grid.Row="11" Grid.Column="1">
+                                <ComboBox Name="RoleComb" SelectedItem="{Binding NewEmp.Role}" ItemsSource="{Binding RoleList}"></ComboBox>
+                            </Grid>
+
+                            <Grid Grid.Row="13" Grid.Column="2">
+                                <materialDesign:PackIcon x:Name="EmpEmailError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                            <Grid Grid.Row="13" Grid.Column="1">
+                                <TextBox Name="NewEmpEmail" GotFocus="NewEmpEmail_GotFocus" Padding="10 0 10 0" BorderBrush="Black" 
+                                         BorderThickness="1" Text="{Binding NewEmp.UserEmail}"></TextBox>
+                            </Grid>
+
+                            <Grid Grid.Row="15" Grid.Column="1">
+                                <TextBox Name="NewEmpPhone" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.PhoneNb}"></TextBox>
+                            </Grid>
+
+                            <Grid Grid.Row="17" Grid.Column="1">
+                                <TextBox Name="NewEmpAddress" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserAddress}" ></TextBox>
+                            </Grid>
+
+                            <Grid Grid.Row="19" Grid.RowSpan="2" Grid.Column="1"  Grid.ColumnSpan="2" Margin="0 0 80 0">
+                                <TextBox Padding="10 1 0 0" Name="NewEmpDes" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeDescription}"></TextBox>
+                            </Grid>
+                            <!--#endregion-->
+                            <!--#endregion-->
                         </Grid>
+                        <!--#endregion-->
+
                     </Grid>
-                </GroupBox>
-            </Border>
-        </Grid>
+
+                    <!-- Lưu, Hủy-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1">
+                            <Button Click="Save_Click">Lưu</Button>
+                        </Grid>
+                        <Grid Grid.Column="3">
+                            <Button>Hủy</Button>
+                        </Grid>
+
+                    </Grid>
+                </Grid>
+            </GroupBox>
+        </Border>
+
     </Grid>
 </UserControl>

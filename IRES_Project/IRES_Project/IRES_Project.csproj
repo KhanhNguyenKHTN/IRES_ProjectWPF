@@ -173,9 +173,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MasterData\MainMasterPage.xaml.cs">
-      <DependentUpon>MainMasterPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MasterData\FoodView\FoodView.xaml.cs">
       <DependentUpon>FoodView.xaml</DependentUpon>
     </Compile>
@@ -203,10 +200,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MasterData\MainPage\AddEmp.xaml" />
-    <Page Include="MasterData\MainMasterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Statistic\BillStatisticPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

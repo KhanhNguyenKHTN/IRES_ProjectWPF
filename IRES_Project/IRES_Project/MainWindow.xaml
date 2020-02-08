@@ -12,7 +12,6 @@
         xmlns:masterdatafoodview="clr-namespace:IRES_Project.MasterData.FoodView"
         xmlns:masterdatamainview="clr-namespace:IRES_Project.MasterData.MainPage"
         
-        
         xmlns:mastervm="clr-namespace:ViewModel.MasterData;assembly=ViewModel"
         xmlns:statisticvm="clr-namespace:ViewModel.Statistic;assembly=ViewModel"
         xmlns:mastermodule="clr-namespace:ViewModel.Modules;assembly=ViewModel"
@@ -26,14 +25,17 @@
     <DataTemplate x:Name="redViewTemplate" DataType="{x:Type mastermodule:MainPageViewModel}">
       <masterdatamainview:MainPage DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate x:Name="blueViewTemplate" DataType="{x:Type mastervm:DishViewModel}">
+        <DataTemplate x:Name="addEmpViewTemplate" DataType="{x:Type mastervm:AddEmpViewModel}">
+            <masterdatamainview:MainPage DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="blueViewTemplate" DataType="{x:Type mastervm:DishViewModel}">
       <masterdatafoodview:FoodView DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Name="orangeViewTemplate" DataType="{x:Type statisticvm:ChartStatisticViewModel}">
-      <statisticview:OverviewStatisticPage DataContext="{Binding}"/>
+        <statisticview:OverviewStatisticPage DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Name="billStatistic" DataType="{x:Type statisticvm:BillStatisticViewModel}">
-      <statisticview:BillStatisticPage DataContext="{Binding}"/>
+    <statisticview:BillStatisticPage DataContext="{Binding}"/>
     </DataTemplate>
   </Window.Resources>
 

@@ -43,7 +43,28 @@ namespace Model.Models
         private bool _Active;
         private int _Version;
         private string _PhoneNb;
-        public Employee() { }
+        private string _UserEmail;
+        private string _UserAddress;
+        public Employee()
+        {
+            EmployeeName = "Nguyen Van A";
+           
+            EmployeeDescription = "";
+            Active = true;
+            CreatedBy = "";
+            CreatedDatetime = DateTime.Now;
+            EmployeeStatus = "";
+            PassWord = "123456";
+            UserAddress = "Thành phố Hồ Chí Minh";
+            PhoneNb = "0909090988";
+            RestaurantId = 1;
+            Role = "Nhân viên phục vụ";
+            RoleId = 1;
+            UserId = -2;
+            UserName = "ten_dang_nhap";
+            UserEmail = "nhanvien01@ires.com.vn";
+            EmployeeCode = "";
+        }
 
         public Employee(int i)
         {
@@ -63,8 +84,7 @@ namespace Model.Models
         }
 
 
-        public string EmployeeCode
-        {
+        public string EmployeeCode    {
             get { return _EmployeeCode; }
             set
             {
@@ -91,6 +111,9 @@ namespace Model.Models
         public string EmployeeName { get => _EmployeeName; set { SetField(ref _EmployeeName, value, "EmployeeName"); } }
         public string Role { get => _Role; set { SetField(ref _Role, value, "Role"); } }
         public int EmployeeId { get => _EmployeeId; set { SetField(ref _EmployeeId, value, "EmployeeId"); } }
+        public string UserEmail { get => _UserEmail; set { SetField(ref _UserEmail, value, "UserEmail"); } }
+        public string UserAddress { get => _UserAddress; set { SetField(ref _UserAddress, value, "UserAddress"); } }
+
 
         private bool _isBegin = false,_isEnd = false;
         private Employee backup; 
