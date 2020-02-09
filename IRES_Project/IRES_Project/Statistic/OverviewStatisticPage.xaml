@@ -8,9 +8,28 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"       
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+  <UserControl.Resources>
+    <Style TargetType="Label">
+      <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style TargetType="TextBlock">
+      <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style TargetType="GroupBox" x:Key="childGroupbox">
+      <Setter Property="BorderBrush" Value="Gray"/>
+    </Style>
+  </UserControl.Resources>
     <!--#region Right Menu-->
-    <Border BorderBrush="Black" BorderThickness="1" >
+  <Border BorderBrush="Black" BorderThickness="2" Background="#FFFBFBFB">
+    <GroupBox Padding="0">
+      <!--#region Header-->
+      <GroupBox.Header >
+        <Border Background="#186e96" BorderBrush="Black" BorderThickness="0 0 0 2">
+          <StackPanel MaxHeight="40" Margin="5" HorizontalAlignment="Center">
+            <Label VerticalContentAlignment="Center" FontWeight="Bold" FontSize="15" Foreground="White">THỐNG KÊ TỔNG QUAN</Label>
+          </StackPanel>
+        </Border>
+      </GroupBox.Header>
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="50" />
@@ -26,9 +45,9 @@
               <RowDefinition Height=".4*"/>
               <RowDefinition />
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Background="AliceBlue">
+            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1 0 0 2" Background="White">
               <DockPanel>
-                <Label Margin="20 0" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left">Tổng quan hoạt động ngày 18/01/2020</Label>
+                <Label Margin="20 0" FontWeight="Bold" VerticalAlignment="Center" FontSize="15" Foreground="#3a3d3d" HorizontalAlignment="Left">Tổng quan hoạt động ngày 18/01/2020</Label>
                 <Button BorderThickness="1" Margin="20 1" Foreground="Black" Background="Transparent" Padding="2" HorizontalAlignment="Right" Height="30" Width="50" Content="{materialDesign:PackIcon Refresh}"/>
               </DockPanel>
             </Border>
@@ -39,21 +58,21 @@
                 <ColumnDefinition />
               </Grid.ColumnDefinitions>
               <Grid Grid.Column="0" HorizontalAlignment="Center">
-                <GroupBox Header="Doanh thu" Width="450" Margin="20">
-                  <GroupBox.HeaderTemplate>
-                    <DataTemplate>
+                <GroupBox Width="400" Margin="20" Padding="0" Style="{StaticResource childGroupbox}">
+                  <GroupBox.Header>
+                    <Border Padding="5" Background="#FF3580BF" Height="30">
                       <DockPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                          <materialDesign:PackIcon Kind="ImageArea" Height="25" Width="25" VerticalAlignment="Center" />
-                          <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{Binding}" />
+                          <materialDesign:PackIcon Kind="Bank" Height="20" Width="20" Foreground="White" VerticalAlignment="Center" />
+                          <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" FontWeight="Bold" Text="Doanh thu: " Foreground="White"/>
                         </StackPanel>
-                        <StackPanel HorizontalAlignment="Right">
-                          <Label Foreground="White">700000</Label>
+                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                          <Label FontWeight="Bold" Foreground="White">700000</Label>
                         </StackPanel>
                       </DockPanel>
-                    </DataTemplate>
-                  </GroupBox.HeaderTemplate>
-                  <Grid>
+                    </Border>
+                  </GroupBox.Header>
+                  <Grid Margin="20 10 20 10">
                     <Grid.RowDefinitions>
                       <RowDefinition />
                       <RowDefinition />
@@ -77,21 +96,21 @@
                 </GroupBox>
               </Grid>
               <Grid Grid.Column="1" HorizontalAlignment="Center">
-                <GroupBox Width="450" Header="Chi tiêu" Style="{DynamicResource MaterialDesignGroupBox}" Margin="20">
-                  <GroupBox.HeaderTemplate>
-                    <DataTemplate>
+                <GroupBox Width="400" Style="{StaticResource childGroupbox}" Padding="0" Margin="20">
+                  <GroupBox.Header>
+                    <Border Padding="5" Background="#FF3580BF" Height="30">
                       <DockPanel>
                         <StackPanel Orientation="Horizontal">
-                          <materialDesign:PackIcon Kind="ImageArea" Height="30" Width="30" VerticalAlignment="Center" />
-                          <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Text="{Binding}" />
+                          <materialDesign:PackIcon Kind="SquareIncCash" Height="20" Width="20" Foreground="White" VerticalAlignment="Center" />
+                          <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" Text="Chi tiêu: " />
                         </StackPanel>
-                        <StackPanel HorizontalAlignment="Right">
-                          <Label Foreground="White">550000</Label>
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
+                          <Label FontWeight="Bold" Foreground="White">550000</Label>
                         </StackPanel>
                       </DockPanel>
-                    </DataTemplate>
-                  </GroupBox.HeaderTemplate>
-                  <Grid>
+                      </Border>
+                  </GroupBox.Header>
+                  <Grid Margin="20 10 20 10">
                     <Grid.RowDefinitions>
                       <RowDefinition />
                       <RowDefinition />
@@ -118,40 +137,23 @@
 
             <Grid Grid.Row="2">
               <Grid.RowDefinitions>
-                <RowDefinition Height=".8*"/>
-                <RowDefinition Height=".2*"/>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1*"/>
               </Grid.RowDefinitions>
-
+              <Label Grid.Row="0" Margin="10 0 0 0" FontSize="18" HorizontalContentAlignment="Center" FontWeight="ExtraBold" Foreground="Green">Biểu đồ doanh thu tổng quan của Nhà hàng IRES</Label>
               <!--#region Chart -->
-              <Grid Grid.Row="0" Name="GridChart">
-                <!--<DVC:Chart  Canvas.Top="80" Canvas.Left="10" Name="mcChart" Background="LightSteelBlue" VerticalContentAlignment="Top">
-                  <DVC:Chart.Series>
-                    <DVC:LineSeries Title=" Monthly Count" IndependentValueBinding="{Binding Path=Key}"  
-                  DependentValueBinding="{Binding Path=Value}">
-                    </DVC:LineSeries>
-                    <DVC:LineSeries Title=" Day Count" IndependentValueBinding="{Binding Path=Key}"  
-                  DependentValueBinding="{Binding Path=Value}">
-                    </DVC:LineSeries>
-                  </DVC:Chart.Series>
-                </DVC:Chart>-->
-
-                <!--<chart:Chart Margin="0" Title="Chart Title" DataContext="{Binding Pies}">
-                  
-                  <chart:LineSeries ItemsSource="{Binding}" 
-                                   DependentValuePath="Count" 
-                                   IndependentValuePath="Name">
-                  </chart:LineSeries>
-                </chart:Chart>-->
+              <Grid Grid.Row="1" Name="GridChart">
+                
               </Grid>
               <!--#endregion-->
 
-              <Grid Grid.Row="1">
+              <!--<Grid Grid.Row="2">
                 <Label>Hanh</Label>
-              </Grid>
+              </Grid>-->
             </Grid>
           </Grid>
         </Border>
       </Grid>
-    </Border>
-  </Grid>
+    </GroupBox>
+  </Border>
 </UserControl>

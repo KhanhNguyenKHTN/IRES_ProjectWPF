@@ -1,11 +1,13 @@
 ﻿using Model.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.DataVisualization;
 using System.Windows.Controls.DataVisualization.Charting;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -28,7 +30,7 @@ namespace IRES_Project.Statistic
         {
             InitializeComponent();
 
-            GetDataOverview("ngày");
+            GetDataOverview("tháng");
         }
 
         private void StatisticHeaderUC_BtnLoadStatistic(object sender, RoutedEventArgs e)
@@ -69,23 +71,49 @@ namespace IRES_Project.Statistic
             var chartStatisticVM = new ChartStatisticViewModel(mode);
             Chart chart = new Chart() { };
 
-            LineSeries lineRevenue = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsRevenue, DependentValuePath = "Count", IndependentValuePath = "Time" };
-            LineSeries lineProfit = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsProfit, DependentValuePath = "Count", IndependentValuePath = "Time" };
-            LineSeries lineInnitialCost = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsInnitialCost, DependentValuePath = "Count", IndependentValuePath = "Time" };
-            LineSeries linePromotion = new LineSeries() { ItemsSource = chartStatisticVM.LineChartsPromotion, DependentValuePath = "Count", IndependentValuePath = "Time" };
-
-
-            lineRevenue.Title = "Doanh Thu";
-            lineProfit.Title = "Lợi nhuận";
-            lineInnitialCost.Title = "Chi phí";
-            linePromotion.Title = "Khuyến mãi";
+            LineSeries lineRevenue = BuildLine(Brushes.OrangeRed, chartStatisticVM.LineChartsRevenue, "Doanh Thu");
+            LineSeries lineProfit = BuildLine(Brushes.Green, chartStatisticVM.LineChartsProfit, "Lợi nhuận");
+            LineSeries lineInnitialCost = BuildLine(Brushes.Black, chartStatisticVM.LineChartsInnitialCost, "Chi phí");
+            LineSeries linePromotion = BuildLine(Brushes.DodgerBlue, chartStatisticVM.LineChartsPromotion, "Khuyến mãi");
 
             chart.Series.Add(lineRevenue);
             chart.Series.Add(lineProfit);
             chart.Series.Add(lineInnitialCost);
             chart.Series.Add(linePromotion);
+            chart.Background = Brushes.SkyBlue;
+            chart.Foreground = Brushes.White;
 
-            GridChart.Children.Add(chart); // add to chart 
+            var legend = new Legend();
+            legend.Background = Brushes.Gray;
+
+           
+            //chart.LegendTitle = "Chú thích";
+            //chart.LegendStyle.Setters.Add(new Setter(, Brushes.Gray));
+            
+            GridChart.Children.Add(chart); // add to chart
+        }
+
+        private LineSeries BuildLine(SolidColorBrush color, ObservableCollection<ChartStatisticModel> source, string title)
+        {
+            LineSeries line = new LineSeries();
+
+            // styles for line1
+            Style poly1 = new Style(typeof(Polyline));
+            poly1.Setters.Add(new Setter(Polyline.StrokeProperty, color));
+            poly1.Setters.Add(new Setter(Polyline.StrokeThicknessProperty, 3d));
+            line.PolylineStyle = poly1;
+
+            Style pointStyle1 = new Style(typeof(LineDataPoint));
+            pointStyle1.Setters.Add(new Setter(LineDataPoint.BackgroundProperty, color));
+            line.DataPointStyle = pointStyle1;
+
+            // Set ValuePath
+            line.DependentValuePath = "Count";
+            line.IndependentValuePath = "Time";
+            line.ItemsSource = source;
+            line.Title = title;
+
+            return line;
         }
     }
 }
