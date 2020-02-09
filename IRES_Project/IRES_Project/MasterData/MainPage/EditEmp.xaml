@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="IRES_Project.MasterData.MainPage.AddEmp"
+﻿<UserControl x:Class="IRES_Project.MasterData.MainPage.EditEmp"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:IRES_Project.MasterData.MainPage"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-                
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ux="clr-namespace:IRES_Project.UC"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -16,8 +15,7 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
-             Name="AddEmpPage">
-
+             Name="EditEmpPage">
     <Grid>
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
             <GroupBox x:Name="MainBox" Padding="0">
@@ -25,7 +23,7 @@
                 <GroupBox.Header >
                     <Border Background="#326690">
                         <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
-                            <Label FontWeight="Bold" FontSize="15" Foreground="White">Thêm mới nhân viên</Label>
+                            <Label FontWeight="Bold" FontSize="15" Foreground="White">Chỉnh sửa thông tin nhân viên</Label>
                         </StackPanel>
                     </Border>
                 </GroupBox.Header>
@@ -111,7 +109,7 @@
                                     <Label>Tên đăng nhập:</Label>
                                 </Grid>
                             </Grid>
-                            
+
                             <Grid Grid.Row="4">
                             </Grid>
                             <Grid Grid.Row="5">
@@ -299,13 +297,13 @@
                             </Grid>
 
                             <Grid Grid.Row="3" Grid.Column="1">
-                                <TextBox Name="user_name" GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserName}"></TextBox>
+                                <TextBox Name="user_name" GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.UserName}"></TextBox>
                             </Grid>
                             <Grid Grid.Row="3" Grid.Column="2">
                                 <materialDesign:PackIcon x:Name="UserNameError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="5" Grid.Column="1">
-                                <TextBox Name="user_display_name" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
+                                <TextBox Name="user_display_name" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.EmployeeName}"></TextBox>
                             </Grid>
 
                             <Grid Grid.Row="7" Grid.Column="2">
@@ -315,9 +313,9 @@
                                 <PasswordBox x:Name="PassW"    Padding=" 10 0 10 0" GotFocus="PassW_GotFocus" VerticalContentAlignment="Top"   
                                              Password="123456" PasswordChanged="MyEmpPass_PasswordChanged"
                                              BorderBrush="Black" BorderThickness="1" MaxLength="20"></PasswordBox>
-                                <!--<TextBox Visibility="Collapsed" Name="NewEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">******</TextBox>-->
+                                <!--<TextBox Visibility="Collapsed" Name="CurEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">******</TextBox>-->
                             </Grid>
-             
+
                             <Grid Grid.Row="9" Grid.Column="2">
                                 <materialDesign:PackIcon x:Name="ConfPassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
@@ -328,27 +326,27 @@
                             </Grid>
 
                             <Grid Grid.Row="11" Grid.Column="1">
-                                <ComboBox Name="RoleComb" SelectedItem="{Binding NewEmp.Role}" ItemsSource="{Binding RoleList}"></ComboBox>
+                                <ComboBox Name="RoleComb" SelectedItem="{Binding CurEmp.Role}" ItemsSource="{Binding RoleList}"></ComboBox>
                             </Grid>
 
                             <Grid Grid.Row="13" Grid.Column="2">
                                 <materialDesign:PackIcon x:Name="EmpEmailError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="13" Grid.Column="1">
-                                <TextBox Name="NewEmpEmail" GotFocus="NewEmpEmail_GotFocus" Padding="10 0 10 0" BorderBrush="Black" 
-                                         BorderThickness="1" Text="{Binding NewEmp.UserEmail}"></TextBox>
+                                <TextBox Name="CurEmpEmail" GotFocus="CurEmpEmail_GotFocus" Padding="10 0 10 0" BorderBrush="Black" 
+                                         BorderThickness="1" Text="{Binding CurEmp.UserEmail}"></TextBox>
                             </Grid>
 
                             <Grid Grid.Row="15" Grid.Column="1">
-                                <TextBox Name="NewEmpPhone" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.PhoneNb}"></TextBox>
+                                <TextBox Name="CurEmpPhone" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.PhoneNb}"></TextBox>
                             </Grid>
 
                             <Grid Grid.Row="17" Grid.Column="1">
-                                <TextBox Name="NewEmpAddress" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserAddress}" ></TextBox>
+                                <TextBox Name="CurEmpAddress" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.UserAddress}" ></TextBox>
                             </Grid>
 
                             <Grid Grid.Row="19" Grid.RowSpan="2" Grid.Column="1"  Grid.ColumnSpan="3" Margin="0 0 80 0">
-                                <TextBox Padding="10 1 0 0" Name="NewEmpDes" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeDescription}"></TextBox>
+                                <TextBox Padding="10 1 0 0" Name="CurEmpDes" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.EmployeeDescription}"></TextBox>
                             </Grid>
                             <!--#endregion-->
                             <!--#endregion-->
@@ -370,7 +368,7 @@
                             <Button Click="Save_Click">Lưu</Button>
                         </Grid>
                         <Grid Grid.Column="3">
-                            <Button Click="Cancel_Click">Quay lại</Button>
+                            <Button Click="Back_Click">Hủy</Button>
                         </Grid>
 
                     </Grid>

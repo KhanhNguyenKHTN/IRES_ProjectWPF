@@ -27,18 +27,21 @@ namespace CustomControls.GlobalControls
         public MasterDataHeader()
         {
             InitializeComponent();
-            
-          
-
         }
         public event RoutedEventHandler SearchClick;
         public event RoutedEventHandler RefreshClick;
         public event RoutedEventHandler TestClick;
         public event RoutedEventHandler ActiveClick;
+        public event RoutedEventHandler AddClick;
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             SearchClick?.Invoke(sender, e);
+
+        }
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddClick?.Invoke(sender, e);
 
         }
         private void Test_Click(object sender, RoutedEventArgs e)

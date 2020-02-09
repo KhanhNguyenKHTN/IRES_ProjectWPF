@@ -33,7 +33,7 @@ namespace IRES_Project
             //Switcher.pageSwitcher = this;
             //Switcher.Switch(new AddEmp());
             //Switcher.Switch(new MainPage());
-            DataContext = new AddEmp();
+            DataContext = new MainPage();
         }
 
         public void Navigate(UserControl nextPage)

@@ -17,6 +17,7 @@ using Model.Models;
 using System.Collections.ObjectModel;
 using System.Collections;
 using System.Data;
+using ViewModel.MasterData;
 
 namespace IRES_Project.MasterData.MainPage
 {
@@ -28,6 +29,7 @@ namespace IRES_Project.MasterData.MainPage
         //int pageIndex = 1;
         private int numberOfRecPerPage = 5;
         MainPageViewModel mainPageVM = new MainPageViewModel();
+        AddEmpViewModel AddEmp = new AddEmpViewModel();
         int ActiveBtn = 1;
         int CurPageIndex = 1;
         int no_View, ViewIndex = 1;
@@ -793,11 +795,14 @@ namespace IRES_Project.MasterData.MainPage
             //var x = dataGrid.SelectedCells;
             //var y = dataGrid.CurrentItem;
 
-
+            EditEmpUC.Visibility = Visibility.Visible;
             IList rows = dataGrid.SelectedItems;
             Employee a = rows[0] as Employee;
 
-            MessageBox.Show(a.EmployeeName);
+            EditEmpUC.TakeEmp(a);
+
+            
+
 
             //DataRowView dataRow = (DataRowView)dataGrid.SelectedItem;
             //int index = dataGrid.CurrentCell.Column.DisplayIndex;
@@ -807,7 +812,10 @@ namespace IRES_Project.MasterData.MainPage
             //var cellValue2 = dataRow.Row[columnName];
 
         }
-
+        public void RemoveItem(ObservableCollection<Employee> collection, Employee instance)
+        {
+            collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
+        }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             IList rows = dataGrid.SelectedItems;
@@ -1090,7 +1098,58 @@ namespace IRES_Project.MasterData.MainPage
 
         }
 
-        
+        private void MasterHeader_AddClick(object sender, RoutedEventArgs e)
+        {
+            //Window window = new Window
+            //{
+            //    Title = "Thêm nhân viên",
+            //    Content = new AddEmp()
+            //};
+
+            //window.ShowDialog();
+           // ListEmpUC.Visibility = Visibility.Collapsed;
+            AddEmpUC.Visibility = Visibility.Visible;
+            
+           // this.DataContext = AddEmp;
+
+
+        }
+
+        private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(ListEmpUC.Visibility == Visibility.Visible)
+            {
+                ListEmpUC.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ListEmpUC.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void EmpDetailUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (ListEmpUC.Visibility == Visibility.Visible)
+            {
+                ListEmpUC.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ListEmpUC.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void EditEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (ListEmpUC.Visibility == Visibility.Visible)
+            {
+                ListEmpUC.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                ListEmpUC.Visibility = Visibility.Visible;
+            }
+        }
 
         private void updtLabel()
         {

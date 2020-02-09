@@ -276,9 +276,7 @@ namespace Service.Modules
             cmd.Parameters["@EmpDes"].Value = Emp.EmployeeDescription;
             cmd.Parameters.AddWithValue(Emp.EmployeeDescription);
 
-            cmd.Parameters.Add("@RoleId", NpgsqlTypes.NpgsqlDbType.Bigint);
-            cmd.Parameters["@RoleId"].Value = Emp.RoleId;
-            cmd.Parameters.AddWithValue(Emp.RoleId);
+            
 
             //object a = null;
             //a = cmd.ExecuteScalar();

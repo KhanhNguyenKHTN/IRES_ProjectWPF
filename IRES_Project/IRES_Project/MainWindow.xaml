@@ -28,6 +28,9 @@
         <DataTemplate x:Name="addEmpViewTemplate" DataType="{x:Type mastervm:AddEmpViewModel}">
             <masterdatamainview:MainPage DataContext="{Binding}"/>
         </DataTemplate>
+        <DataTemplate x:Name="empDetailViewTemplate" DataType="{x:Type mastervm:EmpDetailViewModel}">
+            <masterdatamainview:MainPage DataContext="{Binding}"/>
+        </DataTemplate>
         <DataTemplate x:Name="blueViewTemplate" DataType="{x:Type mastervm:DishViewModel}">
       <masterdatafoodview:FoodView DataContext="{Binding}"/>
     </DataTemplate>

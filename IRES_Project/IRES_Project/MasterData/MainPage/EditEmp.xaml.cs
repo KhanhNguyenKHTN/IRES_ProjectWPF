@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,34 +14,33 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ViewModel.MasterData;
-
 namespace IRES_Project.MasterData.MainPage
 {
     /// <summary>
-    /// Interaction logic for AddEmp.xaml
+    /// Interaction logic for EditEmp.xaml
     /// </summary>
-    public partial class AddEmp : UserControl
+    public partial class EditEmp : UserControl
     {
-        AddEmpViewModel AddEmpVM = new AddEmpViewModel();
+        EditEmpViewModel EditEmpVM = new EditEmpViewModel();
         private string EmpConfPassWord = "";
         private string EmpPassWord = "";
         bool MyIsFocused = false;
         bool IsUserNameOk, IsPassWordOK, IsEmailOK = true;
-        public AddEmp()
+        public EditEmp()
         {
-            InitializeComponent();        
-            this.DataContext = AddEmpVM;
-            ResComb.ItemsSource = AddEmpVM.ListRes;
-        }               
+            InitializeComponent();
+            this.DataContext = EditEmpVM;
+            ResComb.ItemsSource = EditEmpVM.ListRes;
+        }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             var bc = new BrushConverter();
-            AddEmpVM.NewEmp.RoleId = AddEmpVM.RoleDict[AddEmpVM.NewEmp.Role]; //update RoleId
-            if (AddEmpVM.NewEmp.UserName == "" || AddEmpVM.NewEmp.UserName == "ten_dang_nhap")
+            EditEmpVM.CurEmp.RoleId = EditEmpVM.RoleDict[EditEmpVM.CurEmp.Role]; //update RoleId
+            if (EditEmpVM.CurEmp.UserName == "" || EditEmpVM.CurEmp.UserName == "ten_dang_nhap")
             {
                 //MessageBox.Show("Tên đăng nhập không hợp lệ");
                 IsUserNameOk = false;
-                user_name.BorderBrush = System.Windows.Media.Brushes.Red;               
+                user_name.BorderBrush = System.Windows.Media.Brushes.Red;
                 user_name.Background = (Brush)bc.ConvertFrom("#FCA08C");
                 user_name.Text = "Tên đăng nhập không hợp lệ";
                 UserNameError.Visibility = Visibility.Visible;
@@ -48,10 +48,10 @@ namespace IRES_Project.MasterData.MainPage
             }
             else
             {
-                if (!AddEmpVM.CheckUserName())
+                if (!EditEmpVM.CheckUserName())
                 {
                     IsUserNameOk = false;
-                    user_name.BorderBrush = System.Windows.Media.Brushes.Red;                   
+                    user_name.BorderBrush = System.Windows.Media.Brushes.Red;
                     user_name.Background = (Brush)bc.ConvertFrom("#FCA08C");
                     user_name.Text = "Tên đăng nhập bị trùng";
                     UserNameError.Visibility = Visibility.Visible;
@@ -61,13 +61,13 @@ namespace IRES_Project.MasterData.MainPage
                 else
                     IsUserNameOk = true;
             }
-           
-            if ( EmpPassWord=="" || EmpPassWord.Length<6)
+
+            if (EmpPassWord == "" || EmpPassWord.Length < 6)
             {
                 PassWordHasError();
                 MessageBox.Show("Password không hợp lệ");
             }
-            else if(EmpPassWord != EmpConfPassWord)
+            else if (EmpPassWord != EmpConfPassWord)
             {
                 PassWordHasError();
                 MessageBox.Show("Password không trùng khớp");
@@ -75,27 +75,27 @@ namespace IRES_Project.MasterData.MainPage
             else
             {
                 IsPassWordOK = true;
-                AddEmpVM.NewEmp.PassWord = EmpPassWord;
+                EditEmpVM.CurEmp.PassWord = EmpPassWord;
             }
-           
-           if(!IsValidEmail(AddEmpVM.NewEmp.UserEmail))
+
+            if (!IsValidEmail(EditEmpVM.CurEmp.UserEmail))
             {
                 IsEmailOK = false;
-                NewEmpEmail.BorderBrush = System.Windows.Media.Brushes.Red;
-                NewEmpEmail.Background = (Brush)bc.ConvertFrom("#FCA08C");
-                NewEmpEmail.GotFocus += NewEmpEmail_GotFocus;
-                EmpEmailError.Visibility = Visibility.Visible;     
+                CurEmpEmail.BorderBrush = System.Windows.Media.Brushes.Red;
+                CurEmpEmail.Background = (Brush)bc.ConvertFrom("#FCA08C");
+                CurEmpEmail.GotFocus += CurEmpEmail_GotFocus;
+                EmpEmailError.Visibility = Visibility.Visible;
                 MessageBox.Show("Email không hợp lệ");
             }
-           else
+            else
             {
                 IsEmailOK = true;
             }
-           if(IsEmailOK && IsPassWordOK && IsUserNameOk)
+            if (IsEmailOK && IsPassWordOK && IsUserNameOk)
             {
 
-                
-                if (AddEmpVM.NewEmpInsert())
+
+                if (EditEmpVM.CurEmpInsert())
                 {
                     MessageBox.Show("Thêm nhân viên thành công !");
                 }
@@ -106,7 +106,7 @@ namespace IRES_Project.MasterData.MainPage
             }
             else
             {
-               // MessageBox.Show("Not Ok");
+                // MessageBox.Show("Not Ok");
             }
         }
 
@@ -177,9 +177,9 @@ namespace IRES_Project.MasterData.MainPage
             //}
 
         }
-        
 
-        private void NewEmpEmail_GotFocus(object sender, RoutedEventArgs e)
+
+        private void CurEmpEmail_GotFocus(object sender, RoutedEventArgs e)
         {
 
             //MessageBox.Show("Email");
@@ -191,7 +191,7 @@ namespace IRES_Project.MasterData.MainPage
             tb.Background = System.Windows.Media.Brushes.WhiteSmoke;
             MyIsFocused = true;
             EmpEmailError.Visibility = Visibility.Hidden;
-            tb.GotFocus -= NewEmpEmail_GotFocus;
+            tb.GotFocus -= CurEmpEmail_GotFocus;
             //}
             //else
             //{
@@ -199,7 +199,7 @@ namespace IRES_Project.MasterData.MainPage
             //}
         }
 
-      
+
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
@@ -207,7 +207,7 @@ namespace IRES_Project.MasterData.MainPage
 
             user_name.Text = "ten_dang_nhap";
             user_name.BorderBrush = System.Windows.Media.Brushes.Black;
-            user_name.Background = System.Windows.Media.Brushes.WhiteSmoke;           
+            user_name.Background = System.Windows.Media.Brushes.WhiteSmoke;
             UserNameError.Visibility = Visibility.Hidden;
             user_name.GotFocus += TextBox_GotFocus;
 
@@ -223,11 +223,11 @@ namespace IRES_Project.MasterData.MainPage
             ConfPassError.Visibility = Visibility.Hidden;
             ConfPassW.GotFocus += ConfPassW_GotFocus;
 
-            NewEmpEmail.Text = "nhanvien01@ires.com.vn";
-            NewEmpEmail.BorderBrush = System.Windows.Media.Brushes.Black;
-            NewEmpEmail.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            CurEmpEmail.Text = "nhanvien01@ires.com.vn";
+            CurEmpEmail.BorderBrush = System.Windows.Media.Brushes.Black;
+            CurEmpEmail.Background = System.Windows.Media.Brushes.WhiteSmoke;
             EmpEmailError.Visibility = Visibility.Hidden;
-            NewEmpEmail.GotFocus += NewEmpEmail_GotFocus;
+            CurEmpEmail.GotFocus += CurEmpEmail_GotFocus;
 
 
         }
@@ -236,6 +236,36 @@ namespace IRES_Project.MasterData.MainPage
         {
             PasswordBox a = sender as PasswordBox;
             EmpConfPassWord = a.Password;
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+
+            //user_name.Text = "ten_dang_nhap";
+            //user_name.BorderBrush = System.Windows.Media.Brushes.Black;
+            //user_name.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            //UserNameError.Visibility = Visibility.Hidden;
+            //user_name.GotFocus += TextBox_GotFocus;
+
+            //PassW.Password = "123456";
+            //PassW.BorderBrush = System.Windows.Media.Brushes.Black;
+            //PassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            //PassError.Visibility = Visibility.Hidden;
+            //PassW.GotFocus += PassW_GotFocus;
+
+            //ConfPassW.Password = "123456";
+            //ConfPassW.BorderBrush = System.Windows.Media.Brushes.Black;
+            //ConfPassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            //ConfPassError.Visibility = Visibility.Hidden;
+            //ConfPassW.GotFocus += ConfPassW_GotFocus;
+
+            //CurEmpEmail.Text = "nhanvien01@ires.com.vn";
+            //CurEmpEmail.BorderBrush = System.Windows.Media.Brushes.Black;
+            //CurEmpEmail.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            //EmpEmailError.Visibility = Visibility.Hidden;
+            //CurEmpEmail.GotFocus += CurEmpEmail_GotFocus;
+
         }
 
         bool IsValidEmail(string email)
@@ -264,5 +294,9 @@ namespace IRES_Project.MasterData.MainPage
             ConfPassW.GotFocus += ConfPassW_GotFocus;
             ConfPassError.Visibility = Visibility.Visible;
         }
+        public void TakeEmp(Employee A)
+        {
+            EditEmpVM.CurEmp = A;
+        }
     }
-}       
+}
