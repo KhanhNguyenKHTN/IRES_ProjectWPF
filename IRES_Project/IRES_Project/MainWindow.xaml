@@ -48,27 +48,21 @@
       </Grid.RowDefinitions>
 
     <Grid Grid.Row="0">
-      <uc:ControlBarUC FontSize="20" Tag="Màn hình chính"></uc:ControlBarUC>
+      <uc:ControlBarUC FontSize="20" ></uc:ControlBarUC>
     </Grid>
 
-    <Grid Grid.Row="1">
-      <Border BorderBrush="Black" BorderThickness="1">
-        <DockPanel>
-          <StackPanel HorizontalAlignment="Left">
-            <TextBlock FontSize="20" VerticalAlignment="Center" Margin="10 4 0 0"> Desktop</TextBlock>
-          </StackPanel>
-          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <materialDesign:PackIcon Kind="Account" Width="30" Height="30" Margin="0 0 10 0"/>
-            <TextBlock FontSize="20" VerticalAlignment="Center" Margin="0 0 0 0">Admin</TextBlock>
-            <materialDesign:PackIcon Kind="ChevronDown" Width="30" Height="30" />
-          </StackPanel>
-        </DockPanel>
-      </Border>
+    <Grid Grid.Row="1" Background="#FF3580BF">
+      <DockPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+          <TextBlock Foreground="White" FontSize="16" VerticalAlignment="Center" Margin="0 0 0 0">Xin chào, Duy</TextBlock>
+          <materialDesign:PackIcon Foreground="White" Kind="Account" Width="20" Height="20" Margin="10 5 10 5"/>
+        </StackPanel>
+      </DockPanel>
     </Grid>
 
-    <Grid Grid.Row="2" Margin="0 10 0 0">
+    <Grid Grid.Row="2">
       <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="auto"></ColumnDefinition>
+        <ColumnDefinition Width="200"></ColumnDefinition>
         <ColumnDefinition Width="1*"></ColumnDefinition>
       </Grid.ColumnDefinitions>
 

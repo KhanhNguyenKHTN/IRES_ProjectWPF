@@ -16,8 +16,8 @@ namespace Implements.MasterData.Modules
     {
         public static ObservableCollection<Employee> getListEmployee()
         {
-            string query = $"select employee_code,user_display_name,role_name,employee.role_id,employee_description,user_phone, employee.active" +
-                $" from ires.employee,ires.user_info, ires.role where ires.employee.user_id = ires.user_info.user_id and ires.employee.role_id = ires.role.role_id and ires.employee.active = 'true' ";
+            string query = $"select employee_code,user_display_name,role_name,employee_description,user_phone, employee.active" +
+                $" from ires.employee,ires.user_info, ires.role where ires.employee.user_id = ires.user_info.user_id and ires.employee.active = 'true' ";
 
             ObservableCollection<Employee> result = new ObservableCollection<Employee>();
 
@@ -45,7 +45,7 @@ namespace Implements.MasterData.Modules
                 {
                     EmployeeCode = dt.Rows[i]["employee_code"].ToString(),
                     EmployeeName = dt.Rows[i]["user_display_name"].ToString(),
-                    RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
+                    //RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
                     Role = dt.Rows[i]["role_name"].ToString(),
                     PhoneNb = dt.Rows[i]["user_phone"].ToString(),
                     Active = Convert.ToBoolean(dt.Rows[i]["active"])
@@ -57,7 +57,7 @@ namespace Implements.MasterData.Modules
         }
         public static ObservableCollection<Employee> getListDeletedEmployee()
         {
-            string query = $"select employee_code,user_display_name,role_name,employee.role_id,employee_description,user_phone , employee.active from ires.employee,ires.user_info, ires.role where ires.employee.user_id = ires.user_info.user_id and ires.employee.role_id = ires.role.role_id and ires.employee.active = 'false' ";
+            string query = $"select employee_code,user_display_name,role_name,employee_description,user_phone , employee.active from ires.employee,ires.user_info, ires.role where ires.employee.user_id = ires.user_info.user_id and ires.employee.active = 'false' ";
 
             ObservableCollection<Employee> result = new ObservableCollection<Employee>();
 
@@ -85,7 +85,6 @@ namespace Implements.MasterData.Modules
                 {
                     EmployeeCode = dt.Rows[i]["employee_code"].ToString(),
                     EmployeeName = dt.Rows[i]["user_display_name"].ToString(),
-                    RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
                     Role = dt.Rows[i]["role_name"].ToString(),
                     PhoneNb = dt.Rows[i]["user_phone"].ToString(),
                     Active = Convert.ToBoolean(dt.Rows[i]["active"])
@@ -97,8 +96,8 @@ namespace Implements.MasterData.Modules
         }
         public static ObservableCollection<Employee> searchListEmployee(string search_text)
         {
-            string query = $"select employee_code,user_display_name,role_name,employee.role_id,employee_description,user_phone , employee.active from ires.employee,ires.user_info, ires.role " +
-                $" where (ires.employee.user_id = ires.user_info.user_id and ires.employee.role_id = ires.role.role_id and ires.employee.active = 'true') and" +
+            string query = $"select employee_code,user_display_name,role_name,employee_description,user_phone , employee.active from ires.employee,ires.user_info, ires.role " +
+                $" where (ires.employee.user_id = ires.user_info.user_id and ires.employee.active = 'true') and" +
                 $" (lower(user_display_name) like LOWER('%' || @search_text || '%') or lower(role_name) like lower('%' || @search_text || '%') )";
             
             ObservableCollection<Employee> result = new ObservableCollection<Employee>();
@@ -130,7 +129,6 @@ namespace Implements.MasterData.Modules
                 {
                     EmployeeCode = dt.Rows[i]["employee_code"].ToString(),
                     EmployeeName = dt.Rows[i]["user_display_name"].ToString(),
-                    RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
                     Role = dt.Rows[i]["role_name"].ToString(),
                     PhoneNb = dt.Rows[i]["user_phone"].ToString(),
                     Active = Convert.ToBoolean(dt.Rows[i]["active"])
@@ -142,8 +140,8 @@ namespace Implements.MasterData.Modules
         }
         public static ObservableCollection<Employee> searchListDeletedEmployee(string search_text)
         {
-            string query = $"select employee_code,user_display_name,role_name,employee.role_id,employee_description,user_phone, employee.active from ires.employee,ires.user_info, ires.role " +
-                $" where (ires.employee.user_id = ires.user_info.user_id and ires.employee.role_id = ires.role.role_id and ires.employee.active = 'false') and" +
+            string query = $"select employee_code,user_display_name,role_name,employee_description,user_phone, employee.active from ires.employee,ires.user_info, ires.role " +
+                $" where (ires.employee.user_id = ires.user_info.user_id and ires.employee.active = 'false') and" +
                 $" (lower(user_display_name) like LOWER('%' || @search_text || '%') or lower(role_name) like lower('%' || @search_text || '%') )";
 
             ObservableCollection<Employee> result = new ObservableCollection<Employee>();
@@ -175,7 +173,6 @@ namespace Implements.MasterData.Modules
                 {
                     EmployeeCode = dt.Rows[i]["employee_code"].ToString(),
                     EmployeeName = dt.Rows[i]["user_display_name"].ToString(),
-                    RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
                     Role = dt.Rows[i]["role_name"].ToString(),
                     PhoneNb = dt.Rows[i]["user_phone"].ToString(),
                     Active = Convert.ToBoolean(dt.Rows[i]["active"])
@@ -219,9 +216,6 @@ namespace Implements.MasterData.Modules
             SQLExecute sqlExecute = new SQLExecute();
             return sqlExecute.DeleteQuery(query, EmpCode);
         }
-
-
-
 
     }
 }

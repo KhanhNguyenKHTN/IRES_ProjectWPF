@@ -17,8 +17,8 @@
     <Grid>
        
         <materialDesign:ColorZone Mode="PrimaryLight" >
-            <DockPanel>
-                <StackPanel DockPanel.Dock="Right"  Background="Transparent" Orientation="Horizontal">
+      <DockPanel Background="#186e96">
+                <StackPanel DockPanel.Dock="Right" Height="35"  Background="Transparent" Orientation="Horizontal">
                     <StackPanel.Resources>
                         <Style TargetType="Button">
                             <Setter Property="Margin" Value="2 4 2 4"></Setter>
@@ -47,8 +47,8 @@
                 </StackPanel>
 
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                    <ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />
-                    <TextBlock VerticalAlignment="Center" Margin="16 0 0 0" Text="{Binding Tag, ElementName=ucControlBar}"></TextBlock>
+                    <!--<ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />-->
+                      
                 </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>

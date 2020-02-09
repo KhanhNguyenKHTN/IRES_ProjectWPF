@@ -9,20 +9,28 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Name="ucMenu">
+  <UserControl.Resources>
+    <Style TargetType="TextBlock">
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="FontSize" Value="13" />
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+  </UserControl.Resources>
   <Grid>
-    <materialDesign:Card  Background="{DynamicResource MaterialDesignBackground}">
+    <materialDesign:Card Background="#FF3580BF" >
       <StackPanel>
-        <Expander HorizontalAlignment="Stretch" IsExpanded="True" >
+        <Expander Foreground="White" HorizontalAlignment="Stretch" IsExpanded="True" Background="Transparent">
           <Expander.Header>
             <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-              <materialDesign:PackIcon Kind="Database" />
-              <TextBlock HorizontalAlignment="Center" Margin="10 0 0 0" Text="Master Data"></TextBlock>
+              <materialDesign:PackIcon Margin="0" VerticalAlignment="Center" Kind="Database" Height="20" Width="20" />
+              <TextBlock HorizontalAlignment="Center" Margin="5 0 0 0" FontWeight="Bold" FontSize="15" Text="Master Data"></TextBlock>
             </StackPanel>
           </Expander.Header>
           <StackPanel>
             <StackPanel.Resources>
               <Style TargetType="materialDesign:PackIcon" >
-                <Setter Property="Margin" Value="20 0 0 0"></Setter>
+                <Setter Property="Margin" Value="30 0 0 0"></Setter>
+                <Setter Property="Foreground" Value="White" />
               </Style>
             </StackPanel.Resources>
             <ListView x:Name="lsMenu" SelectionChanged="ListView_SelectionChanged">
@@ -37,7 +45,7 @@
                 </ListViewItem.RenderTransform>
                 <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                   <StackPanel>
-                    <materialDesign:PackIcon Kind="AccountMultiple" Foreground="Blue"/>
+                    <materialDesign:PackIcon Kind="AccountMultiple"/>
                   </StackPanel>
                   <StackPanel>
                     <TextBlock Margin="10 0 0 0"> Nhân viên</TextBlock>
@@ -56,7 +64,7 @@
                 </ListViewItem.RenderTransform>
                 <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" >
                   <StackPanel>
-                    <materialDesign:PackIcon Kind="Food" Foreground="Black" />
+                    <materialDesign:PackIcon Kind="Food"/>
                   </StackPanel>
                   <StackPanel>
                     <TextBlock Margin="10 0 0 0">Món ăn</TextBlock>
@@ -75,7 +83,7 @@
                 </ListViewItem.RenderTransform>
                 <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                   <StackPanel>
-                    <materialDesign:PackIcon Kind="Bowl" Foreground="Gray"/>
+                    <materialDesign:PackIcon Kind="Bowl"/>
                   </StackPanel>
                   <StackPanel>
                     <TextBlock Margin="10 0 0 0"> Nguyên liệu</TextBlock>
@@ -94,7 +102,7 @@
                 </ListViewItem.RenderTransform>
                 <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                   <StackPanel>
-                    <materialDesign:PackIcon Kind="Sale" Foreground="Red"/>
+                    <materialDesign:PackIcon Kind="Sale"/>
                   </StackPanel>
                   <StackPanel>
                     <TextBlock Margin="10 0 0 0"> Khuyến mãi</TextBlock>
@@ -127,17 +135,20 @@
         <Border Background="{DynamicResource MaterialDesignDivider}" Height="2" HorizontalAlignment="Stretch"
                      SnapsToDevicePixels="True" />
 
-        <Expander HorizontalAlignment="Stretch" IsExpanded="True">
+        <Expander HorizontalAlignment="Stretch" IsExpanded="True" Background="Transparent">
           <Expander.Header>
-            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-              <materialDesign:PackIcon Kind="ChartLine" />
-              <TextBlock HorizontalAlignment="Center" Margin="10 0 0 0" Text="Thống kê"></TextBlock>
-            </StackPanel>
+            <Border Margin="0" Padding="0">
+              <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="ChartLine" Foreground="White" Height="20" Width="20" />
+                <TextBlock HorizontalAlignment="Center" Margin="10 0 0 0" FontSize="15" FontWeight="Bold" Text="Thống kê"></TextBlock>
+              </StackPanel>
+            </Border>
           </Expander.Header>
           <StackPanel  >
             <StackPanel.Resources>
               <Style TargetType="materialDesign:PackIcon" >
-                <Setter Property="Margin" Value="20 0 0 0"></Setter>
+                <Setter Property="Margin" Value="30 0 0 0"></Setter>
+                <Setter Property="Foreground" Value="White" />
               </Style>
             </StackPanel.Resources>
             <ListView x:Name="lviewStatistic" SelectionChanged="lviewStatistic_SelectionChanged">
@@ -170,15 +181,12 @@
                   </TransformGroup>
                 </ListViewItem.RenderTransform>
                 <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-
                   <StackPanel>
-                    <materialDesign:PackIcon Kind="Receipt" Foreground="Black" />
+                    <materialDesign:PackIcon Kind="Receipt" />
                   </StackPanel>
-
                   <StackPanel>
                     <TextBlock Margin="10 0 0 0">Hóa đơn</TextBlock>
                   </StackPanel>
-
                 </StackPanel>
               </ListViewItem>
 
@@ -193,13 +201,11 @@
                 </ListViewItem.RenderTransform>
                 <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                   <StackPanel>
-                    <materialDesign:PackIcon Kind="PotMix" Foreground="Gray" />
+                    <materialDesign:PackIcon Kind="PotMix"/>
                   </StackPanel>
-
                   <StackPanel>
                     <TextBlock Margin="10 0 0 0"> Sản phẩm</TextBlock>
                   </StackPanel>
-
                 </StackPanel>
               </ListViewItem>
 
@@ -215,7 +221,7 @@
                 <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
 
                   <StackPanel>
-                    <materialDesign:PackIcon Kind="Sale" Foreground="Red"/>
+                    <materialDesign:PackIcon Kind="Sale"/>
                   </StackPanel>
 
                   <StackPanel>
