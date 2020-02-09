@@ -100,7 +100,7 @@
           <Grid Grid.Row="2" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
               <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="80" Margin="0 0 5 0" Background="Gray" Height="30">
-                <Label x:Name="lblpageInformation" Background="Gray" Padding="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Content="1 của 30"
+                <Label x:Name="lblpageInformation" Background="Gray" Padding="5" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Content="1 của 37"
                       HorizontalAlignment="Center" VerticalAlignment="Center" Width="150"  BorderThickness="1"/>
               </StackPanel>
 
