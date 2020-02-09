@@ -147,9 +147,6 @@
               </Grid>
               <!--#endregion-->
 
-              <!--<Grid Grid.Row="2">
-                <Label>Hanh</Label>
-              </Grid>-->
             </Grid>
           </Grid>
         </Border>

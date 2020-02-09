@@ -25,8 +25,8 @@
       <!--#region Header-->
       <GroupBox.Header >
         <Border Background="#326690">
-          <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
-            <Label FontWeight="Bold" FontSize="15" Foreground="White">THỐNG KÊ SẢN PHẨM</Label>
+          <StackPanel MaxHeight="40" Margin="5" HorizontalAlignment="Center">
+            <Label VerticalContentAlignment="Center" FontWeight="Bold" FontSize="15" Foreground="White">THỐNG KÊ SẢN PHẨM</Label>
           </StackPanel>
         </Border>
       </GroupBox.Header>
