@@ -7,6 +7,8 @@ using Model.Models;
 using Implements.MasterData.Modules;
 using ViewModel.GlobalViewModels;
 using System.Collections.ObjectModel;
+using System.Windows;
+
 namespace ViewModel.MasterData
 {
    public class EditEmpViewModel : BaseViewModel
@@ -35,57 +37,17 @@ namespace ViewModel.MasterData
             return EmployeeImplement.CheckEmpUserName(CurEmp.UserName);
 
         }
-        public bool CurEmpInsert()
+        public bool CurEmpEdit()
         {
-            UpDateEmpCode();
-            if (EmployeeImplement.InsertUserToDb(CurEmp, ref User_Id))
-                CurEmp.UserId = User_Id;
-            else
-                return false;
-            if (EmployeeImplement.InsertEmpToDb(CurEmp))
+
+            //MessageBox.Show(CurEmp.EmployeeName);
+            //return true;
+            if (EmployeeImplement.UpdateUserToDb(CurEmp) && EmployeeImplement.UpdateEmpToDb(CurEmp))
                 return true;
             else
                 return false;
         }
-        public void UpDateEmpCode()
-        {
-            string RoleString = "";
-            switch (CurEmp.RoleId)
-            {
-                case 1:
-                    {
-                        RoleString = "WAITER";
-                        break;
-                    }
-                case 2:
-                    {
-                        RoleString = "CHEF";
-                        break;
-                    }
-                case 3:
-                    {
-                        RoleString = "CASHIER";
-                        break;
-                    }
-                case 4:
-                    {
-                        RoleString = "RECEP";
-                        break;
-                    }
-                case 5:
-                    {
-                        RoleString = "COOK";
-                        break;
-                    }
-                case 6:
-                    {
-                        RoleString = "SHMN";
-                        break;
-
-                    }
-            }
-            CurEmp.EmployeeCode = RoleString + DateTime.Now.ToString("yyMMddHHmmss");
-        }
+       
 
     }
 }

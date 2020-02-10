@@ -84,20 +84,21 @@ namespace IRES_Project.MasterData.MainPage
                 NewEmpEmail.BorderBrush = System.Windows.Media.Brushes.Red;
                 NewEmpEmail.Background = (Brush)bc.ConvertFrom("#FCA08C");
                 NewEmpEmail.GotFocus += NewEmpEmail_GotFocus;
-                EmpEmailError.Visibility = Visibility.Visible;     
-                MessageBox.Show("Email không hợp lệ");
+                EmpEmailError.Visibility = Visibility.Visible;
+                NewEmpEmail.Text = "Email không hợp lệ !";
             }
            else
             {
                 IsEmailOK = true;
             }
            if(IsEmailOK && IsPassWordOK && IsUserNameOk)
-            {
-
-                
+            {    
                 if (AddEmpVM.NewEmpInsert())
                 {
                     MessageBox.Show("Thêm nhân viên thành công !");
+                    user_name.Text = "ten_dang_nhap";
+                    user_display_name.Text = "Nguyen Van A";
+                    this.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
@@ -200,10 +201,12 @@ namespace IRES_Project.MasterData.MainPage
         }
 
       
-
+        //Quay lại
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
+
+
 
             user_name.Text = "ten_dang_nhap";
             user_name.BorderBrush = System.Windows.Media.Brushes.Black;
@@ -229,7 +232,35 @@ namespace IRES_Project.MasterData.MainPage
             EmpEmailError.Visibility = Visibility.Hidden;
             NewEmpEmail.GotFocus += NewEmpEmail_GotFocus;
 
+            ShowEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
+            ShowEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            ShowConfEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
+            ShowConfEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
 
+            user_name.BorderBrush = System.Windows.Media.Brushes.Black;
+            user_name.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            UserNameError.Visibility = Visibility.Hidden;
+
+            PassW.BorderBrush = System.Windows.Media.Brushes.Black;
+            PassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            PassError.Visibility = Visibility.Hidden;
+
+            ConfPassW.BorderBrush = System.Windows.Media.Brushes.Black;
+            ConfPassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            ConfPassError.Visibility = Visibility.Hidden;
+
+            ShowEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
+            ShowEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            ShowEmpPass.Visibility = Visibility.Collapsed;
+            ShowConfEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
+            ShowConfEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            ShowConfEmpPass.Visibility = Visibility.Collapsed;
+
+            PassW.Visibility = Visibility.Visible;
+            ConfPassW.Visibility = Visibility.Visible;
+
+            PassShow.Visibility = Visibility.Visible;
+            PassHide.Visibility = Visibility.Hidden;
         }
 
         private void MyEmpConfPass_PasswordChanged(object sender, RoutedEventArgs e)
@@ -250,6 +281,60 @@ namespace IRES_Project.MasterData.MainPage
                 return false;
             }
         }
+        private void PassShow_Click(object sender, RoutedEventArgs e)
+        {
+            ShowEmpPass.Text = EmpPassWord;
+            ShowConfEmpPass.Text = EmpConfPassWord;
+            PassShow.Visibility = Visibility.Hidden;
+            PassHide.Visibility = Visibility.Visible;
+            ShowEmpPass.Visibility = Visibility.Visible;
+            PassW.Visibility = Visibility.Hidden;
+
+            ShowConfEmpPass.Visibility = Visibility.Visible;
+            ConfPassW.Visibility = Visibility.Hidden;
+        }
+
+        private void PassHide_Click(object sender, RoutedEventArgs e)
+        {
+            PassW.Password = EmpPassWord;
+            ConfPassW.Password = EmpConfPassWord;
+            PassShow.Visibility = Visibility.Visible;
+            PassHide.Visibility = Visibility.Hidden;
+            ShowEmpPass.Visibility = Visibility.Hidden;
+            PassW.Visibility = Visibility.Visible;
+            ShowConfEmpPass.Visibility = Visibility.Hidden;
+            ConfPassW.Visibility = Visibility.Visible;
+        }
+
+        private void ShowEmpPass_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox a = sender as TextBox;
+            EmpPassWord = a.Text;
+        }
+
+        private void ShowConfEmpPass_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox a = sender as TextBox;
+            EmpConfPassWord = a.Text;
+        }
+
+        private void ShowEmpPass_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.BorderBrush = System.Windows.Media.Brushes.Black;
+            tb.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            PassError.Visibility = Visibility.Hidden;
+            tb.GotFocus -= ShowEmpPass_GotFocus;
+        }
+
+        private void ShowConfEmpPass_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            tb.BorderBrush = System.Windows.Media.Brushes.Black;
+            tb.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            ConfPassError.Visibility = Visibility.Hidden;
+            tb.GotFocus -= ShowConfEmpPass_GotFocus;
+        }
         private void PassWordHasError()
         {
             var bc = new BrushConverter();
@@ -263,6 +348,12 @@ namespace IRES_Project.MasterData.MainPage
             ConfPassW.Background = (Brush)bc.ConvertFrom("#FCA08C");
             ConfPassW.GotFocus += ConfPassW_GotFocus;
             ConfPassError.Visibility = Visibility.Visible;
+
+            ShowEmpPass.Background = (Brush)bc.ConvertFrom("#FCA08C");
+            ShowEmpPass.BorderBrush = System.Windows.Media.Brushes.Red;
+
+            ShowConfEmpPass.Background = (Brush)bc.ConvertFrom("#FCA08C");
+            ShowConfEmpPass.BorderBrush = System.Windows.Media.Brushes.Red;
         }
     }
 }       

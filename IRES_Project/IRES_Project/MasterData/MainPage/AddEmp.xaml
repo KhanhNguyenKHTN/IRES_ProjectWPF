@@ -301,37 +301,47 @@
                             <Grid Grid.Row="3" Grid.Column="1">
                                 <TextBox Name="user_name" GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserName}"></TextBox>
                             </Grid>
-                            <Grid Grid.Row="3" Grid.Column="2">
+                            <Grid Grid.Row="3" Grid.Column="0">
                                 <materialDesign:PackIcon x:Name="UserNameError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="5" Grid.Column="1">
                                 <TextBox Name="user_display_name" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
                             </Grid>
 
-                            <Grid Grid.Row="7" Grid.Column="2">
+                            <Grid Grid.Row="7" Grid.Column="0">
                                 <materialDesign:PackIcon x:Name="PassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="7" Grid.Column="1">
                                 <PasswordBox x:Name="PassW"    Padding=" 10 0 10 0" GotFocus="PassW_GotFocus" VerticalContentAlignment="Top"   
                                              Password="123456" PasswordChanged="MyEmpPass_PasswordChanged"
                                              BorderBrush="Black" BorderThickness="1" MaxLength="20"></PasswordBox>
-                                <!--<TextBox Visibility="Collapsed" Name="NewEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">******</TextBox>-->
+                                <TextBox GotFocus="ShowEmpPass_GotFocus" TextChanged="ShowEmpPass_TextChanged" Visibility="Collapsed" x:Name="ShowEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">123456</TextBox>
                             </Grid>
-             
-                            <Grid Grid.Row="9" Grid.Column="2">
+                            <Grid Grid.Row="7" Grid.Column="2" Margin="0 0 0 0">
+
+                                <Button Click="PassShow_Click" x:Name="PassShow" Margin="5 0 0 0" Background="Thistle" Width="40" Height="28" Padding="0">
+                                    <materialDesign:PackIcon Foreground="Black" Margin="0 0 0 0" FontSize="10" Kind="EyeOff" />
+                                </Button>
+
+                                <Button Click="PassHide_Click" x:Name="PassHide" Margin="5 0 0 0" Background="Thistle" Width="40" Height="28" Padding="0" Visibility="Collapsed">
+                                    <materialDesign:PackIcon Foreground="Black" Margin="0 0 0 0" FontSize="10" Kind="Eye" />
+                                </Button>
+                            </Grid>
+                            <Grid Grid.Row="9" Grid.Column="0">
                                 <materialDesign:PackIcon x:Name="ConfPassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="9" Grid.Column="1">
                                 <PasswordBox x:Name="ConfPassW" Padding=" 10 0 10 0" GotFocus="ConfPassW_GotFocus" VerticalContentAlignment="Top" 
                                              Password="123456" PasswordChanged="MyEmpConfPass_PasswordChanged"
                                              BorderBrush="Black" BorderThickness="1"></PasswordBox>
-                            </Grid>
+                                <TextBox GotFocus="ShowConfEmpPass_GotFocus" TextChanged="ShowConfEmpPass_TextChanged" Visibility="Collapsed" Name="ShowConfEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1"></TextBox>                            </Grid>
 
+                           
                             <Grid Grid.Row="11" Grid.Column="1">
                                 <ComboBox Name="RoleComb" SelectedItem="{Binding NewEmp.Role}" ItemsSource="{Binding RoleList}"></ComboBox>
                             </Grid>
 
-                            <Grid Grid.Row="13" Grid.Column="2">
+                            <Grid Grid.Row="13" Grid.Column="0">
                                 <materialDesign:PackIcon x:Name="EmpEmailError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="13" Grid.Column="1">

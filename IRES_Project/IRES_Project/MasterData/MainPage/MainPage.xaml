@@ -92,6 +92,7 @@
                                     </Style>
 
                                     <Style TargetType="DataGridCell">
+                                        <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
                                         <Setter Property="MinHeight" Value="50"/>
                                         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
                                         <Setter Property="Template">

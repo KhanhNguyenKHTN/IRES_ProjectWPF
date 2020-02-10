@@ -1087,16 +1087,7 @@ namespace IRES_Project.MasterData.MainPage
 
             return true;
         }
-        private void ComboBox_DropDownClosed(object sender, EventArgs e)
-        {
-            //Do đã updated được ở roweditend nên không cần nưa
-            //IList rows = dataGrid.SelectedItems;
-            //Employee a = rows[0] as Employee;
-
-            //mainPageVM.UpdateEmpRoleId(a.Role, a.EmployeeCode);
-            //mainPageVM.UpdateRole(a.RoleId, a.EmployeeCode);
-
-        }
+       
 
         private void MasterHeader_AddClick(object sender, RoutedEventArgs e)
         {
@@ -1107,12 +1098,8 @@ namespace IRES_Project.MasterData.MainPage
             //};
 
             //window.ShowDialog();
-           // ListEmpUC.Visibility = Visibility.Collapsed;
+           
             AddEmpUC.Visibility = Visibility.Visible;
-            
-           // this.DataContext = AddEmp;
-
-
         }
 
         private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -1123,6 +1110,19 @@ namespace IRES_Project.MasterData.MainPage
             }
             else
             {
+                if (mainPageVM.IsChecked)
+                {
+                    mainPageVM.ListEmployeeRoot = mainPageVM.getDataEmployee();
+
+                }
+                else
+                {
+                    mainPageVM.ListEmployeeRoot = mainPageVM.getDeletedEmployee();
+                }
+
+                No_View_Updt();
+                Navigate((int)PagingMode.First);
+                updtLabel();
                 ListEmpUC.Visibility = Visibility.Visible;
             }
         }
@@ -1149,6 +1149,17 @@ namespace IRES_Project.MasterData.MainPage
             {
                 ListEmpUC.Visibility = Visibility.Visible;
             }
+        }
+
+        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var dataGridCellTarget = (DataGridCell)sender;
+
+            Employee a = dataGridCellTarget.DataContext as Employee;
+            //IList a = dataGridCellTarget.BindingGroup.Items[0];
+
+
+
         }
 
         private void updtLabel()
