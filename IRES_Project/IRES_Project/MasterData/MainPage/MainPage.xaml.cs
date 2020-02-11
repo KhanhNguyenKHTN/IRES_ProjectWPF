@@ -27,7 +27,7 @@ namespace IRES_Project.MasterData.MainPage
     public partial class MainPage : UserControl
     {
         //int pageIndex = 1;
-        private int numberOfRecPerPage = 5;
+        private int numberOfRecPerPage = 10;
         MainPageViewModel mainPageVM = new MainPageViewModel();
         AddEmpViewModel AddEmp = new AddEmpViewModel();
         int ActiveBtn = 1;

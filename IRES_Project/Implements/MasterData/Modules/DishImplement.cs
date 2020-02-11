@@ -29,7 +29,9 @@ namespace Implements.MasterData.Modules
                     DishId = Convert.ToInt32(dt.Rows[i]["dish_id"]),
                     DishName = dt.Rows[i]["dish_name"].ToString(),
                     DishCost = Convert.ToInt32(dt.Rows[i]["dish_cost"]),
-                    DishStatus = dt.Rows[i]["dish_status"].ToString()
+                    DishStatus = dt.Rows[i]["dish_status"].ToString(),
+                    DishCode = dt.Rows[i]["dish_code"].ToString(),
+                    DishType = dt.Rows[i]["dish_type"].ToString()
                 };
                 result.Add(item);
             }

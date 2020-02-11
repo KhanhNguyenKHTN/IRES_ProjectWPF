@@ -45,7 +45,7 @@ namespace Implements.MasterData.Modules
                 {
                     EmployeeCode = dt.Rows[i]["employee_code"].ToString(),
                     EmployeeName = dt.Rows[i]["user_display_name"].ToString(),
-                    RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
+                    //RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
                     Role = dt.Rows[i]["role_name"].ToString(),
                     PhoneNb = dt.Rows[i]["user_phone"].ToString(),
                     Active = Convert.ToBoolean(dt.Rows[i]["active"]),
@@ -91,7 +91,6 @@ namespace Implements.MasterData.Modules
                 {
                     EmployeeCode = dt.Rows[i]["employee_code"].ToString(),
                     EmployeeName = dt.Rows[i]["user_display_name"].ToString(),
-                    RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
                     Role = dt.Rows[i]["role_name"].ToString(),
                     PhoneNb = dt.Rows[i]["user_phone"].ToString(),
                     Active = Convert.ToBoolean(dt.Rows[i]["active"]),
@@ -142,7 +141,6 @@ namespace Implements.MasterData.Modules
                 {
                     EmployeeCode = dt.Rows[i]["employee_code"].ToString(),
                     EmployeeName = dt.Rows[i]["user_display_name"].ToString(),
-                    RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
                     Role = dt.Rows[i]["role_name"].ToString(),
                     PhoneNb = dt.Rows[i]["user_phone"].ToString(),
                     Active = Convert.ToBoolean(dt.Rows[i]["active"]),
@@ -193,7 +191,6 @@ namespace Implements.MasterData.Modules
                 {
                     EmployeeCode = dt.Rows[i]["employee_code"].ToString(),
                     EmployeeName = dt.Rows[i]["user_display_name"].ToString(),
-                    RoleId = Convert.ToInt32(dt.Rows[i]["role_id"]),
                     Role = dt.Rows[i]["role_name"].ToString(),
                     PhoneNb = dt.Rows[i]["user_phone"].ToString(),
                     Active = Convert.ToBoolean(dt.Rows[i]["active"]),

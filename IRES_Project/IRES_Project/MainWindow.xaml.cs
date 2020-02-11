@@ -60,5 +60,10 @@ namespace IRES_Project
         {
             DataContext = new BillStatisticViewModel(DateTime.Now.ToShortDateString());
         }
+
+        private void UserControlMenu_ProductStatisticClick(object sender, RoutedEventArgs e)
+        {
+            DataContext = new ProductStatisticViewModel("tháng");
+        }
     }
 }
