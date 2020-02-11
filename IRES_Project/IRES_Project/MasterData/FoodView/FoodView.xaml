@@ -10,12 +10,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"          
       mc:Ignorable="d" 
       >
-  <i:Interaction.Triggers>
-    <i:EventTrigger EventName="Loaded">
-      <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
-    </i:EventTrigger>
-  </i:Interaction.Triggers>
-
+  
   <Grid>
     <!--#region Right Menu-->
       <Border  Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
