@@ -22,208 +22,137 @@ namespace IRES_Project.MasterData.MainPage
     /// </summary>
     public partial class EmpDetail : UserControl
     {
-        EmpDetailViewModel EmpDetailVM = new EmpDetailViewModel();
+        string CurUserName = "";
+        Employee TempEmp = new Employee();
+        EmpDetailViewModel EditEmpVM = new EmpDetailViewModel();
         private string EmpConfPassWord = "";
         private string EmpPassWord = "";
         bool MyIsFocused = false;
-        bool IsUserNameOk, IsPassWordOK, IsEmailOK = true;
+        
         public EmpDetail()
         {
             InitializeComponent();
-            this.DataContext = EmpDetailVM;
-            ResComb.ItemsSource = EmpDetailVM.ListRes;
+            this.DataContext = EditEmpVM;
+            ResComb.ItemsSource = EditEmpVM.ListRes;
         }
-        private void Save_Click(object sender, RoutedEventArgs e)
-        {
-            var bc = new BrushConverter();
-            EmpDetailVM.CurEmp.RoleId = EmpDetailVM.RoleDict[EmpDetailVM.CurEmp.Role]; //update RoleId
-            if (EmpDetailVM.CurEmp.UserName == "" || EmpDetailVM.CurEmp.UserName == "ten_dang_nhap")
-            {
-                //MessageBox.Show("Tên đăng nhập không hợp lệ");
-                IsUserNameOk = false;
-                user_name.BorderBrush = System.Windows.Media.Brushes.Red;
-                user_name.Background = (Brush)bc.ConvertFrom("#FCA08C");
-                user_name.Text = "Tên đăng nhập không hợp lệ";
-                UserNameError.Visibility = Visibility.Visible;
-                user_name.GotFocus += TextBox_GotFocus;
-            }
-            else
-            {
-                if (!EmpDetailVM.CheckUserName())
-                {
-                    IsUserNameOk = false;
-                    user_name.BorderBrush = System.Windows.Media.Brushes.Red;
-                    user_name.Background = (Brush)bc.ConvertFrom("#FCA08C");
-                    user_name.Text = "Tên đăng nhập bị trùng";
-                    UserNameError.Visibility = Visibility.Visible;
-                    user_name.GotFocus += TextBox_GotFocus;
-                    //MessageBox.Show("Tên đăng nhập bị trùng !");
-                }
-                else
-                    IsUserNameOk = true;
-            }
-
-            if (EmpPassWord != EmpConfPassWord || EmpPassWord == "" || EmpPassWord.Length < 6)
-            {
-                IsPassWordOK = false;
-                ConfPassW.BorderBrush = System.Windows.Media.Brushes.Red;
-                ConfPassW.Background = (Brush)bc.ConvertFrom("#FCA08C");
-                ConfPassW.GotFocus += ConfPassW_GotFocus;
-                ConfPassError.Visibility = Visibility.Visible;
-                MessageBox.Show("Password không hợp lệ");
-            }
-            else
-            {
-                IsPassWordOK = true;
-                EmpDetailVM.CurEmp.PassWord = EmpPassWord;
-            }
-
-            if (!IsValidEmail(EmpDetailVM.CurEmp.UserEmail))
-            {
-                IsEmailOK = false;
-                CurEmpEmail.BorderBrush = System.Windows.Media.Brushes.Red;
-                CurEmpEmail.Background = (Brush)bc.ConvertFrom("#FCA08C");
-                CurEmpEmail.GotFocus += CurEmpEmail_GotFocus;
-                EmpEmailError.Visibility = Visibility.Visible;
-                MessageBox.Show("Email không hợp lệ");
-            }
-            else
-            {
-                IsEmailOK = true;
-            }
-            if (IsEmailOK && IsPassWordOK && IsUserNameOk)
-            {
-
-
-                if (EmpDetailVM.CurEmpInsert())
-                {
-                    MessageBox.Show("Thêm nhân viên thành công !");
-                }
-                else
-                {
-                    MessageBox.Show("Xảy ra lỗi khi thêm nhân viên !");
-                }
-            }
-            else
-            {
-                // MessageBox.Show("Not Ok");
-            }
-        }
-
-        private void MyEmpPass_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PasswordBox a = sender as PasswordBox;
-            EmpPassWord = a.Password;
-        }
-
-        private void PassW_GotFocus(object sender, RoutedEventArgs e)
-        {
-            // MessageBox.Show("Pass");
-
-            //if (!MyIsFocused)
-            //{
-            PasswordBox tb = (PasswordBox)sender;
-            tb.Password = string.Empty;
-            tb.BorderBrush = System.Windows.Media.Brushes.Black;
-            tb.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            PassError.Visibility = Visibility.Hidden;
-            MyIsFocused = true;
-            tb.GotFocus -= PassW_GotFocus;
-            //    }
-            //else
-            //{
-            //    MyIsFocused = false;
-            //}
-
-        }
-
-        private void ConfPassW_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-            // MessageBox.Show("ConPass");
-            //if (!MyIsFocused)
-            //{
-            PasswordBox tb = (PasswordBox)sender;
-            tb.Password = string.Empty;
-            tb.BorderBrush = System.Windows.Media.Brushes.Black;
-            tb.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            ConfPassError.Visibility = Visibility.Hidden;
-            MyIsFocused = true;
-            tb.GotFocus -= ConfPassW_GotFocus;
-            //}
-            //else
-            //{
-            //    MyIsFocused = false;
-            //}
-        }
-
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show("User");
-
-            //if (!MyIsFocused)
-            //{
-            TextBox tb = (TextBox)sender;
-            tb.Text = string.Empty;
-            user_name.BorderBrush = System.Windows.Media.Brushes.Black;
-            user_name.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            MyIsFocused = true;
-            UserNameError.Visibility = Visibility.Hidden;
-            tb.GotFocus -= TextBox_GotFocus;
-            //}
-            //else
-            //{
-            //    MyIsFocused = false;
-            //}
-
-        }
-        private void CurEmpEmail_GotFocus(object sender, RoutedEventArgs e)
-        {
-
-            //MessageBox.Show("Email");
-            //if (!MyIsFocused)
-            //{
-            TextBox tb = (TextBox)sender;
-            tb.Text = string.Empty;
-            tb.BorderBrush = System.Windows.Media.Brushes.Black;
-            tb.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            MyIsFocused = true;
-            EmpEmailError.Visibility = Visibility.Hidden;
-            tb.GotFocus -= CurEmpEmail_GotFocus;
-            //}
-            //else
-            //{
-            //    MyIsFocused = false;
-            //}
-        }
-        private void MyEmpConfPass_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            PasswordBox a = sender as PasswordBox;
-            EmpConfPassWord = a.Password;
-        }
-
-      
-
+         
+         //Quay lại
         private void Back_Click(object sender, RoutedEventArgs e)
         {
+
             this.Visibility = Visibility.Collapsed;
+            #region Revert
+            //EditEmpVM.CurEmp.Active = TempEmp.Active;
+            //EditEmpVM.CurEmp.CreatedBy = TempEmp.CreatedBy;
+            //EditEmpVM.CurEmp.CreatedDatetime = TempEmp.CreatedDatetime;
+            //EditEmpVM.CurEmp.EmployeeCode = TempEmp.EmployeeCode;
+            //EditEmpVM.CurEmp.EmployeeDescription = TempEmp.EmployeeDescription;
+            //EditEmpVM.CurEmp.EmployeeId = TempEmp.EmployeeId;
+            //EditEmpVM.CurEmp.EmployeeName = TempEmp.EmployeeName;
+            //EditEmpVM.CurEmp.EmployeeStatus = TempEmp.EmployeeStatus;
+            //EditEmpVM.CurEmp.PassWord = TempEmp.PassWord;
+            //EditEmpVM.CurEmp.PhoneNb = TempEmp.PhoneNb;
+            //EditEmpVM.CurEmp.RestaurantId = TempEmp.RestaurantId;
+            //EditEmpVM.CurEmp.Role = TempEmp.Role;
+            //EditEmpVM.CurEmp.RoleId = TempEmp.RoleId;
+            //EditEmpVM.CurEmp.UpdatedBy = TempEmp.UpdatedBy;
+            //EditEmpVM.CurEmp.UpdatedDatetime = TempEmp.UpdatedDatetime;
+            //EditEmpVM.CurEmp.UserAddress = TempEmp.UserAddress;
+            //EditEmpVM.CurEmp.UserEmail = TempEmp.UserEmail;
+            //EditEmpVM.CurEmp.UserId = TempEmp.UserId;
+            //EditEmpVM.CurEmp.UserName = TempEmp.UserName;
+            //EditEmpVM.CurEmp.Version = TempEmp.Version;
+
+            //EmpPassWord = TempEmp.PassWord;
+            //EmpConfPassWord = EmpPassWord;
+
+            //PassW.Password = EmpPassWord;
+            //ConfPassW.Password = EmpPassWord;
+
+            //user_name.BorderBrush = System.Windows.Media.Brushes.Black;
+            //user_name.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            //UserNameError.Visibility = Visibility.Hidden;
+
+            //PassW.BorderBrush = System.Windows.Media.Brushes.Black;
+            //PassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            //PassError.Visibility = Visibility.Hidden;
+
+            //ConfPassW.BorderBrush = System.Windows.Media.Brushes.Black;
+            //ConfPassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            //ConfPassError.Visibility = Visibility.Hidden;
+
+            //CurEmpEmail.BorderBrush = System.Windows.Media.Brushes.Black;
+            //CurEmpEmail.Background = System.Windows.Media.Brushes.WhiteSmoke;
+            //EmpEmailError.Visibility = Visibility.Hidden;
+
+            //ShowEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
+            //ShowEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
+
+            //ShowConfEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
+            //ShowConfEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
+
+            ShowConfEmpPass.Visibility = Visibility.Collapsed;
+            ShowEmpPass.Visibility = Visibility.Collapsed;
+            PassW.Visibility = Visibility.Visible;
+            ConfPassW.Visibility = Visibility.Visible;
+
+            PassShow.Visibility = Visibility.Visible;
+            PassHide.Visibility = Visibility.Hidden;
+            #endregion
+        }
+        private void PassShow_Click(object sender, RoutedEventArgs e)
+        {
+            ShowEmpPass.Text = PassW.Password;
+            ShowConfEmpPass.Text = ConfPassW.Password;
+
+            PassShow.Visibility = Visibility.Hidden;
+            PassHide.Visibility = Visibility.Visible;
+            ShowEmpPass.Visibility = Visibility.Visible;      
+            ShowConfEmpPass.Visibility = Visibility.Visible;
+            PassW.Visibility = Visibility.Hidden;
+            ConfPassW.Visibility = Visibility.Hidden;
         }
 
-        bool IsValidEmail(string email)
+        private void PassHide_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
+            PassShow.Visibility = Visibility.Visible;
+            PassHide.Visibility = Visibility.Hidden;
+            ShowEmpPass.Visibility = Visibility.Hidden;
+            PassW.Visibility = Visibility.Visible;
+            ShowConfEmpPass.Visibility = Visibility.Hidden;
+            ConfPassW.Visibility = Visibility.Visible;
         }
-        public void TakeEmp( Employee A)
+        public void TakeEmp(Employee A)
         {
-            EmpDetailVM.CurEmp = A;
+            CopyEmployee(A, ref TempEmp);
+
+            EditEmpVM.CurEmp = A;
+            CurUserName = A.UserName;
+        }       
+        public void CopyEmployee(Employee From, ref Employee To)
+        {
+            To.Active = From.Active;
+            To.CreatedBy = From.CreatedBy;
+            To.CreatedDatetime = From.CreatedDatetime;
+            To.EmployeeCode = From.EmployeeCode;
+            To.EmployeeDescription = From.EmployeeDescription;
+            To.EmployeeId = From.EmployeeId;
+            To.EmployeeName = From.EmployeeName;
+            To.EmployeeStatus = From.EmployeeStatus;
+            To.PassWord = From.PassWord;
+            To.PhoneNb = From.PhoneNb;
+            To.RestaurantId = From.RestaurantId;
+            To.Role = From.Role;
+            To.RoleId = From.RoleId;
+            To.UpdatedBy = From.UpdatedBy;
+            To.UpdatedDatetime = From.UpdatedDatetime;
+            To.UserAddress = From.UserAddress;
+            To.UserEmail = From.UserEmail;
+            To.UserId = From.UserId;
+            To.UserName = From.UserName;
+            To.Version = From.Version;
+            PassW.Password = From.PassWord;
+            ConfPassW.Password = From.PassWord;
         }
     }
 }

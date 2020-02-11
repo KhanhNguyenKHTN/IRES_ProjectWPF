@@ -686,13 +686,7 @@ namespace IRES_Project.MasterData.MainPage
                     Navigate((int)PagingMode.First);
                     updtLabel();
                 }
-
-
-
-
-
-
-            }
+        }
             else
                 FirstRun = false;
         }
@@ -791,26 +785,10 @@ namespace IRES_Project.MasterData.MainPage
 
         private void Edit_Click(object sender, RoutedEventArgs e) // Chuyen sang page edit
         {
-            //var currentRowIndex = dataGrid.Items.IndexOf(dataGrid.CurrentItem);
-            //var x = dataGrid.SelectedCells;
-            //var y = dataGrid.CurrentItem;
-
             EditEmpUC.Visibility = Visibility.Visible;
             IList rows = dataGrid.SelectedItems;
             Employee a = rows[0] as Employee;
-
             EditEmpUC.TakeEmp(a);
-
-            
-
-
-            //DataRowView dataRow = (DataRowView)dataGrid.SelectedItem;
-            //int index = dataGrid.CurrentCell.Column.DisplayIndex;
-            //string cellValue = dataRow.Row.ItemArray[index].ToString();
-
-            //var columnName = ((Binding)((DataGridBoundColumn)dataGrid.CurrentCell.Column).Binding).Path.Path;
-            //var cellValue2 = dataRow.Row[columnName];
-
         }
         public void RemoveItem(ObservableCollection<Employee> collection, Employee instance)
         {
@@ -1154,13 +1132,48 @@ namespace IRES_Project.MasterData.MainPage
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var dataGridCellTarget = (DataGridCell)sender;
-
+            int columnIndex = dataGrid.CurrentColumn.DisplayIndex;
             Employee a = dataGridCellTarget.DataContext as Employee;
-            //IList a = dataGridCellTarget.BindingGroup.Items[0];
+            EmpDetailUC.TakeEmp(a);
+            EmpDetailUC.Visibility = Visibility.Visible;
 
 
 
         }
+
+       
+
+        private void CellSetColor(object sender, MouseEventArgs e)
+        {
+            DataGridCell cell = sender as DataGridCell;
+            var a = cell.Background;
+            int index = cell.Column.DisplayIndex;
+            if (index == 0)
+            {
+               
+                var dataGridCellTarget = (DataGridCell)sender;
+
+                var bc = new BrushConverter();
+                //dataGridCellTarget.Background = (Brush)bc.ConvertFrom("#FCA08C");
+                dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Blue);
+            }
+        }
+
+        private void CellRemoveColor(object sender, MouseEventArgs e)
+        {
+            DataGridCell cell = sender as DataGridCell;
+            int index = cell.Column.DisplayIndex;
+            if (index == 0)
+            {                
+                var dataGridCellTarget = (DataGridCell)sender;
+
+                var bc = new BrushConverter();
+                //dataGridCellTarget.Background = new SolidColorBrush(Colors.WhiteSmoke);
+                //dataGridCellTarget.Background = (Brush)bc.ConvertFrom("#00FFFFFF");
+                dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+        
 
         private void updtLabel()
         {

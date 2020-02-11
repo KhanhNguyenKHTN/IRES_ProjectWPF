@@ -55,16 +55,6 @@
                             <RowDefinition Height="2*" />
                         </Grid.RowDefinitions>
 
-                        <!--<Grid.Background>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF85BDD6" Offset="0"/>
-                        <GradientStop Color="#FF2F7B91" Offset="0.478"/>
-                        <GradientStop Color="#FF4492A8" Offset="0.973"/>
-                        <GradientStop Color="#FF72A6BF" Offset="0.227"/>
-                        <GradientStop Color="#FF2EA4C5" Offset="0.739"/>
-                    </LinearGradientBrush>
-                </Grid.Background>-->
-
                         <!--TestClick="Test_Cmd"-->
                         <!--#region MasterDataHeader -->
                         <Grid Grid.Row="0" Margin="0 10 0 0 " HorizontalAlignment="Stretch" Width="auto">
@@ -92,6 +82,8 @@
                                     </Style>
 
                                     <Style TargetType="DataGridCell">
+                                        <EventSetter Event="MouseEnter" Handler="CellSetColor"/>
+                                        <EventSetter Event="MouseLeave" Handler="CellRemoveColor"/>
                                         <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
                                         <Setter Property="MinHeight" Value="50"/>
                                         <Setter Property="TextBlock.TextAlignment" Value="Center"/>
@@ -108,7 +100,7 @@
                                 </DataGrid.Resources>
 
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Mã nhân viên"  Binding="{Binding EmployeeCode}"/>
+                                    <DataGridTextColumn  IsReadOnly="False" Width="2*" Header="Mã nhân viên"  Binding="{Binding EmployeeCode}"/>
                                     <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Tên nhân viên" Binding="{Binding EmployeeName}"  />
                                     <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Chức vụ"       Binding="{Binding Role}" />
                                     <!--<DataGridComboBoxColumn IsReadOnly="False" Width="2*" Header="Chức vụ" SelectedValueBinding="{Binding Role,Mode=TwoWay}" >

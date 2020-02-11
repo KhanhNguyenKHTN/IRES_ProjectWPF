@@ -102,6 +102,15 @@ namespace IRES_Project.MasterData.MainPage
                 {
                     MessageBox.Show("Chỉnh sửa thông tin thành công !");
                     this.Visibility = Visibility.Collapsed;
+
+                    ShowEmpPass.Visibility = Visibility.Collapsed;
+                    ShowConfEmpPass.Visibility = Visibility.Collapsed;
+
+                    PassW.Visibility = Visibility.Visible;
+                    ConfPassW.Visibility = Visibility.Visible;
+
+                    PassShow.Visibility = Visibility.Visible;
+                    PassHide.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
@@ -300,6 +309,8 @@ namespace IRES_Project.MasterData.MainPage
             ShowConfEmpPass.Background = (Brush)bc.ConvertFrom("#FCA08C");
             ShowConfEmpPass.BorderBrush = System.Windows.Media.Brushes.Red;
 
+            ShowEmpPass.GotFocus += ShowEmpPass_GotFocus;
+            ShowConfEmpPass.GotFocus += ShowConfEmpPass_GotFocus;
 
         }
 

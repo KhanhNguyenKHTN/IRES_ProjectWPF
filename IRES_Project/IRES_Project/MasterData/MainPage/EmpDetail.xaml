@@ -293,60 +293,73 @@
                             <!--#endregion-->
                             <!--#region Thông tin nhân viên mới-->
                             <Grid Grid.Row="1" Grid.Column="1" >
-                                <ComboBox  SelectedItem="IRES cơ sở 1"   Name="ResComb" ></ComboBox>
+                                <ComboBox IsHitTestVisible="False"  SelectedItem="IRES cơ sở 1"   Name="ResComb" ></ComboBox>
                             </Grid>
 
                             <Grid Grid.Row="3" Grid.Column="1">
-                                <TextBox Name="user_name" GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.UserName}"></TextBox>
+                                <TextBox IsReadOnly="True" Name="user_name" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.UserName}"></TextBox>
                             </Grid>
-                            <Grid Grid.Row="3" Grid.Column="2">
+                            <Grid Grid.Row="3" Grid.Column="0">
                                 <materialDesign:PackIcon x:Name="UserNameError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="5" Grid.Column="1">
-                                <TextBox Name="user_display_name" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.EmployeeName}"></TextBox>
+                                <TextBox  IsReadOnly="True" Name="user_display_name" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.EmployeeName}"></TextBox>
                             </Grid>
 
-                            <Grid Grid.Row="7" Grid.Column="2">
+                            <Grid Grid.Row="7" Grid.Column="0">
                                 <materialDesign:PackIcon x:Name="PassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="7" Grid.Column="1">
-                                <PasswordBox x:Name="PassW"    Padding=" 10 0 10 0" GotFocus="PassW_GotFocus" VerticalContentAlignment="Top"   
-                                             Password="123456" PasswordChanged="MyEmpPass_PasswordChanged"
+                                <PasswordBox IsHitTestVisible="False" x:Name="PassW"    Padding=" 10 0 10 0" VerticalContentAlignment="Top"   
+                                             Password="123456" 
                                              BorderBrush="Black" BorderThickness="1" MaxLength="20"></PasswordBox>
-                                <!--<TextBox Visibility="Collapsed" Name="CurEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">******</TextBox>-->
+                                <TextBox  IsReadOnly="True"  Visibility="Collapsed" x:Name="ShowEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1"></TextBox>
+                            </Grid>
+                            <Grid Grid.Row="7" Grid.Column="2" Margin="0 0 0 0">
+
+                                <Button Click="PassShow_Click" x:Name="PassShow" Margin="5 0 0 0" Background="Thistle" Width="40" Height="28" Padding="0">
+                                    <materialDesign:PackIcon Foreground="Black" Margin="0 0 0 0" FontSize="10" Kind="EyeOff" />
+                                </Button>
+
+                                <Button Click="PassHide_Click" x:Name="PassHide" Margin="5 0 0 0" Background="Thistle" Width="40" Height="28" Padding="0" Visibility="Collapsed">
+                                    <materialDesign:PackIcon Foreground="Black" Margin="0 0 0 0" FontSize="10" Kind="Eye" />
+                                </Button>
                             </Grid>
 
-                            <Grid Grid.Row="9" Grid.Column="2">
+                            <Grid Grid.Row="9" Grid.Column="0">
                                 <materialDesign:PackIcon x:Name="ConfPassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="9" Grid.Column="1">
-                                <PasswordBox x:Name="ConfPassW" Padding=" 10 0 10 0" GotFocus="ConfPassW_GotFocus" VerticalContentAlignment="Top" 
-                                             Password="123456" PasswordChanged="MyEmpConfPass_PasswordChanged"
+                                <PasswordBox IsHitTestVisible="False" x:Name="ConfPassW" Padding=" 10 0 10 0" VerticalContentAlignment="Top" 
+                                             Password="123456" 
                                              BorderBrush="Black" BorderThickness="1"></PasswordBox>
+                                <TextBox  IsReadOnly="True" Visibility="Collapsed" Name="ShowConfEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1"></TextBox>
+
                             </Grid>
+
 
                             <Grid Grid.Row="11" Grid.Column="1">
-                                <ComboBox Name="RoleComb" SelectedItem="{Binding CurEmp.Role}" ItemsSource="{Binding RoleList}"></ComboBox>
+                                <ComboBox  IsHitTestVisible="False" Name="RoleComb" SelectedItem="{Binding CurEmp.Role}" ItemsSource="{Binding RoleList}"></ComboBox>
                             </Grid>
 
-                            <Grid Grid.Row="13" Grid.Column="2">
+                            <Grid Grid.Row="13" Grid.Column="0">
                                 <materialDesign:PackIcon x:Name="EmpEmailError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                             <Grid Grid.Row="13" Grid.Column="1">
-                                <TextBox Name="CurEmpEmail" GotFocus="CurEmpEmail_GotFocus" Padding="10 0 10 0" BorderBrush="Black" 
+                                <TextBox  IsReadOnly="True" Name="CurEmpEmail"  Padding="10 0 10 0" BorderBrush="Black" 
                                          BorderThickness="1" Text="{Binding CurEmp.UserEmail}"></TextBox>
                             </Grid>
 
                             <Grid Grid.Row="15" Grid.Column="1">
-                                <TextBox Name="CurEmpPhone" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.PhoneNb}"></TextBox>
+                                <TextBox  IsReadOnly="True" Name="CurEmpPhone" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.PhoneNb}"></TextBox>
                             </Grid>
 
                             <Grid Grid.Row="17" Grid.Column="1">
-                                <TextBox Name="CurEmpAddress" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.UserAddress}" ></TextBox>
+                                <TextBox  IsReadOnly="True" Name="CurEmpAddress" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.UserAddress}" ></TextBox>
                             </Grid>
 
                             <Grid Grid.Row="19" Grid.RowSpan="2" Grid.Column="1"  Grid.ColumnSpan="3" Margin="0 0 80 0">
-                                <TextBox Padding="10 1 0 0" Name="CurEmpDes" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.EmployeeDescription}"></TextBox>
+                                <TextBox  IsReadOnly="True" Padding="10 1 0 0" Name="CurEmpDes" BorderBrush="Black" BorderThickness="1" Text="{Binding CurEmp.EmployeeDescription}"></TextBox>
                             </Grid>
                             <!--#endregion-->
                             <!--#endregion-->
@@ -359,15 +372,13 @@
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                             <ColumnDefinition Width="1*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
-                            <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="1">
-                            <Button Click="Save_Click">Lưu</Button>
-                        </Grid>
-                        <Grid Grid.Column="3">
+                        
+                        <Grid Grid.Column="2">
                             <Button Click="Back_Click">Quay lại</Button>
                         </Grid>
 
