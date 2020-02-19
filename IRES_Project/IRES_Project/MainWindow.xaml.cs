@@ -13,10 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IRES_Project.MasterData.MainPage;
-using IRES_Project.MasterData.FoodView;
+using IRES_Project.MasterData.PromoView;
+using IRES_Project.MasterData.DishView;
 using IRES_Project.Statistic;
 using ViewModel.MasterData;
 using ViewModel.Modules;
+
 using ViewModel.Statistic;
 
 namespace IRES_Project
@@ -33,7 +35,8 @@ namespace IRES_Project
             //Switcher.pageSwitcher = this;
             //Switcher.Switch(new AddEmp());
             //Switcher.Switch(new MainPage());
-            DataContext = new MainPage();
+            DataContext = new DishView();
+            //DataContext = new PromoView();
         }
 
         public void Navigate(UserControl nextPage)

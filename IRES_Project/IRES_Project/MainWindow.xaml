@@ -10,9 +10,9 @@
         xmlns:ux="clr-namespace:IRES_Project.UC"
         
         xmlns:statisticview="clr-namespace:IRES_Project.Statistic"
-        xmlns:masterdatafoodview="clr-namespace:IRES_Project.MasterData.FoodView"
+        xmlns:masterdatafoodview="clr-namespace:IRES_Project.MasterData.DishView"
         xmlns:masterdatamainview="clr-namespace:IRES_Project.MasterData.MainPage"
-        
+        xmlns:masterdatapromoview="clr-namespace:IRES_Project.MasterData.PromoView"
         xmlns:mastervm="clr-namespace:ViewModel.MasterData;assembly=ViewModel"
         xmlns:statisticvm="clr-namespace:ViewModel.Statistic;assembly=ViewModel"
         xmlns:mastermodule="clr-namespace:ViewModel.Modules;assembly=ViewModel"
@@ -22,10 +22,10 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" WindowState="Maximized">
-  <Window.Resources>
-    <DataTemplate x:Name="redViewTemplate" DataType="{x:Type mastermodule:MainPageViewModel}">
-      <masterdatamainview:MainPage DataContext="{Binding}"/>
-    </DataTemplate>
+    <Window.Resources>
+        <DataTemplate x:Name="redViewTemplate" DataType="{x:Type mastermodule:MainPageViewModel}">
+            <masterdatamainview:MainPage DataContext="{Binding}"/>
+        </DataTemplate>
         <DataTemplate x:Name="addEmpViewTemplate" DataType="{x:Type mastervm:AddEmpViewModel}">
             <masterdatamainview:MainPage DataContext="{Binding}"/>
         </DataTemplate>
@@ -33,20 +33,23 @@
             <masterdatamainview:MainPage DataContext="{Binding}"/>
         </DataTemplate>
         <DataTemplate x:Name="blueViewTemplate" DataType="{x:Type mastervm:DishViewModel}">
-      <masterdatafoodview:FoodView DataContext="{Binding}"/>
-    </DataTemplate>
-    <DataTemplate x:Name="orangeViewTemplate" DataType="{x:Type statisticvm:ChartStatisticViewModel}">
-        <statisticview:OverviewStatisticPage DataContext="{Binding}"/>
-    </DataTemplate>
-    <DataTemplate x:Name="billStatistic" DataType="{x:Type statisticvm:BillStatisticViewModel}">
-    <statisticview:BillStatisticPage DataContext="{Binding}"/>
-    </DataTemplate>
-    <DataTemplate x:Name="productStatistic" DataType="{x:Type statisticvm:ProductStatisticViewModel}">
-      <statisticview:ProductStatisticPage DataContext="{Binding}" />
-    </DataTemplate>
-  </Window.Resources>
+            <masterdatafoodview:DishView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="promoViewTemplate" DataType="{x:Type mastervm:PromoViewModel}">
+            <masterdatapromoview:PromoView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="orangeViewTemplate" DataType="{x:Type statisticvm:ChartStatisticViewModel}">
+            <statisticview:OverviewStatisticPage DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="billStatistic" DataType="{x:Type statisticvm:BillStatisticViewModel}">
+            <statisticview:BillStatisticPage DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="productStatistic" DataType="{x:Type statisticvm:ProductStatisticViewModel}">
+            <statisticview:ProductStatisticPage DataContext="{Binding}" />
+        </DataTemplate>
+    </Window.Resources>
 
-  <Grid>
+    <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="auto"></RowDefinition>
         <RowDefinition Height="auto"></RowDefinition>

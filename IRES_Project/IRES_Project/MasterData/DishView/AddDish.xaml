@@ -1,0 +1,355 @@
+﻿<UserControl x:Class="IRES_Project.MasterData.DishView.AddDish"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IRES_Project.MasterData.DishView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ux="clr-namespace:IRES_Project.UC"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             Name="AddDishPage">
+    <Grid>
+        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
+            <GroupBox x:Name="MainBox" Padding="0">
+                <!--#region Header-->
+                <GroupBox.Header >
+                    <Border Background="#326690">
+                        <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
+                            <Label FontWeight="Bold" FontSize="15" Foreground="White">Thêm món ăn mới</Label>
+                        </StackPanel>
+                    </Border>
+                </GroupBox.Header>
+                <!--#endregion-->
+                <Grid Background="WhiteSmoke" OpacityMask="#FF423535">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"></RowDefinition>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.Resources>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Padding" Value="18 0 20 0"/>
+                            </Style>
+                            <Style TargetType="Label">
+                                <Setter Property="FontSize" Value="15" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Style>
+                            <Style TargetType="ComboBox">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Setter Property="Padding" Value="20 4 20 0" />
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <!--#region  1st Col-->
+                        <Grid Grid.Column="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="1*"/>                                                             
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Tên nhà hàng:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="2">
+                            </Grid>
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Tên món ăn:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="4">
+                            </Grid>
+                            <Grid Grid.Row="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Đơn giá:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="6">
+                            </Grid>
+                            <Grid Grid.Row="7">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Thời gian nấu:</Label>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Row="8">
+                            </Grid>
+                            <Grid Grid.Row="9">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Loại món ăn:</Label>
+                                </Grid>
+                            </Grid>
+
+                           
+                        </Grid>
+                        <!--#endregion-->
+                        <!--#region  2nd Col-->
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="1*"/>
+                              
+                            
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="8*"></ColumnDefinition>
+                                <ColumnDefinition Width="1*"></ColumnDefinition>
+                                <ColumnDefinition Width="8*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <!--#region New Content-->
+                            <!--#region Ảnh nhân viên-->
+                            <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="6" Margin="20 0 20 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1">
+                                    <Border BorderBrush="Black" BorderThickness="1" >
+                                        <Image Margin="20" Source="https://upload.wikimedia.org/wikipedia/commons/3/30/Googlelogo.png" />
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="8" Grid.RowSpan="2" MaxHeight="60"  Grid.Column="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1">
+                                    <Button VerticalAlignment="Top" VerticalContentAlignment="Center" >Chọn ảnh</Button>
+                                </Grid>
+                            </Grid>
+                            <!--#endregion-->
+                            <!--#region Thông tin nhân viên mới-->
+                            <Grid Grid.Row="1" Grid.Column="1" >
+                                <ComboBox  SelectedItem="IRES cơ sở 1"   Name="ResComb" ></ComboBox>
+                            </Grid>
+
+                            <Grid Grid.Row="3" Grid.Column="1">
+                                <TextBox Name="textboxDishName" GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserName}"></TextBox>
+                            </Grid>
+                            
+                            <Grid Grid.Row="3" Grid.Column="0">
+                                <materialDesign:PackIcon x:Name="iconDishNameError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                            
+                            <Grid Grid.Row="5" Grid.Column="1">
+                                <TextBox Name="textboxDishPrice" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
+                            </Grid>
+                            
+                            <Grid Grid.Row="5" Grid.Column="0">
+                                <materialDesign:PackIcon x:Name="iconDishPriceError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+
+                            <Grid Grid.Row="7" Grid.Column="1">
+                                <TextBox Name="textboxDishCookTime" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
+                            </Grid>
+                            
+                            <Grid Grid.Row="7" Grid.Column="0">
+                                <materialDesign:PackIcon x:Name="iconCookTimeError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                            
+                            <!--<Grid Grid.Row="9" Grid.Column="0">
+                                <materialDesign:PackIcon x:Name="ConfPassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>-->
+                            
+                            <Grid Grid.Row="9" Grid.Column="1">
+                                <ComboBox Name="comboboxFoodType" SelectedItem="{Binding NewEmp.Role}" ItemsSource="{Binding RoleList}"></ComboBox>
+                            </Grid>
+
+
+
+                            
+                            <!--#endregion-->
+                            <!--#endregion-->
+                        </Grid>
+                        <!--#endregion-->
+
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="15"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <GroupBox x:Name="ComponentBox" Grid.Column="1" Padding="0">
+                            <GroupBox.Header >
+                                <Border Background="#326690">
+                                    <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
+                                        <Label FontWeight="Bold" FontSize="14" Foreground="White">Danh sách nguyên liệu</Label>
+                                    </StackPanel>
+                                </Border>
+                            </GroupBox.Header>
+                            <!--#region  Danh sách nguyên liệu-->
+                            <DataGrid Margin="10" CellEditEnding="DataGrid_CellEditEnding" RowEditEnding="DataGrid_RowEditEnding" CanUserAddRows="True"
+                                    IsReadOnly="True" BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
+                                HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"  CanUserSortColumns="True"  ColumnWidth="*" 
+                                materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                                ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
+                                MouseLeave="DataGrid_MouseLeave"   >
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                                        <Setter Property="BorderBrush" Value="Black" />
+                                        <Setter Property="Background" Value="#FF3580BF" />
+                                        <Setter Property="BorderThickness" Value="0 0 1 1"></Setter>
+                                        <Setter Property="Margin" Value="0 0 0 1"></Setter>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                                        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                                        <Setter Property="Foreground" Value="White"></Setter>
+                                        <Setter Property="MinHeight" Value="40"/>
+                                    </Style>
+
+                                    <Style TargetType="DataGridCell">
+                                        <EventSetter Event="MouseEnter" Handler="CellSetColor"/>
+                                        <EventSetter Event="MouseLeave" Handler="CellRemoveColor"/>
+                                        <EventSetter Event="MouseDoubleClick" Handler="DataGridCell_MouseDoubleClick"/>
+                                        <Setter Property="MinHeight" Value="50"/>
+                                        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                    <Grid Background="{TemplateBinding Background}">
+                                                        <ContentPresenter VerticalAlignment="Center"/>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </DataGrid.Resources>
+
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn  IsReadOnly="False" Width="2*" Header="Tên nguyên liệu"  Binding="{Binding EmployeeCode}"/>
+                                    <DataGridTextColumn IsReadOnly="False" Width="2*" Header="Số lượng" Binding="{Binding EmployeeName}"  />
+                                    <DataGridTemplateColumn IsReadOnly="True" Width="2*" Header="Đơn vị" x:Name="cmbUnit" >
+                                        <DataGridTemplateColumn.CellTemplate >
+                                            <DataTemplate>
+                                                <ComboBox HorizontalContentAlignment="Center" Margin="10 0 10 0" Padding="5 0 5 0" Background="Thistle" Foreground="Black" 
+                                                        ItemsSource ="{Binding Path=DataContext.RoleList, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" 
+                                                DropDownClosed="ComboBox_DropDownClosed" SelectedItem="{Binding Role, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   Width="auto">
+                                                </ComboBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn  IsReadOnly="False" Width="2*" Header="Đơn giá"         Binding="{Binding PhoneNb}" />
+                                    <DataGridTextColumn  IsReadOnly="False" Width="2*" Header="Chi phí"         Binding="{Binding PhoneNb}" />
+                                    <DataGridTemplateColumn x:Name="Edit_Col" Width="1*" Header="Tùy chỉnh" >
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                    <TextBlock Width="15"></TextBlock>
+                                                    <Button Width="auto" Name="btn_Edit" Click="Edit_Click" Background="Green" BorderBrush="Green">
+                                                        <materialDesign:PackIcon Width="auto" Kind="AccountEdit" Margin= " 0 0 0 0" />
+                                                    </Button>
+                                                    <TextBlock Width="10"></TextBlock>
+                                                    <Button Width="auto" Click="Delete_Click"  Background="Red" BorderBrush="Red">
+                                                        <materialDesign:PackIcon Width="auto" Kind="Delete" Margin= " 0 0 0 0" />
+                                                    </Button>
+                                                    <TextBlock Width="10"></TextBlock>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <!--#endregion-->
+                        </GroupBox>
+                    </Grid>
+                    <!-- Lưu, Hủy-->
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1">
+                            <Button Click="Save_Click">Lưu</Button>
+                        </Grid>
+                        <Grid Grid.Column="3">
+                            <Button Click="Cancel_Click">Quay lại</Button>
+                        </Grid>
+                    </Grid>
+                    <!--#endregion-->
+                </Grid>
+            </GroupBox>
+        </Border>
+    </Grid>
+</UserControl>

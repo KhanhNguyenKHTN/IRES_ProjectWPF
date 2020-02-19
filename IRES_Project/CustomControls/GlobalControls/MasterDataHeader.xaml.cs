@@ -61,13 +61,6 @@ namespace CustomControls.GlobalControls
 
         }
 
-        private void MySearch_KeyUp(object sender, KeyEventArgs e)
-        {
-            //if(e.Key == Key.Enter)
-            //{
-            //    ToFireSearchCheckBox.IsChecked = !ToFireSearchCheckBox.IsChecked;
-              
-            //}
-        }
+        
     }
 }

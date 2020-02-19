@@ -173,14 +173,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MasterData\FoodView\FoodView.xaml.cs">
-      <DependentUpon>FoodView.xaml</DependentUpon>
+    <Compile Include="MasterData\DishView\AddDish.xaml.cs">
+      <DependentUpon>AddDish.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MasterData\DishView\DishView.xaml.cs">
+      <DependentUpon>DishView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MasterData\MainPage\EditEmp.xaml.cs">
       <DependentUpon>EditEmp.xaml</DependentUpon>
     </Compile>
     <Compile Include="MasterData\MainPage\EmpDetail.xaml.cs">
       <DependentUpon>EmpDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MasterData\PromoView\PromoView.xaml.cs">
+      <DependentUpon>PromoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Statistic\BillStatisticPage.xaml.cs">
       <DependentUpon>BillStatisticPage.xaml</DependentUpon>
@@ -204,7 +210,11 @@
     <Compile Include="MasterData\MainPage\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Page Include="MasterData\FoodView\FoodView.xaml">
+    <Page Include="MasterData\DishView\AddDish.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MasterData\DishView\DishView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -214,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MasterData\MainPage\EmpDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MasterData\PromoView\PromoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

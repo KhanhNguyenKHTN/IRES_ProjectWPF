@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model.Models;
-using Implements.MasterData.Modules;
-using ViewModel.GlobalViewModels;
 using System.Windows.Input;
+using ViewModel.GlobalViewModels;
+using Model.Models;
 using System.Windows;
 using System.Windows.Controls;
+using Implements.MasterData.Modules;
 
 namespace ViewModel.MasterData
 {
-    public class DishViewModel: BaseViewModel
+  public  class PromoViewModel : BaseViewModel
     {
 
         public bool IsSearching = false;
-       public string Search_Text { get; set; } = null;
+        public string Search_Text { get; set; } = null;
 
         private bool _Refresh = false;
         public bool Refresh { get { return _Refresh; } set { _Refresh = value; OnPropertyChanged(); } }
@@ -27,14 +27,14 @@ namespace ViewModel.MasterData
         public ICommand SearchCommand { get; set; }
         private ICommand checkCommand;
 
-        public DishViewModel()
+        public PromoViewModel()
         {
-            ListDishes = new List<DishModel>();
-            ListDishes = getListDishes();
-            ListDishesRoot = new List<DishModel>();
-            ListDishesRoot = getListDishes();
+            ListPromo = new List<PromoModel>();
+            ListPromo = getListPromo();
+            ListPromoRoot = new List<PromoModel>();
+            ListPromoRoot = getListPromo();
 
-            if (ListDishes.Count() == 0)
+            if (ListPromo.Count() == 0)
             {
                 MessageBox.Show("Khong co data");
             }
@@ -52,162 +52,162 @@ namespace ViewModel.MasterData
                 });
         }
 
-        private List<DishModel> _ListDishes;
+        private List<PromoModel> _ListPromo;
 
-        public List<DishModel> ListDishes
+        public List<PromoModel> ListPromo
         {
-            get { return _ListDishes; }
-            set { _ListDishes = value; OnPropertyChanged(); }
+            get { return _ListPromo; }
+            set { _ListPromo = value; OnPropertyChanged(); }
         }
-        private List<DishModel> _ListDishesRoot;
+        private List<PromoModel> _ListPromoRoot;
 
-        public List<DishModel> ListDishesRoot
+        public List<PromoModel> ListPromoRoot
         {
-            get { return _ListDishesRoot; }
-            set { _ListDishesRoot = value; OnPropertyChanged(); }
+            get { return _ListPromoRoot; }
+            set { _ListPromoRoot = value; OnPropertyChanged(); }
         }
 
-        public List<DishModel> getListDishes()
+        public List<PromoModel> getListPromo()
         {
             IsSearching = false;
-            List<DishModel> listDishes = new List<DishModel>();  
-            listDishes = DishImplement.getDBListDishes();
-            DishModel X = listDishes.First();
-            if (X.DishId == -1)
+            List<PromoModel> listPromo = new List<PromoModel>();
+            listPromo = PromoImplement.getDBListPromo();
+            PromoModel X = listPromo.First();
+            if (X.PromotionId == -1)
             {
                 MessageBox.Show("Không có kết quả");
-                listDishes.Clear();
+                listPromo.Clear();
             }
-
-            return listDishes;
+            return listPromo;
         }
-      
-        public List<DishModel> getDeletedDishes()
+
+        public List<PromoModel> getDeletedPromo()
         {
             IsSearching = false;
-            List<DishModel> listDishes = new List<DishModel>();
-            listDishes = DishImplement.getDBListDeletedDishes();
-            DishModel X = listDishes.First();
-            if (X.DishId == -1)
+            List<PromoModel> listPromo = new List<PromoModel>();
+            listPromo = PromoImplement.getDBListDeletedPromo();
+            PromoModel X = listPromo.First();
+            if (X.PromotionId == -1)
             {
                 MessageBox.Show("Không có kết quả");
-                listDishes.Clear();
+                listPromo.Clear();
             }
-            return listDishes;
+            return listPromo;
         }
-        public List<DishModel> searchDish()
+        public List<PromoModel> searchDish()
         {
-            List<DishModel> listDishes = new List<DishModel>();
+            List<PromoModel> listPromo = new List<PromoModel>();
             if (Search_Text == null)
             {
                 MessageBox.Show("Vui lòng gõ nội dung tìm kiếm");
-                return listDishes;
+                return listPromo;
             }
             else if (Search_Text == "")
             {
                 MessageBox.Show("Nội dung tìm kiếm không được rỗng");
-                return listDishes;
+                return listPromo;
             }
-            listDishes = DishImplement.searchDBListDishes(Search_Text);
+            listPromo = PromoImplement.searchDBListPromo(Search_Text);
 
-            DishModel X = listDishes.First();
-            if (X.DishId == -1)
+            PromoModel X = listPromo.First();
+            if (X.PromotionId == -1)
             {
                 //MessageBox.Show("Không có kết quả");
-                listDishes.Clear();
-                return listDishes;
+                listPromo.Clear();
+                return listPromo;
             }
             IsSearching = true;
-            return listDishes;
+            return listPromo;
         }
-        public List<DishModel> searchDeletedDish()
+        public List<PromoModel> searchDeletedDish()
         {
-            List<DishModel> listDishes = new List<DishModel>();
+            List<PromoModel> listPromo = new List<PromoModel>();
             if (Search_Text == null)
             {
                 MessageBox.Show("Vui lòng gõ nội dung tìm kiếm");
-                return listDishes;
+                return listPromo;
             }
             else if (Search_Text == "")
             {
                 MessageBox.Show("Nội dung tìm kiếm không được rỗng");
-                return listDishes;
+                return listPromo;
             }
-            listDishes = DishImplement.searchDBListDishesDeleted(Search_Text);
-            DishModel X = listDishes.First();
-            if (X.DishId == -1)
+            listPromo = PromoImplement.searchDBListDeletedPromo(Search_Text);
+
+            PromoModel X = listPromo.First();
+            if (X.PromotionId == -1)
             {
                 //MessageBox.Show("Không có kết quả");
-                listDishes.Clear();
-                return listDishes;
+                listPromo.Clear();
+                return listPromo;
             }
             IsSearching = true;
-            return listDishes;
+            return listPromo;
         }
         //public bool UpdatePhoneNb(string phoneNb, string employee_code)
         //{
 
-        //    return DishImplement.UpdatePhone(phoneNb, employee_code);
+        //    return EmployeeImplement.UpdatePhone(phoneNb, employee_code);
         //}
 
 
-        //public bool DeleteEmployee(string employee_code, DishModel a)
+        //public bool DeleteEmployee(string employee_code, Employee a)
         //{
         //    RemoveItem(ListEmployeeRoot, a);
-        //    return DishImplement.DeleteEmp(employee_code);
+        //    return EmployeeImplement.DeleteEmp(employee_code);
         //}
-        //public bool ActiveEmployee(string employee_code, DishModel a)
+        //public bool ActiveEmployee(string employee_code, Employee a)
         //{
         //    RemoveItem(ListEmployeeRoot, a);
-        //    return DishImplement.ActiveEmp(employee_code);
+        //    return EmployeeImplement.ActiveEmp(employee_code);
         //}
         //public bool UpdateRole(int RoleId, string employee_code)
         //{
 
-        //    return DishImplement.UpdateRole(RoleId, employee_code);
+        //    return EmployeeImplement.UpdateRole(RoleId, employee_code);
         //}
         //public void UpdateLocalEmpRoleId(string Role, string employee_code)
         //{
-        //    for (int i = 1; i <= listDishes.Count(); i++)
+        //    for (int i = 1; i <= ListEmployee.Count(); i++)
         //    {
-        //        if (listDishes[i - 1].EmployeeCode == employee_code)
+        //        if (ListEmployee[i - 1].EmployeeCode == employee_code)
         //        {
         //            switch (Role)
         //            {
         //                case "Nhân viên phục vụ":
         //                    {
-        //                        listDishes[i - 1].RoleId = 1;
+        //                        ListEmployee[i - 1].RoleId = 1;
         //                        break;
         //                    }
         //                case "Bếp trưởng":
         //                    {
-        //                        listDishes[i - 1].RoleId = 2;
+        //                        ListEmployee[i - 1].RoleId = 2;
         //                        break;
         //                    }
         //                case "Thu ngân":
         //                    {
-        //                        listDishes[i - 1].RoleId = 3;
+        //                        ListEmployee[i - 1].RoleId = 3;
         //                        break;
         //                    }
 
         //                case "Lễ tân":
         //                    {
-        //                        listDishes[i - 1].RoleId = 4;
+        //                        ListEmployee[i - 1].RoleId = 4;
         //                        break;
         //                    }
         //                case "Đầu bếp":
         //                    {
-        //                        listDishes[i - 1].RoleId = 5;
+        //                        ListEmployee[i - 1].RoleId = 5;
         //                        break;
         //                    }
         //                case "Quản lý ca":
         //                    {
-        //                        listDishes[i - 1].RoleId = 6;
+        //                        ListEmployee[i - 1].RoleId = 6;
         //                        break;
         //                    }
         //                case "Quản lý nhà hàng":
         //                    {
-        //                        listDishes[i - 1].RoleId = 7;
+        //                        ListEmployee[i - 1].RoleId = 7;
         //                        break;
         //                    }
 
@@ -217,7 +217,7 @@ namespace ViewModel.MasterData
         //}
 
 
-        //public void RemoveItem(List<DishModel> collection, DishModel instance)
+        //public void RemoveItem(ObservableCollection<Employee> collection, Employee instance)
         //{
         //    collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
         //}

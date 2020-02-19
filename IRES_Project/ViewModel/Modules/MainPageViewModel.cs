@@ -22,14 +22,12 @@ namespace ViewModel.Modules
 
         private bool _Refresh = false;
         public bool Refresh { get { return _Refresh; } set { _Refresh = value; OnPropertyChanged(); } }
-        
-        private bool _ToFireSearch = false;
-        public bool ToFireSearch { get { return _ToFireSearch; } set { _ToFireSearch = value; OnPropertyChanged(); } }
+
         private bool _IsChecked = true;
         public bool IsChecked { get { return _IsChecked; } set { _IsChecked = value; OnPropertyChanged(); } }
 
         public  ICommand SearchCommand { get; set; }
-        private ICommand checkCommand;
+        private ICommand checkCommand;// khong dùng
    
         private ObservableCollection<Employee> _ListEmployee;
         public  ObservableCollection<Employee>  ListEmployee     { get { return _ListEmployee; }     set { _ListEmployee     = value; OnPropertyChanged(); } }

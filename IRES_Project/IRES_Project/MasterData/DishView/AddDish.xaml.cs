@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel.MasterData;
 
-namespace IRES_Project.MasterData.FoodView
+namespace IRES_Project.MasterData.DishView
 {
     /// <summary>
-    /// Interaction logic for FoodView.xaml
+    /// Interaction logic for AddDish.xaml
     /// </summary>
-    public partial class FoodView : UserControl
+    public partial class AddDish : UserControl
     {
-        DishViewModel dishVM = null;
-        public FoodView()
+        public AddDish()
         {
             InitializeComponent();
-            dishVM = new DishViewModel();
-            this.DataContext = dishVM;
         }
     }
 }

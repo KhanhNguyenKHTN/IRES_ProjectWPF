@@ -1,0 +1,183 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Model.Models;
+using Implements.Workers;
+using System.Data;
+using Service.Modules;
+
+namespace Implements.MasterData.Modules
+{
+    public class PromoImplement
+    {
+        public static List<PromoModel> getDBListPromo()
+        {
+            string query = $"select * from ires.promotion where active = true";
+            List<PromoModel> result = new List<PromoModel>();
+            WorkerToDB worker = new WorkerToDB();
+            DataTable dt = worker.getRecordsCommand(query);
+            if (dt.Rows.Count == 0)
+            {
+                PromoModel def_item = new PromoModel();
+                def_item = new PromoModel
+                {
+                    PromotionId = -1,
+                };
+                result.Add(def_item);
+                return result;
+            }
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PromoModel item = new PromoModel();
+
+                item = new PromoModel
+                {
+                    Active = true,
+                    PromotionId = Convert.ToInt32(dt.Rows[i]["promotion_id"]),
+                    PromotionName = dt.Rows[i]["promotion_name"].ToString(),
+                    PromotionMaxValue = Convert.ToInt32(dt.Rows[i]["promotion_max_value"]),
+                    PromotionDes = dt.Rows[i]["promotion_description"].ToString(),
+                    PromotionValue = dt.Rows[i]["promotion_value"].ToString(),
+                    PromotionCode = dt.Rows[i]["promotion_code"].ToString(),
+                    PromotionApplyType = dt.Rows[i]["promotion_apply_type"].ToString(),
+                    PromotionStartDate = Convert.ToDateTime(dt.Rows[i]["promotion_start_date"]),
+                    PromotionEndDate = Convert.ToDateTime(dt.Rows[i]["promotion_end_date"]),
+                };
+                result.Add(item);
+            }
+            return result;
+        }
+        public static List<PromoModel> getDBListDeletedPromo()
+        {
+            string query = $"select * from ires.promotion where active = false";
+            List<PromoModel> result = new List<PromoModel>();
+            WorkerToDB worker = new WorkerToDB();
+            DataTable dt = worker.getRecordsCommand(query);
+            if (dt.Rows.Count == 0)
+            {
+                PromoModel def_item = new PromoModel();
+                def_item = new PromoModel
+                {
+                    PromotionId = -1,
+                };
+                result.Add(def_item);
+                return result;
+            }
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PromoModel item = new PromoModel();
+
+                item = new PromoModel
+                {
+                    Active=false,
+                    PromotionId = Convert.ToInt32(dt.Rows[i]["promotion_id"]),
+                    PromotionName = dt.Rows[i]["promotion_name"].ToString(),
+                    PromotionMaxValue = Convert.ToInt32(dt.Rows[i]["promotion_max_value"]),
+                    PromotionDes = dt.Rows[i]["promotion_description"].ToString(),
+                    PromotionValue = dt.Rows[i]["promotion_value"].ToString(),
+                    PromotionCode = dt.Rows[i]["promotion_code"].ToString(),
+                    PromotionApplyType = dt.Rows[i]["promotion_apply_type"].ToString(),
+                    PromotionStartDate = Convert.ToDateTime(dt.Rows[i]["promotion_start_date"]),
+                    PromotionEndDate = Convert.ToDateTime(dt.Rows[i]["promotion_end_date"]),
+                };
+                result.Add(item);
+            }
+            return result;
+        }
+        public static List<PromoModel> searchDBListPromo(string search_text)
+        {
+            string query = $"select *" +
+                $" from ires.promotion" +
+                $" where (active = 'true') and" +
+                $" (promotion_name ilike '%' || @search_text || '%' or promotion_code ilike '%' || @search_text || '%' )";
+
+            List<PromoModel> result = new List<PromoModel>();
+            SQLExecute sqlExecute = new SQLExecute();
+
+            DataTable dt = sqlExecute.GetExcuteQueryOne(query, search_text);
+
+            if (dt.Rows.Count == 0)
+            {
+                PromoModel def_item = new PromoModel();
+                def_item = new PromoModel
+                {
+                    PromotionId = -1,
+                };
+                result.Add(def_item);
+                return result;
+            }
+
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PromoModel item = new PromoModel();
+
+                item = new PromoModel
+                {
+                    Active = true,
+                    PromotionId = Convert.ToInt32(dt.Rows[i]["promotion_id"]),
+                    PromotionName = dt.Rows[i]["promotion_name"].ToString(),
+                    PromotionMaxValue = Convert.ToInt32(dt.Rows[i]["promotion_max_value"]),
+                    PromotionDes = dt.Rows[i]["promotion_description"].ToString(),
+                    PromotionValue = dt.Rows[i]["promotion_value"].ToString(),
+                    PromotionCode = dt.Rows[i]["promotion_code"].ToString(),
+                    PromotionApplyType = dt.Rows[i]["promotion_apply_type"].ToString(),
+                    PromotionStartDate = Convert.ToDateTime(dt.Rows[i]["promotion_start_date"]),
+                    PromotionEndDate = Convert.ToDateTime(dt.Rows[i]["promotion_end_date"]),
+                };
+                result.Add(item);
+            }
+
+            return result;
+        }
+        public static List<PromoModel> searchDBListDeletedPromo(string search_text)
+        {
+            string query = $"select *" +
+                $" from ires.promotion" +
+                $" where (active = 'false') and" +
+                $" (promotion_name ilike '%' || @search_text || '%' or promotion_code ilike '%' || @search_text || '%' )";
+
+            List<PromoModel> result = new List<PromoModel>();
+            SQLExecute sqlExecute = new SQLExecute();
+
+            DataTable dt = sqlExecute.GetExcuteQueryOne(query, search_text);
+
+            if (dt.Rows.Count == 0)
+            {
+                PromoModel def_item = new PromoModel();
+                def_item = new PromoModel
+                {
+                    PromotionId = -1,
+                };
+                result.Add(def_item);
+                return result;
+            }
+
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PromoModel item = new PromoModel();
+
+                item = new PromoModel
+                {
+                    Active = false,
+                    PromotionId = Convert.ToInt32(dt.Rows[i]["promotion_id"]),
+                    PromotionName = dt.Rows[i]["promotion_name"].ToString(),
+                    PromotionMaxValue = Convert.ToInt32(dt.Rows[i]["promotion_max_value"]),
+                    PromotionDes = dt.Rows[i]["promotion_description"].ToString(),
+                    PromotionValue = dt.Rows[i]["promotion_value"].ToString(),
+                    PromotionCode = dt.Rows[i]["promotion_code"].ToString(),
+                    PromotionApplyType = dt.Rows[i]["promotion_apply_type"].ToString(),
+                    PromotionStartDate = Convert.ToDateTime(dt.Rows[i]["promotion_start_date"]),
+                    PromotionEndDate = Convert.ToDateTime(dt.Rows[i]["promotion_end_date"]),
+                };
+                result.Add(item);
+            }
+
+            return result;
+        }
+    }
+    
+}

@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using Model.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,26 +11,22 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewModel.Modules;
-using Model.Models;
-using System.Collections.ObjectModel;
-using System.Collections;
-using System.Data;
 using ViewModel.MasterData;
 
-namespace IRES_Project.MasterData.MainPage
+namespace IRES_Project.MasterData.PromoView
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    /// Interaction logic for PromoView.xaml
     /// </summary>
-    public partial class MainPage : UserControl
+    public partial class PromoView : UserControl
     {
         //int pageIndex = 1;
         private int numberOfRecPerPage = 10;
-        MainPageViewModel mainPageVM = new MainPageViewModel();
+        PromoViewModel promoVM = new PromoViewModel();
         int ActiveBtn = 1;
         int CurPageIndex = 1;
         int no_View, ViewIndex = 1;
@@ -37,18 +35,18 @@ namespace IRES_Project.MasterData.MainPage
         int no_Page;
         string SelectedCol;
         bool FirstRun = true;
-        ObservableCollection<Employee> ListEm { get; set; }
+        List<PromoModel> ListPromo { get; set; }
 
         private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
 
-        public MainPage()
+        public PromoView()
         {
-            
-            InitializeComponent();
-            this.DataContext = mainPageVM;
 
-            mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage));
-            //dataGrid.ItemsSource=mainPageVM.ListEmployee.Take(numberOfRecPerPage);
+            InitializeComponent();
+            this.DataContext = promoVM;
+
+            promoVM.ListPromo = new List<PromoModel>(promoVM.ListPromoRoot.Take(numberOfRecPerPage));
+            //dataGrid.ItemsSource=promoVM.ListPromo.Take(numberOfRecPerPage);
             No_View_Updt();
             #region Config paging btn 2 trường hợp, 1 là khi khởi tạo, 1 là khi itemsource thay đổi
             if (no_Page > 1)
@@ -62,7 +60,7 @@ namespace IRES_Project.MasterData.MainPage
                 btnNext.Opacity = 0.75;
             }
 
-            if (mainPageVM.ListEmployeeRoot.Count <= numberOfRecPerPage)
+            if (promoVM.ListPromoRoot.Count <= numberOfRecPerPage)
             {
                 btnLast.IsEnabled = false;
                 btnLast.Opacity = 0.75;
@@ -101,25 +99,24 @@ namespace IRES_Project.MasterData.MainPage
                     btnPrev.Opacity = 1;
                     btnFirst.IsEnabled = true;
                     btnFirst.Opacity = 1;
-                    if (mainPageVM.ListEmployeeRoot.Count >= (CurPageIndex * numberOfRecPerPage)) //còn at least 0 item để next
+                    if (promoVM.ListPromoRoot.Count >= (CurPageIndex * numberOfRecPerPage)) //còn at least 0 item để next
                     {
 
-                        if (mainPageVM.ListEmployeeRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() != 0) // còn item để lấy
+                        if (promoVM.ListPromoRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() != 0) // còn item để lấy
                         {
-                            mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage));
+                            promoVM.ListPromo = new List<PromoModel>(promoVM.ListPromoRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage));
                             if (ActiveBtn == 5 && ViewIndex != no_View)     //nút 5th
                             {
-
                                 ViewIndex++;
                             }
                             btnUpdate();
                             btnDeFocus();
                             CurPageIndex++;
-                            count = Math.Min((CurPageIndex) * (numberOfRecPerPage), mainPageVM.ListEmployeeRoot.Count());
+                            count = Math.Min((CurPageIndex) * (numberOfRecPerPage), promoVM.ListPromoRoot.Count());
                             updtActBtn();
                             btnFocus();
 
-                            if (mainPageVM.ListEmployeeRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() == 0) // hết item để lấy
+                            if (promoVM.ListPromoRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() == 0) // hết item để lấy
                             {
                                 btnNext.IsEnabled = false;
                                 btnNext.Opacity = 0.75;
@@ -128,7 +125,7 @@ namespace IRES_Project.MasterData.MainPage
                             }
                         }
                         from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-                        lblpageInformation.Content = from + "-" + count + " of " + mainPageVM.ListEmployeeRoot.Count;
+                        lblpageInformation.Content = from + "-" + count + " of " + promoVM.ListPromoRoot.Count;
                     }
                     break;
                 case (int)PagingMode.Previous:
@@ -154,15 +151,15 @@ namespace IRES_Project.MasterData.MainPage
                             btnPrev.Opacity = 0.75;
                             btnFirst.IsEnabled = false;
                             btnFirst.Opacity = 0.75;
-                            mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage));
+                            promoVM.ListPromo = new List<PromoModel>(promoVM.ListPromoRoot.Take(numberOfRecPerPage));
                             updtLabel();
                         }
                         else
                         {
-                            mainPageVM.ListEmployee = new ObservableCollection<Employee>(mainPageVM.ListEmployeeRoot.Skip((CurPageIndex - 1) * numberOfRecPerPage).Take(numberOfRecPerPage));
+                            promoVM.ListPromo = new List<PromoModel>(promoVM.ListPromoRoot.Skip((CurPageIndex - 1) * numberOfRecPerPage).Take(numberOfRecPerPage));
                             count = CurPageIndex * numberOfRecPerPage;
                             from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-                            lblpageInformation.Content = from + "-" + count + " of " + mainPageVM.ListEmployeeRoot.Count;
+                            lblpageInformation.Content = from + "-" + count + " of " + promoVM.ListPromoRoot.Count;
                         }
                         updtActBtn();
                         btnFocus();
@@ -194,8 +191,8 @@ namespace IRES_Project.MasterData.MainPage
                     break;
                 case (int)PagingMode.Last:
                     ViewIndex = no_View;
-                    CurPageIndex = (mainPageVM.ListEmployeeRoot.Count / numberOfRecPerPage);
-                    if (mainPageVM.ListEmployeeRoot.Count % numberOfRecPerPage == 0)
+                    CurPageIndex = (promoVM.ListPromoRoot.Count / numberOfRecPerPage);
+                    if (promoVM.ListPromoRoot.Count % numberOfRecPerPage == 0)
                     {
                         CurPageIndex--;
                     }
@@ -206,11 +203,11 @@ namespace IRES_Project.MasterData.MainPage
                     //    CurPageIndex = 1;
                     //    numberOfRecPerPage = Convert.ToInt32(cbNumberOfRecords.SelectedItem);
                     //    dataGrid.ItemsSource = null;
-                    //    dataGrid.ItemsSource = mainPageVM.ListEmployee.Take(numberOfRecPerPage);
-                    //    count = (mainPageVM.ListEmployee.Take(numberOfRecPerPage)).Count();
+                    //    dataGrid.ItemsSource = promoVM.ListPromo.Take(numberOfRecPerPage);
+                    //    count = (promoVM.ListPromo.Take(numberOfRecPerPage)).Count();
                     //    from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
 
-                    //    lblpageInformation.Content = from + "-" + count + " of " + mainPageVM.ListEmployee.Count;
+                    //    lblpageInformation.Content = from + "-" + count + " of " + promoVM.ListPromo.Count;
 
                     //    btnNext.IsEnabled = true;
                     //    btnLast.IsEnabled = true;
@@ -622,8 +619,8 @@ namespace IRES_Project.MasterData.MainPage
         }
         public void No_View_Updt()
         {
-            no_Page = mainPageVM.ListEmployeeRoot.Count / numberOfRecPerPage;
-            if (mainPageVM.ListEmployeeRoot.Count % numberOfRecPerPage != 0)
+            no_Page = promoVM.ListPromoRoot.Count / numberOfRecPerPage;
+            if (promoVM.ListPromoRoot.Count % numberOfRecPerPage != 0)
             {
                 no_Page++;
             }
@@ -637,13 +634,13 @@ namespace IRES_Project.MasterData.MainPage
         public int GetNo_Page()
         {
             int res;
-            int TotalRec = mainPageVM.ListEmployeeRoot.Skip((ViewIndex - 1) * 5 * numberOfRecPerPage).Count();
+            int TotalRec = promoVM.ListPromoRoot.Skip((ViewIndex - 1) * 5 * numberOfRecPerPage).Count();
             if (TotalRec == 0)
             {
                 return 0;
             }
             res = TotalRec / numberOfRecPerPage;
-            if (mainPageVM.ListEmployeeRoot.Count() % numberOfRecPerPage != 0)
+            if (promoVM.ListPromoRoot.Count() % numberOfRecPerPage != 0)
             {
                 res++;
             }
@@ -651,83 +648,75 @@ namespace IRES_Project.MasterData.MainPage
         }
         #endregion
 
+        #region Có bug
         private void MyCheck_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e) //Check xem dưới VM có gọi gì ko, nếu có reset itemsource
         {
-            if (!FirstRun)
-            {                                                                                        
-                if (mainPageVM.IsChecked)
-                {
-                    ListEm = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
-                }
-                else
-                {
-                    ListEm = mainPageVM.searchDeletedEmployee();
-                }
-                if (ListEm.Count != 0)
-                {
-                    mainPageVM.ListEmployee = ListEm;
-                    mainPageVM.ListEmployeeRoot = ListEm;
-                    No_View_Updt();
-                    if (no_Page >= 1)
-                    {
-                        Navigate((int)PagingMode.First);
-                    }
-                    else
-                    {
-                        mainPageVM.ListEmployee.Clear();
-                    }
-                    updtLabel();
-                }
-                else
-                {
-                    mainPageVM.ListEmployeeRoot.Clear();
-                    No_View_Updt();
-                    Navigate((int)PagingMode.First);
-                    updtLabel();
-                }
+            //if (!FirstRun)
+            //{
+            //    if (promoVM.IsChecked)
+            //    {
+            //        ListPromo = promoVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
+            //    }
+            //    else
+            //    {
+            //        ListPromo = promoVM.searchDeletedEmployee();
+            //    }
+            //    if (ListPromo.Count != 0)
+            //    {
+            //        promoVM.ListPromo = ListPromo;
+            //        promoVM.ListPromoRoot = ListPromo;
+            //        No_View_Updt();
+            //        if (no_Page >= 1)
+            //        {
+            //            Navigate((int)PagingMode.First);
+            //        }
+            //        else
+            //        {
+            //            promoVM.ListPromo.Clear();
+            //        }
+            //        updtLabel();
+            //    }
+            //    else
+            //    {
+            //        promoVM.ListPromoRoot.Clear();
+            //        No_View_Updt();
+            //        Navigate((int)PagingMode.First);
+            //        updtLabel();
+            //    }
+            //}
+            //else
+            //    FirstRun = false;
         }
-            else
-                FirstRun = false;
-        }
-
-        //private void Test_Cmd(object sender, RoutedEventArgs e)
-        //{
-        //    dataGrid.ItemsSource = null;
-
-        //    ListEm = mainPageVM.ListEmployee;
-        //    dataGrid.ItemsSource = ListEm;
-        //}
         private void Refresh_Data(object sender, RoutedEventArgs e)
         {
-            if (mainPageVM.IsChecked)
-            {
-                mainPageVM.ListEmployeeRoot = mainPageVM.getDataEmployee();
+            //if (promoVM.IsChecked)
+            //{
+            //    promoVM.ListPromoRoot = promoVM.getDataEmployee();
 
-            }
-            else
-            {
-                mainPageVM.ListEmployeeRoot = mainPageVM.getDeletedEmployee();
-            }
+            //}
+            //else
+            //{
+            //    promoVM.ListPromoRoot = promoVM.getDeletedEmployee();
+            //}
 
-            No_View_Updt();
-            Navigate((int)PagingMode.First);
-            updtLabel();
+            //No_View_Updt();
+            //Navigate((int)PagingMode.First);
+            //updtLabel();
         }
         private void Search_Emp(object sender, RoutedEventArgs e)
         {
-
-            if (mainPageVM.IsChecked)
+            if (promoVM.IsChecked)
             {
-                ListEm = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
-             }
+                ListPromo = promoVM.searchDish(); //If == 0 tra ve list rong va thong bao
+            }
             else
             {
-                ListEm = mainPageVM.searchDeletedEmployee();
+                ListPromo = promoVM.searchDeletedDish();
             }
-            if (ListEm.Count != 0)
+            if (ListPromo.Count != 0)
             {
-                mainPageVM.ListEmployee = ListEm;
-                mainPageVM.ListEmployeeRoot = ListEm;
+                promoVM.ListPromo = ListPromo;
+                promoVM.ListPromoRoot = ListPromo;
                 No_View_Updt();
                 if (no_Page >= 1)
                 {
@@ -735,163 +724,179 @@ namespace IRES_Project.MasterData.MainPage
                 }
                 else
                 {
-                    mainPageVM.ListEmployee.Clear();
+                    promoVM.ListPromo.Clear();
                 }
                 updtLabel();
             }
             else
             {
-                mainPageVM.ListEmployeeRoot.Clear();
+                promoVM.ListPromoRoot.Clear();
                 No_View_Updt();
                 Navigate((int)PagingMode.First);
                 updtLabel();
             }
 
-            #region test luong tìm kiếm Khong co ket qua => quay về mặc định
-            //else //Khong co ket qua => ko lam gi het
-            //{
-            //    listEm = mainPageVM.ListEmployee; // Load lai list default, command dòng này để giữ lại list hiện tại
-            //    Navigate((int)PagingMode.First);
-            //    count = listEm.Take(numberOfRecPerPage).Count();
-            //    from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-            //    lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
-            //}
-            #endregion
-
-            #region test dùng trực tiếp VM
-            //mainPageVM.ListEmployee = mainPageVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
-            //if (mainPageVM.ListEmployee.Count != 0)
-            //{
-            //    listEm = mainPageVM.ListEmployee;
-            //    dataGrid.ItemsSource = listEm;
-            //    Navigate((int)PagingMode.First);
-            //    count = listEm.Take(numberOfRecPerPage).Count();
-            //    from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-            //    lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
-            //}
-            //else //Khong co ket qua => ko lam gi het
-            //{
-            //    //listEm = mainPageVM.ListEmployee; // Load lai list default, command dòng này để giữ lại list hiện tại
-            //    //Navigate((int)PagingMode.First);
-            //    //count = listEm.Take(numberOfRecPerPage).Count();
-            //    //from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
-            //    //lblpageInformation.Content = from + "-" + count + " of " + listEm.Count;
-            //}
-            #endregion
-
 
         }
-
         private void Edit_Click(object sender, RoutedEventArgs e) // Chuyen sang page edit
         {
-            EditEmpUC.Visibility = Visibility.Visible;
-            IList rows = dataGrid.SelectedItems;
-            Employee a = rows[0] as Employee;
-            EditEmpUC.TakeEmp(a);
+            //EditEmpUC.Visibility = Visibility.Visible;
+            //IList rows = dataGrid.SelectedItems;
+            //Employee a = rows[0] as Employee;
+            //EditEmpUC.TakeEmp(a);
         }
-        public void RemoveItem(ObservableCollection<Employee> collection, Employee instance)
+        public void RemoveItem(List<PromoModel> collection, Employee instance)
         {
-            collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
+            //collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
+        }
+
+
+        private void MasterHeader_ActiveClick(object sender, RoutedEventArgs e)
+        {
+            //if (promoVM.IsChecked == true)
+            //{
+            //    if (promoVM.IsSearching == true)
+            //    {
+            //        //MessageBox.Show("Đang trong tìm kiếm");
+            //        ListPromo = promoVM.searchEmployee();
+            //        if (ListPromo.Count != 0)
+            //        {
+            //            promoVM.ListPromoRoot = ListPromo;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        promoVM.ListPromoRoot = promoVM.getDataEmployee();
+            //    }
+            //}
+            //else
+            //{
+            //    if (promoVM.IsSearching == true)
+            //    {
+            //        // MessageBox.Show("Đang trong tìm kiếm");
+            //        ListPromo = promoVM.searchDeletedEmployee();
+            //        if (ListPromo.Count != 0)
+            //        {
+            //            promoVM.ListPromoRoot = ListPromo;
+            //        }
+            //        else
+            //        {
+            //            promoVM.ListPromoRoot.Clear();
+            //            No_View_Updt();
+            //            Navigate((int)PagingMode.First);
+            //            updtLabel();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        promoVM.ListPromoRoot = promoVM.getDeletedEmployee();
+            //    }
+            //}
+            //No_View_Updt();
+            //if (no_Page >= 1)
+            //{
+            //    Navigate((int)PagingMode.First);
+            //}
+            //else
+            //{
+            //    promoVM.ListPromo.Clear();
+            //}
+            //updtLabel();
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            IList rows = dataGrid.SelectedItems;
-            Employee a = rows[0] as Employee;
-            if (a.RoleId == 7)
-            {
-                MessageBox.Show("Không thể xóa Admin");
-            }
-            else
-            {
-                if (a.Active == false)
-                {
-                    if (MessageBox.Show("Bỏ xóa nhân viên này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
-                    {
-                        //do no stuff
+            //    IList rows = dataGrid.SelectedItems;
+            //    Employee a = rows[0] as Employee;
+            //    if (a.RoleId == 7)
+            //    {
+            //        MessageBox.Show("Không thể xóa Admin");
+            //    }
+            //    else
+            //    {
+            //        if (a.Active == false)
+            //        {
+            //            if (MessageBox.Show("Bỏ xóa nhân viên này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
+            //            {
+            //                //do no stuff
 
-                    }
-                    else
-                    {
-                        //do yes stuff
-                        mainPageVM.ActiveEmployee(a.EmployeeCode, a);
-                        //mainPageVM.ListEmployeeRoot = mainPageVM.ListEmployee;
-                        No_View_Updt();
-                        Navigate((int)PagingMode.First);
-                        updtLabel();
-                    }
-                }
+            //            }
+            //            else
+            //            {
+            //                //do yes stuff
+            //                promoVM.ActiveEmployee(a.EmployeeCode, a);
+            //                //promoVM.ListPromoRoot = promoVM.ListPromo;
+            //                No_View_Updt();
+            //                Navigate((int)PagingMode.First);
+            //                updtLabel();
+            //            }
+            //        }
 
-                else
-                {
-                    if (MessageBox.Show("Xóa nhân viên này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
-                    {
-                        //do no stuff
+            //        else
+            //        {
+            //            if (MessageBox.Show("Xóa nhân viên này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
+            //            {
+            //                //do no stuff
 
-                    }
-                    else
-                    {
-                        //do yes stuff
-                        mainPageVM.DeleteEmployee(a.EmployeeCode, a);
-                        //mainPageVM.ListEmployeeRoot = mainPageVM.ListEmployee;
-                        No_View_Updt();
-                        Navigate((int)PagingMode.First);
-                        updtLabel();
-                    }
-                }
-            }
+            //            }
+            //            else
+            //            {
+            //                //do yes stuff
+            //                promoVM.DeleteEmployee(a.EmployeeCode, a);
+            //                //promoVM.ListPromoRoot = promoVM.ListPromo;
+            //                No_View_Updt();
+            //                Navigate((int)PagingMode.First);
+            //                updtLabel();
+            //            }
+            //        }
+            //    }
         }
-        private void MasterHeader_ActiveClick(object sender, RoutedEventArgs e)
+
+        private void MasterHeader_AddClick(object sender, RoutedEventArgs e)
         {
-            if (mainPageVM.IsChecked == true)
-            {
-                if (mainPageVM.IsSearching == true)
-                {
-                    //MessageBox.Show("Đang trong tìm kiếm");
-                    ListEm = mainPageVM.searchEmployee();
-                    if (ListEm.Count != 0)
-                    {
-                        mainPageVM.ListEmployeeRoot = ListEm;
-                    }
-                }
-                else
-                {
-                    mainPageVM.ListEmployeeRoot = mainPageVM.getDataEmployee();
-                }
-            }
-            else
-            {
-                if (mainPageVM.IsSearching == true)
-                {
-                   // MessageBox.Show("Đang trong tìm kiếm");
-                    ListEm = mainPageVM.searchDeletedEmployee();
-                    if (ListEm.Count != 0)
-                    {
-                        mainPageVM.ListEmployeeRoot = ListEm;
-                    }
-                    else
-                    {
-                        mainPageVM.ListEmployeeRoot.Clear();
-                        No_View_Updt();
-                        Navigate((int)PagingMode.First);
-                        updtLabel();
-                    }
-                }
-                else
-                {
-                    mainPageVM.ListEmployeeRoot = mainPageVM.getDeletedEmployee();
-                }
-            }
-            No_View_Updt();
-            if (no_Page >= 1)
-            {
-                Navigate((int)PagingMode.First);
-            }
-            else
-            {
-                mainPageVM.ListEmployee.Clear();
-            }
-            updtLabel();
+            //AddEmpUC.Visibility = Visibility.Visible;
         }
+        private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            //if (ListEmpUC.Visibility == Visibility.Visible)
+            //{
+            //    ListEmpUC.Visibility = Visibility.Collapsed;
+            //}
+            //else
+            //{
+            //    if (promoVM.IsChecked)
+            //    {
+            //        promoVM.ListPromoRoot = promoVM.getDataEmployee();
+
+            //    }
+            //    else
+            //    {
+            //        promoVM.ListPromoRoot = promoVM.getDeletedEmployee();
+            //    }
+
+            //    No_View_Updt();
+            //    Navigate((int)PagingMode.First);
+            //    updtLabel();
+            //    ListEmpUC.Visibility = Visibility.Visible;
+            //}
+        }
+        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //var dataGridCellTarget = (DataGridCell)sender;
+            //int columnIndex = dataGrid.CurrentColumn.DisplayIndex;
+            //Employee a = dataGridCellTarget.DataContext as Employee;
+            //EmpDetailUC.TakeEmp(a);
+            //EmpDetailUC.Visibility = Visibility.Visible;
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
         private void DataGrid_MouseLeave(object sender, MouseEventArgs e)
         {
             switch (ActiveBtn)
@@ -926,134 +931,6 @@ namespace IRES_Project.MasterData.MainPage
         }
 
 
-        private void DataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-
-            CellValidate(sender, e);
-        }
-
-        private void DataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            if (this.dataGrid.SelectedItem != null)
-            {
-                (sender as DataGrid).RowEditEnding -= DataGrid_RowEditEnding;
-                (sender as DataGrid).CommitEdit();
-                (sender as DataGrid).Items.Refresh();
-                (sender as DataGrid).RowEditEnding += DataGrid_RowEditEnding;
-            }
-            else return;
-            IList Row = dataGrid.SelectedItems;
-            Employee x = Row[0] as Employee;
-            switch (SelectedCol)
-            {
-                case "PhoneNb":
-                    {
-                        mainPageVM.UpdatePhoneNb(x.PhoneNb, x.EmployeeCode);
-                        break;
-                    }
-                case "Role":
-                    {
-                        mainPageVM.UpdateLocalEmpRoleId(x.Role, x.EmployeeCode); // Update local RoleId, local Role đã updated
-                        mainPageVM.UpdateRole(x.RoleId, x.EmployeeCode); // Update db RoleId
-                        break;
-                    }
-                case "EmployeeCode":
-                    {
-                        break;
-                    }
-                case "EmployeeName":
-                    {
-                        break;
-                    }
-                default:
-                    {
-                        break;
-                    }
-            }
-        }
-
-        private void CellValidate(object sender, DataGridCellEditEndingEventArgs e)
-        {
-
-            if (e.EditAction == DataGridEditAction.Commit)
-            {
-
-                var column = e.Column as DataGridBoundColumn;
-                DataGridComboBoxColumn clm = e.Column as DataGridComboBoxColumn;
-                if (column==null)
-                {
-                    var bindingPath = (clm.SelectedItemBinding as Binding).Path.Path;
-                    // rowIndex has the row index
-                    // bindingPath has the column's binding
-                    // el.Text has the new, user-entered value
-                    SelectedCol = bindingPath;
-                    switch (bindingPath)
-                    {
-                        case "PhoneNb":
-                            {
-                                int rowIndex = e.Row.GetIndex();
-                                var el = e.EditingElement as TextBox;
-                                if (!IsDigitsOnly(el.Text))
-                                {
-                                    MessageBox.Show("Số điện thoại không được chứa chữ cái");
-                                    e.Cancel = true;
-                                    (sender as DataGrid).CancelEdit(DataGridEditingUnit.Cell);
-                                }
-                                break;
-                            }
-                        case "Role":
-                            {
-                                break;
-                            }
-                        case "EmployeeCode":
-                            {
-                                break;
-                            }
-                        case "EmployeeName":
-                            {
-                                break;
-                            }
-                    }
-
-                }
-                if (column != null)
-                {
-
-                    var bindingPath = (column.Binding as Binding).Path.Path;
-                    // rowIndex has the row index
-                    // bindingPath has the column's binding
-                    // el.Text has the new, user-entered value
-                    SelectedCol = bindingPath;
-                    switch (bindingPath)
-                    {
-                        case "PhoneNb":
-                            {
-                                int rowIndex = e.Row.GetIndex();
-                                var el = e.EditingElement as TextBox;
-                                if (!IsDigitsOnly(el.Text))
-                                {
-                                    MessageBox.Show("Số điện thoại không được chứa chữ cái");
-                                    e.Cancel = true;
-                                    (sender as DataGrid).CancelEdit(DataGridEditingUnit.Cell);
-                                }
-                                break;
-                            }
-                        case "Role":
-                            {
-                                break;
-                            }
-                        case "EmployeeCode":
-                            {
-                                break;
-                            }
-                        case "EmployeeName":
-                            {
-                                break;
-                            }
-                    }
-                }
-            }
-        }
         bool IsDigitsOnly(string str)
         {
             foreach (char c in str)
@@ -1063,45 +940,6 @@ namespace IRES_Project.MasterData.MainPage
             }
 
             return true;
-        }
-       
-
-        private void MasterHeader_AddClick(object sender, RoutedEventArgs e)
-        {
-            //Window window = new Window
-            //{
-            //    Title = "Thêm nhân viên",
-            //    Content = new AddEmp()
-            //};
-
-            //window.ShowDialog();
-           
-            AddEmpUC.Visibility = Visibility.Visible;
-        }
-
-        private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if(ListEmpUC.Visibility == Visibility.Visible)
-            {
-                ListEmpUC.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                if (mainPageVM.IsChecked)
-                {
-                    mainPageVM.ListEmployeeRoot = mainPageVM.getDataEmployee();
-
-                }
-                else
-                {
-                    mainPageVM.ListEmployeeRoot = mainPageVM.getDeletedEmployee();
-                }
-
-                No_View_Updt();
-                Navigate((int)PagingMode.First);
-                updtLabel();
-                ListEmpUC.Visibility = Visibility.Visible;
-            }
         }
 
         private void EmpDetailUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -1115,7 +953,6 @@ namespace IRES_Project.MasterData.MainPage
                 ListEmpUC.Visibility = Visibility.Visible;
             }
         }
-
         private void EditEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (ListEmpUC.Visibility == Visibility.Visible)
@@ -1128,20 +965,6 @@ namespace IRES_Project.MasterData.MainPage
             }
         }
 
-        private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var dataGridCellTarget = (DataGridCell)sender;
-            int columnIndex = dataGrid.CurrentColumn.DisplayIndex;
-            Employee a = dataGridCellTarget.DataContext as Employee;
-            EmpDetailUC.TakeEmp(a);
-            EmpDetailUC.Visibility = Visibility.Visible;
-
-
-
-        }
-
-       
-
         private void CellSetColor(object sender, MouseEventArgs e)
         {
             DataGridCell cell = sender as DataGridCell;
@@ -1149,7 +972,7 @@ namespace IRES_Project.MasterData.MainPage
             int index = cell.Column.DisplayIndex;
             if (index == 0)
             {
-               
+
                 var dataGridCellTarget = (DataGridCell)sender;
 
                 var bc = new BrushConverter();
@@ -1157,13 +980,12 @@ namespace IRES_Project.MasterData.MainPage
                 dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Blue);
             }
         }
-
         private void CellRemoveColor(object sender, MouseEventArgs e)
         {
             DataGridCell cell = sender as DataGridCell;
             int index = cell.Column.DisplayIndex;
             if (index == 0)
-            {                
+            {
                 var dataGridCellTarget = (DataGridCell)sender;
 
                 var bc = new BrushConverter();
@@ -1172,15 +994,13 @@ namespace IRES_Project.MasterData.MainPage
                 dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
-        
-
         private void updtLabel()
         {
-            count = mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage).Count();
+            count = promoVM.ListPromoRoot.Take(numberOfRecPerPage).Count();
             from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
             if (count == 0)
                 from = 0;
-            lblpageInformation.Content = from + "-" + count + " of " + mainPageVM.ListEmployeeRoot.Count;
+            lblpageInformation.Content = from + "-" + count + " of " + promoVM.ListPromoRoot.Count;
         }
     }
 }
