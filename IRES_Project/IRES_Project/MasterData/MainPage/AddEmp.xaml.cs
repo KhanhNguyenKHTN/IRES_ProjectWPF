@@ -62,15 +62,20 @@ namespace IRES_Project.MasterData.MainPage
                     IsUserNameOk = true;
             }
            
-            if ( EmpPassWord=="" || EmpPassWord.Length<6)
+            if ( EmpPassWord=="")
             {
                 PassWordHasError();
-                MessageBox.Show("Password không hợp lệ");
+                MessageBox.Show("Mật khẩu không hợp lệ!");
+            }
+            else if (EmpPassWord.Length < 6)
+            {
+                PassWordHasError();
+                MessageBox.Show("Mật khẩu phải có ít nhất 6 kí tự!");
             }
             else if(EmpPassWord != EmpConfPassWord)
             {
                 PassWordHasError();
-                MessageBox.Show("Password không trùng khớp");
+                MessageBox.Show("Mật khẩu không trùng khớp");
             }
             else
             {
