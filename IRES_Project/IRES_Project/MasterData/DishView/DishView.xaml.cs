@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace IRES_Project.MasterData.DishView
         int no_Page;
         string SelectedCol;
         bool FirstRun = true;
-        List<DishModel> ListDish { get; set; }
+        ObservableCollection<DishModel> ListDish { get; set; }
 
         private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
 
@@ -44,7 +45,7 @@ namespace IRES_Project.MasterData.DishView
             InitializeComponent();
             this.DataContext = dishVM;
 
-            dishVM.ListDishes = new List<DishModel>(dishVM.ListDishesRoot.Take(numberOfRecPerPage));
+            dishVM.ListDishes = new ObservableCollection<DishModel>(dishVM.ListDishesRoot.Take(numberOfRecPerPage));
             //dataGrid.ItemsSource=dishVM.ListDishes.Take(numberOfRecPerPage);
             No_View_Updt();
             #region Config paging btn 2 trường hợp, 1 là khi khởi tạo, 1 là khi itemsource thay đổi
@@ -103,7 +104,7 @@ namespace IRES_Project.MasterData.DishView
 
                         if (dishVM.ListDishesRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() != 0) // còn item để lấy
                         {
-                            dishVM.ListDishes = new List<DishModel>(dishVM.ListDishesRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage));
+                            dishVM.ListDishes = new ObservableCollection<DishModel>(dishVM.ListDishesRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage));
                             if (ActiveBtn == 5 && ViewIndex != no_View)     //nút 5th
                             {
 
@@ -151,12 +152,12 @@ namespace IRES_Project.MasterData.DishView
                             btnPrev.Opacity = 0.75;
                             btnFirst.IsEnabled = false;
                             btnFirst.Opacity = 0.75;
-                            dishVM.ListDishes = new List<DishModel>(dishVM.ListDishesRoot.Take(numberOfRecPerPage));
+                            dishVM.ListDishes = new ObservableCollection<DishModel>(dishVM.ListDishesRoot.Take(numberOfRecPerPage));
                             updtLabel();
                         }
                         else
                         {
-                            dishVM.ListDishes = new List<DishModel>(dishVM.ListDishesRoot.Skip((CurPageIndex - 1) * numberOfRecPerPage).Take(numberOfRecPerPage));
+                            dishVM.ListDishes = new ObservableCollection<DishModel>(dishVM.ListDishesRoot.Skip((CurPageIndex - 1) * numberOfRecPerPage).Take(numberOfRecPerPage));
                             count = CurPageIndex * numberOfRecPerPage;
                             from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
                             lblpageInformation.Content = from + "-" + count + " of " + dishVM.ListDishesRoot.Count;
@@ -655,7 +656,7 @@ namespace IRES_Project.MasterData.DishView
             //{
             //    if (dishVM.IsChecked)
             //    {
-            //        ListDish = dishVM.searchEmployee(); //If == 0 tra ve list rong va thong bao
+            //        ListDish = dishVM.searchEmployee(); //If == 0 tra ve ObservableCollection rong va thong bao
             //    }
             //    else
             //    {
@@ -707,7 +708,7 @@ namespace IRES_Project.MasterData.DishView
         {
             if (dishVM.IsChecked)
             {
-                ListDish = dishVM.searchDish(); //If == 0 tra ve list rong va thong bao
+                ListDish = dishVM.searchDish(); //If == 0 tra ve ObservableCollection rong va thong bao
             }
             else
             {
@@ -745,7 +746,7 @@ namespace IRES_Project.MasterData.DishView
             //Employee a = rows[0] as Employee;
             //EditEmpUC.TakeEmp(a);
         }
-        public void RemoveItem(List<DishModel> collection, Employee instance)
+        public void RemoveItem(ObservableCollection<DishModel> collection, Employee instance)
         {
             //collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
         }
@@ -944,24 +945,24 @@ namespace IRES_Project.MasterData.DishView
      
         private void EmpDetailUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (ListEmpUC.Visibility == Visibility.Visible)
+            if (ListDishUC.Visibility == Visibility.Visible)
             {
-                ListEmpUC.Visibility = Visibility.Collapsed;
+                ListDishUC.Visibility = Visibility.Collapsed;
             }
             else
             {
-                ListEmpUC.Visibility = Visibility.Visible;
+                ListDishUC.Visibility = Visibility.Visible;
             }
         }
         private void EditEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (ListEmpUC.Visibility == Visibility.Visible)
+            if (ListDishUC.Visibility == Visibility.Visible)
             {
-                ListEmpUC.Visibility = Visibility.Collapsed;
+                ListDishUC.Visibility = Visibility.Collapsed;
             }
             else
             {
-                ListEmpUC.Visibility = Visibility.Visible;
+                ListDishUC.Visibility = Visibility.Visible;
             }
         }
       

@@ -53,7 +53,9 @@
     <Compile Include="Models\BillModel.cs" />
     <Compile Include="Models\BillStatisticModel.cs" />
     <Compile Include="Models\ChartStatisticModel.cs" />
+    <Compile Include="Models\DishItem.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\ItemModel.cs" />
     <Compile Include="Models\PromoModel.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\DishModel.cs" />

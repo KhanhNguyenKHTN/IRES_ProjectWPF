@@ -28,7 +28,7 @@ namespace Model.Models
             dishId = 1;
             resId  = 1;
             dishCode = "D-0011";
-            dishName = "Xôi mặn";
+            dishName = "";
             imageUrl = "";
             dishCookTime = new DateTime(2020, 2, 20, 0, 30, 0);
             dishCost = 50000;
@@ -37,18 +37,19 @@ namespace Model.Models
             comboId = 3;
             saleId = 0;
             dishStatus = "ACTIVE";
-            dishDescription = "Xôi mặn";
+            dishDescription = "";
             active = true ;
             version = 1;
         }
-       
+      
         private int     dishId;
         private int     resId;
         private string  dishCode;
         private string  dishName;
         private string  imageUrl;
-        private int     dishCost;
+        private double  dishCost;
         private string  dishType;
+        
         private int     dishCategoryId;
         private int     comboId;
         private int     saleId;
@@ -67,7 +68,7 @@ namespace Model.Models
         public string DishCode { get => dishCode; set => SetField( ref dishCode , value); }
         public string DishName { get => dishName; set => SetField( ref dishName , value); }
         public string ImageUrl { get => imageUrl; set => SetField( ref imageUrl , value); }
-        public int DishCost { get => dishCost; set => SetField( ref dishCost , value); }
+        public double DishCost { get => dishCost; set => SetField( ref dishCost , value); }
         public string DishType { get => dishType; set => SetField( ref dishType , value); }
         public int DishCategoryId { get => dishCategoryId; set => SetField( ref dishCategoryId , value); }
         public int ComboId { get => comboId; set => SetField( ref comboId , value); }
@@ -81,5 +82,6 @@ namespace Model.Models
         public bool Active { get => active; set => SetField( ref active , value); }
         public float Version { get => version; set => SetField( ref version , value); }
         public DateTime DishCookTime { get => dishCookTime; set => SetField(ref dishCookTime , value); }
+        
     }
 }

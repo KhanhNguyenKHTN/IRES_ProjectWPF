@@ -68,7 +68,7 @@
                                 HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"  CanUserSortColumns="True"  ColumnWidth="*" 
                                 materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"
                                 ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
-                                MouseLeave="DataGrid_MouseLeave"   >
+                                MouseLeave="DataGrid_MouseLeave" VerticalScrollBarVisibility="Visible"  >
                                 <DataGrid.Resources>
                                     <Style TargetType="{x:Type DataGridColumnHeader}">
                                         <Setter Property="BorderBrush" Value="Black" />

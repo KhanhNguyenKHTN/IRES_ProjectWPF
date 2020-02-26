@@ -9,6 +9,7 @@ using ViewModel.GlobalViewModels;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace ViewModel.MasterData
 {
@@ -16,7 +17,7 @@ namespace ViewModel.MasterData
     {
 
         public bool IsSearching = false;
-       public string Search_Text { get; set; } = null;
+        public string Search_Text { get; set; } = null;
 
         private bool _Refresh = false;
         public bool Refresh { get { return _Refresh; } set { _Refresh = value; OnPropertyChanged(); } }
@@ -29,9 +30,9 @@ namespace ViewModel.MasterData
 
         public DishViewModel()
         {
-            ListDishes = new List<DishModel>();
+            ListDishes = new ObservableCollection<DishModel>();
             ListDishes = getListDishes();
-            ListDishesRoot = new List<DishModel>();
+            ListDishesRoot = new ObservableCollection<DishModel>();
             ListDishesRoot = getListDishes();
 
             if (ListDishes.Count() == 0)
@@ -52,25 +53,25 @@ namespace ViewModel.MasterData
                 });
         }
 
-        private List<DishModel> _ListDishes;
+        private ObservableCollection<DishModel> _ListDishes;
 
-        public List<DishModel> ListDishes
+        public ObservableCollection<DishModel> ListDishes
         {
             get { return _ListDishes; }
             set { _ListDishes = value; OnPropertyChanged(); }
         }
-        private List<DishModel> _ListDishesRoot;
+        private ObservableCollection<DishModel> _ListDishesRoot;
 
-        public List<DishModel> ListDishesRoot
+        public ObservableCollection<DishModel> ListDishesRoot
         {
             get { return _ListDishesRoot; }
             set { _ListDishesRoot = value; OnPropertyChanged(); }
         }
 
-        public List<DishModel> getListDishes()
+        public ObservableCollection<DishModel> getListDishes()
         {
             IsSearching = false;
-            List<DishModel> listDishes = new List<DishModel>();  
+            ObservableCollection<DishModel> listDishes = new ObservableCollection<DishModel>();  
             listDishes = DishImplement.getDBListDishes();
             DishModel X = listDishes.First();
             if (X.DishId == -1)
@@ -82,10 +83,10 @@ namespace ViewModel.MasterData
             return listDishes;
         }
       
-        public List<DishModel> getDeletedDishes()
+        public ObservableCollection<DishModel> getDeletedDishes()
         {
             IsSearching = false;
-            List<DishModel> listDishes = new List<DishModel>();
+            ObservableCollection<DishModel> listDishes = new ObservableCollection<DishModel>();
             listDishes = DishImplement.getDBListDeletedDishes();
             DishModel X = listDishes.First();
             if (X.DishId == -1)
@@ -95,9 +96,9 @@ namespace ViewModel.MasterData
             }
             return listDishes;
         }
-        public List<DishModel> searchDish()
+        public ObservableCollection<DishModel> searchDish()
         {
-            List<DishModel> listDishes = new List<DishModel>();
+            ObservableCollection<DishModel> listDishes = new ObservableCollection<DishModel>();
             if (Search_Text == null)
             {
                 MessageBox.Show("Vui lòng gõ nội dung tìm kiếm");
@@ -120,9 +121,9 @@ namespace ViewModel.MasterData
             IsSearching = true;
             return listDishes;
         }
-        public List<DishModel> searchDeletedDish()
+        public ObservableCollection<DishModel> searchDeletedDish()
         {
-            List<DishModel> listDishes = new List<DishModel>();
+            ObservableCollection<DishModel> listDishes = new ObservableCollection<DishModel>();
             if (Search_Text == null)
             {
                 MessageBox.Show("Vui lòng gõ nội dung tìm kiếm");
@@ -217,7 +218,7 @@ namespace ViewModel.MasterData
         //}
 
 
-        //public void RemoveItem(List<DishModel> collection, DishModel instance)
+        //public void RemoveItem(ObservableCollection<DishModel> collection, DishModel instance)
         //{
         //    collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
         //}
