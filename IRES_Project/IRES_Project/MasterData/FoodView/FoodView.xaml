@@ -5,20 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IRES_Project.MasterData.FoodView"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      xmlns:ux="clr-namespace:IRES_Project.UC"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
+      xmlns:masterdataUC="clr-namespace:CustomControls.MasterData;assembly=CustomControls"
       mc:Ignorable="d" 
       >
-  <i:Interaction.Triggers>
-    <i:EventTrigger EventName="Loaded">
-      <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
-    </i:EventTrigger>
-  </i:Interaction.Triggers>
 
   <Grid >
     <!--#region Right Menu-->
-    <Border  Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
+    <Border BorderBrush="Black" BorderThickness="2" >
       <GroupBox Padding="0">
         <!--#region Header-->
         <GroupBox.Header >
@@ -38,7 +32,7 @@
           </Grid.RowDefinitions>
 
           <Grid Grid.Row="0">
-            <uc:MasterDataHeader />
+            <masterdataUC:MasterDataHeader />
           </Grid>
 
           <Grid Grid.Row="1">

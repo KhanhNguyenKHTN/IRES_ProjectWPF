@@ -30,7 +30,10 @@ namespace IRES_Project
         {
             InitializeComponent();
 
-            DataContext = new MainPageViewModel();
+            //Switcher.pageSwitcher = this;
+            //Switcher.Switch(new AddEmp());
+            //Switcher.Switch(new MainPage());
+            DataContext = new MainPage();
         }
 
         public void Navigate(UserControl nextPage)

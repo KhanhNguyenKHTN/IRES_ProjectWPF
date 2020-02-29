@@ -176,6 +176,12 @@
     <Compile Include="MasterData\FoodView\FoodView.xaml.cs">
       <DependentUpon>FoodView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MasterData\MainPage\EditEmp.xaml.cs">
+      <DependentUpon>EditEmp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MasterData\MainPage\EmpDetail.xaml.cs">
+      <DependentUpon>EmpDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Statistic\BillStatisticPage.xaml.cs">
       <DependentUpon>BillStatisticPage.xaml</DependentUpon>
     </Compile>
@@ -192,9 +198,6 @@
       <DependentUpon>ProductStatisticPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Switcher.cs" />
-    <Compile Include="UC\UserControlMenu.xaml.cs">
-      <DependentUpon>UserControlMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MasterData\MainPage\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -203,6 +206,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MasterData\MainPage\AddEmp.xaml" />
+    <Page Include="MasterData\MainPage\EditEmp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MasterData\MainPage\EmpDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Statistic\BillStatisticPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -216,10 +227,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Statistic\ProductStatisticPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UC\UserControlMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

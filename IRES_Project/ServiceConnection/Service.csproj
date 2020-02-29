@@ -88,6 +88,10 @@
       <Project>{a853e1cc-890f-482d-b5a1-2d60e7d1eb70}</Project>
       <Name>IRES_Globals</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{C8D7F380-EB45-4172-A57D-1DA54708933B}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

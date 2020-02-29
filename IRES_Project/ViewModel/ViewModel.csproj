@@ -52,6 +52,8 @@
     <Compile Include="GlobalViewModels\MasterDataHeaderViewModel.cs" />
     <Compile Include="MasterData\AddEmpViewModel.cs" />
     <Compile Include="MasterData\DishViewModel.cs" />
+    <Compile Include="MasterData\EditEmpViewModel.cs" />
+    <Compile Include="MasterData\EmpDetailViewModel.cs" />
     <Compile Include="Modules\LoginViewModel.cs" />
     <Compile Include="Modules\MainPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

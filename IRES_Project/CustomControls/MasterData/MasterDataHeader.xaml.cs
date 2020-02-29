@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using ViewModel.GlobalViewModels;
 using ViewModel.Modules;
 
-namespace CustomControls.GlobalControls
+namespace CustomControls.MasterData
 {
     /// <summary>
     /// Interaction logic for MasterDataHeader.xaml

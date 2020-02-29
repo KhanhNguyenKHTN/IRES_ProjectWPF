@@ -7,7 +7,7 @@
         
         xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:ux="clr-namespace:IRES_Project.UC"
+        xmlns:globaluc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
         
         xmlns:statisticview="clr-namespace:IRES_Project.Statistic"
         xmlns:masterdatafoodview="clr-namespace:IRES_Project.MasterData.FoodView"
@@ -26,14 +26,20 @@
     <DataTemplate x:Name="redViewTemplate" DataType="{x:Type mastermodule:MainPageViewModel}">
       <masterdatamainview:MainPage DataContext="{Binding}"/>
     </DataTemplate>
-    <DataTemplate x:Name="blueViewTemplate" DataType="{x:Type mastervm:DishViewModel}">
+        <DataTemplate x:Name="addEmpViewTemplate" DataType="{x:Type mastervm:AddEmpViewModel}">
+            <masterdatamainview:MainPage DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="empDetailViewTemplate" DataType="{x:Type mastervm:EmpDetailViewModel}">
+            <masterdatamainview:MainPage DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="blueViewTemplate" DataType="{x:Type mastervm:DishViewModel}">
       <masterdatafoodview:FoodView DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Name="orangeViewTemplate" DataType="{x:Type statisticvm:ChartStatisticViewModel}">
-      <statisticview:OverviewStatisticPage DataContext="{Binding}"/>
+        <statisticview:OverviewStatisticPage DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Name="billStatistic" DataType="{x:Type statisticvm:BillStatisticViewModel}">
-      <statisticview:BillStatisticPage DataContext="{Binding}"/>
+    <statisticview:BillStatisticPage DataContext="{Binding}"/>
     </DataTemplate>
     <DataTemplate x:Name="productStatistic" DataType="{x:Type statisticvm:ProductStatisticViewModel}">
       <statisticview:ProductStatisticPage DataContext="{Binding}" />
@@ -68,13 +74,13 @@
 
 
       <Grid Grid.Column="0">
-        <ux:UserControlMenu
+        <globaluc:LeftMenuControl
           DishClick="UserControlMenu_DishClick"
           StaffClick="UserControlMenu_StaffClick"
           OverviewStatisticClick="UserControlMenu_OverviewStatisticClick"
           BillStatisticClick="UserControlMenu_BillStatisticClick"
           ProductStatisticClick="UserControlMenu_ProductStatisticClick"
-          ></ux:UserControlMenu>
+          ></globaluc:LeftMenuControl>
       </Grid>
 
       <ContentControl Grid.Column="1" Content="{Binding}">
