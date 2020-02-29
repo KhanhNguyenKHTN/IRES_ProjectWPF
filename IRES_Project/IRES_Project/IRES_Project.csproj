@@ -198,9 +198,6 @@
       <DependentUpon>ProductStatisticPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Switcher.cs" />
-    <Compile Include="UC\UserControlMenu.xaml.cs">
-      <DependentUpon>UserControlMenu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MasterData\MainPage\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -230,10 +227,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Statistic\ProductStatisticPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UC\UserControlMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
