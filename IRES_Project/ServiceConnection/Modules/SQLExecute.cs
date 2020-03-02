@@ -396,5 +396,159 @@ namespace Service.Modules
             }
 
         }
+        public bool InsertDishQuery(string query, DishModel dish, ref int Id, string hour, string min)
+        {
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+
+            //add parameter
+            cmd.Parameters.Add("@dish_name", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@dish_name"].Value = dish.DishName;
+            cmd.Parameters.AddWithValue(dish.DishName);
+
+           // DateTime dishCookTime = new DateTime(2020, 3, 4, Convert.ToInt32(hour), Convert.ToInt32(min), 0);
+            TimeSpan cook = new TimeSpan(Convert.ToInt32( hour), Convert.ToInt32(min), 0);
+            cmd.Parameters.Add("@cook_time", NpgsqlTypes.NpgsqlDbType.Time);
+            cmd.Parameters["@cook_time"].Value = cook;
+            cmd.Parameters.AddWithValue(cook);
+
+            //cmd.Parameters.Add("@cook_time_hour", NpgsqlTypes.NpgsqlDbType.Text);
+            //cmd.Parameters["@cook_time_hour"].Value = hour;
+            //cmd.Parameters.AddWithValue(hour);
+
+            //cmd.Parameters.Add("@cook_time_min", NpgsqlTypes.NpgsqlDbType.Text);
+            //cmd.Parameters["@cook_time_min"].Value = min;
+            //cmd.Parameters.AddWithValue(min);
+
+            cmd.Parameters.Add("@dish_cost", NpgsqlTypes.NpgsqlDbType.Numeric);
+            cmd.Parameters["@dish_cost"].Value = Convert.ToDecimal(dish.DishCost);
+            cmd.Parameters.AddWithValue(Convert.ToDecimal(dish.DishCost));
+
+            cmd.Parameters.Add("@dish_type", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@dish_type"].Value = dish.DishType.ToUpper();
+            cmd.Parameters.AddWithValue(dish.DishType.ToUpper());
+
+            cmd.Parameters.Add("@dish_cate", NpgsqlTypes.NpgsqlDbType.Bigint);
+            cmd.Parameters["@dish_cate"].Value = dish.DishCategoryId;
+            cmd.Parameters.AddWithValue(dish.DishCategoryId);
+            
+            object a = null;
+            a = cmd.ExecuteScalar();
+            if (a != null)
+            {
+                Id = Convert.ToInt32(a);
+                return true;
+            }
+            else
+                return false;
+        }
+        public bool UpdateDishCodeQuery(string query, int dishId)
+        {
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+            string dishCodeString="D";
+            if( 0<= dishId && dishId <10 )
+            {
+                dishCodeString = "D-000" + dishId.ToString();
+            }
+            else if(dishId>=10 && dishId < 100)
+            {
+                dishCodeString = "D-00" + dishId.ToString();
+            }
+            else if (dishId >= 100 && dishId < 1000)
+            {
+                dishCodeString = "D-0" + dishId.ToString();
+            }
+            else if (dishId >= 1000 && dishId < 10000)
+            {
+                dishCodeString = "D-" + dishId.ToString();
+            }
+            //add parameter
+            cmd.Parameters.Add("@dish_code", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@dish_code"].Value = dishCodeString;
+            cmd.Parameters.AddWithValue(dishCodeString);
+
+            cmd.Parameters.Add("@dish_Id", NpgsqlTypes.NpgsqlDbType.Bigint);
+            cmd.Parameters["@dish_Id"].Value = dishId;
+            cmd.Parameters.AddWithValue(dishId);
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+        public bool InsertDishItemQuery(string query, DishItem item, ref int itemId, int dishId)
+        {
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+
+            //add parameter
+            cmd.Parameters.Add("@dish_id", NpgsqlTypes.NpgsqlDbType.Bigint);
+            cmd.Parameters["@dish_id"].Value = dishId;
+            cmd.Parameters.AddWithValue(dishId);
+
+            cmd.Parameters.Add("@item_id", NpgsqlTypes.NpgsqlDbType.Bigint);
+            cmd.Parameters["@item_id"].Value = item.ItemId;
+            cmd.Parameters.AddWithValue(item.ItemId);
+            
+            cmd.Parameters.Add("@item_quantity", NpgsqlTypes.NpgsqlDbType.Numeric);
+            cmd.Parameters["@item_quantity"].Value = item.ItemQuantity;
+            cmd.Parameters.AddWithValue(item.ItemQuantity);
+            
+            object a = null;
+            a = cmd.ExecuteScalar();
+            if (a != null)
+            {
+                itemId = Convert.ToInt32(a);
+                return true;
+            }
+            else
+                return false;
+        }
+        public bool UpdateItemCodeQuery(string query, int itemId)
+        {
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+            string dishCodeString = "D";
+            if (0 <= itemId && itemId < 10)
+            {
+                dishCodeString = "D-000" + itemId.ToString() +"-I";
+            }
+            else if (itemId >= 10 && itemId < 100)
+            {
+                dishCodeString = "D-00" + itemId.ToString() + "-I";
+            }
+            else if (itemId >= 100 && itemId < 1000)
+            {
+                dishCodeString = "D-0" + itemId.ToString() + "-I";
+            }
+            else if (itemId >= 1000 && itemId < 10000)
+            {
+                dishCodeString = "D-" + itemId.ToString() + "-I";
+            }
+            //add parameter
+            cmd.Parameters.Add("@dish_item_code", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@dish_item_code"].Value = dishCodeString;
+            cmd.Parameters.AddWithValue(dishCodeString);
+
+            cmd.Parameters.Add("@dish_item_id", NpgsqlTypes.NpgsqlDbType.Bigint);
+            cmd.Parameters["@dish_item_id"].Value = itemId;
+            cmd.Parameters.AddWithValue(itemId);
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
     }
 }

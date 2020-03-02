@@ -14,7 +14,8 @@ namespace ViewModel.MasterData
    public class AddDishViewModel : BaseViewModel
     {
         public ObservableCollection<string> ListRes = new ObservableCollection<string>() { "IRES cơ sở 1" };
-       
+        public ObservableCollection<string> DishTypeList { get; set; } = new ObservableCollection<string>() { "Khai vị", "Món chính","Món lẩu","Tráng miệng"};
+        
         public string Unit { get; set; } = "Kg";
         public int ItemIndex { get; set; } = 10;
         public ObservableCollection<ItemModel> ListItem { get; set; } = new ObservableCollection<ItemModel>();
@@ -53,6 +54,7 @@ namespace ViewModel.MasterData
         {
             
             ListDishItem.Add(new DishItem());
+           
             DishCateDict = GetListCategory();
             ListItem = GetListItem();
             ItemDict = ListItem.Select(p => new { id = p.ItemId, name = p.ItemName }).ToDictionary(x => x.id, x => x.name);
@@ -72,17 +74,36 @@ namespace ViewModel.MasterData
         }
 
 
-        //public bool NewEmpInsert()
-        //{            
-        //    //if (DishImplement.InsertUserToDb(NewEmp, ref User_Id))
-        //    //    NewEmp.UserId = User_Id;
-        //    //else
-        //    //    return false;
-        //    //if (EmployeeImplement.InsertEmpToDb(NewEmp))
-        //    //    return true;
-        //    //else
-        //    //    return false;
-        //}
+        public bool NewDishInsert(string hour, string min)
+        {
+
+            if (DishImplement.InsertDishToDb(NewDish, ref dish_Id, hour, min))
+            {
+                NewDish.DishId = dish_Id;
+                DishImplement.UpdateDishCode(dish_Id);
+                int itemId = -1;
+                foreach (DishItem a in listDishItem)
+                {
+                    DishImplement.InsertDishItemToDb(a, ref itemId, dish_Id);
+                    if (itemId != -1)
+                    {
+                        DishImplement.UpdateItemCode(itemId);
+                        itemId = -1;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Có lỗi khi thêm DishItem");
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi khi thêm DishItem");
+                return false;
+            }
+            return true;
+        }
         public ObservableCollection<ItemModel> GetListItem()
         {
             ObservableCollection<ItemModel> ListItemTemp = new ObservableCollection<ItemModel>();

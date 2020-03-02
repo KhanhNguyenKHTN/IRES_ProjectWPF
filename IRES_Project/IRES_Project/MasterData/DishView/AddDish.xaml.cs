@@ -27,19 +27,30 @@ namespace IRES_Project.MasterData.DishView
     {
 
         AddDishViewModel AddDishVm = new AddDishViewModel();
-        bool MyIsFocused = false;
-        bool IsUserNameOk, IsEmailOK = true;
+        bool IsDishItemOK, IsDishPriceOK, IsDishCookTimeOK = false;
+        bool IsDishNameOk = true;
 
         public AddDish()
         {
             InitializeComponent();
             this.DataContext = AddDishVm;
             ResComb.ItemsSource = AddDishVm.ListRes;
+          
         }
         #region chua làm
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            AddDish_CheckDishNameError();
+            if(!Check_Dish_ItemList())
+            {
+                MessageBox.Show("Nguyên liệu phải có trọng lượng lớn hơn 0 và nhỏ hơn 10");
+            }
+            AddDish_CheckCookTime();
+            if(IsDishItemOK && IsDishPriceOK && IsDishCookTimeOK && IsDishNameOk)
+            {
+                AddDishVm.NewDishInsert(textboxHour.Text, textboxMin.Text);
+                
+            }
             //#region save
             //var bc = new BrushConverter();
             //AddDishVm.NewEmp.RoleId = AddDishVm.RoleDict[AddDishVm.NewEmp.Role]; //update RoleId
@@ -189,11 +200,99 @@ namespace IRES_Project.MasterData.DishView
 
 
         #endregion
+        #region Danh sách nguyên liệu
+        #region Chức năng search trên combobox
+        //private void ComboBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        //{
+        //    ComboBox cmb = (ComboBox)sender;
 
-        #region Xử lí
+        //    cmb.IsDropDownOpen = true;
+
+        //    if (!string.IsNullOrEmpty(cmb.Text))
+        //    {
+        //        string fullText = cmb.Text.Insert(GetChildOfType<TextBox>(cmb).CaretIndex, e.Text);
+        //        // cmb.ItemsSource = AddDishVm.ItemDict.Where(s => s.IndexOf(fullText, StringComparison.InvariantCultureIgnoreCase) != -1).ToList();
+        //        cmb.ItemsSource = AddDishVm.ItemDict.Where(s => s.Value.ToUpper().Contains(fullText.ToUpper()));
+
+        //    }
+        //    else if (!string.IsNullOrEmpty(e.Text))
+        //    {
+        //        cmb.ItemsSource = AddDishVm.ItemDict.Where(s => s.Value.ToUpper().Contains(e.Text.ToUpper()));
+        //    }
+        //    else
+        //    {
+        //        cmb.ItemsSource = AddDishVm.ItemDict;
+        //    }
+        //}
+        //private void ComboBox_PreviewKeyUp(object sender, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Back || e.Key == Key.Delete)
+        //    {
+        //        ComboBox cmb = (ComboBox)sender;
+
+        //        cmb.IsDropDownOpen = true;
+
+        //        if (!string.IsNullOrEmpty(cmb.Text))
+        //        {
+        //            cmb.ItemsSource = AddDishVm.ItemDict.Where(s => s.Value.ToUpper().Contains(cmb.Text.ToUpper()));
+        //        }
+        //        else
+        //        {
+        //            cmb.ItemsSource = AddDishVm.ItemDict;
+        //        }
+        //    }
+        //}
+        //private void ComboBox_Pasting(object sender, DataObjectPastingEventArgs e)
+        //{
+        //    ComboBox cmb = (ComboBox)sender;
+
+        //    cmb.IsDropDownOpen = true;
+
+        //    string pastedText = (string)e.DataObject.GetData(typeof(string));
+        //    string fullText = cmb.Text.Insert(GetChildOfType<TextBox>(cmb).CaretIndex, pastedText);
+
+        //    if (!string.IsNullOrEmpty(fullText))
+        //    {
+        //        cmb.ItemsSource = AddDishVm.ItemDict.Where(s => s.Value.ToUpper().Contains(fullText.ToUpper()));
+        //    }
+        //    else
+        //    {
+        //        cmb.ItemsSource = AddDishVm.ItemDict; 
+        //    }
+        //}
+        //public static T GetChildOfType<T>(DependencyObject depObj) where T : DependencyObject
+        //{
+        //    if (depObj == null) return null;
+
+        //    for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+        //    {
+        //        var child = VisualTreeHelper.GetChild(depObj, i);
+
+        //        var result = (child as T) ?? GetChildOfType<T>(child);
+        //        if (result != null) return result;
+        //    }
+        //    return null;
+        //}
+        #endregion
+
+
+        private bool Check_Dish_ItemList()
+        {
+            foreach (DishItem a in AddDishVm.ListDishItem)
+            {
+                if (a.IsQuantityZero == true)
+                {
+                    IsDishItemOK = false;
+                    return false;
+                }
+            }
+            IsDishItemOK = true;
+            return true;
+        }
         private void DataGrid_MouseLeave(object sender, MouseEventArgs e)
         {
             btnSave.Focus();
+          
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
@@ -216,7 +315,7 @@ namespace IRES_Project.MasterData.DishView
             DishItem b = rows[0] as DishItem;
 
             b.DishItemUnitPrice = AddDishVm.PriceDict[b.ItemId];
-            b.DishItemTotalPrice = b.DishItemUnitPrice * b.ItemQuantity;
+            b.DishItemTotalPrice = b.DishItemUnitPrice * (double)b.ItemQuantity;
         }
 
         private void ComboboxFoodType_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -228,6 +327,7 @@ namespace IRES_Project.MasterData.DishView
             //string a = AddDishVm.ListDishItem[0].ItemId.ToString();
             //MessageBox.Show(a);
         }
+        #endregion
         #region Textbox số lượng
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -235,7 +335,8 @@ namespace IRES_Project.MasterData.DishView
             if (rows.Count != 0)
             {
                 DishItem b = rows[0] as DishItem;
-                b.ItemQuantity++;
+                if (b.ItemQuantity < 10)
+                    b.ItemQuantity+=0.1m;
             }
         } 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -244,8 +345,8 @@ namespace IRES_Project.MasterData.DishView
             if (rows.Count != 0)
             {
                 DishItem b = rows[0] as DishItem;
-                if(b.ItemQuantity>1)
-                b.ItemQuantity--;
+                if(b.ItemQuantity>0)
+                b.ItemQuantity-=0.1m;
             }
         }
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -254,35 +355,54 @@ namespace IRES_Project.MasterData.DishView
             if (rows.Count != 0)
             {
                 DishItem b = rows[0] as DishItem;
-
-               
-
-
                 if (e.Key == Key.Up)
                 {
-                    b.ItemQuantity++;
+                    if(b.ItemQuantity <10)
+                        b.ItemQuantity += 0.1m;
                 }
 
-                if (e.Key == Key.Down &&b.ItemQuantity!=1)
+                if (e.Key == Key.Down &&b.ItemQuantity >0)
                 {
-                    b.ItemQuantity--;
+                    if(b.ItemQuantity > 0)
+                        b.ItemQuantity -= 0.1m;
                 }
             }
         }
+        private void TextboxQuantity_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            TextBox mytxtbox = sender as TextBox;
+            if(mytxtbox.Text =="")
+            {
+                mytxtbox.Text = "0.0";
+            }
             IList rows = DataGridItem.SelectedItems;
             if (rows.Count != 0)
             {
                 DishItem b = rows[0] as DishItem;
-
+                
+                if (b.ItemQuantity == 0 || b.ItemQuantity>=10)
+                {
+                    b.IsQuantityZero = true;
+                }
+                else
+                    b.IsQuantityZero = false;
                 b.DishItemUnitPrice = AddDishVm.PriceDict[b.ItemId];
-                b.DishItemTotalPrice = b.DishItemUnitPrice * b.ItemQuantity;
+                b.DishItemTotalPrice = b.DishItemUnitPrice * (double)b.ItemQuantity;
             }
         }
         #endregion
 
         #region textbox Giá món
+        private void TextboxDishPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
         private void MyGrid_LostFocus(object sender, RoutedEventArgs e)
         {
             //textboxDishPrice.Visibility = Visibility.Collapsed;
@@ -305,58 +425,60 @@ namespace IRES_Project.MasterData.DishView
 
         private void TextboxDishPrice_TextChanged(object sender, TextChangedEventArgs e)
         {
-          
             double cost = AddDishVm.NewDish.DishCost;
             if(cost%1000!=0)
             {
-                AddDish_DishPriceError();
+             AddDish_DishPriceError("Lẻ");
             }
             else
             {
-                AddDish_DishPriceOk();
+                if(cost==0||cost < AddDish_GetTotalItemPrice())
+                { 
+                    AddDish_DishPriceError("0");
+                }
+                else
+                    AddDish_DishPriceOk();
             }
         }
+        private void AddDish_DishPriceError(string error)
+        {
+            IsDishPriceOK = false;
+            if (error == "Lẻ")
+            {
+                gridDishPriceError.Visibility = Visibility.Visible;
+                gridDishPriceZero.Visibility = Visibility.Collapsed;
+                textboxDishPrice.BorderBrush = System.Windows.Media.Brushes.Red;
+                textboxDishPrice2.BorderBrush = System.Windows.Media.Brushes.Red;
+            }
+            if (error == "0" )
+            {
+                gridDishPriceZero.Visibility = Visibility.Visible;
+                gridDishPriceError.Visibility = Visibility.Collapsed;
+                textboxDishPrice.BorderBrush = System.Windows.Media.Brushes.Red;
+                textboxDishPrice2.BorderBrush = System.Windows.Media.Brushes.Red;
+            }
+        }
+        private void AddDish_DishPriceOk()
+        {
+            IsDishPriceOK = true;
+            gridDishPriceError.Visibility = Visibility.Collapsed;
+            gridDishPriceZero.Visibility = Visibility.Collapsed;
+            textboxDishPrice.BorderBrush = System.Windows.Media.Brushes.Black;
+            textboxDishPrice2.BorderBrush = System.Windows.Media.Brushes.Black;
+        }
+        private int AddDish_GetTotalItemPrice()
+        {
+            double result = 0;
+            foreach( DishItem dishItem in AddDishVm.ListDishItem)
+            {
+                result += dishItem.DishItemTotalPrice;
+            }
+            return (int)result ;
+        }
         #endregion
-        private void TextboxDishPrice_LostFocus(object sender, RoutedEventArgs e)
-        {
-            //double value = AddDishVm.NewDish.DishCost;
-            //var info = System.Globalization.CultureInfo.GetCultureInfo("en-US");
-            //string a = value.ToString("#,##0.###");
-            //string b = String.Format("{0:#,##0.##}", 12314);
-
-            //double value = AddDishVm.NewDish.DishCost;
-            //string a = value.ToString("#,##0.###");
-            //a.Replace(".", "k");
-            //MessageBox.Show(a);
-
-            //int a = 10000000;
-            //String.Format("{0:n0}", a);
-            //string b = String.Format("{0:n0}", 9876);
-            //b.Replace('.', 'k');
-
-            //string temp = textboxDishPrice.Text;
-            //textboxDishPrice.Text = string.Format("{0:n0}", temp);
 
 
-            
-        }
 
-        private void TextboxDishPrice2_LostFocus(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TextboxDishPrice2_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
-        private void TextboxDishPrice_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
-       
 
 
         //private void TextBox_GotFocus(object sender, RoutedEventArgs e)
@@ -382,70 +504,279 @@ namespace IRES_Project.MasterData.DishView
 
 
 
+
+
+
       
 
 
-        private void TextboxMin_PreviewKeyDown(object sender, KeyEventArgs e)
+        #region Thời gian nấu
+        private void AddDish_CheckCookTime()
         {
-            if (e.Key == Key.Up && textboxMin.Text != "59")
+            IsDishCookTimeOK = true;
+            int min;
+            int hour;
+            int.TryParse(textboxMin.Text, out min);
+            int.TryParse(textboxHour.Text, out hour);
+            if (hour<0 || hour>23)
             {
-                int i = Convert.ToInt32(textboxMin.Text);
-                i++;
-                textboxMin.Text = i.ToString();
+                IsDishCookTimeOK = false;
             }
-
-            if (e.Key == Key.Down && textboxMin.Text !="0")
+            if(hour==0 && min==0 || min<0 || min >=60)
             {
-                int i = Convert.ToInt32(textboxMin.Text);
-                i--;
-                textboxMin.Text = i.ToString();
+                IsDishCookTimeOK = false;
             }
         }
-        private void TextboxDishPrice_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextboxHour_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            int hour;
+            if (e.Key == Key.Up && textboxHour.Text != "23")
+            {
+                int.TryParse(textboxHour.Text, out hour);
+                hour++;
+                textboxHour.Text = hour.ToString();
+            }
+
+            if (e.Key == Key.Down && textboxHour.Text != "0" && textboxHour.Text != "")
+            {
+                int.TryParse(textboxHour.Text, out hour);
+                hour--;
+                textboxHour.Text = hour.ToString();
+            }
+        }
+        private void TextboxMin_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                int min;
+                int hour;
+                int.TryParse(textboxMin.Text, out min);
+                int.TryParse(textboxHour.Text, out hour);
+                if (e.Key == Key.Up && min != 59)
+                {                
+                    min++;
+                    textboxMin.Text = min.ToString();
+                }
+                if (hour != 0)
+                {
+                    if (e.Key == Key.Down && min > 0)
+                    {
+                        min--;
+                        textboxMin.Text = min.ToString();
+                    }
+                }
+                if (hour == 0)
+                {
+                    if (e.Key == Key.Down && min > 1)
+                    {
+                        min--;
+                        textboxMin.Text = min.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void TextboxMin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                int min;
+                int hour;
+                int.TryParse(textboxMin.Text, out min);
+                int.TryParse(textboxHour.Text, out hour);
+                if (textboxMin.Text == "")
+                {
+                    stackpanelMinError0_59.Visibility = Visibility.Collapsed;
+                    stackpanelMinError1_59.Visibility = Visibility.Collapsed;
+                    stackpanelMinErrorEmpty.Visibility = Visibility.Visible;
+                    textboxMin.BorderBrush = System.Windows.Media.Brushes.Red;
+                }
+                if (textboxMin.Text != "")
+                {
+                    stackpanelMinErrorEmpty.Visibility = Visibility.Collapsed;
+                    textboxMin.BorderBrush = System.Windows.Media.Brushes.Black;
+                   
+                    if (hour == 0)
+                    {
+                        if (min > 59)
+                        {
+                            stackpanelMinError1_59.Visibility = Visibility.Visible;
+                            textboxMin.BorderBrush = System.Windows.Media.Brushes.Red;
+                        }
+                        else if (min == 0)
+                        {
+                            stackpanelMinError1_59.Visibility = Visibility.Visible;
+                            textboxMin.BorderBrush = System.Windows.Media.Brushes.Red;
+                        }
+                        else
+                        {
+                            stackpanelMinError1_59.Visibility = Visibility.Collapsed;
+                            textboxMin.BorderBrush = System.Windows.Media.Brushes.Black;
+                        }
+                    }
+                    else
+                    {
+                        if (min > 59)
+                        {
+                            stackpanelMinError0_59.Visibility = Visibility.Visible;
+                            textboxMin.BorderBrush = System.Windows.Media.Brushes.Red;
+                        }
+
+                        else
+                        {
+                            stackpanelMinError0_59.Visibility = Visibility.Collapsed;
+                            textboxMin.BorderBrush = System.Windows.Media.Brushes.Black;
+                        }
+                    }
+                }   
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void TextboxHour_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (textboxHour.Text == "")
+            {
+                stackpanelHourErrorEmpty.Visibility = Visibility.Visible;
+                textboxHour.BorderBrush = System.Windows.Media.Brushes.Red;
+            }
+            else
+            {
+                stackpanelHourErrorEmpty.Visibility = Visibility.Collapsed;
+                textboxHour.BorderBrush = System.Windows.Media.Brushes.Black;
+                int hour = Convert.ToInt32(textboxHour.Text);
+                if (hour > 23)
+                {
+                    stackpanelHourError.Visibility = Visibility.Visible;
+                    textboxHour.BorderBrush = System.Windows.Media.Brushes.Red;
+                }
+                else
+                {
+
+                    if (textboxMin.Text == "0" || textboxMin.Text == "00")
+                    {
+                        if (hour != 0)
+                        {
+                            {
+                                stackpanelMinError1_59.Visibility = Visibility.Collapsed;
+                                textboxMin.BorderBrush = System.Windows.Media.Brushes.Black;
+                            }
+                        }
+                        else
+                        {
+                            stackpanelMinError1_59.Visibility = Visibility.Visible;
+                            textboxMin.BorderBrush = System.Windows.Media.Brushes.Red;
+                        }
+
+                        stackpanelHourError.Visibility = Visibility.Collapsed;
+                        textboxHour.BorderBrush = System.Windows.Media.Brushes.Black;
+                    }
+                }
+            }
+        }
+        private void TextboxMin_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+            //if(textboxMin.CaretIndex==1)
+            //e.Handled = !IsValid(((TextBox)sender).Text + e.Text);
+            //else if(textboxMin.CaretIndex == 0)
+            //{
+            //    e.Handled = !IsValid(e.Text+ ((TextBox)sender).Text);
+            //}
         }
 
-
-
-
-        private void TextboxHour_PreviewKeyDown(object sender, KeyEventArgs e)
+        public  bool IsValid(string str)
         {
-            if (e.Key == Key.Up && textboxHour.Text != "24")
+            int i;
+            if(textboxHour.Text =="")
             {
-                int i = Convert.ToInt32(textboxHour.Text);
-                i++;
-                textboxHour.Text = i.ToString();
+                textboxHour.Text = "0";
             }
+            int hour = Convert.ToInt32(textboxHour.Text);
+            if (hour != 0)
+            {
+                return int.TryParse(str, out i) && i >= 0 && i <= 59;
+            }
+            else if (hour == 0 )
+            {
+                if (textboxMin.Text == "")
+                {
+                    return int.TryParse(str, out i) && i >= 0 && i <= 59;
+                }
+                else if(textboxMin.Text == "0")
+                {
+                    return int.TryParse(str, out i) && i >= 1 && i <= 59;
+                }
+                else
+                {
+                    return int.TryParse(str, out i) && i >= 0 && i <= 59;
+                }
+                    
+            }
+            else
+                return false;
+        }
+       
+        private void TextboxHour_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+           
 
-            if (e.Key == Key.Down && textboxHour.Text != "0")
-            {
-                int i = Convert.ToInt32(textboxHour.Text);
-                i--;
-                textboxHour.Text = i.ToString();
-            }
+            //if( textboxHour.CaretIndex ==1)
+            //  e.Handled = !IsValidForHour(((TextBox)sender).Text + e.Text);
+            //else if(textboxHour.CaretIndex == 0)
+            //  {
+            //      e.Handled = !IsValidForHour(e.Text + ((TextBox)sender).Text);
+            //  }
+
         }
         #endregion
 
 
+
+        #region Tên món
+        private void AddDish_CheckDishNameError()
+        {
+            if (textboxDishName.Text == "")
+            {
+                IsDishNameOk = false;
+                textboxDishName.BorderBrush = System.Windows.Media.Brushes.Red;
+                gridNameError.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                IsDishNameOk = true;
+                textboxDishName.BorderBrush = System.Windows.Media.Brushes.Black;
+                gridNameError.Visibility = Visibility.Collapsed;
+            }
+        }
+        
+        private void TextboxDishName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(textboxDishName.Text=="")
+            {
+                textboxDishName.BorderBrush = System.Windows.Media.Brushes.Red;
+                gridNameError.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                textboxDishName.BorderBrush = System.Windows.Media.Brushes.Black;
+                gridNameError.Visibility = Visibility.Collapsed;
+            }
+        }
+        #endregion
+     
        
 
-
-
-        private void AddDish_DishPriceError()
-        {
-            gridDishPriceError.Visibility = Visibility.Visible;
-            textboxDishPrice.BorderBrush = System.Windows.Media.Brushes.Red;
-            textboxDishPrice2.BorderBrush = System.Windows.Media.Brushes.Red;
-        }
-
        
-        private void AddDish_DishPriceOk()
-        {
-            gridDishPriceError.Visibility = Visibility.Collapsed;
-            textboxDishPrice.BorderBrush = System.Windows.Media.Brushes.Black;
-            textboxDishPrice2.BorderBrush = System.Windows.Media.Brushes.Black;
-        }
     }
 }

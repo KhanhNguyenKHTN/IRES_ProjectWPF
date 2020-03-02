@@ -224,5 +224,36 @@ namespace Implements.MasterData.Modules
 
             return result;
         }
+        public static bool InsertDishToDb(DishModel dish, ref int dishId, string hour, string min)
+        {
+            string query = $"insert into ires.dish(restaurant_id,dish_code, dish_name,dish_cook_time,dish_cost,dish_type, dish_category_id,dish_status, created_by,created_datetime,updated_by, updated_datetime,active,version)" +
+                                             $" values(1, 'D-099', '' || @dish_name ||'',  @cook_time  , @dish_cost,  '' || @dish_type||'', @dish_cate,  'ACTIVE', 'Admin', CURRENT_TIMESTAMP(0), 'Admin', CURRENT_TIMESTAMP(0), true, '0') returning dish_id";
+
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.InsertDishQuery(query, dish, ref dishId, hour,min);
+        }
+        public static bool UpdateDishCode(int dishId)
+        {
+            string query = $"UPDATE ires.dish " +
+                $"SET dish_code = '' || @dish_code || ''" +
+                $" WHERE dish_id = @dish_Id";   
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.UpdateDishCodeQuery(query, dishId);
+
+        }
+        public static bool InsertDishItemToDb(DishItem item, ref int itemId,int dishId)
+        {
+            string query = $"insert into ires.dish_item(dish_item_code,       dish_id,  item_id,  item_quantity, uom_id, dish_item_status, created_by,created_datetime,updated_by, updated_datetime,active,version)" +
+                                             $" values('D'  ,                @dish_id, @item_id, @item_quantity, 1     , 'ACTIVE', 'Admin', CURRENT_TIMESTAMP(0), 'Admin', CURRENT_TIMESTAMP(0), true, '0') returning dish_item_id";
+
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.InsertDishItemQuery(query, item, ref itemId, dishId);
+        }
+        public static bool UpdateItemCode(int dishItemId)
+        {
+            string query = $"UPDATE ires.dish_item SET dish_item_code = '' || @dish_item_code || '' WHERE dish_item_id = @dish_item_id";
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.UpdateItemCodeQuery(query, dishItemId);
+        }
     }
-}
+}               

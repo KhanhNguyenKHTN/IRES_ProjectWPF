@@ -52,7 +52,7 @@
                             <Style TargetType="ComboBox">
                                 <Setter Property="BorderBrush" Value="Black" />
                                 <Setter Property="BorderThickness" Value="1" />
-                                <Setter Property="Padding" Value="20 8 20 0" />
+                                <Setter Property="Padding" Value="20 3 20 0" />
                             </Style>
                         </Grid.Resources>
                         <Grid.ColumnDefinitions>
@@ -73,7 +73,9 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="1*"/>                                                             
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
@@ -150,8 +152,20 @@
                                     <Label>Loại món ăn:</Label>
                                 </Grid>
                             </Grid>
+                            <Grid Grid.Row="11">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0"></Grid>
+                                <Grid Grid.Column="1"></Grid>
+                                <Grid Grid.Column="2">
+                                    <Label>Món:</Label>
+                                </Grid>
+                            </Grid>
 
-                           
+
                         </Grid>
                         <!--#endregion-->
                         <!--#region  2nd Col-->
@@ -161,15 +175,17 @@
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
                                 <RowDefinition Height="1*"/>
-                              
-                            
+
+
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -208,42 +224,53 @@
                             </Grid>
 
                             <Grid Grid.Row="3" Grid.Column="1">
-                                <TextBox Name="textboxDishName" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewDish.DishName, Mode=TwoWay}"></TextBox>
+                                <TextBox Name="textboxDishName" TextChanged="TextboxDishName_TextChanged" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewDish.DishName, Mode=TwoWay}"></TextBox>
                             </Grid>
                             
-                            <Grid Grid.Row="3" Grid.Column="0">
-                                <materialDesign:PackIcon x:Name="iconDishNameError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Grid Grid.Row="4" Grid.Column="1" x:Name="gridNameError" Visibility="Collapsed" Margin="0 0 15 0" >
+                                
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Tên món không được trống"></Label>
+                                </StackPanel>
+
                             </Grid>
 
-                        
-                            
+
                             <Grid Grid.Row="5" Grid.Column="1" Name="MyGrid" LostFocus="MyGrid_LostFocus" MouseLeave="MyGrid_MouseLeave" MouseEnter="MyGrid_MouseEnter">
-                                <TextBox Name="textboxDishPrice" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" LostFocus="TextboxDishPrice_LostFocus"
+                                <TextBox Name="textboxDishPrice" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" 
                                          Text="{Binding NewDish.DishCost, Mode=TwoWay, Converter={StaticResource StringToDouble},
                                     UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
-                                   TextChanged="TextboxDishPrice_TextChanged" PreviewTextInput="TextboxDishPrice_PreviewTextInput"    Visibility="Collapsed"  IsVisibleChanged="TextboxDishPrice_IsVisibleChanged">
+                                   TextChanged="TextboxDishPrice_TextChanged" PreviewTextInput="TextboxDishPrice_PreviewTextInput"    Visibility="Collapsed" >
                                   
                                 </TextBox>
                           
-                                <TextBox Name="textboxDishPrice2" IsReadOnly="True" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" LostFocus="TextboxDishPrice2_LostFocus"
+                                <TextBox Name="textboxDishPrice2" IsReadOnly="True" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" 
                                          Text="{Binding NewDish.DishCost, Mode=OneWay,StringFormat='{}{0:0,0} VND',
                                     UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
-                                      IsVisibleChanged="TextboxDishPrice2_IsVisibleChanged" >
+                                      >
                                     
                                 </TextBox>
                                
                             </Grid>
 
 
-                            <Grid Grid.Row="6" Grid.Column="1" x:Name="gridDishPriceError" Visibility="Collapsed" >
-                                <StackPanel Orientation="Horizontal" >
-                                <materialDesign:PackIcon FontSize="11" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-                                <Label Margin=" 0 0 10 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giá tiền phải làm tròn tới phần ngàn"></Label>
+                            <Grid x:Name="gridDishPriceError" Grid.Row="6" Grid.Column="1"  Visibility="Collapsed" >
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                    <materialDesign:PackIcon FontSize="11" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label  Margin="0 -2 0 0"  FontSize="10" BorderThickness="0" Foreground ="Red"  Content="Giá tiền phải làm tròn tới phần ngàn"></Label>
                                 </StackPanel>
                             </Grid>
+                            <Grid x:Name="gridDishPriceZero" Grid.Row="6" Grid.Column="1"  Visibility="Collapsed" >
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                                    <materialDesign:PackIcon FontSize="11" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Label  Margin="0 -2 0 0"  FontSize="10" BorderThickness="0" Foreground ="Red"  Content="Giá tiền phải lớn hơn tổng giá nguyên liệu"></Label>
+                                </StackPanel>
+                            </Grid>
+
                             <!--#region Thoi gian nau-->
-                            <Grid Grid.Row="7" Grid.Column="1">
+                            <Grid  Grid.Row="7" Grid.Column="1">
                                 <!--<TextBox Name="textboxDishCookTime" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewDish.DishCookTime,StringFormat=HH:mm:ss}"></TextBox>-->
 
 
@@ -257,7 +284,8 @@
 
                                 <Grid Grid.Column="0" x:Name="hour" Focusable="True" >
 
-                                    <TextBox x:Name="textboxHour" TextWrapping="Wrap" PreviewKeyDown="TextboxHour_PreviewKeyDown" Text="{Binding NewDish.DishCookTime.Hour, Mode=OneTime}"
+                                    <TextBox x:Name="textboxHour" MaxLength="2" PreviewTextInput="TextboxHour_PreviewTextInput" TextChanged="TextboxHour_TextChanged" TextWrapping="Wrap" PreviewKeyDown="TextboxHour_PreviewKeyDown" 
+                                             Text="{Binding NewDish.DishCookTime.Hour, Mode=OneTime}"
 
                                          TextAlignment="Center" VerticalAlignment="Center" FontFamily="Goudy Stout" FontSize="14"/>
 
@@ -277,7 +305,7 @@
 
                                 <Grid  Grid.Column="3" x:Name="min" Focusable="True" >
 
-                                    <TextBox  x:Name="textboxMin"  TextWrapping="Wrap" PreviewKeyDown="TextboxMin_PreviewKeyDown" Text="{Binding NewDish.DishCookTime.Minute, Mode=OneTime}"
+                                    <TextBox  x:Name="textboxMin" MaxLength="2" TextChanged="TextboxMin_TextChanged" PreviewTextInput="TextboxMin_PreviewTextInput" TextWrapping="Wrap" PreviewKeyDown="TextboxMin_PreviewKeyDown" Text="{Binding NewDish.DishCookTime.Minute, Mode=OneTime}"
 
                                          TextAlignment="Center" VerticalAlignment="Center" FontFamily="Goudy Stout" FontSize="14"/>
 
@@ -287,11 +315,39 @@
                                 </Grid>
                             </Grid>
                             <!--#endregion-->
-                            <Grid Grid.Row="7" Grid.Column="0">
-                                <materialDesign:PackIcon x:Name="iconCookTimeError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                           
+
+                            <Grid Grid.Row="8" Grid.Column="1"   >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal" x:Name="stackpanelHourError"  Grid.Column="0"  Visibility="Collapsed">
+                                    <materialDesign:PackIcon Margin=" 0 2 0 0"  FontSize="8" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Thời gian không quá 23 giờ"></Label>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" x:Name="stackpanelHourErrorEmpty"  Grid.Column="0"  Visibility="Collapsed">
+                                    <materialDesign:PackIcon Margin=" 0 2 0 0" FontSize="8" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giờ không được để trống"></Label>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" x:Name="stackpanelMinError0_59"  Grid.Column="1"  Visibility="Collapsed">
+                                    <materialDesign:PackIcon Margin=" 0 2 0 0" FontSize="8" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giới hạn từ 0 đến 59 phút"></Label>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" x:Name="stackpanelMinError1_59"  Grid.Column="1"  Visibility="Collapsed">
+                                    <materialDesign:PackIcon Margin=" 0 2 0 0" FontSize="8" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giới hạn từ 1 đến 59 phút"></Label>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" x:Name="stackpanelMinErrorEmpty"  Grid.Column="1"  Visibility="Collapsed">
+                                    <materialDesign:PackIcon Margin=" 0 2 0 0" FontSize="8" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Phút không được để trống"></Label>
+                                </StackPanel>
                             </Grid>
-                            
-                        
 
                             <Grid Grid.Row="9" Grid.Column="1">
 
@@ -302,11 +358,15 @@
                                 </ComboBox>
 
                             </Grid>
+                            <Grid Grid.Row="11" Grid.Column="1">
 
+                                <ComboBox Name="comboboxFoodType2"  VerticalContentAlignment="Stretch"
+                                          ItemsSource ="{Binding DishTypeList}"
+                                          SelectedValue="{Binding NewDish.DishType, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
+                                          >
+                                </ComboBox>
 
-
-
-
+                            </Grid>
                             <!--#endregion-->
                             <!--#endregion-->
                         </Grid>
@@ -334,7 +394,16 @@
                                     materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"
                                     ItemsSource="{Binding ListDishItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
                                     MouseLeave="DataGrid_MouseLeave"  VerticalScrollBarVisibility="Visible" >
+                               
                                 <DataGrid.Resources>
+                                    
+                                    <!--<Style  TargetType="DataGridCell">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding FSCP, UpdateSourceTrigger=PropertyChanged}" Value="True">
+                                                <Setter Property="Background" Value="Blue"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>-->
                                     <Style TargetType="{x:Type DataGridColumnHeader}">
                                         <Setter Property="BorderBrush" Value="Black" />
                                         <Setter Property="Background" Value="#FF3580BF" />
@@ -365,12 +434,13 @@
                                     <DataGridTemplateColumn IsReadOnly="False" Width="2*" Header="Tên nguyên liệu" x:Name="cmbItemName" >
                                         <DataGridTemplateColumn.CellTemplate >
                                             <DataTemplate>
-                                                <ComboBox HorizontalContentAlignment="Center" Margin="10 0 10 0" Padding="5 0 5 0" Background="WhiteSmoke" Foreground="Black" 
-                                          DisplayMemberPath="Value" SelectedValuePath="Key" ItemsSource ="{Binding Path=DataContext.ItemDict, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                          SelectionChanged="ComboboxFoodType_SelectionChanged" SelectedValue="{Binding ItemId, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
-                                                          
-                                                DropDownClosed="ComboBox_DropDownClosed" Width="200">
+                                                <ComboBox HorizontalContentAlignment="Center"  Margin="10 0 10 0" Padding="5 0 5 0" Background="WhiteSmoke" Foreground="Black" 
+                                                 DisplayMemberPath="Value" SelectedValuePath="Key" ItemsSource ="{Binding Path=DataContext.ItemDict, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                 SelectionChanged="ComboboxFoodType_SelectionChanged" SelectedValue="{Binding ItemId,ValidatesOnDataErrors=True, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
+                                                 IsTextSearchEnabled="True" Name="comboboxDishItem" Visibility="Visible" IsEditable="False" 
+                                                 DropDownClosed="ComboBox_DropDownClosed" Width="200">
                                                 </ComboBox>
+                                                <!-- PreviewTextInput="ComboBox_PreviewTextInput" PreviewKeyUp="ComboBox_PreviewKeyUp" DataObject.Pasting="ComboBox_Pasting"-->
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -379,12 +449,25 @@
                                         <DataGridTemplateColumn.CellTemplate >
                                             <DataTemplate>
                                                 <Grid>
+                                                    <Grid.Resources>
+                                                        <Style TargetType="TextBox">
+                                                            <Setter Property="Foreground" Value="Black" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsQuantityZero}" Value="true">
+                                                                    <Setter Property="Foreground" Value="Red"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </Grid.Resources>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                                         <ColumnDefinition Width="1*"></ColumnDefinition>                                                       
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBox Name="textboxQuantity" Margin="15 1 0 10" PreviewKeyDown="TextBox_PreviewKeyDown" TextChanged="TextBox_TextChanged" Text="{Binding ItemQuantity, Mode=TwoWay, StringFormat='{}{0:#0.0}',
-                                                        UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" Grid.Column="0"></TextBox>
+                                                    <TextBox Name="textboxQuantity" VerticalAlignment="Center" Margin="20 0 0 0"
+                                                             PreviewKeyDown="TextBox_PreviewKeyDown" TextChanged="TextBox_TextChanged" PreviewTextInput="TextboxQuantity_PreviewTextInput"
+                                                             Text="{Binding ItemQuantity, Mode=TwoWay, StringFormat='{}{0:#0.0}',
+                                                        UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" Grid.Column="0">
+                                                    </TextBox>
                                                     <StackPanel Margin="10 0 0 0" Grid.Column="1">
                                                         <Button Click="Button_Click"    Height="20" BorderBrush="Transparent" BorderThickness="0" Padding="-4" Background="Transparent"   >
                                                             <materialDesign:PackIcon Foreground="Black" FontSize="8" Kind="ArrowUpDropCircleOutline" />
@@ -393,10 +476,20 @@
                                                             <materialDesign:PackIcon Foreground="Black" FontSize="8" Kind="ArrowDownDropCircleOutline" />
                                                         </Button>
                                                          </StackPanel>
-
+                                                  
                                                 </Grid>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
+                                        <!--<DataGridTemplateColumn.CellEditingTemplate>
+                                            <DataTemplate>
+                                                <DataTemplate.Triggers>
+                                                    <DataTrigger Binding="{Binding IsQuantityZero}" Value="false">
+                                                       
+                                                         
+                                                    </DataTrigger>
+                                                </DataTemplate.Triggers>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellEditingTemplate>-->
                                     </DataGridTemplateColumn>
 
                                     <DataGridTextColumn IsReadOnly="True" Width="1*" Header="Đơn vị"   Binding="{Binding Path=DataContext.Unit, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"  />

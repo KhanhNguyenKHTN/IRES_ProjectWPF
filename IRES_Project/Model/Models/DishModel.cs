@@ -32,7 +32,7 @@ namespace Model.Models
             imageUrl = "";
             dishCookTime = new DateTime(2020, 2, 20, 0, 30, 0);
             dishCost = 50000;
-            dishType = "KHAI VỊ";
+            dishType = "Khai vị";
             dishCategoryId = 6;
             comboId = 3;
             saleId = 0;

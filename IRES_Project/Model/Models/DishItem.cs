@@ -25,18 +25,20 @@ namespace Model.Models
         }
         public DishItem()
         {
-            DishItemTotalPrice = 50000;
+            DishItemTotalPrice = 25000;
             DishItemUnitPrice = 50000;
-            ItemId = 8;
-            ItemQuantity = 1.0;
+            ItemId = 8; 
+            ItemQuantity = 0.5m;
+            IsQuantityZero = false;
         }
+        private bool isQuantityZero;
         private double dishItemTotalPrice;
         private int dishItemId;
         private double dishItemUnitPrice;
-        private string disItemCode;
+        private string dishItemCode;
         private int dishId;
         private int itemId;
-        private double itemQuantity;
+        private decimal itemQuantity;
         private int uomId;
         private string dishItemStatus;
         private string createBy;
@@ -47,11 +49,11 @@ namespace Model.Models
         private bool active;
         private float version;
 
-        public string DisItemCode { get => disItemCode; set => SetField(ref disItemCode , value); }
+        public string DisItemCode { get => dishItemCode; set => SetField(ref dishItemCode , value); }
         public int DishItemId { get => dishItemId; set => SetField(ref dishItemId , value); }
         public int DishId { get => dishId; set => SetField(ref dishId , value); }
         public int ItemId { get => itemId; set => SetField(ref itemId , value); }
-        public double ItemQuantity { get => itemQuantity; set => SetField(ref itemQuantity , value); }
+        public decimal ItemQuantity { get => itemQuantity; set => SetField(ref itemQuantity , value); }
         public int UomId { get => uomId; set => SetField(ref uomId , value); }
         public string DishItemStatus { get => dishItemStatus; set => SetField(ref dishItemStatus , value); }
         public string CreateBy { get => createBy; set => SetField(ref createBy , value); }
@@ -64,5 +66,6 @@ namespace Model.Models
         public double DishItemUnitPrice { get => dishItemUnitPrice; set => SetField(ref dishItemUnitPrice, value); }
 
         public double DishItemTotalPrice { get => dishItemTotalPrice; set => SetField(ref dishItemTotalPrice, value); }
+        public bool IsQuantityZero { get => isQuantityZero; set => SetField(ref isQuantityZero, value); }
     }
 }
