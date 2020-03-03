@@ -853,8 +853,8 @@ namespace IRES_Project.MasterData.DishView
         }
 
         private void MasterHeader_AddClick(object sender, RoutedEventArgs e)
-        {
-           //AddEmpUC.Visibility = Visibility.Visible;
+        {           
+            AddDishUC.Visibility = Visibility.Visible;            
         }
         private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -995,6 +995,17 @@ namespace IRES_Project.MasterData.DishView
                 dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
+
+        private void AddDishUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (ListDishUC.Visibility == Visibility.Visible)
+            {
+                ListDishUC.Visibility = Visibility.Collapsed;
+            }
+            else
+                ListDishUC.Visibility = Visibility.Visible;
+        }
+
         private void updtLabel()
         {
             count = dishVM.ListDishesRoot.Take(numberOfRecPerPage).Count();

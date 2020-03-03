@@ -9,19 +9,24 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
              mc:Ignorable="d" 
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid>
-            <local:AddDish Visibility="Visible"></local:AddDish>
+        <Grid >
+            <local:AddDish x:Name="AddDishUC"  Visibility="Collapsed"  IsVisibleChanged="AddDishUC_IsVisibleChanged"></local:AddDish>
         </Grid>
-        <Grid x:Name="ListDishUC" Visibility="Collapsed" >
+        <Grid x:Name="ListDishUC" Visibility="Visible" >
             <Border  Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
                 <GroupBox x:Name="MainBox" Padding="0">
                     <!--#region Header-->
                     <GroupBox.Header >
                         <Border Background="#326690">
                             <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
-                                <Label FontWeight="Bold" FontSize="15" Foreground="White">Danh sách nhân viên</Label>
+                                <Label FontWeight="Bold" FontSize="15" Foreground="White">Danh sách món ăn</Label>
                             </StackPanel>
                         </Border>
 

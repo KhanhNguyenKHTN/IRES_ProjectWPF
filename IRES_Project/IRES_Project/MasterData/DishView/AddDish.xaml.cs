@@ -37,7 +37,7 @@ namespace IRES_Project.MasterData.DishView
             ResComb.ItemsSource = AddDishVm.ListRes;
           
         }
-        #region chua làm
+        #region Luu, Thoat
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             AddDish_CheckDishNameError();
@@ -49,7 +49,6 @@ namespace IRES_Project.MasterData.DishView
             if(IsDishItemOK && IsDishPriceOK && IsDishCookTimeOK && IsDishNameOk)
             {
                 AddDishVm.NewDishInsert(textboxHour.Text, textboxMin.Text);
-                
             }
             //#region save
             //var bc = new BrushConverter();
@@ -140,64 +139,22 @@ namespace IRES_Project.MasterData.DishView
         //Quay lại
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
-            //#region back
-            //this.Visibility = Visibility.Collapsed;
-            //user_name.Text = "ten_dang_nhap";
-            //user_name.BorderBrush = System.Windows.Media.Brushes.Black;
-            //user_name.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //UserNameError.Visibility = Visibility.Hidden;
-            //user_name.GotFocus += TextBox_GotFocus;
-
-            //PassW.Password = "123456";
-            //PassW.BorderBrush = System.Windows.Media.Brushes.Black;
-            //PassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //PassError.Visibility = Visibility.Hidden;
-            //PassW.GotFocus += PassW_GotFocus;
-
-            //ConfPassW.Password = "123456";
-            //ConfPassW.BorderBrush = System.Windows.Media.Brushes.Black;
-            //ConfPassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //ConfPassError.Visibility = Visibility.Hidden;
-            //ConfPassW.GotFocus += ConfPassW_GotFocus;
-
-            //NewEmpEmail.Text = "nhanvien01@ires.com.vn";
-            //NewEmpEmail.BorderBrush = System.Windows.Media.Brushes.Black;
-            //NewEmpEmail.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //EmpEmailError.Visibility = Visibility.Hidden;
-            //NewEmpEmail.GotFocus += NewEmpEmail_GotFocus;
-
-            //ShowEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
-            //ShowEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //ShowConfEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
-            //ShowConfEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
-
-            //user_name.BorderBrush = System.Windows.Media.Brushes.Black;
-            //user_name.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //UserNameError.Visibility = Visibility.Hidden;
-
-            //PassW.BorderBrush = System.Windows.Media.Brushes.Black;
-            //PassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //PassError.Visibility = Visibility.Hidden;
-
-            //ConfPassW.BorderBrush = System.Windows.Media.Brushes.Black;
-            //ConfPassW.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //ConfPassError.Visibility = Visibility.Hidden;
-
-            //ShowEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
-            //ShowEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //ShowEmpPass.Visibility = Visibility.Collapsed;
-            //ShowConfEmpPass.BorderBrush = System.Windows.Media.Brushes.Black;
-            //ShowConfEmpPass.Background = System.Windows.Media.Brushes.WhiteSmoke;
-            //ShowConfEmpPass.Visibility = Visibility.Collapsed;
-
-            //PassW.Visibility = Visibility.Visible;
-            //ConfPassW.Visibility = Visibility.Visible;
-
-            //PassShow.Visibility = Visibility.Visible;
-            //PassHide.Visibility = Visibility.Hidden;
-            //#endregion
+            #region back
+            this.Visibility = Visibility.Collapsed;
+            SetDefault();
+            #endregion
         }
-
+        private void SetDefault()
+        {
+            textboxDishName.Text = "";
+            AddDishVm.NewDish.DishCost = 50000;
+            textboxHour.Text = "0";
+            textboxMin.Text = "30";
+            AddDishVm.ListDishItem.Clear();
+            AddDishVm.ListDishItem.Add(new DishItem());
+            gridNameError.Visibility = Visibility.Collapsed;
+            textboxDishName.BorderBrush= System.Windows.Media.Brushes.Black;
+        }
 
         #endregion
         #region Danh sách nguyên liệu
@@ -739,8 +696,7 @@ namespace IRES_Project.MasterData.DishView
         }
         #endregion
 
-
-
+        
         #region Tên món
         private void AddDish_CheckDishNameError()
         {
