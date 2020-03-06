@@ -36,7 +36,7 @@ namespace IRES_Project.MasterData.MainPage
         {
             var bc = new BrushConverter();
             AddEmpVM.NewEmp.RoleId = AddEmpVM.RoleDict[AddEmpVM.NewEmp.Role]; //update RoleId
-            if (AddEmpVM.NewEmp.UserName == "" || AddEmpVM.NewEmp.UserName == "ten_dang_nhap")
+            if (AddEmpVM.NewEmp.UserName == "" || AddEmpVM.NewEmp.UserName == "ten_dang_nhap" || String.IsNullOrWhiteSpace(AddEmpVM.NewEmp.UserName))
             {
                 //MessageBox.Show("Tên đăng nhập không hợp lệ");
                 IsUserNameOk = false;

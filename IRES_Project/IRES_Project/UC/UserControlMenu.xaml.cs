@@ -27,6 +27,7 @@ namespace IRES_Project.UC
 
         public event RoutedEventHandler StaffClick;
         public event RoutedEventHandler DishClick;
+        public event RoutedEventHandler PromoClick;
 
         public event RoutedEventHandler OverviewStatisticClick;
         public event RoutedEventHandler BillStatisticClick;
@@ -45,8 +46,10 @@ namespace IRES_Project.UC
                     DishClick?.Invoke(sender, e);
                     break;
                 case 2:
+                    
                     break;
                 case 3:
+                    PromoClick?.Invoke(sender, e);
                     break;
                 case 4:
                     break;

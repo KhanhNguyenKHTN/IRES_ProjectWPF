@@ -10,7 +10,11 @@
              xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="ListEmpUC" >
+    <Grid>
+        <Grid>
+            <local:AddPromo></local:AddPromo>
+        </Grid>
+        <Grid x:Name="ListPromoUC" Visibility="Collapsed">
         <Border  Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
             <GroupBox x:Name="MainBox" Padding="0">
                 <!--#region Header-->
@@ -197,4 +201,6 @@
             </GroupBox>
         </Border>
     </Grid>
+    </Grid>
+
 </UserControl>

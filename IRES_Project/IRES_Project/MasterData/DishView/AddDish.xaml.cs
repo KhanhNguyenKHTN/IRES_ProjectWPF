@@ -700,7 +700,7 @@ namespace IRES_Project.MasterData.DishView
         #region Tên món
         private void AddDish_CheckDishNameError()
         {
-            if (textboxDishName.Text == "")
+            if (textboxDishName.Text == ""|| String.IsNullOrWhiteSpace(textboxDishName.Text))
             {
                 IsDishNameOk = false;
                 textboxDishName.BorderBrush = System.Windows.Media.Brushes.Red;

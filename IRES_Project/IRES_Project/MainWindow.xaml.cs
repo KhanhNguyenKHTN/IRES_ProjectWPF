@@ -35,7 +35,7 @@ namespace IRES_Project
             //Switcher.pageSwitcher = this;
             //Switcher.Switch(new AddEmp());
             //Switcher.Switch(new MainPage());
-            DataContext = new DishView();
+            DataContext = new PromoView();
             //DataContext = new PromoView();
         }
 
@@ -67,6 +67,11 @@ namespace IRES_Project
         private void UserControlMenu_ProductStatisticClick(object sender, RoutedEventArgs e)
         {
             DataContext = new ProductStatisticViewModel("tháng");
+        }
+
+        private void UserControlMenu_PromoClick(object sender, RoutedEventArgs e)
+        {
+            DataContext = new PromoViewModel();
         }
     }
 }

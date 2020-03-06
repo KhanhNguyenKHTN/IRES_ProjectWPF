@@ -944,24 +944,24 @@ namespace IRES_Project.MasterData.PromoView
 
         private void EmpDetailUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (ListEmpUC.Visibility == Visibility.Visible)
+            if (ListPromoUC.Visibility == Visibility.Visible)
             {
-                ListEmpUC.Visibility = Visibility.Collapsed;
+                ListPromoUC.Visibility = Visibility.Collapsed;
             }
             else
             {
-                ListEmpUC.Visibility = Visibility.Visible;
+                ListPromoUC.Visibility = Visibility.Visible;
             }
         }
         private void EditEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (ListEmpUC.Visibility == Visibility.Visible)
+            if (ListPromoUC.Visibility == Visibility.Visible)
             {
-                ListEmpUC.Visibility = Visibility.Collapsed;
+                ListPromoUC.Visibility = Visibility.Collapsed;
             }
             else
             {
-                ListEmpUC.Visibility = Visibility.Visible;
+                ListPromoUC.Visibility = Visibility.Visible;
             }
         }
 

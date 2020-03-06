@@ -78,6 +78,7 @@
 
       <Grid Grid.Column="0">
         <ux:UserControlMenu
+          PromoClick="UserControlMenu_PromoClick"
           DishClick="UserControlMenu_DishClick"
           StaffClick="UserControlMenu_StaffClick"
           OverviewStatisticClick="UserControlMenu_OverviewStatisticClick"

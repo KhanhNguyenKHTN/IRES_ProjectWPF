@@ -1,14 +1,13 @@
-﻿<UserControl x:Class="IRES_Project.MasterData.MainPage.AddEmp"
+﻿<UserControl x:Class="IRES_Project.MasterData.PromoView.AddPromo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:IRES_Project.MasterData.MainPage"
+             xmlns:local="clr-namespace:IRES_Project.MasterData.PromoView"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-                
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ux="clr-namespace:IRES_Project.UC"
+            
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
              TextElement.FontSize="13"
@@ -16,8 +15,7 @@
              TextOptions.TextRenderingMode="Auto"
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
-             Name="AddEmpPage">
-
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
             <GroupBox x:Name="MainBox" Padding="0">
@@ -25,14 +23,14 @@
                 <GroupBox.Header >
                     <Border Background="#326690">
                         <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
-                            <Label FontWeight="Bold" FontSize="15" Foreground="White">Thêm mới nhân viên</Label>
+                            <Label FontWeight="Bold" FontSize="15" Foreground="White">Thêm khuyến mãi mới</Label>
                         </StackPanel>
                     </Border>
                 </GroupBox.Header>
                 <!--#endregion-->
                 <Grid Background="WhiteSmoke" OpacityMask="#FF423535">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="7*"></RowDefinition>
+                        <RowDefinition Height="8*"></RowDefinition>
                         <RowDefinition Height="2*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
@@ -56,29 +54,28 @@
                         </Grid.ColumnDefinitions>
                         <!--#region  1st Col-->
                         <Grid Grid.Column="0">
-
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="4*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="4*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
@@ -108,10 +105,10 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Tên đăng nhập:</Label>
+                                    <Label>Tên chương trình:</Label>
                                 </Grid>
                             </Grid>
-                            
+
                             <Grid Grid.Row="4">
                             </Grid>
                             <Grid Grid.Row="5">
@@ -123,7 +120,7 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Tên hiển thị:</Label>
+                                    <Label>Mã khuyến mãi:</Label>
                                 </Grid>
                             </Grid>
 
@@ -138,7 +135,7 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Mật khẩu:</Label>
+                                    <Label>Ngày bắt đầu:</Label>
                                 </Grid>
                             </Grid>
 
@@ -153,7 +150,7 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Xác nhận mật khẩu:</Label>
+                                    <Label>Ngày kết thúc:</Label>
                                 </Grid>
                             </Grid>
 
@@ -168,7 +165,7 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Chức vụ:</Label>
+                                    <Label>Loại áp dụng:</Label>
                                 </Grid>
                             </Grid>
 
@@ -183,7 +180,7 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Email:</Label>
+                                    <Label>Giá trị khuyến mãi:</Label>
                                 </Grid>
                             </Grid>
 
@@ -198,13 +195,14 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Số điện thoại:</Label>
+                                    <Label>Đơn vị:</Label>
                                 </Grid>
                             </Grid>
 
                             <Grid Grid.Row="16">
                             </Grid>
-                            <Grid Grid.Row="17">
+                            
+                            <Grid Grid.Row="17" Grid.RowSpan="2" Margin="10 0 0 0 ">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*"></ColumnDefinition>
                                     <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -213,13 +211,12 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Địa chỉ:</Label>
+                                    <TextBlock TextWrapping="Wrap" FontSize="15" FontWeight="Bold" >
+                                        Giá trị khuyến mãi tối đa:
+                                    </TextBlock>
                                 </Grid>
                             </Grid>
-
-                            <Grid Grid.Row="18">
-                            </Grid>
-
+                            
                             <Grid Grid.Row="19">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -229,38 +226,36 @@
                                 <Grid Grid.Column="0"></Grid>
                                 <Grid Grid.Column="1"></Grid>
                                 <Grid Grid.Column="2">
-                                    <Label>Ghi chú:</Label>
+                                    <Label>Mô tả:</Label>
                                 </Grid>
                             </Grid>
-                            <Grid Grid.Row="20">
 
-                            </Grid>
                         </Grid>
                         <!--#endregion-->
                         <!--#region  2nd Col-->
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="1*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="4*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="4*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
                                 <RowDefinition Height="3*"/>
-                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="3*"/>
+                                <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -268,98 +263,135 @@
                                 <ColumnDefinition Width="1*"></ColumnDefinition>
                                 <ColumnDefinition Width="8*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <!--#region New Content-->
-                            <!--#region Ảnh nhân viên-->
-                            <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="6" Margin="20 0 20 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    <ColumnDefinition Width="4*"></ColumnDefinition>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="1">
-                                    <Border BorderBrush="Black" BorderThickness="1" >
-                                        <Image Margin="20" Source="https://upload.wikimedia.org/wikipedia/commons/3/30/Googlelogo.png" />
-                                    </Border>
-                                </Grid>
-                            </Grid>
-                            <Grid Grid.Row="8" Grid.RowSpan="2" MaxHeight="60"  Grid.Column="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                    <ColumnDefinition Width="1*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="1">
-                                    <Button VerticalAlignment="Top" VerticalContentAlignment="Center" >Chọn ảnh</Button>
-                                </Grid>
-                            </Grid>
-                            <!--#endregion-->
+                            <!--#region New Content-->                            
                             <!--#region Thông tin nhân viên mới-->
                             <Grid Grid.Row="1" Grid.Column="1" >
                                 <ComboBox  SelectedItem="IRES cơ sở 1"   Name="ResComb" ></ComboBox>
                             </Grid>
 
                             <Grid Grid.Row="3" Grid.Column="1">
-                                <TextBox Name="user_name" GotFocus="TextBox_GotFocus" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserName}"></TextBox>
+                                <TextBox Name="textbox_promo_name" PreviewKeyDown="Textbox_promo_name_PreviewKeyDown" PreviewTextInput="Textbox_promo_name_PreviewTextInput" TextChanged="Textbox_promo_name_TextChanged" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewPromo.PromotionName}"></TextBox>
                             </Grid>
-                            <Grid Grid.Row="3" Grid.Column="0">
-                                <materialDesign:PackIcon x:Name="UserNameError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                     
+                            <Grid Grid.Row="4" Grid.Column="1" x:Name="GridPromoNameError" Visibility="Collapsed" Margin="0 0 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Tên khuyến mãi không được trống"></Label>
+                                </StackPanel>
                             </Grid>
+                            
                             <Grid Grid.Row="5" Grid.Column="1">
-                                <TextBox Name="user_display_name" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
+                                <TextBox Name="textbox_promo_code" TextChanged="Textbox_promo_code_TextChanged" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
                             </Grid>
 
-                            <Grid Grid.Row="7" Grid.Column="0">
-                                <materialDesign:PackIcon x:Name="PassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Grid>
-                            <Grid Grid.Row="7" Grid.Column="1">
-                                <PasswordBox x:Name="PassW"    Padding=" 10 0 10 0" GotFocus="PassW_GotFocus" VerticalContentAlignment="Top"   
-                                             Password="123456" PasswordChanged="MyEmpPass_PasswordChanged"
-                                             BorderBrush="Black" BorderThickness="1" MaxLength="20"></PasswordBox>
-                                <TextBox GotFocus="ShowEmpPass_GotFocus" TextChanged="ShowEmpPass_TextChanged" Visibility="Collapsed" x:Name="ShowEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1">123456</TextBox>
-                            </Grid>
-                            <Grid Grid.Row="7" Grid.Column="2" Margin="0 0 0 0">
+                            <Grid Grid.Row="6" Grid.Column="1" x:Name="GridPromoCodeError" Visibility="Collapsed" Margin="0 -1 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
-                                <Button Click="PassShow_Click" x:Name="PassShow" Margin="5 0 0 0" Background="Thistle" Width="40" Height="28" Padding="0">
-                                    <materialDesign:PackIcon Foreground="Black" Margin="0 0 0 0" FontSize="10" Kind="EyeOff" />
-                                </Button>
-
-                                <Button Click="PassHide_Click" x:Name="PassHide" Margin="5 0 0 0" Background="Thistle" Width="40" Height="28" Padding="0" Visibility="Collapsed">
-                                    <materialDesign:PackIcon Foreground="Black" Margin="0 0 0 0" FontSize="10" Kind="Eye" />
-                                </Button>
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Mã khuyến mãi không được trống"></Label>
+                                </StackPanel>
                             </Grid>
-                            <Grid Grid.Row="9" Grid.Column="0">
-                                <materialDesign:PackIcon x:Name="ConfPassError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Grid>
-                            <Grid Grid.Row="9" Grid.Column="1">
-                                <PasswordBox x:Name="ConfPassW" Padding=" 10 0 10 0" GotFocus="ConfPassW_GotFocus" VerticalContentAlignment="Top" 
-                                             Password="123456" PasswordChanged="MyEmpConfPass_PasswordChanged"
-                                             BorderBrush="Black" BorderThickness="1"></PasswordBox>
-                                <TextBox GotFocus="ShowConfEmpPass_GotFocus" TextChanged="ShowConfEmpPass_TextChanged" Visibility="Collapsed" Name="ShowConfEmpPass" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1"></TextBox>                            </Grid>
 
-                           
+
+                            <Grid Grid.Row="7" Grid.Column="1" Margin="0 -11 0 0" VerticalAlignment="Top">
+                                <DatePicker x:Name="DatapickerStart"
+                                   FontSize="12" SelectedDate="{Binding NewPromo.PromotionStartDate}" SelectedDateChanged="DatePicker_SelectedDateChanged"
+                                   materialDesign:HintAssist.Hint="Pick Date"
+                                   Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            </Grid>
+                            <Grid Grid.Row="8" Grid.Column="1" x:Name="GridStartDate_c_NowError" Visibility="Collapsed" Margin="0 -10 15 0" VerticalAlignment="Top" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Ngày bắt đầu khuyến mãi không được nhỏ hơn ngày hôm nay"></Label>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="8" Grid.Column="1" x:Name="GridStartDate_Bigger_EndError" Visibility="Collapsed" Margin="0 -10 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Ngày bắt đầu khuyến mãi không được lớn hơn ngày kết thúc"></Label>
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Row="9" Grid.Column="1" Margin="0 -11 0 0" VerticalAlignment="Top">
+                                <DatePicker x:Name="DatapickerEnd"
+                                   FontSize="12" SelectedDate="{Binding NewPromo.PromotionEndDate}" SelectedDateChanged="DatapickerEnd_SelectedDateChanged"
+                                   materialDesign:HintAssist.Hint="Pick Date"
+                                   Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            </Grid>
+                            <Grid Grid.Row="10" Grid.Column="1" x:Name="GridEndDate_c_NowError" Visibility="Collapsed" Margin="0 -10 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Ngày kết thúc khuyến mãi không được nhỏ hơn ngày hôm nay"></Label>
+                                </StackPanel>
+                            </Grid>
+
                             <Grid Grid.Row="11" Grid.Column="1">
-                                <ComboBox Name="RoleComb" SelectedItem="{Binding NewEmp.Role}" ItemsSource="{Binding RoleList}"></ComboBox>
-                            </Grid>
-
-                            <Grid Grid.Row="13" Grid.Column="0">
-                                <materialDesign:PackIcon x:Name="EmpEmailError" Visibility="Hidden" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Grid>
+                                <ComboBox Name="ComboboxPromoType"  VerticalContentAlignment="Stretch"
+                                          DisplayMemberPath="Value" SelectedValuePath="Key" ItemsSource ="{Binding RoleDict}"
+                                          SelectedValue="{Binding NewPromo.PromotionApplyType, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
+                                          >
+                                </ComboBox>
+                                </Grid>
+                          
                             <Grid Grid.Row="13" Grid.Column="1">
-                                <TextBox Name="NewEmpEmail" GotFocus="NewEmpEmail_GotFocus" Padding="10 0 10 0" BorderBrush="Black" 
-                                         BorderThickness="1" Text="{Binding NewEmp.UserEmail}"></TextBox>
+                                <TextBox Name="textbox_promo_value" Padding="10 0 10 0" BorderBrush="Black" MaxLength="10"
+                                         PreviewTextInput="Textbox_promo_value_PreviewTextInput" TextChanged="Textbox_promo_value_TextChanged"
+                                         BorderThickness="1" Text="{Binding NewPromo.PromotionValue}"></TextBox>
+                            </Grid>
+                            <Grid Grid.Row="14" Grid.Column="1" x:Name="GridPromoValueError" Visibility="Collapsed" Margin="0 0 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giá trị khuyến mãi không được lớn hơn 100 %"></Label>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="14" Grid.Column="1" x:Name="GridPromoValueError2" Visibility="Collapsed" Margin="0 0 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giá trị khuyến mãi không được nhỏ hơn 1000 VNĐ"></Label>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="14" Grid.Column="1" x:Name="GridPromoValueError3" Visibility="Collapsed" Margin="0 0 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giá trị khuyến mãi không được nhỏ hơn 5%"></Label>
+                                </StackPanel>
                             </Grid>
 
                             <Grid Grid.Row="15" Grid.Column="1">
-                                <TextBox Name="NewEmpPhone" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.PhoneNb}"></TextBox>
+                                <ComboBox Name="ComboboxPromoUnit"  VerticalContentAlignment="Stretch"
+                                          ItemsSource ="{Binding PromoUnitList}" SelectionChanged="ComboboxPromoUnit_SelectionChanged"
+                                          SelectedValue="{Binding NewPromo.PromotionUnit, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
+                                          >
+                                </ComboBox>
                             </Grid>
 
                             <Grid Grid.Row="17" Grid.Column="1">
-                                <TextBox Name="NewEmpAddress" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserAddress}" ></TextBox>
+                                <TextBox Name="textbox_promo_max" MaxLength="10" Padding="10 0 10 0" PreviewTextInput="Textbox_promo_max_PreviewTextInput"
+                                         BorderBrush="Black" BorderThickness="1" TextChanged="Textbox_promo_max_TextChanged"
+                                         Text="{Binding NewPromo.PromotionMaxValue,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
+                                         ></TextBox>
+                            </Grid>
+                            <Grid Grid.Row="18"  Grid.ColumnSpan="2" Grid.Column="1" x:Name="GridPromoMaxValueError" Visibility="Collapsed" Margin="0 0 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giá trị khuyến mãi tối đa không được nhỏ hơn giá trị khuyến mãi "></Label>
+                                </StackPanel>
                             </Grid>
 
                             <Grid Grid.Row="19" Grid.RowSpan="2" Grid.Column="1"  Grid.ColumnSpan="3" Margin="0 0 80 0">
-                                <TextBox Name="NewEmpDes" Padding="10 1 0 0"  TextWrapping="Wrap" AcceptsReturn="True"  BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeDescription}"></TextBox>
+                                <TextBox Name="textbox_promo_des" TextWrapping="Wrap" AcceptsReturn="True"
+                                         Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserAddress}" ></TextBox>
                             </Grid>
+
+                           
                             <!--#endregion-->
                             <!--#endregion-->
                         </Grid>

@@ -52,6 +52,7 @@
     <Compile Include="GlobalViewModels\MasterDataHeaderViewModel.cs" />
     <Compile Include="MasterData\AddDishViewModel.cs" />
     <Compile Include="MasterData\AddEmpViewModel.cs" />
+    <Compile Include="MasterData\AddPromoViewModel.cs" />
     <Compile Include="MasterData\DishViewModel.cs" />
     <Compile Include="MasterData\EditEmpViewModel.cs" />
     <Compile Include="MasterData\EmpDetailViewModel.cs" />

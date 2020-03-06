@@ -26,11 +26,15 @@ namespace Model.Models
         public PromoModel()
         {
             Active = true;
-            PromotionName = "Khuyến mãi 01";
-            PromotionCode = "KHUYENMAI00";
+            PromotionValue = "1000";
+            promotionMaxValue = 500000;
+            PromotionUnit = "VNĐ";
+            PromotionApplyType = "ALL";
+            PromotionName = "";
+            PromotionCode = "";
             PromotionId = 0;
-            PromotionStartDate = new DateTime(2020, 5, 30);
-            PromotionEndDate = new DateTime(2020, 6, 30);
+            PromotionStartDate = DateTime.Now;
+            PromotionEndDate = DateTime.Now.AddDays(1);
         }
         private string promotionName;
         private int promotionId;
