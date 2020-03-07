@@ -57,7 +57,9 @@ namespace IRES_Project.MasterData.PromoView
             {
                 if(AddProVM.InsertNewPromo())
                 {
-                    MessageBox.Show("Thêm khuyến mãi thành công");
+                    MessageBox.Show("Thêm khuyến mãi " + AddProVM.NewPromo.PromotionName + " thành công");
+                    SetDefault();
+                    this.Visibility = Visibility.Collapsed;
                 }
                 else
                 {

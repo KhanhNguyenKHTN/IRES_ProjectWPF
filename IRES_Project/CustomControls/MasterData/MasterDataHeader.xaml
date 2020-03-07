@@ -25,7 +25,13 @@
     <Border Grid.Column ="2" BorderBrush="Black" BorderThickness="1" Margin="0 4 4 4" CornerRadius="10">
       <DockPanel HorizontalAlignment="Stretch" >
         <materialDesign:PackIcon Width="20" Height="20" Kind="FileFind" Margin="5 5 5 5" />
-        <TextBox x:Name="MySearch" Padding="5 0 0 0" Text="{Binding Search_Text, Mode=TwoWay}" Margin="0 0 15 5" VerticalContentAlignment="Center" Width="auto"></TextBox>
+        <TextBox x:Name="MySearch" Padding="5 0 0 0" Text="{Binding Search_Text, Mode=TwoWay}" Margin="0 0 15 5" VerticalContentAlignment="Center" Width="auto">
+                    <i:Interaction.Triggers>
+                        <iex:KeyTrigger Key="Enter">
+                            <i:InvokeCommandAction CommandParameter="{Binding ElementName=MySearch}" Command="{Binding SearchCommand}" />
+                        </iex:KeyTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
       </DockPanel>
     </Border>
 
@@ -39,7 +45,7 @@
       <StackPanel Orientation="Horizontal">
         <Button Content="Test Cmd" Visibility="Collapsed" Click ="Test_Click" Margin ="0 0 0 0" Command="{Binding SearchCommand}" 
                 CommandParameter="{Binding ElementName=MySearch}"/>
-        <Button  Margin="10 0 10 0" Background="Green">
+        <Button  Margin="10 0 10 0" Background="Green" Click="Add_Click">
           <DockPanel>
             <materialDesign:PackIcon Kind="PlusBox" Margin="-8 0"/>
             <TextBlock Margin="10 0 0 0">Thêm mới</TextBlock>

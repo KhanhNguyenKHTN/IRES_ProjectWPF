@@ -40,7 +40,7 @@
       <StackPanel Orientation="Horizontal">
         <Button Content="Test Cmd" Visibility="Collapsed" Click ="Test_Click" Margin ="0 0 0 0" Command="{Binding SearchCommand}" 
                 CommandParameter="{Binding ElementName=MySearch}"/>
-        <Button  Margin="10 0 10 0" Background="Green">
+        <Button  Margin="10 0 10 0" Background="Green" Click="Add_Click" >
           <DockPanel>
             <materialDesign:PackIcon Kind="PlusBox" Margin="-8 0"/>
             <TextBlock Margin="10 0 0 0">Thêm mới</TextBlock>

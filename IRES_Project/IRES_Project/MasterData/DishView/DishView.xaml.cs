@@ -852,10 +852,6 @@ namespace IRES_Project.MasterData.DishView
         //    }
         }
 
-        private void MasterHeader_AddClick(object sender, RoutedEventArgs e)
-        {           
-            AddDishUC.Visibility = Visibility.Visible;            
-        }
         private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             //if (ListEmpUC.Visibility == Visibility.Visible)
@@ -1003,7 +999,26 @@ namespace IRES_Project.MasterData.DishView
                 ListDishUC.Visibility = Visibility.Collapsed;
             }
             else
+            {
+                if (dishVM.IsChecked)
+                {
+                    dishVM.ListDishesRoot = dishVM.getListDishes();
+
+                }
+                else
+                {
+                    dishVM.ListDishesRoot = dishVM.getDeletedDishes();
+                }
+                No_View_Updt();
+                Navigate((int)PagingMode.First);
+                updtLabel();
                 ListDishUC.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void MasterHeader_AddClick_1(object sender, RoutedEventArgs e)
+        {
+            AddDishUC.Visibility = Visibility.Visible;
         }
 
         private void updtLabel()

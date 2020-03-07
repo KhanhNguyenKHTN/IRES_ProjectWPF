@@ -855,29 +855,29 @@ namespace IRES_Project.MasterData.PromoView
         {
             AddPromoUC.Visibility = Visibility.Visible;
         }
-        private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void AddPromoUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            //if (ListEmpUC.Visibility == Visibility.Visible)
-            //{
-            //    ListEmpUC.Visibility = Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    if (promoVM.IsChecked)
-            //    {
-            //        promoVM.ListPromoRoot = promoVM.getDataEmployee();
+            if (ListPromoUC.Visibility == Visibility.Visible)
+            {
+                ListPromoUC.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                if (promoVM.IsChecked)
+                {
+                    promoVM.ListPromoRoot = promoVM.getListPromo();
 
-            //    }
-            //    else
-            //    {
-            //        promoVM.ListPromoRoot = promoVM.getDeletedEmployee();
-            //    }
+                }
+                else
+                {
+                    promoVM.ListPromoRoot = promoVM.getDeletedPromo();
+                }
 
-            //    No_View_Updt();
-            //    Navigate((int)PagingMode.First);
-            //    updtLabel();
-            //    ListEmpUC.Visibility = Visibility.Visible;
-            //}
+                No_View_Updt();
+                Navigate((int)PagingMode.First);
+                updtLabel();
+                ListPromoUC.Visibility = Visibility.Visible;
+            }
         }
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -889,12 +889,6 @@ namespace IRES_Project.MasterData.PromoView
         }
 
         #endregion
-
-
-
-
-
-
 
 
         private void DataGrid_MouseLeave(object sender, MouseEventArgs e)
@@ -993,16 +987,6 @@ namespace IRES_Project.MasterData.PromoView
                 //dataGridCellTarget.Background = (Brush)bc.ConvertFrom("#00FFFFFF");
                 dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Black);
             }
-        }
-
-        private void AddPromoUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (ListPromoUC.Visibility == Visibility.Visible)
-            {
-                ListPromoUC.Visibility = Visibility.Collapsed;
-            }
-            else
-                ListPromoUC.Visibility = Visibility.Visible;
         }
 
         private void updtLabel()

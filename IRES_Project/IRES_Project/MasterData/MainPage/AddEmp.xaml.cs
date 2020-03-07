@@ -100,7 +100,7 @@ namespace IRES_Project.MasterData.MainPage
             {    
                 if (AddEmpVM.NewEmpInsert())
                 {
-                    MessageBox.Show("Thêm nhân viên thành công !");
+                    MessageBox.Show("Thêm nhân viên " + AddEmpVM.NewEmp.EmployeeName +  " thành công !");
                     user_name.Text = "ten_dang_nhap";
                     user_display_name.Text = "Nguyen Van A";
                     this.Visibility = Visibility.Collapsed;

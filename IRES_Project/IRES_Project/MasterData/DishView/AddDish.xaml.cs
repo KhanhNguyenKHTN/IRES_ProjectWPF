@@ -48,7 +48,12 @@ namespace IRES_Project.MasterData.DishView
             AddDish_CheckCookTime();
             if(IsDishItemOK && IsDishPriceOK && IsDishCookTimeOK && IsDishNameOk)
             {
-                AddDishVm.NewDishInsert(textboxHour.Text, textboxMin.Text);
+                if(AddDishVm.NewDishInsert(textboxHour.Text, textboxMin.Text))
+                {
+                    MessageBox.Show("Thêm món " + AddDishVm.NewDish.DishName + " thành công !");
+                    SetDefault();
+                    this.Visibility = Visibility.Collapsed;                 
+                }
             }
             //#region save
             //var bc = new BrushConverter();

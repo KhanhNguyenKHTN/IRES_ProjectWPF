@@ -24,7 +24,7 @@
                     <GroupBox.Header >
                         <Border Background="#326690">
                             <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
-                                <Label FontWeight="Bold" FontSize="15" Foreground="White">Danh sách món ăn</Label>
+                                <Label FontWeight="Bold" FontSize="15" Foreground="White">DANH SÁCH MÓN ĂN</Label>
                             </StackPanel>
                         </Border>
 
@@ -40,15 +40,15 @@
                         <!--TestClick="Test_Cmd"-->
                         <!--#region MasterDataHeader -->
                         <Grid Grid.Row="0" Margin="0 10 0 0 " HorizontalAlignment="Stretch" Width="auto">
-                            <uc:MasterDataHeader  x:Name="MasterHeader"  AddClick="MasterHeader_AddClick" ActiveClick="MasterHeader_ActiveClick" SearchClick ="Search_Emp"  RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
+                            <uc:MasterDataHeader  x:Name="MasterHeader"  AddClick="MasterHeader_AddClick_1" ActiveClick="MasterHeader_ActiveClick" SearchClick ="Search_Emp"  RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
                         </Grid>
                         <!--#endregion-->
                         <!-- ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"-->
                         <Grid Grid.Row="1">
-                            <DataGrid Margin="10 20 10 20"   CanUserAddRows="False"
+                            <DataGrid Margin="20"   CanUserAddRows="False"
                                     IsReadOnly="True" BorderBrush="Black" BorderThickness="1"  AutoGenerateColumns="False"  x:Name="dataGrid" Grid.Row ="1" 
                                 HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top"  CanUserSortColumns="True"  ColumnWidth="*" 
-                                materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8"
+                                materialDesign:DataGridAssist.CellPadding="13 8 8 8" materialDesign:DataGridAssist.ColumnHeaderPadding="8" VerticalScrollBarVisibility="Visible"
                                 ItemsSource="{Binding ListDishes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" 
                                 MouseLeave="DataGrid_MouseLeave"   >
                                 <DataGrid.Resources>
@@ -175,13 +175,13 @@
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0" Background="White" BorderBrush="Gray" Foreground="#2672fb"
                             Name="btn1" Click="Btn1_Click" VerticalAlignment="Bottom" Width="50" Content="1"  Opacity="1"  BorderThickness="1"></Button>
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0" Background="White" BorderBrush="Gray" Foreground="#2672fb"
-                            Name="btn2" Click="Btn2_Click" VerticalAlignment="Bottom" Width="50" Content="2"  Opacity="0.75"></Button>
+                            Name="btn2" Click="Btn2_Click" VerticalAlignment="Bottom" Width="50" Content="2"  Opacity="0.75"  BorderThickness="0"></Button>
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0" Background="White" BorderBrush="Gray" Foreground="#2672fb"
-                            Name="btn3" Click="Btn3_Click" VerticalAlignment="Bottom" Width="50" Content="3"  Opacity="0.75"></Button>
+                            Name="btn3" Click="Btn3_Click" VerticalAlignment="Bottom" Width="50" Content="3"  Opacity="0.75"  BorderThickness="0"></Button>
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0" Background="White" BorderBrush="Gray" Foreground="#2672fb"
-                            Name="btn4" Click="Btn4_Click" VerticalAlignment="Bottom" Width="50" Content="4"  Opacity="0.75"></Button>
+                            Name="btn4" Click="Btn4_Click" VerticalAlignment="Bottom" Width="50" Content="4"  Opacity="0.75"  BorderThickness="0"></Button>
                                     <Button Height="25" HorizontalAlignment="Right"  Margin="5 0 5 0" Background="White" BorderBrush="Gray" Foreground="#2672fb"
-                            Name="btn5" Click="Btn5_Click" VerticalAlignment="Bottom" Width="50" Content="5"  Opacity="0.75"></Button>
+                            Name="btn5" Click="Btn5_Click" VerticalAlignment="Bottom" Width="50" Content="5"  Opacity="0.75"  BorderThickness="0"></Button>
                                 </StackPanel>
                             </Grid>
 
