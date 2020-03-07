@@ -67,14 +67,19 @@
     <Compile Include="GlobalControls\MasterDataHeader.xaml.cs">
       <DependentUpon>MasterDataHeader.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalControls\LeftMenuControl.xaml.cs">
+      <DependentUpon>LeftMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MasterData\MasterDataHeader.xaml.cs">
+      <DependentUpon>MasterDataHeader.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Statistic\DatePickerCalendar.cs" />
     <Compile Include="Statistic\StatisticHeaderUC.xaml.cs">
       <DependentUpon>StatisticHeaderUC.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controls\CusCombobox\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="GlobalControls\ControlBarUC.xaml">
@@ -84,6 +89,14 @@
     <Page Include="GlobalControls\MasterDataHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GlobalControls\LeftMenuControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MasterData\MasterDataHeader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Statistic\StatisticHeaderUC.xaml">
       <SubType>Designer</SubType>
