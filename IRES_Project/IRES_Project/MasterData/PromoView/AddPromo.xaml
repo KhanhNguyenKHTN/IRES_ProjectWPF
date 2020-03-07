@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:IRES_Project.MasterData.PromoView"
              mc:Ignorable="d" 
               xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:ux="clr-namespace:IRES_Project.UC"
+             
             
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"

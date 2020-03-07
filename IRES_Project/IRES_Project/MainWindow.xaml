@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IRES_Project"
         
-        xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:globaluc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
         
@@ -57,7 +57,7 @@
       </Grid.RowDefinitions>
 
     <Grid Grid.Row="0">
-      <uc:ControlBarUC FontSize="20" ></uc:ControlBarUC>
+            <globaluc:ControlBarUC FontSize="20" ></globaluc:ControlBarUC>
     </Grid>
 
     <Grid Grid.Row="1" Background="#FF3580BF">
