@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IRES_Project.UC
+namespace CustomControls.GlobalControls
 {
     /// <summary>
     /// Interaction logic for UserControlMenu.xaml
     /// </summary>
-    public partial class UserControlMenu : UserControl
+    public partial class LeftMenuControl : UserControl
     {
-        public UserControlMenu()
+        public LeftMenuControl()
         {
             InitializeComponent();
         }
