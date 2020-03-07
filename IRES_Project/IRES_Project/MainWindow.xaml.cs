@@ -35,7 +35,7 @@ namespace IRES_Project
             //Switcher.pageSwitcher = this;
             //Switcher.Switch(new AddEmp());
             //Switcher.Switch(new MainPage());
-            DataContext = new PromoView();
+            DataContext = new MainPage();
             //DataContext = new PromoView();
         }
 

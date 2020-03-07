@@ -35,6 +35,7 @@ namespace Model.Models
             PromotionId = 0;
             PromotionStartDate = DateTime.Now;
             PromotionEndDate = DateTime.Now.AddDays(1);
+            PromotionDes = "Mô tả";
         }
         private string promotionName;
         private int promotionId;

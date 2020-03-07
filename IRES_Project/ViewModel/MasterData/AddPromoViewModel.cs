@@ -1,4 +1,5 @@
-﻿using Model.Models;
+﻿using Implements.MasterData.Modules;
+using Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,16 +31,12 @@ namespace ViewModel.MasterData
             set { _NewPromo = value; OnPropertyChanged(); }
         }
 
-        //public bool InsertNewPromo()
-        //{
-        //    if (EmployeeImplement.InsertUserToDb(NewEmp, ref User_Id))
-        //        NewEmp.UserId = User_Id;
-        //    else
-        //        return false;
-        //    if (EmployeeImplement.InsertEmpToDb(NewEmp))
-        //        return true;
-        //    else
-        //        return false;
-        //}
+        public bool InsertNewPromo()
+        {
+            if (PromoImplement.InsertNewPromoToDb(NewPromo))
+                return true;
+            else
+                return false;
+        }
     }
 }

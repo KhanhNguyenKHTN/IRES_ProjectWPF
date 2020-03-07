@@ -550,5 +550,58 @@ namespace Service.Modules
                 return false;
             }
         }
+        public bool InsertPromoQuery(string query, PromoModel promo)
+        {
+            // Read command
+            NpgsqlCommand cmd = new NpgsqlCommand(query, SQLConnection.Instance.Connection);
+
+            //add parameter
+            cmd.Parameters.Add("@promotion_code", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@promotion_code"].Value = promo.PromotionCode;
+            cmd.Parameters.AddWithValue(promo.PromotionCode);
+
+            cmd.Parameters.Add("@promotion_name", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@promotion_name"].Value = promo.PromotionName;
+            cmd.Parameters.AddWithValue(promo.PromotionName);
+           
+            cmd.Parameters.Add("@promotion_apply_type", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@promotion_apply_type"].Value = promo.PromotionApplyType;
+            cmd.Parameters.AddWithValue(promo.PromotionApplyType);
+
+            cmd.Parameters.Add("@promotion_start_date", NpgsqlTypes.NpgsqlDbType.Date);
+            cmd.Parameters["@promotion_start_date"].Value = promo.PromotionStartDate;
+            cmd.Parameters.AddWithValue(promo.PromotionStartDate);
+
+            cmd.Parameters.Add("@promotion_end_date", NpgsqlTypes.NpgsqlDbType.Date);
+            cmd.Parameters["@promotion_end_date"].Value = promo.PromotionEndDate;
+            cmd.Parameters.AddWithValue(promo.PromotionEndDate);
+
+            cmd.Parameters.Add("@promotion_value", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@promotion_value"].Value = promo.PromotionValue;
+            cmd.Parameters.AddWithValue(promo.PromotionValue);
+
+            cmd.Parameters.Add("@promotion_max_value", NpgsqlTypes.NpgsqlDbType.Bigint);
+            cmd.Parameters["@promotion_max_value"].Value = promo.PromotionMaxValue;
+            cmd.Parameters.AddWithValue(promo.PromotionMaxValue);
+
+            cmd.Parameters.Add("@promotion_unit", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@promotion_unit"].Value = promo.PromotionUnit;
+            cmd.Parameters.AddWithValue(promo.PromotionUnit);
+
+            cmd.Parameters.Add("@promotion_description", NpgsqlTypes.NpgsqlDbType.Text);
+            cmd.Parameters["@promotion_description"].Value = promo.PromotionDes;
+            cmd.Parameters.AddWithValue(promo.PromotionDes);
+
+            if (cmd.ExecuteNonQuery() == 1)
+            {
+
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
     }
 }

@@ -270,7 +270,10 @@
                             </Grid>
 
                             <Grid Grid.Row="3" Grid.Column="1">
-                                <TextBox Name="textbox_promo_name" PreviewKeyDown="Textbox_promo_name_PreviewKeyDown" PreviewTextInput="Textbox_promo_name_PreviewTextInput" TextChanged="Textbox_promo_name_TextChanged" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewPromo.PromotionName}"></TextBox>
+                                <TextBox Name="textbox_promo_name" MaxLength="100" PreviewKeyDown="Textbox_promo_name_PreviewKeyDown"
+                                         PreviewTextInput="Textbox_promo_name_PreviewTextInput" TextChanged="Textbox_promo_name_TextChanged" 
+                                         Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewPromo.PromotionName}" 
+                                         VerticalAlignment="Top"></TextBox>
                             </Grid>
                      
                             <Grid Grid.Row="4" Grid.Column="1" x:Name="GridPromoNameError" Visibility="Collapsed" Margin="0 0 15 0" >
@@ -282,7 +285,8 @@
                             </Grid>
                             
                             <Grid Grid.Row="5" Grid.Column="1">
-                                <TextBox Name="textbox_promo_code" TextChanged="Textbox_promo_code_TextChanged" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.EmployeeName}"></TextBox>
+                                <TextBox Name="textbox_promo_code" MaxLength="20" PreviewKeyDown="Textbox_promo_code_PreviewKeyDown" TextChanged="Textbox_promo_code_TextChanged"
+                                         Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewPromo.PromotionCode, Mode=TwoWay}"></TextBox>
                             </Grid>
 
                             <Grid Grid.Row="6" Grid.Column="1" x:Name="GridPromoCodeError" Visibility="Collapsed" Margin="0 -1 15 0" >
@@ -388,7 +392,7 @@
 
                             <Grid Grid.Row="19" Grid.RowSpan="2" Grid.Column="1"  Grid.ColumnSpan="3" Margin="0 0 80 0">
                                 <TextBox Name="textbox_promo_des" TextWrapping="Wrap" AcceptsReturn="True"
-                                         Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewEmp.UserAddress}" ></TextBox>
+                                         Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewPromo.PromotionDes}" ></TextBox>
                             </Grid>
 
                            

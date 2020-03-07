@@ -853,7 +853,7 @@ namespace IRES_Project.MasterData.PromoView
 
         private void MasterHeader_AddClick(object sender, RoutedEventArgs e)
         {
-            //AddEmpUC.Visibility = Visibility.Visible;
+            AddPromoUC.Visibility = Visibility.Visible;
         }
         private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
@@ -994,6 +994,17 @@ namespace IRES_Project.MasterData.PromoView
                 dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
+
+        private void AddPromoUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (ListPromoUC.Visibility == Visibility.Visible)
+            {
+                ListPromoUC.Visibility = Visibility.Collapsed;
+            }
+            else
+                ListPromoUC.Visibility = Visibility.Visible;
+        }
+
         private void updtLabel()
         {
             count = promoVM.ListPromoRoot.Take(numberOfRecPerPage).Count();

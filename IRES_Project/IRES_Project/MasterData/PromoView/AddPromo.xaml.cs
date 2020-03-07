@@ -53,15 +53,59 @@ namespace IRES_Project.MasterData.PromoView
             {
                 Ok = false;
             }
-            if (!Ok )
+            if (Ok )
             {
-                MessageBox.Show("Lỗi");
+                if(AddProVM.InsertNewPromo())
+                {
+                    MessageBox.Show("Thêm khuyến mãi thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Thêm khuyến mãi không thành công");
+                }
+
             }
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
+            this.Visibility = Visibility.Collapsed;
+            SetDefault();
+        }
 
+        private void SetDefault()
+        {
+            textbox_promo_name.Text = "";
+            textbox_promo_name.BorderBrush = System.Windows.Media.Brushes.Black;
+            GridPromoNameError.Visibility = Visibility.Collapsed;
+
+            textbox_promo_code.Text = "";
+            textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Black;
+            GridPromoCodeError.Visibility = Visibility.Collapsed;
+
+            AddProVM.NewPromo.PromotionStartDate = DateTime.Now;
+            DatapickerStart.BorderBrush = System.Windows.Media.Brushes.Black;
+            AddProVM.NewPromo.PromotionEndDate = DateTime.Now.AddDays(1);
+            DatapickerEnd.BorderBrush = System.Windows.Media.Brushes.Black;
+
+            GridEndDate_c_NowError.Visibility = Visibility.Collapsed;
+            GridStartDate_c_NowError.Visibility = Visibility.Collapsed;
+            GridStartDate_Bigger_EndError.Visibility = Visibility.Collapsed;
+
+            AddProVM.NewPromo.PromotionApplyType = "ALL";
+
+            AddProVM.NewPromo.PromotionValue = "1000";
+            textbox_promo_value.BorderBrush = System.Windows.Media.Brushes.Black;
+            GridPromoValueError.Visibility = Visibility.Collapsed;
+            GridPromoValueError2.Visibility = Visibility.Collapsed;
+            GridPromoValueError3.Visibility = Visibility.Collapsed;
+
+            AddProVM.NewPromo.PromotionUnit = "VNĐ";
+
+            AddProVM.NewPromo.PromotionMaxValue = 500000;
+            textbox_promo_max.BorderBrush = System.Windows.Media.Brushes.Black;
+            GridPromoMaxValueError.Visibility = Visibility.Collapsed;
+            AddProVM.NewPromo.PromotionDes = "Mô tả";
         }
 
         #region Tên khuyến mãi
@@ -119,6 +163,11 @@ namespace IRES_Project.MasterData.PromoView
         #endregion
 
         #region Mã khuyến mãi
+        private void Textbox_promo_code_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space || e.Key == Key.Tab)
+                e.Handled = true;
+        }
         private bool CheckPromoCode()
         {
             bool res = true;
@@ -381,8 +430,9 @@ namespace IRES_Project.MasterData.PromoView
         {
             CheckPromoMaxValue();
         }
+         #endregion
 
-        #endregion
+       
 
        
     }

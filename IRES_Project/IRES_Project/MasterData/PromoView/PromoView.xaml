@@ -9,12 +9,17 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
              mc:Ignorable="d" 
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal"
+             TextOptions.TextRenderingMode="Auto"
+             Background="{DynamicResource MaterialDesignPaper}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid>
-            <local:AddPromo></local:AddPromo>
+            <local:AddPromo x:Name="AddPromoUC"  Visibility="Collapsed"  IsVisibleChanged="AddPromoUC_IsVisibleChanged"></local:AddPromo>
         </Grid>
-        <Grid x:Name="ListPromoUC" Visibility="Collapsed">
+        <Grid x:Name="ListPromoUC" Visibility="Visible">
         <Border  Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
             <GroupBox x:Name="MainBox" Padding="0">
                 <!--#region Header-->

@@ -178,6 +178,14 @@ namespace Implements.MasterData.Modules
 
             return result;
         }
+        public static bool InsertNewPromoToDb(PromoModel promo)
+        {
+            string query = $"insert into ires.promotion(       promotion_code       ,      promotion_name     ,       promotion_apply_type,            promotion_start_date     ,       promotion_end_date     ,       promotion_value     ,  promotion_max_value ,      promotion_unit     ,      promotion_description     ,  created_by,created_datetime,updated_by, updated_datetime,active,version)" +
+                                             $"  values('' || @promotion_code || '' ,'' ||@promotion_name|| '', '' ||@promotion_apply_type|| '',  @promotion_start_date , @promotion_end_date, '' ||@promotion_value|| '', @promotion_max_value ,'' ||@promotion_unit|| '','' ||@promotion_description|| '', 'Admin', CURRENT_TIMESTAMP(0), 'Admin', CURRENT_TIMESTAMP(0), true, '0')";
+
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.InsertPromoQuery(query, promo);
+        }
     }
     
 }
