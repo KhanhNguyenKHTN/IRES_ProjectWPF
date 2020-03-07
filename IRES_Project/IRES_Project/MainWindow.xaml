@@ -7,7 +7,7 @@
         
         xmlns:uc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:globaluc="clr-namespace:CustomControls.GlobalControls;assembly=CustomControls"
+        xmlns:ux="clr-namespace:IRES_Project.UC"
         
         xmlns:statisticview="clr-namespace:IRES_Project.Statistic"
         xmlns:masterdatafoodview="clr-namespace:IRES_Project.MasterData.DishView"
@@ -77,14 +77,14 @@
 
 
       <Grid Grid.Column="0">
-        <globaluc:LeftMenuControl
+        <ux:UserControlMenu
           PromoClick="UserControlMenu_PromoClick"
           DishClick="UserControlMenu_DishClick"
           StaffClick="UserControlMenu_StaffClick"
           OverviewStatisticClick="UserControlMenu_OverviewStatisticClick"
           BillStatisticClick="UserControlMenu_BillStatisticClick"
           ProductStatisticClick="UserControlMenu_ProductStatisticClick"
-          ></globaluc:LeftMenuControl>
+          ></ux:UserControlMenu>
       </Grid>
 
       <ContentControl Grid.Column="1" Content="{Binding}">

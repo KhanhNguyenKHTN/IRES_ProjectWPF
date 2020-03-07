@@ -18,9 +18,17 @@ namespace Implements.Statistic
 
         public BillStatisticModel GetBillsByDate(string date)
         {
-            string query = $"SELECT b.*, o.count_dish_in_order FROM ires.bill b " +
-                $"JOIN ( SELECT order_id, COUNT(order_id) AS count_dish_in_order FROM ires.order_detail GROUP BY order_id) AS o" +
-                $" ON o.order_id = b.order_id WHERE CAST(created_datetime AS DATE) = '11-22-2019'";
+            //string query = $"SELECT b.*, c.user_name " +
+            //    $"FROM ires.bill b" +
+            //    $" JOIN ires.customer c ON b.customer_id = c.customer_id" +
+            //    $" WHERE bill_id IN " +
+            //    $" (SELECT bill_id FROM ires.bill WHERE CAST(created_datetime AS DATE) = '{date}')";
+
+            string query = $"SELECT b.*, c.user_name, o1.person_quantity, o1.count_dish_in_order" +
+                $" FROM ires.bill b JOIN ires.customer c ON b.customer_id = c.customer_id" +
+                $" JOIN ( SELECT o.*, o_d.count_dish_in_order FROM ires.orders o JOIN (SELECT order_id, COUNT(order_id) AS count_dish_in_order FROM ires.order_detail GROUP BY order_id) AS o_d" +
+                $" ON o.order_id = o_d.order_id) AS o1 ON b.order_id = o1.order_id" +
+                $" WHERE bill_id IN( SELECT bill_id FROM ires.bill WHERE CAST(created_datetime AS DATE) = '11-22-2019')";
 
             var result = new BillStatisticModel
             {
@@ -37,10 +45,10 @@ namespace Implements.Statistic
 
                 string queryOrderDetail = $"SELECT d.*, o_d.dish_quantity FROM ires.dish d " +
                     $"JOIN ( SELECT dish_id, dish_quantity FROM ires.order_detail " +
-                    $"WHERE order_id = 1) AS o_d ON d.dish_id = o_d.dish_id";
+                    $"WHERE order_id = 1) AS o_d ON d.dish_id = o_d.dish_id" ;
 
                 DataTable dtOrderDetail = worker.getRecordsCommand(queryOrderDetail);
-                List<OrderDetailModel> listOrderDetail = new List<OrderDetailModel>();
+                List<OrderDetailModel> listOrders = new List<OrderDetailModel>();
                 for (int j = 0; j< dtOrderDetail.Rows.Count; j++)
                 {
                     var totalPrice = 0;//Convert.ToInt32(dtOrderDetail.Rows[j]["dish_quantity"]) * Convert.ToInt32(dtOrderDetail.Rows[j]["dish_cost"]);
@@ -53,7 +61,7 @@ namespace Implements.Statistic
                         TotalDishPrice = (float)totalPrice
                     };
 
-                    listOrderDetail.Add(detail);
+                    listOrders.Add(detail);
                 }
 
                 BillModel item ;
@@ -68,12 +76,12 @@ namespace Implements.Statistic
                     EmployeeId = Convert.ToInt32(dt.Rows[i]["employee_id"]),
                     Payment = (float)Convert.ToDouble(dt.Rows[i]["payment"]),
                     Tip = (float)Convert.ToDouble(dt.Rows[i]["tip"]),
-                    //PromotionCost = (float)Convert.ToDouble(dt.Rows[i]["promotion_cost"]),
+                    PromotionCost = (float)Convert.ToDouble(dt.Rows[i]["promotion_cost"]),
                     CreatedDate = Convert.ToDateTime(dt.Rows[i]["created_datetime"]),
-                    Username = dt.Rows[i]["customer_name"].ToString(),
+                    Username = dt.Rows[i]["user_name"].ToString(),
                     PersonQuantity = Convert.ToInt32(dt.Rows[i]["person_quantity"]),
                     CountDishes = Convert.ToInt32(dt.Rows[i]["count_dish_in_order"]),
-                    OrdersDetail = listOrderDetail
+                    OrdersDetail = listOrders
                 };
                 if (result.ListBills == null)
                 {
@@ -88,9 +96,19 @@ namespace Implements.Statistic
 
         public List<BillStatisticModel> GetBillsByMonth(string month)
         {
-            string query = $"SELECT b.*, o.count_dish_in_order FROM ires.bill b " +
-                $"JOIN ( SELECT order_id, COUNT(order_id) AS count_dish_in_order FROM ires.order_detail GROUP BY order_id) AS o" +
-                $" ON o.order_id = b.order_id WHERE extract(month FROM created_datetime)=12 AND extract(year FROM created_datetime)=2019";
+            //string query = $"SELECT b.*, c.user_name " +
+            //    $"FROM ires.bill b" +
+            //    $" JOIN ires.customer c ON b.customer_id = c.customer_id" +
+            //    $" WHERE bill_id IN (" +
+            //    $" SELECT bill_id FROM ires.bill WHERE " +
+            //    $" extract(month FROM created_datetime) = 11 " +
+            //    $"AND extract(year FROM created_datetime) = 2019)";
+
+            string query = $"SELECT b.*, c.user_name, o1.person_quantity, o1.count_dish_in_order" +
+                $" FROM ires.bill b JOIN ires.customer c ON b.customer_id = c.customer_id" +
+                $" JOIN ( SELECT o.*, o_d.count_dish_in_order FROM ires.orders o JOIN (SELECT order_id, COUNT(order_id) AS count_dish_in_order FROM ires.order_detail GROUP BY order_id) AS o_d" +
+                $" ON o.order_id = o_d.order_id) AS o1 ON b.order_id = o1.order_id" +
+                $"  WHERE bill_id IN ( SELECT bill_id FROM ires.bill WHERE extract(month FROM created_datetime) = 11 AND extract(year FROM created_datetime) = 2019)";
 
             var result = new List<BillStatisticModel>();
 
@@ -114,9 +132,9 @@ namespace Implements.Statistic
                     Payment = (float)Convert.ToDouble(dt.Rows[i]["payment"]),
                     Tip = (float)Convert.ToDouble(dt.Rows[i]["tip"]),
                     //PromotionId = Convert.ToInt32(dt.Rows[i]["promotion_id"]),
-                    //PromotionCost = (float)Convert.ToDouble(dt.Rows[i]["promotion_cost"]),
+                    PromotionCost = (float)Convert.ToDouble(dt.Rows[i]["promotion_cost"]),
                     CreatedDate = Convert.ToDateTime(dt.Rows[i]["created_datetime"]),
-                    Username = dt.Rows[i]["customer_name"].ToString(),
+                    Username = dt.Rows[i]["user_name"].ToString(),
                     PersonQuantity = Convert.ToInt32(dt.Rows[i]["person_quantity"]),
                     CountDishes = Convert.ToInt32(dt.Rows[i]["count_dish_in_order"])
                 };
