@@ -7,15 +7,16 @@ using Model.Models;
 using Implements.Workers;
 using System.Data;
 using Service.Modules;
+using System.Collections.ObjectModel;
 
 namespace Implements.MasterData.Modules
 {
     public class PromoImplement
     {
-        public static List<PromoModel> getDBListPromo()
+        public static ObservableCollection<PromoModel> getDBListPromo()
         {
             string query = $"select * from ires.promotion where active = true";
-            List<PromoModel> result = new List<PromoModel>();
+            ObservableCollection<PromoModel> result = new ObservableCollection<PromoModel>();
             WorkerToDB worker = new WorkerToDB();
             DataTable dt = worker.getRecordsCommand(query);
             if (dt.Rows.Count == 0)
@@ -49,10 +50,10 @@ namespace Implements.MasterData.Modules
             }
             return result;
         }
-        public static List<PromoModel> getDBListDeletedPromo()
+        public static ObservableCollection<PromoModel> getDBListDeletedPromo()
         {
             string query = $"select * from ires.promotion where active = false";
-            List<PromoModel> result = new List<PromoModel>();
+            ObservableCollection<PromoModel> result = new ObservableCollection<PromoModel>();
             WorkerToDB worker = new WorkerToDB();
             DataTable dt = worker.getRecordsCommand(query);
             if (dt.Rows.Count == 0)
@@ -86,14 +87,14 @@ namespace Implements.MasterData.Modules
             }
             return result;
         }
-        public static List<PromoModel> searchDBListPromo(string search_text)
+        public static ObservableCollection<PromoModel> searchDBListPromo(string search_text)
         {
             string query = $"select *" +
                 $" from ires.promotion" +
                 $" where (active = 'true') and" +
                 $" (promotion_name ilike '%' || @search_text || '%' or promotion_code ilike '%' || @search_text || '%' )";
 
-            List<PromoModel> result = new List<PromoModel>();
+            ObservableCollection<PromoModel> result = new ObservableCollection<PromoModel>();
             SQLExecute sqlExecute = new SQLExecute();
 
             DataTable dt = sqlExecute.GetExcuteQueryOne(query, search_text);
@@ -132,14 +133,14 @@ namespace Implements.MasterData.Modules
 
             return result;
         }
-        public static List<PromoModel> searchDBListDeletedPromo(string search_text)
+        public static ObservableCollection<PromoModel> searchDBListDeletedPromo(string search_text)
         {
             string query = $"select *" +
                 $" from ires.promotion" +
                 $" where (active = 'false') and" +
                 $" (promotion_name ilike '%' || @search_text || '%' or promotion_code ilike '%' || @search_text || '%' )";
 
-            List<PromoModel> result = new List<PromoModel>();
+            ObservableCollection<PromoModel> result = new ObservableCollection<PromoModel>();
             SQLExecute sqlExecute = new SQLExecute();
 
             DataTable dt = sqlExecute.GetExcuteQueryOne(query, search_text);
@@ -185,6 +186,22 @@ namespace Implements.MasterData.Modules
 
             SQLExecute sqlExecute = new SQLExecute();
             return sqlExecute.InsertPromoQuery(query, promo);
+        }
+        public static bool ActivePromo(string PromoCode)
+        {
+
+            string query = $"UPDATE ires.promotion SET active = true" +
+                           $" WHERE promotion_code = '' || @Value ||''";
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.DeleteQuery(query, PromoCode);
+        }
+        public static bool DeletePromo(string PromoCode)
+        {
+
+            string query = $"UPDATE ires.promotion SET active = false" +
+                           $" WHERE promotion_code = '' || @Value ||''";
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.DeleteQuery(query, PromoCode);
         }
     }
     

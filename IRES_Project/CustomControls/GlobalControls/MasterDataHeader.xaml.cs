@@ -23,7 +23,8 @@ namespace CustomControls.GlobalControls
     
     public partial class MasterDataHeader : UserControl
     {
-       
+        public event EventHandler TextBoxReturn;
+
         public MasterDataHeader()
         {
             InitializeComponent();
@@ -61,6 +62,12 @@ namespace CustomControls.GlobalControls
 
         }
 
-        
+        private void MySearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                TextBoxReturn?.Invoke(this, EventArgs.Empty);
+            }
+        }
     }
 }

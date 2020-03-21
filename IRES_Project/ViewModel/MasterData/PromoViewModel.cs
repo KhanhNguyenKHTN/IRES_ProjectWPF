@@ -9,6 +9,7 @@ using Model.Models;
 using System.Windows;
 using System.Windows.Controls;
 using Implements.MasterData.Modules;
+using System.Collections.ObjectModel;
 
 namespace ViewModel.MasterData
 {
@@ -29,9 +30,9 @@ namespace ViewModel.MasterData
 
         public PromoViewModel()
         {
-            ListPromo = new List<PromoModel>();
+            ListPromo = new ObservableCollection<PromoModel>();
             ListPromo = getListPromo();
-            ListPromoRoot = new List<PromoModel>();
+            ListPromoRoot = new ObservableCollection<PromoModel>();
             ListPromoRoot = getListPromo();
 
             if (ListPromo.Count() == 0)
@@ -52,25 +53,25 @@ namespace ViewModel.MasterData
                 });
         }
 
-        private List<PromoModel> _ListPromo;
+        private ObservableCollection<PromoModel> _ListPromo;
 
-        public List<PromoModel> ListPromo
+        public ObservableCollection<PromoModel> ListPromo
         {
             get { return _ListPromo; }
             set { _ListPromo = value; OnPropertyChanged(); }
         }
-        private List<PromoModel> _ListPromoRoot;
+        private ObservableCollection<PromoModel> _ListPromoRoot;
 
-        public List<PromoModel> ListPromoRoot
+        public ObservableCollection<PromoModel> ListPromoRoot
         {
             get { return _ListPromoRoot; }
             set { _ListPromoRoot = value; OnPropertyChanged(); }
         }
 
-        public List<PromoModel> getListPromo()
+        public ObservableCollection<PromoModel> getListPromo()
         {
             IsSearching = false;
-            List<PromoModel> listPromo = new List<PromoModel>();
+            ObservableCollection<PromoModel> listPromo = new ObservableCollection<PromoModel>();
             listPromo = PromoImplement.getDBListPromo();
             PromoModel X = listPromo.First();
             if (X.PromotionId == -1)
@@ -81,10 +82,10 @@ namespace ViewModel.MasterData
             return listPromo;
         }
 
-        public List<PromoModel> getDeletedPromo()
+        public ObservableCollection<PromoModel> getDeletedPromo()
         {
             IsSearching = false;
-            List<PromoModel> listPromo = new List<PromoModel>();
+            ObservableCollection<PromoModel> listPromo = new ObservableCollection<PromoModel>();
             listPromo = PromoImplement.getDBListDeletedPromo();
             PromoModel X = listPromo.First();
             if (X.PromotionId == -1)
@@ -94,9 +95,10 @@ namespace ViewModel.MasterData
             }
             return listPromo;
         }
-        public List<PromoModel> searchDish()
+        public ObservableCollection<PromoModel> searchPromo()
         {
-            List<PromoModel> listPromo = new List<PromoModel>();
+            IsSearching = true;
+            ObservableCollection<PromoModel> listPromo = new ObservableCollection<PromoModel>();
             if (Search_Text == null)
             {
                 MessageBox.Show("Vui lòng gõ nội dung tìm kiếm");
@@ -116,12 +118,13 @@ namespace ViewModel.MasterData
                 listPromo.Clear();
                 return listPromo;
             }
-            IsSearching = true;
+            
             return listPromo;
         }
-        public List<PromoModel> searchDeletedDish()
+        public ObservableCollection<PromoModel> searchDeletedPromo()
         {
-            List<PromoModel> listPromo = new List<PromoModel>();
+            IsSearching = true;
+            ObservableCollection<PromoModel> listPromo = new ObservableCollection<PromoModel>();
             if (Search_Text == null)
             {
                 MessageBox.Show("Vui lòng gõ nội dung tìm kiếm");
@@ -141,114 +144,30 @@ namespace ViewModel.MasterData
                 listPromo.Clear();
                 return listPromo;
             }
-            IsSearching = true;
+           
             return listPromo;
         }
-        //public bool UpdatePhoneNb(string phoneNb, string employee_code)
-        //{
-
-        //    return EmployeeImplement.UpdatePhone(phoneNb, employee_code);
-        //}
 
 
-        //public bool DeleteEmployee(string employee_code, Employee a)
-        //{
-        //    RemoveItem(ListEmployeeRoot, a);
-        //    return EmployeeImplement.DeleteEmp(employee_code);
-        //}
-        //public bool ActiveEmployee(string employee_code, Employee a)
-        //{
-        //    RemoveItem(ListEmployeeRoot, a);
-        //    return EmployeeImplement.ActiveEmp(employee_code);
-        //}
-        //public bool UpdateRole(int RoleId, string employee_code)
-        //{
 
-        //    return EmployeeImplement.UpdateRole(RoleId, employee_code);
-        //}
-        //public void UpdateLocalEmpRoleId(string Role, string employee_code)
-        //{
-        //    for (int i = 1; i <= ListEmployee.Count(); i++)
-        //    {
-        //        if (ListEmployee[i - 1].EmployeeCode == employee_code)
-        //        {
-        //            switch (Role)
-        //            {
-        //                case "Nhân viên phục vụ":
-        //                    {
-        //                        ListEmployee[i - 1].RoleId = 1;
-        //                        break;
-        //                    }
-        //                case "Bếp trưởng":
-        //                    {
-        //                        ListEmployee[i - 1].RoleId = 2;
-        //                        break;
-        //                    }
-        //                case "Thu ngân":
-        //                    {
-        //                        ListEmployee[i - 1].RoleId = 3;
-        //                        break;
-        //                    }
-
-        //                case "Lễ tân":
-        //                    {
-        //                        ListEmployee[i - 1].RoleId = 4;
-        //                        break;
-        //                    }
-        //                case "Đầu bếp":
-        //                    {
-        //                        ListEmployee[i - 1].RoleId = 5;
-        //                        break;
-        //                    }
-        //                case "Quản lý ca":
-        //                    {
-        //                        ListEmployee[i - 1].RoleId = 6;
-        //                        break;
-        //                    }
-        //                case "Quản lý nhà hàng":
-        //                    {
-        //                        ListEmployee[i - 1].RoleId = 7;
-        //                        break;
-        //                    }
-
-        //            }
-        //        }
-        //    }
-        //}
+        public bool DeletePromo(string promo_code, PromoModel a)
+        {
+            RemoveItem(ListPromoRoot, a);
+            return PromoImplement.DeletePromo(promo_code);
+        }
+        public bool ActivePromo(string promo_code, PromoModel a)
+        {
+            RemoveItem(ListPromoRoot, a);
+            return PromoImplement.ActivePromo(promo_code);
+        }
+       
 
 
-        //public void RemoveItem(ObservableCollection<Employee> collection, Employee instance)
-        //{
-        //    collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
-        //}
-        //public ICommand CheckCommand
-        //{
-        //    get
-        //    {
-        //        if (checkCommand == null)
-        //            checkCommand = new RelayCommand<object>((i) => { return true; }, i => { Checkprocess(i); }); ;
-        //        return checkCommand;
-        //    }
-        //    set
-        //    {
-        //        checkCommand = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-        //public void Checkprocess(object sender)
-        //{
-        //    if (IsChecked == true)
-        //    {
-        //        ListEmployeeRoot = getDataEmployee();
-        //    }
-        //    else
-        //    {
-
-        //        ListEmployeeRoot = getDeletedEmployee();
-        //    }
-
-        //    //this DOES react when the checkbox is checked or unchecked
-        //}
+        public void RemoveItem(ObservableCollection<PromoModel> collection, PromoModel instance)
+        {
+            collection.Remove(collection.Where(i => i.PromotionCode == instance.PromotionCode).Single());
+        }
+       
 
     }
 }

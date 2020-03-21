@@ -73,7 +73,8 @@ namespace IRES_Project.MasterData.DishView
             btnPrev.IsEnabled = false;
             btnFirst.IsEnabled = false;
             updtLabel();
-
+            MasterHeader.TextBoxReturn += MasterHeader_TextBoxReturn;
+                 
             //cbNumberOfRecords.Items.Add("10");
             //cbNumberOfRecords.Items.Add("20");
             //cbNumberOfRecords.Items.Add("30");
@@ -86,6 +87,11 @@ namespace IRES_Project.MasterData.DishView
             btnUpdate();
 
             #endregion
+        }
+
+        private void MasterHeader_TextBoxReturn(object sender, EventArgs e)
+        {
+            Search_Emp(sender,null);
         }
 
         private void Navigate(int mode)
@@ -434,32 +440,32 @@ namespace IRES_Project.MasterData.DishView
                 case 1:
                     {
                         btn1.Opacity = 0.75;
-                        btn1.BorderThickness = new Thickness(0.0);
+                        btn1.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 2:
                     {
                         btn2.Opacity = 0.75;
-                        btn2.BorderThickness = new Thickness(0.0);
+                        btn2.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 3:
                     {
 
-                        btn3.BorderThickness = new Thickness(0.0);
+                        btn3.BorderThickness = new Thickness(1.0);
                         btn3.Opacity = 0.75;
                         break;
                     }
                 case 4:
                     {
                         btn4.Opacity = 0.75;
-                        btn4.BorderThickness = new Thickness(0.0);
+                        btn4.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 5:
                     {
                         btn5.Opacity = 0.75;
-                        btn5.BorderThickness = new Thickness(0.0);
+                        btn5.BorderThickness = new Thickness(1.0);
                         break;
                     }
             }
@@ -482,37 +488,37 @@ namespace IRES_Project.MasterData.DishView
                 case 1:
                     {
                         btn1.Opacity = 1;
-                        btn1.BorderBrush = Brushes.Black;
-                        btn1.BorderThickness = new Thickness(1.0);
+                        btn1.BorderBrush = Brushes.Gray;
+                        btn1.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 2:
                     {
                         btn2.Opacity = 1;
-                        btn2.BorderBrush = Brushes.Black;
-                        btn2.BorderThickness = new Thickness(1.0);
+                        btn2.BorderBrush = Brushes.Gray;
+                        btn2.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 3:
                     {
 
                         btn3.Opacity = 1;
-                        btn3.BorderBrush = Brushes.Black;
-                        btn3.BorderThickness = new Thickness(1.0);
+                        btn3.BorderBrush = Brushes.Gray;
+                        btn3.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 4:
                     {
                         btn4.Opacity = 1;
-                        btn4.BorderBrush = Brushes.Black;
-                        btn4.BorderThickness = new Thickness(1.0);
+                        btn4.BorderBrush = Brushes.Gray;
+                        btn4.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 5:
                     {
                         btn5.Opacity = 1;
-                        btn5.BorderBrush = Brushes.Black;
-                        btn5.BorderThickness = new Thickness(1.0);
+                        btn5.BorderBrush = Brushes.Gray;
+                        btn5.BorderThickness = new Thickness(2.0);
                         break;
                     }
             }
@@ -690,19 +696,12 @@ namespace IRES_Project.MasterData.DishView
         }
         private void Refresh_Data(object sender, RoutedEventArgs e)
         {
-            //if (dishVM.IsChecked)
-            //{
-            //    dishVM.ListDishesRoot = dishVM.getDataEmployee();
-
-            //}
-            //else
-            //{
-            //    dishVM.ListDishesRoot = dishVM.getDeletedEmployee();
-            //}
-
-            //No_View_Updt();
-            //Navigate((int)PagingMode.First);
-            //updtLabel();
+            dishVM.IsChecked = true;
+            dishVM.ListDishesRoot = dishVM.getListDishes();
+            dishVM.Search_Text = "";
+            No_View_Updt();
+            Navigate((int)PagingMode.First);
+            updtLabel();
         }
         private void Search_Emp(object sender, RoutedEventArgs e)
         {
@@ -746,136 +745,105 @@ namespace IRES_Project.MasterData.DishView
             //Employee a = rows[0] as Employee;
             //EditEmpUC.TakeEmp(a);
         }
-        public void RemoveItem(ObservableCollection<DishModel> collection, Employee instance)
-        {
-            //collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
-        }
-
+      
 
         private void MasterHeader_ActiveClick(object sender, RoutedEventArgs e)
         {
-            //if (dishVM.IsChecked == true)
-            //{
-            //    if (dishVM.IsSearching == true)
-            //    {
-            //        //MessageBox.Show("Đang trong tìm kiếm");
-            //        ListDish = dishVM.searchEmployee();
-            //        if (ListDish.Count != 0)
-            //        {
-            //            dishVM.ListDishesRoot = ListDish;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        dishVM.ListDishesRoot = dishVM.getDataEmployee();
-            //    }
-            //}
-            //else
-            //{
-            //    if (dishVM.IsSearching == true)
-            //    {
-            //        // MessageBox.Show("Đang trong tìm kiếm");
-            //        ListDish = dishVM.searchDeletedEmployee();
-            //        if (ListDish.Count != 0)
-            //        {
-            //            dishVM.ListDishesRoot = ListDish;
-            //        }
-            //        else
-            //        {
-            //            dishVM.ListDishesRoot.Clear();
-            //            No_View_Updt();
-            //            Navigate((int)PagingMode.First);
-            //            updtLabel();
-            //        }
-            //    }
-            //    else
-            //    {
-            //        dishVM.ListDishesRoot = dishVM.getDeletedEmployee();
-            //    }
-            //}
-            //No_View_Updt();
-            //if (no_Page >= 1)
-            //{
-            //    Navigate((int)PagingMode.First);
-            //}
-            //else
-            //{
-            //    dishVM.ListDishes.Clear();
-            //}
-            //updtLabel();
+            if (dishVM.IsChecked == true)
+            {
+                if (dishVM.IsSearching == true)
+                {
+                    //MessageBox.Show("Đang trong tìm kiếm");
+                    ListDish = dishVM.searchDish();
+                    if (ListDish.Count != 0)
+                    {
+                        dishVM.ListDishesRoot = ListDish;
+                    }
+                   
+                }
+                else
+                {
+                    dishVM.ListDishesRoot = dishVM.getListDishes();
+                }
+            }
+            else
+            {
+                if (dishVM.IsSearching == true)
+                {
+                    // MessageBox.Show("Đang trong tìm kiếm");
+                    ListDish = dishVM.searchDeletedDish();
+                    if (ListDish.Count != 0)
+                    {
+                        dishVM.ListDishesRoot = ListDish;
+                    }
+                    else
+                    {
+                        dishVM.ListDishesRoot.Clear();
+                        No_View_Updt();
+                        Navigate((int)PagingMode.First);
+                        updtLabel();
+                    }
+                   
+                }
+                else
+                {
+                    dishVM.ListDishesRoot = dishVM.getDeletedDishes();
+                }
+            }
+            No_View_Updt();
+            if (no_Page >= 1)
+            {
+                Navigate((int)PagingMode.First);
+            }
+            else
+            {
+                dishVM.ListDishes.Clear();
+            }
+            updtLabel();
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-        //    IList rows = dataGrid.SelectedItems;
-        //    Employee a = rows[0] as Employee;
-        //    if (a.RoleId == 7)
-        //    {
-        //        MessageBox.Show("Không thể xóa Admin");
-        //    }
-        //    else
-        //    {
-        //        if (a.Active == false)
-        //        {
-        //            if (MessageBox.Show("Bỏ xóa nhân viên này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
-        //            {
-        //                //do no stuff
+            IList rows = dataGrid.SelectedItems;
+            DishModel a = rows[0] as DishModel;
+            if (a.Active == false)
+            {
+                if (MessageBox.Show("Bỏ xóa món ăn này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                {
+                    //do no stuff
 
-        //            }
-        //            else
-        //            {
-        //                //do yes stuff
-        //                dishVM.ActiveEmployee(a.EmployeeCode, a);
-        //                //dishVM.ListDishesRoot = dishVM.ListDishes;
-        //                No_View_Updt();
-        //                Navigate((int)PagingMode.First);
-        //                updtLabel();
-        //            }
-        //        }
+                }
+                else
+                {
+                    //do yes stuff
+                    dishVM.ActiveDish(a.DishCode, a);
+                    //dishVM.ListDishesRoot = dishVM.ListDishes;
+                    No_View_Updt();
+                    Navigate((int)PagingMode.First);
+                    updtLabel();
+                }
+            }
 
-        //        else
-        //        {
-        //            if (MessageBox.Show("Xóa nhân viên này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
-        //            {
-        //                //do no stuff
+            else
+            {
+                if (MessageBox.Show("Xóa món ăn này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                {
+                    //do no stuff
 
-        //            }
-        //            else
-        //            {
-        //                //do yes stuff
-        //                dishVM.DeleteEmployee(a.EmployeeCode, a);
-        //                //dishVM.ListDishesRoot = dishVM.ListDishes;
-        //                No_View_Updt();
-        //                Navigate((int)PagingMode.First);
-        //                updtLabel();
-        //            }
-        //        }
-        //    }
+                }
+                else
+                {
+                    //do yes stuff
+                    dishVM.DeleteDish(a.DishCode, a);
+                    //dishVM.ListDishesRoot = dishVM.ListDishes;
+                    No_View_Updt();
+                    Navigate((int)PagingMode.First);
+                    updtLabel();
+                }
+            }
         }
+        
 
-        private void AddEmpUC_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            //if (ListEmpUC.Visibility == Visibility.Visible)
-            //{
-            //    ListEmpUC.Visibility = Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    if (dishVM.IsChecked)
-            //    {
-            //        dishVM.ListDishesRoot = dishVM.getDataEmployee();
-
-            //    }
-            //    else
-            //    {
-            //        dishVM.ListDishesRoot = dishVM.getDeletedEmployee();
-            //    }
-
-            //    No_View_Updt();
-            //    Navigate((int)PagingMode.First);
-            //    updtLabel();
-            //    ListEmpUC.Visibility = Visibility.Visible;
-            //}
-        }
+  
         private void DataGridCell_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //var dataGridCellTarget = (DataGridCell)sender;

@@ -34,15 +34,16 @@
                 <!--#endregion-->
                 <Grid Background="#FFFBFBFB" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="6*" />
-                        <RowDefinition Height="2*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="100" />
                     </Grid.RowDefinitions>
 
                     <!--TestClick="Test_Cmd"-->
                     <!--#region MasterDataHeader -->
                     <Grid Grid.Row="0" Margin="0 10 0 0 " HorizontalAlignment="Stretch" Width="auto">
-                        <uc:MasterDataHeader  x:Name="MasterHeader"  AddClick="MasterHeader_AddClick" ActiveClick="MasterHeader_ActiveClick" SearchClick ="Search_Emp"  RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
+                        <uc:MasterDataHeader  x:Name="MasterHeader" TextBoxReturn="MasterHeader_TextBoxReturn"
+                                              AddClick="MasterHeader_AddClick" ActiveClick="MasterHeader_ActiveClick" SearchClick ="Search_Emp"  RefreshClick="Refresh_Data" ></uc:MasterDataHeader>
                     </Grid>
                     <!--#endregion-->
                     <!-- ItemsSource="{Binding ListEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"-->
@@ -175,7 +176,7 @@
                                     <Button Height="30" Width="30" Padding="0"  HorizontalAlignment="Right" 
                                    Name="btn4" Click="Btn4_Click" VerticalAlignment="Bottom" Content="4" Margin="0 0 5 0" Background="White" BorderBrush="Gray"  Foreground="#2672fb" Opacity="0.75" BorderThickness="0"></Button>
                                     <Button Height="30" Width="30" Padding="0"  HorizontalAlignment="Right" 
-                                   Name="btn5" Click="Btn5_Click" VerticalAlignment="Bottom" Content="5" Margin="0 0 5 0" Background="White" BorderBrush="Gray"  Foreground="#2672fb" Opacity="0.75" ></Button>
+                                   Name="btn5" Click="Btn5_Click" VerticalAlignment="Bottom" Content="5" Margin="0 0 5 0" Background="White" BorderBrush="Gray"  Foreground="#2672fb" Opacity="0.75" BorderThickness="0" ></Button>
                                 </StackPanel>
                             </Grid>
 

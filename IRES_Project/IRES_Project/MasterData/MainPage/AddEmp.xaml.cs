@@ -31,7 +31,9 @@ namespace IRES_Project.MasterData.MainPage
             InitializeComponent();        
             this.DataContext = AddEmpVM;
             ResComb.ItemsSource = AddEmpVM.ListRes;
-        }               
+        }
+      
+       
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             var bc = new BrushConverter();
@@ -340,6 +342,7 @@ namespace IRES_Project.MasterData.MainPage
             tb.GotFocus -= ShowEmpPass_GotFocus;
         }
 
+       
         private void ShowConfEmpPass_GotFocus(object sender, RoutedEventArgs e)
         {
             TextBox tb = (TextBox)sender;

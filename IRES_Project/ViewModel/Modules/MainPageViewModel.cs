@@ -104,7 +104,7 @@ namespace ViewModel.Modules
         }
         public ObservableCollection<Employee> searchEmployee()
         {
-
+            IsSearching = true;
             ObservableCollection<Employee> listEmployee = new ObservableCollection<Employee>();
            
             if ( Search_Text==null)
@@ -127,11 +127,12 @@ namespace ViewModel.Modules
                 listEmployee.Clear();
                 return listEmployee;
             }
-            IsSearching = true;
+           
             return listEmployee;
         }
         public ObservableCollection<Employee> searchDeletedEmployee()
         {
+            IsSearching = true;
             ObservableCollection<Employee> listEmployee = new ObservableCollection<Employee>();
 
             if (Search_Text == null)
@@ -154,7 +155,7 @@ namespace ViewModel.Modules
                 listEmployee.Clear();
                 return listEmployee;
             }
-            IsSearching = true;
+           
             return listEmployee;
         }
         public bool UpdatePhoneNb(string phoneNb, string employee_code)

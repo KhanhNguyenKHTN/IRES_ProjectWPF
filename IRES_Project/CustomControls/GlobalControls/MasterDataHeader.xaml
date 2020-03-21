@@ -26,7 +26,7 @@
     <Border Grid.Column ="2" BorderBrush="Black" BorderThickness="1" Margin="0 4 4 4" CornerRadius="10">
       <DockPanel HorizontalAlignment="Stretch" >
         <materialDesign:PackIcon Width="20" Height="20" Kind="FileFind" Margin="5 5 5 5" />
-        <TextBox x:Name="MySearch" Padding="5 0 0 0" Text="{Binding Search_Text, Mode=TwoWay}" Margin="0 0 15 5" VerticalContentAlignment="Center" Width="auto"></TextBox>
+                <TextBox x:Name="MySearch" KeyDown="MySearch_KeyDown" Padding="5 0 0 0" Text="{Binding Search_Text, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0 0 15 5" VerticalContentAlignment="Center" Width="auto"></TextBox>
       </DockPanel>
     </Border>
 

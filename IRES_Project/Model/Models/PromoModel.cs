@@ -46,7 +46,7 @@ namespace Model.Models
         private DateTime promotionEndDate;
         private int promotionQuantity;
         private string promotionValue;
-        private int promotionMaxValue;
+        private double promotionMaxValue;
         private string promotionUnit;
         private string promotionCondition;
         private string promotionDes;
@@ -66,7 +66,7 @@ namespace Model.Models
         public DateTime PromotionEndDate { get => promotionEndDate; set => SetField( ref  promotionEndDate, value); }
         public int PromotionQuantity { get => promotionQuantity; set => SetField( ref  promotionQuantity, value); }
         public string PromotionValue { get => promotionValue; set => SetField( ref  promotionValue, value); }
-        public int PromotionMaxValue { get => promotionMaxValue; set => SetField( ref  promotionMaxValue, value); }
+        public double PromotionMaxValue { get => promotionMaxValue; set => SetField( ref  promotionMaxValue, value); }
         public string PromotionUnit { get => promotionUnit; set => SetField( ref  promotionUnit, value); }
         public string PromotionCondition { get => promotionCondition; set => SetField( ref  promotionCondition, value); }
         public string PromotionDes { get => promotionDes; set => SetField( ref  promotionDes, value); }

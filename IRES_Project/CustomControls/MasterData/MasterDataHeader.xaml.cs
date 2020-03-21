@@ -23,7 +23,7 @@ namespace CustomControls.MasterData
     
     public partial class MasterDataHeader : UserControl
     {
-       
+        public event EventHandler TextBoxReturn;
         public MasterDataHeader()
         {
             InitializeComponent();
@@ -68,6 +68,14 @@ namespace CustomControls.MasterData
             //    ToFireSearchCheckBox.IsChecked = !ToFireSearchCheckBox.IsChecked;
               
             //}
+        }
+
+        private void MySearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                TextBoxReturn?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }

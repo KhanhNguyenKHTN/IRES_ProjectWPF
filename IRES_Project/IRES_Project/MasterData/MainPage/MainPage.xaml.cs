@@ -436,32 +436,32 @@ namespace IRES_Project.MasterData.MainPage
                 case 1:
                     {
                         btn1.Opacity = 0.75;
-                        btn1.BorderThickness = new Thickness(0.0);
+                        btn1.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 2:
                     {
                         btn2.Opacity = 0.75;
-                        btn2.BorderThickness = new Thickness(0.0);
+                        btn2.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 3:
                     {
 
-                        btn3.BorderThickness = new Thickness(0.0);
+                        btn3.BorderThickness = new Thickness(1.0);
                         btn3.Opacity = 0.75;
                         break;
                     }
                 case 4:
                     {
                         btn4.Opacity = 0.75;
-                        btn4.BorderThickness = new Thickness(0.0);
+                        btn4.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 5:
                     {
                         btn5.Opacity = 0.75;
-                        btn5.BorderThickness = new Thickness(0.0);
+                        btn5.BorderThickness = new Thickness(1.0);
                         break;
                     }
             }
@@ -484,37 +484,37 @@ namespace IRES_Project.MasterData.MainPage
                 case 1:
                     {
                         btn1.Opacity = 1;
-                        btn1.BorderBrush = Brushes.Black;
-                        btn1.BorderThickness = new Thickness(1.0);
+                        btn1.BorderBrush = Brushes.Gray;
+                        btn1.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 2:
                     {
                         btn2.Opacity = 1;
-                        btn2.BorderBrush = Brushes.Black;
-                        btn2.BorderThickness = new Thickness(1.0);
+                        btn2.BorderBrush = Brushes.Gray;
+                        btn2.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 3:
                     {
 
                         btn3.Opacity = 1;
-                        btn3.BorderBrush = Brushes.Black;
-                        btn3.BorderThickness = new Thickness(1.0);
+                        btn3.BorderBrush = Brushes.Gray;
+                        btn3.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 4:
                     {
                         btn4.Opacity = 1;
-                        btn4.BorderBrush = Brushes.Black;
-                        btn4.BorderThickness = new Thickness(1.0);
+                        btn4.BorderBrush = Brushes.Gray;
+                        btn4.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 5:
                     {
                         btn5.Opacity = 1;
-                        btn5.BorderBrush = Brushes.Black;
-                        btn5.BorderThickness = new Thickness(1.0);
+                        btn5.BorderBrush = Brushes.Gray;
+                        btn5.BorderThickness = new Thickness(2.0);
                         break;
                     }
             }
@@ -699,16 +699,9 @@ namespace IRES_Project.MasterData.MainPage
         //}
         private void Refresh_Data(object sender, RoutedEventArgs e)
         {
-            if (mainPageVM.IsChecked)
-            {
-                mainPageVM.ListEmployeeRoot = mainPageVM.getDataEmployee();
-
-            }
-            else
-            {
-                mainPageVM.ListEmployeeRoot = mainPageVM.getDeletedEmployee();
-            }
-
+            mainPageVM.IsChecked = true;
+            mainPageVM.ListEmployeeRoot = mainPageVM.getDataEmployee();
+            mainPageVM.Search_Text = "";
             No_View_Updt();
             Navigate((int)PagingMode.First);
             updtLabel();
@@ -1135,13 +1128,7 @@ namespace IRES_Project.MasterData.MainPage
             Employee a = dataGridCellTarget.DataContext as Employee;
             EmpDetailUC.TakeEmp(a);
             EmpDetailUC.Visibility = Visibility.Visible;
-
-
-
         }
-
-       
-
         private void CellSetColor(object sender, MouseEventArgs e)
         {
             DataGridCell cell = sender as DataGridCell;
@@ -1172,8 +1159,6 @@ namespace IRES_Project.MasterData.MainPage
                 dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
-        
-
         private void updtLabel()
         {
             count = mainPageVM.ListEmployeeRoot.Take(numberOfRecPerPage).Count();

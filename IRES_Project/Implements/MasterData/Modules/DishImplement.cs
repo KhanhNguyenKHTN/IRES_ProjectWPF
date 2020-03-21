@@ -35,6 +35,7 @@ namespace Implements.MasterData.Modules
 
                 item = new DishModel
                 {
+                    Active =true,
                     DishId = Convert.ToInt32(dt.Rows[i]["dish_id"]),
                     DishName = dt.Rows[i]["dish_name"].ToString(),
                     DishCost = Convert.ToInt32(dt.Rows[i]["dish_cost"]),
@@ -71,6 +72,7 @@ namespace Implements.MasterData.Modules
 
                 item = new DishModel
                 {
+                    Active = false,
                     DishId = Convert.ToInt32(dt.Rows[i]["dish_id"]),
                     DishName = dt.Rows[i]["dish_name"].ToString(),
                     DishCost = Convert.ToInt32(dt.Rows[i]["dish_cost"]),
@@ -254,6 +256,22 @@ namespace Implements.MasterData.Modules
             string query = $"UPDATE ires.dish_item SET dish_item_code = '' || @dish_item_code || '' WHERE dish_item_id = @dish_item_id";
             SQLExecute sqlExecute = new SQLExecute();
             return sqlExecute.UpdateItemCodeQuery(query, dishItemId);
+        }
+        public static bool ActiveDish(string DishCode)
+        {
+
+            string query = $"UPDATE ires.dish SET active = true" +
+                           $" WHERE dish_code = '' || @Value ||''";
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.DeleteQuery(query, DishCode);
+        }
+        public static bool DeleteDish(string DishCode)
+        {
+
+            string query = $"UPDATE ires.dish SET active = false" +
+               $" WHERE dish_code = '' || @Value ||''";
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.DeleteQuery(query, DishCode);
         }
     }
 }               

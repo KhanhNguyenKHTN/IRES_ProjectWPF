@@ -313,10 +313,36 @@ namespace IRES_Project.MasterData.DishView
         }
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            IList rows = DataGridItem.SelectedItems;
+            //if( textboxHour.CaretIndex ==1)
+            //  e.Handled = !IsValidForHour(((TextBox)sender).Text + e.Text);
+            //else if(textboxHour.CaretIndex == 0)
+            //  {
+            //      e.Handled = !IsValidForHour(e.Text + ((TextBox)sender).Text);
+            //  }
+            IList rows = DataGridItem.SelectedItems;        
             if (rows.Count != 0)
             {
+                var a = sender as TextBox;
                 DishItem b = rows[0] as DishItem;
+                if (a != null)
+                {
+                    if (e.Key == Key.Delete || e.Key == Key.Back)
+                    {
+                        var index = a.CaretIndex;
+                        if (b.ItemQuantity < 10 && b.ItemQuantity > 0 && index == 2)
+                        {
+                            a.CaretIndex = 1;
+                            e.Handled = true;
+                        }
+                        else if(b.ItemQuantity >= 10 && index == 3)
+                        {
+                            a.CaretIndex = 2;
+                            e.Handled = true;
+                        }
+                    }
+                }
+
+                
                 if (e.Key == Key.Up)
                 {
                     if(b.ItemQuantity <10)

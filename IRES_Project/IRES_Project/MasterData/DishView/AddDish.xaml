@@ -223,7 +223,7 @@
                             </Grid>
 
                             <Grid Grid.Row="3" Grid.Column="1">
-                                <TextBox Name="textboxDishName" TextChanged="TextboxDishName_TextChanged" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewDish.DishName, Mode=TwoWay}"></TextBox>
+                                <TextBox Name="textboxDishName" MaxLength="20" TextChanged="TextboxDishName_TextChanged" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" Text="{Binding NewDish.DishName, Mode=TwoWay}"></TextBox>
                             </Grid>
                             
                             <Grid Grid.Row="4" Grid.Column="1" x:Name="gridNameError" Visibility="Collapsed" Margin="0 0 15 0" >
@@ -238,7 +238,7 @@
 
 
                             <Grid Grid.Row="5" Grid.Column="1" Name="MyGrid" LostFocus="MyGrid_LostFocus" MouseLeave="MyGrid_MouseLeave" MouseEnter="MyGrid_MouseEnter">
-                                <TextBox Name="textboxDishPrice" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" 
+                                <TextBox Name="textboxDishPrice" Padding="10 0 10 0" BorderBrush="Black" BorderThickness="1" MaxLength="9"
                                          Text="{Binding NewDish.DishCost, Mode=TwoWay, Converter={StaticResource StringToDouble},
                                     UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}"
                                    TextChanged="TextboxDishPrice_TextChanged" PreviewTextInput="TextboxDishPrice_PreviewTextInput"    Visibility="Collapsed" >
@@ -462,7 +462,7 @@
                                                         <ColumnDefinition Width="3*"></ColumnDefinition>
                                                         <ColumnDefinition Width="1*"></ColumnDefinition>                                                       
                                                     </Grid.ColumnDefinitions>
-                                                    <TextBox Name="textboxQuantity" VerticalAlignment="Center" Margin="20 0 0 0"
+                                                    <TextBox Name="textboxQuantity" VerticalAlignment="Center" Margin="20 0 0 0" MaxLength="4"
                                                              PreviewKeyDown="TextBox_PreviewKeyDown" TextChanged="TextBox_TextChanged" PreviewTextInput="TextboxQuantity_PreviewTextInput"
                                                              Text="{Binding ItemQuantity, Mode=TwoWay, StringFormat='{}{0:#0.0}',
                                                         UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True, NotifyOnTargetUpdated=True}" Grid.Column="0">
@@ -546,11 +546,11 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="1">
-                            <Button Name="btnSave" Click="Save_Click">Lưu</Button>
-                        </Grid>
                         <Grid Grid.Column="3">
-                            <Button Click="Cancel_Click">Quay lại</Button>
+                            <Button Name="btnSave" Click="Save_Click" Background="Green">Lưu</Button>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Button Click="Cancel_Click" Background="Blue">Quay lại</Button>
                         </Grid>
                     </Grid>
                     <!--#endregion-->

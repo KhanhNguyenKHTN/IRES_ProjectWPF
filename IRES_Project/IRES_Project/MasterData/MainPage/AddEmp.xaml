@@ -16,7 +16,6 @@
              Background="{DynamicResource MaterialDesignPaper}"
              FontFamily="{DynamicResource MaterialDesignFont}"
              Name="AddEmpPage">
-
     <Grid>
         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2" >
             <GroupBox x:Name="MainBox" Padding="0">
@@ -375,11 +374,11 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="1">
-                            <Button Click="Save_Click">Lưu</Button>
-                        </Grid>
                         <Grid Grid.Column="3">
-                            <Button Click="Cancel_Click">Quay lại</Button>
+                            <Button Click="Save_Click" Background="Green">Lưu</Button>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Button Click="Cancel_Click" Background="Blue">Quay lại</Button>
                         </Grid>
 
                     </Grid>

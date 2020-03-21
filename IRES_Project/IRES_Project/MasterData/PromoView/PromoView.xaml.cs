@@ -1,7 +1,9 @@
 ﻿
 using Model.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,7 +37,7 @@ namespace IRES_Project.MasterData.PromoView
         int no_Page;
         string SelectedCol;
         bool FirstRun = true;
-        List<PromoModel> ListPromo { get; set; }
+        ObservableCollection<PromoModel> ListPromo { get; set; }
 
         private enum PagingMode { First = 1, Next = 2, Previous = 3, Last = 4, PageCountChange = 5 };
 
@@ -45,7 +47,7 @@ namespace IRES_Project.MasterData.PromoView
             InitializeComponent();
             this.DataContext = promoVM;
 
-            promoVM.ListPromo = new List<PromoModel>(promoVM.ListPromoRoot.Take(numberOfRecPerPage));
+            promoVM.ListPromo = new ObservableCollection<PromoModel>(promoVM.ListPromoRoot.Take(numberOfRecPerPage));
             //dataGrid.ItemsSource=promoVM.ListPromo.Take(numberOfRecPerPage);
             No_View_Updt();
             #region Config paging btn 2 trường hợp, 1 là khi khởi tạo, 1 là khi itemsource thay đổi
@@ -104,7 +106,7 @@ namespace IRES_Project.MasterData.PromoView
 
                         if (promoVM.ListPromoRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage).Count() != 0) // còn item để lấy
                         {
-                            promoVM.ListPromo = new List<PromoModel>(promoVM.ListPromoRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage));
+                            promoVM.ListPromo = new ObservableCollection<PromoModel>(promoVM.ListPromoRoot.Skip(CurPageIndex * numberOfRecPerPage).Take(numberOfRecPerPage));
                             if (ActiveBtn == 5 && ViewIndex != no_View)     //nút 5th
                             {
                                 ViewIndex++;
@@ -151,12 +153,12 @@ namespace IRES_Project.MasterData.PromoView
                             btnPrev.Opacity = 0.75;
                             btnFirst.IsEnabled = false;
                             btnFirst.Opacity = 0.75;
-                            promoVM.ListPromo = new List<PromoModel>(promoVM.ListPromoRoot.Take(numberOfRecPerPage));
+                            promoVM.ListPromo = new ObservableCollection<PromoModel>(promoVM.ListPromoRoot.Take(numberOfRecPerPage));
                             updtLabel();
                         }
                         else
                         {
-                            promoVM.ListPromo = new List<PromoModel>(promoVM.ListPromoRoot.Skip((CurPageIndex - 1) * numberOfRecPerPage).Take(numberOfRecPerPage));
+                            promoVM.ListPromo = new ObservableCollection<PromoModel>(promoVM.ListPromoRoot.Skip((CurPageIndex - 1) * numberOfRecPerPage).Take(numberOfRecPerPage));
                             count = CurPageIndex * numberOfRecPerPage;
                             from = (CurPageIndex - 1) * numberOfRecPerPage + 1;
                             lblpageInformation.Content = from + "-" + count + " of " + promoVM.ListPromoRoot.Count;
@@ -433,32 +435,32 @@ namespace IRES_Project.MasterData.PromoView
                 case 1:
                     {
                         btn1.Opacity = 0.75;
-                        btn1.BorderThickness = new Thickness(0.0);
+                        btn1.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 2:
                     {
                         btn2.Opacity = 0.75;
-                        btn2.BorderThickness = new Thickness(0.0);
+                        btn2.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 3:
                     {
 
-                        btn3.BorderThickness = new Thickness(0.0);
+                        btn3.BorderThickness = new Thickness(1.0);
                         btn3.Opacity = 0.75;
                         break;
                     }
                 case 4:
                     {
                         btn4.Opacity = 0.75;
-                        btn4.BorderThickness = new Thickness(0.0);
+                        btn4.BorderThickness = new Thickness(1.0);
                         break;
                     }
                 case 5:
                     {
                         btn5.Opacity = 0.75;
-                        btn5.BorderThickness = new Thickness(0.0);
+                        btn5.BorderThickness = new Thickness(1.0);
                         break;
                     }
             }
@@ -481,37 +483,37 @@ namespace IRES_Project.MasterData.PromoView
                 case 1:
                     {
                         btn1.Opacity = 1;
-                        btn1.BorderBrush = Brushes.Black;
-                        btn1.BorderThickness = new Thickness(1.0);
+                        btn1.BorderBrush = Brushes.Gray;
+                        btn1.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 2:
                     {
                         btn2.Opacity = 1;
-                        btn2.BorderBrush = Brushes.Black;
-                        btn2.BorderThickness = new Thickness(1.0);
+                        btn2.BorderBrush = Brushes.Gray;
+                        btn2.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 3:
                     {
 
                         btn3.Opacity = 1;
-                        btn3.BorderBrush = Brushes.Black;
-                        btn3.BorderThickness = new Thickness(1.0);
+                        btn3.BorderBrush = Brushes.Gray;
+                        btn3.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 4:
                     {
                         btn4.Opacity = 1;
-                        btn4.BorderBrush = Brushes.Black;
-                        btn4.BorderThickness = new Thickness(1.0);
+                        btn4.BorderBrush = Brushes.Gray;
+                        btn4.BorderThickness = new Thickness(2.0);
                         break;
                     }
                 case 5:
                     {
                         btn5.Opacity = 1;
-                        btn5.BorderBrush = Brushes.Black;
-                        btn5.BorderThickness = new Thickness(1.0);
+                        btn5.BorderBrush = Brushes.Gray;
+                        btn5.BorderThickness = new Thickness(2.0);
                         break;
                     }
             }
@@ -689,29 +691,22 @@ namespace IRES_Project.MasterData.PromoView
         }
         private void Refresh_Data(object sender, RoutedEventArgs e)
         {
-            //if (promoVM.IsChecked)
-            //{
-            //    promoVM.ListPromoRoot = promoVM.getDataEmployee();
-
-            //}
-            //else
-            //{
-            //    promoVM.ListPromoRoot = promoVM.getDeletedEmployee();
-            //}
-
-            //No_View_Updt();
-            //Navigate((int)PagingMode.First);
-            //updtLabel();
+            promoVM.IsChecked = true;
+            promoVM.ListPromoRoot = promoVM.getListPromo();
+            promoVM.Search_Text = "";
+            No_View_Updt();
+            Navigate((int)PagingMode.First);
+            updtLabel();
         }
         private void Search_Emp(object sender, RoutedEventArgs e)
         {
             if (promoVM.IsChecked)
             {
-                ListPromo = promoVM.searchDish(); //If == 0 tra ve list rong va thong bao
+                ListPromo = promoVM.searchPromo(); //If == 0 tra ve list rong va thong bao
             }
             else
             {
-                ListPromo = promoVM.searchDeletedDish();
+                ListPromo = promoVM.searchDeletedPromo();
             }
             if (ListPromo.Count != 0)
             {
@@ -745,110 +740,97 @@ namespace IRES_Project.MasterData.PromoView
             //Employee a = rows[0] as Employee;
             //EditEmpUC.TakeEmp(a);
         }
-        public void RemoveItem(List<PromoModel> collection, Employee instance)
-        {
-            //collection.Remove(collection.Where(i => i.EmployeeCode == instance.EmployeeCode).Single());
-        }
+     
 
 
         private void MasterHeader_ActiveClick(object sender, RoutedEventArgs e)
         {
-            //if (promoVM.IsChecked == true)
-            //{
-            //    if (promoVM.IsSearching == true)
-            //    {
-            //        //MessageBox.Show("Đang trong tìm kiếm");
-            //        ListPromo = promoVM.searchEmployee();
-            //        if (ListPromo.Count != 0)
-            //        {
-            //            promoVM.ListPromoRoot = ListPromo;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        promoVM.ListPromoRoot = promoVM.getDataEmployee();
-            //    }
-            //}
-            //else
-            //{
-            //    if (promoVM.IsSearching == true)
-            //    {
-            //        // MessageBox.Show("Đang trong tìm kiếm");
-            //        ListPromo = promoVM.searchDeletedEmployee();
-            //        if (ListPromo.Count != 0)
-            //        {
-            //            promoVM.ListPromoRoot = ListPromo;
-            //        }
-            //        else
-            //        {
-            //            promoVM.ListPromoRoot.Clear();
-            //            No_View_Updt();
-            //            Navigate((int)PagingMode.First);
-            //            updtLabel();
-            //        }
-            //    }
-            //    else
-            //    {
-            //        promoVM.ListPromoRoot = promoVM.getDeletedEmployee();
-            //    }
-            //}
-            //No_View_Updt();
-            //if (no_Page >= 1)
-            //{
-            //    Navigate((int)PagingMode.First);
-            //}
-            //else
-            //{
-            //    promoVM.ListPromo.Clear();
-            //}
-            //updtLabel();
+            if (promoVM.IsChecked == true)
+            {
+                if (promoVM.IsSearching == true)
+                {
+                    //MessageBox.Show("Đang trong tìm kiếm");
+                    ListPromo = promoVM.searchPromo();
+                    if (ListPromo.Count != 0)
+                    {
+                        promoVM.ListPromoRoot = ListPromo;
+                    }
+
+                }
+                else
+                {
+                    promoVM.ListPromoRoot = promoVM.getListPromo();
+                }
+            }
+            else
+            {
+                if (promoVM.IsSearching == true)
+                {
+                    // MessageBox.Show("Đang trong tìm kiếm");
+                    ListPromo = promoVM.searchDeletedPromo();
+                    if (ListPromo.Count != 0)
+                    {
+                        promoVM.ListPromoRoot = ListPromo;
+                    }
+                    else
+                    {
+                        promoVM.ListPromoRoot.Clear();
+                        No_View_Updt();
+                        Navigate((int)PagingMode.First);
+                        updtLabel();
+                    }
+                }
+                else
+                {
+                    promoVM.ListPromoRoot = promoVM.getDeletedPromo();
+                }
+            }
+            No_View_Updt();
+            if (no_Page >= 1)
+            {
+                Navigate((int)PagingMode.First);
+            }
+            else
+            {
+                promoVM.ListPromo.Clear();
+            }
+            updtLabel();
         }
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            //    IList rows = dataGrid.SelectedItems;
-            //    Employee a = rows[0] as Employee;
-            //    if (a.RoleId == 7)
-            //    {
-            //        MessageBox.Show("Không thể xóa Admin");
-            //    }
-            //    else
-            //    {
-            //        if (a.Active == false)
-            //        {
-            //            if (MessageBox.Show("Bỏ xóa nhân viên này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
-            //            {
-            //                //do no stuff
-
-            //            }
-            //            else
-            //            {
-            //                //do yes stuff
-            //                promoVM.ActiveEmployee(a.EmployeeCode, a);
-            //                //promoVM.ListPromoRoot = promoVM.ListPromo;
-            //                No_View_Updt();
-            //                Navigate((int)PagingMode.First);
-            //                updtLabel();
-            //            }
-            //        }
-
-            //        else
-            //        {
-            //            if (MessageBox.Show("Xóa nhân viên này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
-            //            {
-            //                //do no stuff
-
-            //            }
-            //            else
-            //            {
-            //                //do yes stuff
-            //                promoVM.DeleteEmployee(a.EmployeeCode, a);
-            //                //promoVM.ListPromoRoot = promoVM.ListPromo;
-            //                No_View_Updt();
-            //                Navigate((int)PagingMode.First);
-            //                updtLabel();
-            //            }
-            //        }
-            //    }
+            IList rows = dataGrid.SelectedItems;
+            PromoModel a = rows[0] as PromoModel;
+            if (a.Active == false)
+            {
+                if (MessageBox.Show("Bỏ xóa khuyến mãi này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                {
+                    //do no stuff
+                }
+                else
+                {
+                    //do yes stuff
+                    promoVM.ActivePromo(a.PromotionCode, a);
+                   
+                    No_View_Updt();
+                    Navigate((int)PagingMode.First);
+                    updtLabel();
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Xóa khuyến mãi này?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.No)
+                {
+                    //do no stuff
+                }
+                else
+                {
+                    //do yes stuff
+                    promoVM.DeletePromo(a.PromotionCode, a);          
+                    No_View_Updt();
+                    Navigate((int)PagingMode.First);
+                    updtLabel();
+                }
+            }
         }
 
         private void MasterHeader_AddClick(object sender, RoutedEventArgs e)
@@ -987,6 +969,11 @@ namespace IRES_Project.MasterData.PromoView
                 //dataGridCellTarget.Background = (Brush)bc.ConvertFrom("#00FFFFFF");
                 dataGridCellTarget.Foreground = new SolidColorBrush(Colors.Black);
             }
+        }
+
+        private void MasterHeader_TextBoxReturn(object sender, EventArgs e)
+        {
+            Search_Emp(sender, null);
         }
 
         private void updtLabel()
