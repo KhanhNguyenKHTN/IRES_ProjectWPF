@@ -18,7 +18,9 @@ namespace ViewModel.Modules
     {
         public bool IsSearching = false;
         public List<string> RoleList { get; set; } = new List<string>() { "Bếp trưởng", "Thu ngân", "Nhân viên phục vụ", "Lễ tân", "Đầu bếp", "Quản lý ca", "Quản lý nhà hàng" };
-        public string Search_Text { get; set; } = null;
+        private string _Search_Text;
+        public string Search_Text { get { return _Search_Text; } set { _Search_Text = value; OnPropertyChanged(); } }
+
 
         private bool _Refresh = false;
         public bool Refresh { get { return _Refresh; } set { _Refresh = value; OnPropertyChanged(); } }

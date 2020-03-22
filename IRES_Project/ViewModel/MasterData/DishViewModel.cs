@@ -19,8 +19,7 @@ namespace ViewModel.MasterData
         public bool IsSearching = false;
         
         private string _Search_Text;
-        public string Search_Text { get { return _Search_Text; } set { _Search_Text = value;
-                OnPropertyChanged(); } }
+        public string Search_Text { get { return _Search_Text; } set { _Search_Text = value; OnPropertyChanged(); } }
 
         private bool _Refresh = false;
         public bool Refresh { get { return _Refresh; } set { _Refresh = value; OnPropertyChanged(); } }

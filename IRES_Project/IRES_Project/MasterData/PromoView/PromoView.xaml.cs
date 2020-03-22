@@ -693,7 +693,7 @@ namespace IRES_Project.MasterData.PromoView
         {
             promoVM.IsChecked = true;
             promoVM.ListPromoRoot = promoVM.getListPromo();
-            promoVM.Search_Text = "";
+            promoVM.Search_Text ="";
             No_View_Updt();
             Navigate((int)PagingMode.First);
             updtLabel();
