@@ -27,7 +27,6 @@ namespace IRES_Project.Statistic
         public BillStatisticPage()
         {
             InitializeComponent();
-            //this.billVM = new BillStatisticViewModel(DateTime.Now.ToShortDateString());
             DataContext = billVM;
         }
 

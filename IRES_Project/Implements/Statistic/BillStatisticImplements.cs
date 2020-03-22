@@ -20,7 +20,7 @@ namespace Implements.Statistic
         {
             string query = $"SELECT b.*, o.count_dish_in_order FROM ires.bill b " +
                 $"JOIN ( SELECT order_id, COUNT(order_id) AS count_dish_in_order FROM ires.order_detail GROUP BY order_id) AS o" +
-                $" ON o.order_id = b.order_id WHERE CAST(created_datetime AS DATE) = '11-22-2019'";
+                $" ON o.order_id = b.order_id WHERE CAST(created_datetime AS DATE) = '{date}'";
 
             var result = new BillStatisticModel
             {

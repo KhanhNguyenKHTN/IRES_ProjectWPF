@@ -304,20 +304,13 @@ namespace IRES_Project.MasterData.PromoView
         {
             bool result = true;
             int value = -1;
-            int maxvalue = -1;
             int.TryParse(textbox_promo_value.Text, out value);
-            int.TryParse(textbox_promo_max.Text, out maxvalue);
             string unit = AddProVM.NewPromo.PromotionUnit;
             if (unit == "%")
             {
                 if (textbox_promo_value.Text.Length >= 3 && value > 100)
                 {
                     PromoValueHasError("% > 100");
-                    result = false;
-                }
-                else if (value > maxvalue)
-                {
-                    PromoValueHasError("> Max");
                     result = false;
                 }
                 else if (value < 5)
@@ -332,22 +325,15 @@ namespace IRES_Project.MasterData.PromoView
             }
             else
             {
-                if (unit == "VNĐ")
+
+                if (unit == "VNĐ" && value < 1000)
                 {
-                    if (value < 1000)
-                    {
-                        PromoValueHasError("VND < 1000");
-                        result = false;
-                    }
-                    else if (value > maxvalue)
-                    {
-                        PromoValueHasError("> Max");
-                        result = false;
-                    }
-                    else
-                    {
-                        PromoValueHasError();
-                    }
+                    PromoValueHasError("VND < 1000");
+                    result = false;
+                }
+                else
+                {
+                    PromoValueHasError();
                 }
             }
             return result;
@@ -356,19 +342,9 @@ namespace IRES_Project.MasterData.PromoView
         {
             switch (error)
             {
-                case "> Max":
-                    {
-                        GridPromoValueError4.Visibility = Visibility.Visible;
-                        GridPromoValueError3.Visibility = Visibility.Collapsed;
-                        GridPromoValueError2.Visibility = Visibility.Collapsed;
-                        GridPromoValueError.Visibility = Visibility.Collapsed;
-                        textbox_promo_value.BorderBrush = System.Windows.Media.Brushes.Red;
-                        break;
-                    }
                 case "VND < 1000":
                     {
                         GridPromoValueError2.Visibility = Visibility.Visible;
-                        GridPromoValueError4.Visibility = Visibility.Collapsed;
                         GridPromoValueError3.Visibility = Visibility.Collapsed;
                         GridPromoValueError.Visibility = Visibility.Collapsed;
                         textbox_promo_value.BorderBrush = System.Windows.Media.Brushes.Red;
@@ -377,7 +353,6 @@ namespace IRES_Project.MasterData.PromoView
                 case "% < 5":
                     {
                         GridPromoValueError3.Visibility = Visibility.Visible;
-                        GridPromoValueError4.Visibility = Visibility.Collapsed;
                         GridPromoValueError2.Visibility = Visibility.Collapsed;
                         GridPromoValueError.Visibility = Visibility.Collapsed;
                         textbox_promo_value.BorderBrush = System.Windows.Media.Brushes.Red;
@@ -386,7 +361,6 @@ namespace IRES_Project.MasterData.PromoView
                 case "% > 100":
                     {
                         GridPromoValueError.Visibility = Visibility.Visible;
-                        GridPromoValueError4.Visibility = Visibility.Collapsed;
                         GridPromoValueError3.Visibility = Visibility.Collapsed;
                         GridPromoValueError2.Visibility = Visibility.Collapsed;
                         textbox_promo_value.BorderBrush = System.Windows.Media.Brushes.Red;
@@ -394,12 +368,9 @@ namespace IRES_Project.MasterData.PromoView
                     }
                 default:
                     {
-                        GridPromoMaxValueError.Visibility = Visibility.Collapsed;
-                        GridPromoValueError4.Visibility = Visibility.Collapsed;
                         GridPromoValueError.Visibility = Visibility.Collapsed;
                         GridPromoValueError3.Visibility = Visibility.Collapsed;
                         GridPromoValueError2.Visibility = Visibility.Collapsed;
-                        textbox_promo_max.BorderBrush = System.Windows.Media.Brushes.Black;
                         textbox_promo_value.BorderBrush = System.Windows.Media.Brushes.Black;
                         break;
                     }
@@ -454,14 +425,14 @@ namespace IRES_Project.MasterData.PromoView
         private bool CheckPromoMaxValue()
         {
             bool result = true;
-            int value = -1;
-            int.TryParse(textbox_promo_value.Text, out value);
             if (string.IsNullOrEmpty(textbox_promo_max.Text) || string.IsNullOrWhiteSpace(textbox_promo_max.Text))
             {
                 textbox_promo_max.Text = "0";
             }
             if (AddProVM.NewPromo.PromotionUnit == "VNĐ")
             {
+                int value;
+                int.TryParse(textbox_promo_value.Text, out value);
                 if (AddProVM.NewPromo.PromotionMaxValue < value)
                 {
                     result = false;
@@ -470,24 +441,6 @@ namespace IRES_Project.MasterData.PromoView
                 }
                 else
                 {
-                    GridPromoValueError4.Visibility = Visibility.Collapsed;
-                    textbox_promo_value.BorderBrush = System.Windows.Media.Brushes.Black;
-                    GridPromoMaxValueError.Visibility = Visibility.Collapsed;
-                    textbox_promo_max.BorderBrush = System.Windows.Media.Brushes.Black;
-                }
-            }
-            else
-            {
-                if (AddProVM.NewPromo.PromotionMaxValue < value)
-                {
-                    result = false;
-                    GridPromoMaxValueError.Visibility = Visibility.Visible;
-                    textbox_promo_max.BorderBrush = System.Windows.Media.Brushes.Red;
-                }
-                else
-                {
-                    GridPromoValueError4.Visibility = Visibility.Collapsed;
-                    textbox_promo_value.BorderBrush = System.Windows.Media.Brushes.Black;
                     GridPromoMaxValueError.Visibility = Visibility.Collapsed;
                     textbox_promo_max.BorderBrush = System.Windows.Media.Brushes.Black;
                 }

@@ -374,13 +374,6 @@
                                     <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giá trị khuyến mãi không được nhỏ hơn 5%"></Label>
                                 </StackPanel>
                             </Grid>
-                            <Grid Grid.Row="14" Grid.Column="1" x:Name="GridPromoValueError4" Visibility="Collapsed" Margin="0 0 15 0" >
-                                <StackPanel Orientation="Horizontal" >
-                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
-
-                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Giá trị khuyến mãi không được lớn hơn trị tối đa"></Label>
-                                </StackPanel>
-                            </Grid>
 
                             <Grid Grid.Row="15" Grid.Column="1">
                                 <ComboBox Name="ComboboxPromoUnit"  VerticalContentAlignment="Stretch"

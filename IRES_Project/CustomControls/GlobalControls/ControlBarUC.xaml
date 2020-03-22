@@ -47,9 +47,12 @@
                 </StackPanel>
 
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                    <!--<ToggleButton Style="{DynamicResource MaterialDesignHamburgerToggleButton}" />-->
-                      
-                </StackPanel>
+
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <materialDesign:PackIcon Kind="Dna" VerticalContentAlignment="Center" Height="20" Width="20" Foreground="White" Margin="10 0 0 0"/>
+            <TextBlock Padding="5 0 10 0" FontSize="16" FontWeight="Bold" Foreground="White" Text="IRES ADMIN" />
+          </StackPanel>
+        </StackPanel>
             </DockPanel>
         </materialDesign:ColorZone>
 
