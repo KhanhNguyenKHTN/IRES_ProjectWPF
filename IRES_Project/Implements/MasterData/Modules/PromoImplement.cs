@@ -203,6 +203,16 @@ namespace Implements.MasterData.Modules
             SQLExecute sqlExecute = new SQLExecute();
             return sqlExecute.DeleteQuery(query, PromoCode);
         }
+        public static bool CheckPromoCode(string PromoCode)
+        {
+
+            //string query = $"SELECT * FROM ires.employee" +
+            //               $" WHERE user_name = '' ||@Value|| '' ";
+            string query = $"select * from ires.promotion where promotion.promotion_code ='' || @Value ||''";
+
+            SQLExecute sqlExecute = new SQLExecute();
+            return sqlExecute.CheckUserNameQuery(query, PromoCode);
+        }
     }
     
 }

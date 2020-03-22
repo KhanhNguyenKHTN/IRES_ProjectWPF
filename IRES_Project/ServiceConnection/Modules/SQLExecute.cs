@@ -173,7 +173,7 @@ namespace Service.Modules
 
             DataTable dt = new DataTable();
             dt.Load(dr);
-            if (dt.Rows.Count == 1)
+            if (dt.Rows.Count >= 1)
             {
                 return false;
 

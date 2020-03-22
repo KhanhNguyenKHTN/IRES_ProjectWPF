@@ -21,7 +21,7 @@
             <GroupBox x:Name="MainBox" Padding="0">
                 <!--#region Header-->
                 <GroupBox.Header >
-                    <Border Background="#326690">
+                    <Border Background="#326690" BorderBrush="Black" BorderThickness="0 0 0 2">
                         <StackPanel MaxHeight="20" Margin="0 5 0 10 " HorizontalAlignment="Center">
                             <Label FontWeight="Bold" FontSize="15" Foreground="White">Thêm khuyến mãi mới</Label>
                         </StackPanel>
@@ -294,6 +294,13 @@
                                     <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
 
                                     <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Mã khuyến mãi không được trống"></Label>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="6" Grid.Column="1" x:Name="GridPromoCodeDup" Visibility="Collapsed" Margin="0 -1 15 0" >
+                                <StackPanel Orientation="Horizontal" >
+                                    <materialDesign:PackIcon FontSize="9" Margin=" 0 2 0 0" Foreground="Red" Kind="Alert" HorizontalAlignment="Center" VerticalAlignment="Top" />
+
+                                    <Label Margin=" 0 0 0 0"  FontSize="11" BorderThickness="0" Foreground ="Red"  Content="Mã khuyến mãi bị trùng"></Label>
                                 </StackPanel>
                             </Grid>
 

@@ -38,5 +38,10 @@ namespace ViewModel.MasterData
             else
                 return false;
         }
+        public bool CheckPromoCode(string PromotionCode)
+        {
+            return PromoImplement.CheckPromoCode(PromotionCode);
+
+        }
     }
 }

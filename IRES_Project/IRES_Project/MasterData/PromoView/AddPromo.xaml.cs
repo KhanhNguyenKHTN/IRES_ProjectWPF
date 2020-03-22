@@ -84,6 +84,7 @@ namespace IRES_Project.MasterData.PromoView
             textbox_promo_code.Text = "";
             textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Black;
             GridPromoCodeError.Visibility = Visibility.Collapsed;
+            GridPromoCodeDup.Visibility = Visibility.Collapsed;
 
             AddProVM.NewPromo.PromotionStartDate = DateTime.Now;
             DatapickerStart.BorderBrush = System.Windows.Media.Brushes.Black;
@@ -178,14 +179,26 @@ namespace IRES_Project.MasterData.PromoView
             if (String.IsNullOrEmpty(promocode) || String.IsNullOrWhiteSpace(promocode))
             {
                 GridPromoCodeError.Visibility = Visibility.Visible;
+                GridPromoCodeDup.Visibility = Visibility.Collapsed;
                 textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Red;
                 res = false;
             }
             else
             {
-                GridPromoCodeError.Visibility = Visibility.Collapsed;
-                textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Black;
-                res= true;
+                if (!AddProVM.CheckPromoCode(promocode))
+                {
+                    GridPromoCodeDup.Visibility = Visibility.Visible;
+                    GridPromoCodeError.Visibility = Visibility.Collapsed;
+                    textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Red;
+                    res = false;
+                }
+                else
+                {
+                    GridPromoCodeError.Visibility = Visibility.Collapsed;
+                    GridPromoCodeDup.Visibility = Visibility.Collapsed;
+                    textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Black;
+                    res = true;
+                }
             }
             return res;
         }
@@ -196,12 +209,23 @@ namespace IRES_Project.MasterData.PromoView
             if (String.IsNullOrEmpty(promocode) || String.IsNullOrWhiteSpace(promocode))
             {
                 GridPromoCodeError.Visibility = Visibility.Visible;
+                GridPromoCodeDup.Visibility = Visibility.Collapsed;
                 textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Red;
             }
             else
             {
-                GridPromoCodeError.Visibility = Visibility.Collapsed;
-                textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Black;
+                if (!AddProVM.CheckPromoCode(promocode))
+                {
+                    GridPromoCodeDup.Visibility = Visibility.Visible;
+                    GridPromoCodeError.Visibility = Visibility.Collapsed;
+                    textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Red;
+                }
+                else
+                {
+                    GridPromoCodeError.Visibility = Visibility.Collapsed;
+                    GridPromoCodeDup.Visibility = Visibility.Collapsed;
+                    textbox_promo_code.BorderBrush = System.Windows.Media.Brushes.Black;
+                }
             }
         }
         #endregion
