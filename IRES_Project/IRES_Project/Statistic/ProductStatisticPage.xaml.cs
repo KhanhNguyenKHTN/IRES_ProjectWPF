@@ -33,9 +33,12 @@ namespace IRES_Project.Statistic
 
         public void GetData(string mode)
         {
-            GridChartProduct.Children.Clear();
+            // GridChartProduct.Children.Clear();
+            GridChartProductHigh.Children.Clear();
+            GridChartProductLow.Children.Clear();
             var chartStatisticVM = new ProductStatisticViewModel(mode);
-            Chart chart = new Chart() { };
+            Chart chartHigh = new Chart() { };
+            Chart chartLow = new Chart() { };
 
             //LineSeries line1 = new LineSeries() { ItemsSource = chartStatisticVM.LineCharts1, DependentValuePath = "Count", IndependentValuePath = "Time" };
             //LineSeries line2 = new LineSeries() { ItemsSource = chartStatisticVM.LineCharts2, DependentValuePath = "Count", IndependentValuePath = "Time" };
@@ -44,23 +47,32 @@ namespace IRES_Project.Statistic
             //LineSeries line5 = new LineSeries() { ItemsSource = chartStatisticVM.LineCharts5, DependentValuePath = "Count", IndependentValuePath = "Time" };
             //LineSeries line6 = new LineSeries() { ItemsSource = chartStatisticVM.LineCharts6, DependentValuePath = "Count", IndependentValuePath = "Time" };
 
+            // high series
             LineSeries line1 = BuildLine(Brushes.OrangeRed, chartStatisticVM.LineCharts1, "Bò xào rau muống");
             LineSeries line2 = BuildLine(Brushes.Green, chartStatisticVM.LineCharts2, "Cơm chiên dương châu");
             LineSeries line3 = BuildLine(Brushes.Black, chartStatisticVM.LineCharts3, "Gỏi gà xé chay");
+
+            // low series
             LineSeries line4 = BuildLine(Brushes.DodgerBlue, chartStatisticVM.LineCharts4, "Cơm mắm ruốc");
             LineSeries line5 = BuildLine(Brushes.Brown, chartStatisticVM.LineCharts5, "Cải bó xôi");
             LineSeries line6 = BuildLine(Brushes.DarkSlateBlue, chartStatisticVM.LineCharts6, "Nước mắm truyền thống");
+            
+            // add series to chart high
+            chartHigh.Series.Add(line1);
+            chartHigh.Series.Add(line2);
+            chartHigh.Series.Add(line3);
+            chartHigh.Background = Brushes.SkyBlue;
+            chartHigh.Foreground = Brushes.White;
 
-            chart.Series.Add(line1);
-            chart.Series.Add(line2);
-            chart.Series.Add(line3);
-            chart.Series.Add(line4);
-            chart.Series.Add(line5);
-            chart.Series.Add(line6);
-            chart.Background = Brushes.SkyBlue;
-            chart.Foreground = Brushes.White;
+            // Add series to chart low
+            chartLow.Series.Add(line4);
+            chartLow.Series.Add(line5);
+            chartLow.Series.Add(line6);
+            chartLow.Background = Brushes.SkyBlue;
+            chartLow.Foreground = Brushes.White;
 
-            GridChartProduct.Children.Add(chart); // add to chart    
+            GridChartProductHigh.Children.Add(chartHigh); // add to chart    
+            GridChartProductLow.Children.Add(chartLow); // add to chart    
         }
         private void StatisticHeaderUC_BtnLoadStatistic(object sender, RoutedEventArgs e)
         {

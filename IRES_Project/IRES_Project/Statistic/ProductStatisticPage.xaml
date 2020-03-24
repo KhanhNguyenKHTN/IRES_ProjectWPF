@@ -136,8 +136,17 @@
               </Grid.RowDefinitions>
               <Label Grid.Row="0" Margin="10 0 0 0" FontSize="18" HorizontalContentAlignment="Center" FontWeight="ExtraBold" Foreground="Green">Biểu đồ phân tích sản phẩm của Nhà hàng IRES</Label>
               <!--#region Chart -->
-              <Grid Grid.Row="1" Name="GridChartProduct" Background="#e4eaeb">
-
+              <Grid Grid.Row="1" Background="#e4eaeb">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Margin="2" BorderThickness="0 0 1 0" BorderBrush="Black">
+                  <Grid Name="GridChartProductHigh" Grid.Column="0"/>
+                </Border>
+                <Border Grid.Column="1" Margin="2" BorderThickness="1 0 0 0" BorderBrush="Black">
+                  <Grid Background="Red" Name="GridChartProductLow" Grid.Column="1"/>
+                </Border>
               </Grid>
             </Grid>
             </Grid>

@@ -78,7 +78,7 @@ namespace ViewModel.Statistic
 
             public fakeDataForDate()
             {
-                fakeTime = "20/12";
+                fakeTime = "22/03";
                 fakeCountRevenue = 1100000;
                 fakeCountProfit = 600000;
                 fakePromotion = 0;
@@ -104,7 +104,7 @@ namespace ViewModel.Statistic
             //    100000, 200000, 2000000, 120000, 210000, 200000, 200000, 300000, 200000, 300000, 230000};\
 
 
-            public string[] fakeTime = new string[5] { "12/01", "12/02", "12/03", "12/04", "12/05" };
+            public string[] fakeTime = new string[5] { "25/02", "26/02", "27/02", "28/02", "29/02" };
 
             public float[] fakeCountRevenue = new float[5] {800000, 989000, 13000000, 1200000, 700000};
 

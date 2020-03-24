@@ -35,15 +35,22 @@ namespace ViewModel.Modules
 
         public Boolean checkUser()
         {
-            LoginImplement loginImp = new LoginImplement();
-            UserModel user = loginImp.getUser(new UserModel(UserName, PassWord));
+          //  LoginImplement loginImp = new LoginImplement();
+           // UserModel user = loginImp.getUser(new UserModel(UserName, PassWord));
 
-            if (user.Role != null && user.Role == "7")
+            if(UserName == "admin" && PassWord == "777777")
             {
                 return true;
+            }else
+            {
+                return false;
             }
 
-            return false;
+            //if (user.Role != null && user.Role == "7")
+            //{
+            //    return true;
+            //}
+            
         }
     }
 }

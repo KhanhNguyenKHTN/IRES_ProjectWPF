@@ -20,7 +20,7 @@ namespace Implements.Common
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                account.Role = dt.Rows[i]["role_id"].ToString();
+                //account.Role = dt.Rows[i]["role_id"].ToString();
             }
 
             return account;
